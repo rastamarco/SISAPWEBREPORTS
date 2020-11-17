@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>FastReport.Plugins.snk</AssemblyOriginatorKeyFile>
+    <!--<assemblies>
+      <add assembly="FastReport, Version=2020.4.9.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c" />
+    </assemblies>-->
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.11.3" />
+    <PackageReference Include="EntityFramework.Firebird" Version="7.5.0" />
+    <PackageReference Include="FastMember" Version="1.5.0" />
+    <PackageReference Include="FastReport.OpenSource" Version="2020.4.9" />
+    <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2020.4.9" />
+    <PackageReference Include="FastReport.OpenSource.Web" Version="2020.4.9" />
+    <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="7.5.0" />
+    <PackageReference Include="FirebirdSql.EntityFrameworkCore.Firebird" Version="7.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.NETCore.App" Version="2.2.8" />
+    <PackageReference Include="Microsoft.NETCore.Windows.ApiSets" Version="1.0.1" />
+    <PackageReference Include="System.Windows.Extensions" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="FastReport">
+      <HintPath>bin\Debug\netcoreapp3.1\FastReport.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Bars">
+      <HintPath>bin\Debug\netcoreapp3.1\FastReport.Bars.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Compat">
+      <HintPath>bin\Debug\netcoreapp3.1\FastReport.Compat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.DataVisualization">
+      <HintPath>bin\Debug\netcoreapp3.1\FastReport.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Editor">
+      <HintPath>bin\Debug\netcoreapp3.1\FastReport.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Firebird">
+      <HintPath>bin\Debug\netcoreapp3.1\FastReport.Firebird.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.OpenSource.Export.PdfSimple">
+      <HintPath>bin\Debug\netcoreapp3.1\FastReport.OpenSource.Export.PdfSimple.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.OpenSource.Web">
+      <HintPath>bin\Debug\netcoreapp3.1\FastReport.OpenSource.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Web">
+      <HintPath>bin\Debug\netcoreapp3.1\FastReport.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
