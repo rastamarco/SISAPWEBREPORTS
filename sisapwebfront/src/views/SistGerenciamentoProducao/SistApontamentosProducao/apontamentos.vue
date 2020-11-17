@@ -1,0 +1,92 @@
+<template>
+<v-row>
+  <v-col cols="12" sm="3">
+    <v-sheet rounded="lg" min-height="268">
+      <Cadastros />
+      <Relatorios />
+      <Etiquetas />
+    </v-sheet>
+  </v-col>
+  <v-col cols="12" sm="9">
+    <v-sheet min-height="70vh" rounded="lg">
+      <div class="initial" v-if="!showReport">
+        <div class="system-text">
+          <SystemTitles />
+        </div>
+        <div class="system-img">
+          <v-img :src="require('../../../assets/logo-lar.png')" class="my-3" contain height="230" />
+        </div>
+      </div>
+      <Reports v-if="showReport" />
+    </v-sheet>
+  </v-col>
+</v-row>
+</template>
+
+<script lang="ts">
+import {
+  Component,
+  Vue
+} from 'vue-property-decorator';
+import {
+  Action,
+  Getter
+} from 'vuex-class';
+
+import Cadastros from './Cadastros/cadastrosSidebar.vue';
+import Relatorios from './Relatorios/relatoriosSidebar.vue';
+import Etiquetas from './Etiquetas/etiquetasSidebarr.vue';
+
+import Reports from './Relatorios/ModaisRelatorios/Reports.vue';
+import SystemTitles from './../../header/system-tittles.vue';
+
+@Component({
+  components: {
+    Cadastros,
+    Relatorios,
+    Etiquetas,
+    Reports,
+    SystemTitles
+  }
+})
+/* eslint-disable indent */
+export default class Apontamentos extends Vue {
+  @Action reloadUser
+
+  @Getter showReport
+
+  private reportApontamentoResfriado: boolean = false;
+
+  beforeMount() {
+    if (window.localStorage.token) {
+      this.reloadUser({
+        token: window.localStorage.token
+      });
+    }
+  }
+}
+</script>
+
+<style scoped>
+.initial {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.initial .system-text {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+}
+
+.initial .system-img {
+  width: 100%;
+  height: 80%;
+  padding-left: 50px;
+}
+</style>

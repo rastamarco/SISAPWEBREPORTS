@@ -1,0 +1,16 @@
+{
+     // Format settings
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.organizeImports": false
+    },
+    "eslint.validate": [
+        "javascript"
+    ],
+    "prettier.semi": true,
+    "prettier.endOfLine": "lf",
+    "prettier.singleQuote": true,
+}
