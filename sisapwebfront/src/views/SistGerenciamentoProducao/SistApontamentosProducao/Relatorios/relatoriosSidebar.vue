@@ -55,17 +55,12 @@ export default class ApontamentosRelatorios extends Vue {
       },
       {
         id: 2,
-        title: 'Apontamento de Resfriados'
-      },
-      {
-        id: 3,
         title: 'Apontamento de Refeitório'
-      },
+      }
     ]
   }, ]
 
   public async selectReport(item: any): Promise<void> {
-    await this.setSelectedIdReport({ id: item.id });
     switch (item.id) {
       case 1:
         this.nameBox = 'Impressão de Apontamento de Produção';

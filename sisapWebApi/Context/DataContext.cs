@@ -17,8 +17,8 @@ namespace sisapWebApi.Context
     {
         private static string pUser = "SYSDBA";
         private static string pPassword = "uv@doc3";
-        private static string pDataBase = "localhost:C:\\SISAP\\DB\\SISAP.FDB";
-        private static string pDataSource = "localhost";
+        private static string pDataBase = "10.10.11.32:C:\\SISAP\\DB\\SISAP.FDB";
+        private static string pDataSource = "10.10.11.32";
         private static int pPort = 3050;
         private static int pDialect = 3;
         private static string pCharset = "None";

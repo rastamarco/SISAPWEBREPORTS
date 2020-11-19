@@ -4,9 +4,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>FastReport.Plugins.snk</AssemblyOriginatorKeyFile>
-    <!--<assemblies>
-      <add assembly="FastReport, Version=2020.4.9.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c" />
-    </assemblies>-->
   </PropertyGroup>
 
   <ItemGroup>

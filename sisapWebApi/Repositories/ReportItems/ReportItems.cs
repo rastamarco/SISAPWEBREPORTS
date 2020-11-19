@@ -12,6 +12,7 @@ namespace sisapWebApi.Repositories.ReportItems
         {
             reportItems = new List<ReportRepository>();
             reportItems.Add(new ReportRepository(1, "ApontamentoDeProducao.frx"));
+            reportItems.Add(new ReportRepository(11,"ApontamentoDeProducaoR2.frx"));
         }
     }
 }

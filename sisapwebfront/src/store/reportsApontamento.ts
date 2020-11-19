@@ -43,6 +43,8 @@ export const reportsApontamento = {
       parameter.period = options.period;
       parameter.shift = options.turno;
       parameter.localUser = options.localUser;
+      console.log(options.idReport);
+      await commit('setIdReport', options.idReport);
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
     },

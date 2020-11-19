@@ -4,7 +4,7 @@
     <span class="title-box">{{ nameBox }} </span>
   </div>
   <v-card-actions>
-    <v-row>
+     <v-row>
       <v-col cols="12" sm="6" md="4">
         <v-menu v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
           <template v-slot:activator="{ on, attrs }">
@@ -15,7 +15,7 @@
         </v-menu>
       </v-col>
       <v-col cols="12" sm="6" md="4">
-        <small class="text-title">Turno</small>
+        <small class="text-title">Turno </small>
         <v-radio-group v-model="turnoGroup" style="padding-left: 30px;">
           <v-radio v-for="n in 3" :key="n" :label="`${n}º Turno`" :value="n"></v-radio>
         </v-radio-group>
@@ -33,7 +33,7 @@
     <v-btn absolute rounded bottom right color="primary" @click="Print()" :disabled="!canPrint()" style="text-transform: none;">
       <v-icon>mdi-printer</v-icon>
       Imprimir
-    </v-btn>
+    </v-btn> 
   </v-card-actions>
 </v-card>
 </template>
@@ -54,6 +54,8 @@ export default class RelatorioModals extends Vue {
   @Prop() idBox!: any;
 
   @Action reportApontamentoProducao
+  @Action setSelectedIdReport
+
   @Getter filialName
 
   private menu: boolean = false;
@@ -89,11 +91,14 @@ export default class RelatorioModals extends Vue {
   public parseDate(date: any): any {
     if (!date) return null;
 
-    const [month, day, year] = date.split('/');
+    const [day, month, year] = date.split('/');
     return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
   }
 
   public canPrint(): boolean {
+    if (this.idBox === 1){
+      return true;
+    } 
     if ((this.periodoGroup === 1 || this.periodoGroup === 2) && (this.turnoGroup === 1 || this.turnoGroup === 2 || this.turnoGroup === 3)) {
       return true;
     } else {
@@ -111,13 +116,22 @@ export default class RelatorioModals extends Vue {
       this.dateToSend = this.date;
     }
     switch(this.idBox){
-    case 1: 
-      await this.reportApontamentoProducao({
-        localUser: this.filialName, 
-        date: this.dateToSend,
-        period: this.periodoGroup,
-        turno: this.turnoGroup
-      }); 
+    case 1:
+      if (this.periodoGroup === null || this.turnoGroup === null) {
+        await this.reportApontamentoProducao({
+          localUser: this.filialName, 
+          date: this.dateToSend,
+          idReport: 1
+        });
+      }else {
+        await this.reportApontamentoProducao({
+          localUser: this.filialName, 
+          date: this.dateToSend,
+          period: this.periodoGroup,
+          turno: this.turnoGroup,
+          idReport: 11
+        });
+      } 
     }
     this.closeModal();
   }
