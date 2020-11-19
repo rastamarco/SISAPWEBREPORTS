@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FastReport.Data;
 using FastReport;
-using FastReport.Web;
-using FastReport.Export.Image;
 using FastReport.Export.PdfSimple;
 using FastReport.Utils;
-using FirebirdSql.Data.FirebirdClient;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using sisapWebApi.Models;
 using sisapWebApi.Repositories;
+using Aspose.Pdf;
+using sisapWebApi.Models.ReportModels;
+using Newtonsoft.Json;
+using sisapWebApi.Repositories.ReportItems;
 
 namespace sisapWebApi.Controllers
 {
@@ -29,49 +28,79 @@ namespace sisapWebApi.Controllers
         // [Authorize]
         public async Task<IActionResult> GetReport(int id, [FromQuery] ReportQuery query)
         {
-            //////////// Veriricar jeito para iniciar com todos os relatórios no ínicio da API
-            List<ReportRepository> reportItems;
-            reportItems = new List<ReportRepository>();
-            reportItems.Add(new ReportRepository(1, "Teste2.frx"));
-            ///
-            ///
-            // 
+            // Aqui obtenho a lista de Relatórios
+            var reports = new ReportItems();
+            
+            // Aqui crio o tipo do relatório (Sempre PDF)            
             string mime = "application/" + query.Format;
-            ReportRepository reportItem = reportItems.FirstOrDefault((p) => p.Id == id);
+            
+            // Aqui faço uma busca pelo relatório na lista de relatórios de acordo com o id dele 
+            var reportItem = reports.reportItems.FirstOrDefault((p) => p.Id == id);
             if (reportItem != null)
             {
+                // Faz o registro do uso do FastReport na API
                 RegisteredObjects.AddConnection(typeof(FirebirdDataConnection));
-                string reportPath = ("wwwroot/App_Data/" + reportItem.ReportName); // determine the path to the report
-                MemoryStream stream = new MemoryStream(); // Create a stream for the report
+                string reportPath = ("wwwroot/App_Data/" + reportItem.ReportName); // Vejo onde que o arquivo Físico dele está
+                MemoryStream stream = new MemoryStream(); // Crio um Stream para ser lido no IFrame do Front
                 Report report = new Report();
                 Config.WebMode = true;
-                report.Load(reportPath);
+                report.Load(reportPath); 
+                if (query.Parameter != null)
+                {
+                    // Aqui converto o parametro enviado do FRONT do Relatório se houver
+                    var parametros = JsonConvert.DeserializeObject<ReportParameters>(query.Parameter);
+                    if ( parametros.LocalUser != null )
+                        report.SetParameterValue("LocalUsuario", parametros.LocalUser);
+                    if (parametros.InitialDate != null)
+                        report.SetParameterValue("DataInicial", parametros.InitialDate);
+                    if (parametros.EndDate != null)
+                        report.SetParameterValue("DataFinal", parametros.EndDate);
+                    if (parametros.Name != null)
+                        report.SetParameterValue("Nome", parametros.Name);
+                    if (parametros.Sector != 0)
+                        report.SetParameterValue("Setor", parametros.Sector);
+                    if (parametros.Shift != 0)
+                        report.SetParameterValue("Turno", parametros.Shift);
+                    if (parametros.Period != 0)
+                        report.SetParameterValue("Periodo", parametros.Period);
+                    if (parametros.Id != 0)
+                        report.SetParameterValue("Id", parametros.Id);
+                }
+                // Aqui pega e carrega o arquivo com os parametros passados ou não
                 report.Prepare();
-
+                // Converte para PDF
                 if (query.Format == "pdf")
                 {
-                    // Export report to PDF
                     PDFSimpleExport pdf = new PDFSimpleExport();
-                    // Use the stream to store the report, so as not to create unnecessary files
                     report.Export(pdf, stream);
                 }
 
-                if (query.Format == "xlsx")
-                {
-                    // Export report to PDF
-                    // PDFSimpleExport pdf = new PDFSimpleExport();
+                ////////////////////////////////////////////////////////////////////
+                // Conversão para EXCEL, não está funcionando falta passar o arquivo em pdf ali no new Document
+                //if (query.Format == "xlsx")
+                //{
+                //    PDFSimpleExport pdf = new PDFSimpleExport();
+                //    // Use the stream to store the report, so as not to create unnecessary files
+                //    report.Export(pdf, stream);
 
-                    // Use the stream to store the report, so as not to create unnecessary files
-                    //report.Export(pdf, stream);
-                }
-
-                // Get the name of the resulting report file with the necessary extension
+                //    var pdfFile = string.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", query.Format);
+                //    Document pdfDocument = new Document();
+                //    // Initialize ExcelSaveOptions
+                //    ExcelSaveOptions options = new ExcelSaveOptions();
+                //    // Set output format
+                //    options.Format = ExcelSaveOptions.ExcelFormat.XLSX;
+                //    // Save output file
+                //    pdfDocument.Save("C:\\Relatório.xlsx", options);
+                //}
+                //////////////////////////////////////////////////////////////////////
+                
+                // Obtenho o nome do relatório
                 var file = string.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", query.Format);
-                //// If the inline parameter is true, then open the report in the browser
                 if (query.Inline)
+                    // Aqui sempre vai mostrar o pdf no Frame 
                     return File(stream.ToArray(), mime);
                 else
-                    // Otherwise download the report file 
+                    // Aqui vai fazer o download do arquivo
                     return File(stream.ToArray(), mime, file); // 
             }
             else

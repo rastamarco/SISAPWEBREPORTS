@@ -10,14 +10,14 @@
           </v-btn>
         </template>
         <v-list dense>
-          <v-list-item v-for="(item, i) in items" :key="i">
-            <v-list-item-title @click="teste(backendPath+item.type)"> {{ item.title }}</v-list-item-title>
+          <v-list-item v-for="(item, i) in itemsDownload" :key="i">
+            <v-list-item-title> {{ item.title }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
     </div>
     <div class="export-excel">
-      <v-btn text color="primary" dark class="btn-download" @click="teste()">
+      <v-btn text color="primary" dark class="btn-download" @click="fileExcel()">
         <v-icon>mdi-file-excel</v-icon>
         Gerar Excel
       </v-btn>
@@ -29,17 +29,7 @@
       </v-btn>
     </div>
   </div>
-  <!-- 
-  <a v-bind:href="backendPath+item.type" target="_blank"></a>
-  <h2>Inline reports</h2>
-  <input type="radio" id="master" value="1?format=html&inline=true" v-model="selectedReport">
-  <label for="one">Master-Detail</label>
-  <br>
-  <input type="radio" id="bar" value="2?format=html&inline=true" v-model="selectedReport">
-  <label for="one">Barcodes</label> 
-  <br> -->
-  <!-- <iframe v-bind:src="backendPath+selectedReport" width="100%" height="540" class="frame" frameborder="0" type="application/pdf"> -->
-  <iframe v-bind:src="backendPath+selectedReport" width="100%" height="560" class="frame" type="application/pdf" />
+  <iframe v-bind:src="backendPath+idReport+pathReport+params" width="100%" height="560" class="frame" type="application/pdf" />
 </div>
 </template>
 
@@ -51,23 +41,23 @@ import {
   Watch
 } from 'vue-property-decorator';
 import {
-  Action,
+  Action, Getter
 } from 'vuex-class';
 @Component
 export default class Reports extends Vue {
   /* eslint-disable indent */
-  @Action reportApontamentoResfriadoFalse
+  @Action noShowReport
+  @Action setSelectedIdReport
 
-  private backendPath: any = 'http://localhost:54687/api/reportgeneration/';
-  // private modalReports: boolean = false;
-  private selectedReport: any = '1?format=pdf&inline=true';
-  private items: Array < any > = [{
+  @Getter idReport
+  @Getter params
+
+  private backendPath: any = `${process.env.VUE_APP_API_URL}/api/reportgeneration/`;
+  private pathReport: any = '?format=pdf&inline=true&parameter=';
+  
+  private itemsDownload: Array < any > = [{
       title: 'Download PDF',
       type: '1?format=pdf'
-    },
-    {
-      title: 'Download PNG',
-      type: '1?format=png'
     },
     {
       title: 'Download Excel',
@@ -75,46 +65,14 @@ export default class Reports extends Vue {
     },
   ];
 
-  public teste(): void {
-    window.open(this.backendPath + this.selectedReport);
-  }
+  // public fileExcel(): void {
+  //   window.open(this.backendPath + this.idReport +'?format=xlsx');
+  // }
 
   public async ClosePrinter(): Promise < void > {
-    await this.reportApontamentoResfriadoFalse({
-      date: null,
-      period: null,
-      turno: null
-    });
+    await this.noShowReport({ show: false }); 
+    await this.setSelectedIdReport({ id: null });
   }
-  // public printDocument(): any {
-  //   // const  iframe = document.querySelector('iframe');
-  //   // console.log(iframe.contentDocument.domain);
-  //   // console.log(document.getElementById('printf'));
-  //   // window.frames['printf'].focus();
-  //   // window.frames['printf'].print();
-  //   const element: HTMLIFrameElement = document.getElementById('printf') as HTMLIFrameElement;
-  //   const iframe = element.contentWindow;
-  //   if (iframe !== null) {
-  //     window.open(element.src);
-  //   } else {
-  //     this.$swal('Ops!', 'Algo deu Errado ao tentar imprimir esse arquivo! Aguarde um pouco e tente novamente, ou contate a equipe de Suporte.', 'error');
-  //   }
-  // }
-
-  // public teste(url: any): void {
-  //   this.modalReports = true;
-  //   // window.open(this.backendPath + '1?format=pdf');
-  //   // const fileURL = window.URL.createObjectURL(new Blob([responseGetDocument.data]));
-  //   // const fileLink = document.createElement('a');
-  //   // fileLink.href = fileURL;
-
-  //   // fileLink.setAttribute('download', `${name}.${extension}`);
-  //   // document.body.appendChild(fileLink);
-  //   // const fileURLView = window.URL.createObjectURL(new Blob([responseGetDocument.data], {
-  //   //   type: typeDocument
-  //   // }));
-  // }
-
 }
 </script>
 

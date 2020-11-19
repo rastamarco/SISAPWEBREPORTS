@@ -1,4 +1,6 @@
-﻿using System;
+﻿using sisapWebApi.Models.ReportModels;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,11 +9,12 @@ namespace sisapWebApi.Models
 {
     public class ReportQuery
     {
-        // Format of resulting report: png, pdf, html
+        // Formato do Arquivo, pdf, xlsx (Caso precise tem outros também como PNG, basta converter
         public string Format { get; set; }
-        // Enable Inline preview in browser (generates "inline" or "attachment")
+        // Aqui verifica se é Inline=True ou não, se for mostra o arquivo no IFRAME se não volta com download
         public bool Inline { get; set; }
-        // Value of "Parameter" variable in report
+
+        // Variável que armazena os parametros enviados na selação do relatório
         public string Parameter { get; set; }
     }
 }

@@ -2,9 +2,9 @@
 <v-row>
   <v-col cols="12" sm="3">
     <v-sheet rounded="lg" min-height="268">
-      <Cadastros />
+      <!-- <Cadastros /> -->
       <Relatorios />
-      <Etiquetas />
+      <!-- <Etiquetas /> -->
     </v-sheet>
   </v-col>
   <v-col cols="12" sm="9">

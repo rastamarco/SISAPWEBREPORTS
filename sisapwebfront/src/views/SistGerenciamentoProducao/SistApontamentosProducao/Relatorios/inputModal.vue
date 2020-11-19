@@ -46,13 +46,15 @@ import {
   Watch
 } from 'vue-property-decorator';
 import {
-  Action,
+  Action, Getter
 } from 'vuex-class';
 @Component
 export default class RelatorioModals extends Vue {
   @Prop() nameBox!: any
+  @Prop() idBox!: any;
 
-  @Action reportApontamentoResfriado
+  @Action reportApontamentoProducao
+  @Getter filialName
 
   private menu: boolean = false;
   private date = new Date().toISOString().substr(0, 10);
@@ -92,25 +94,31 @@ export default class RelatorioModals extends Vue {
   }
 
   public canPrint(): boolean {
-    if ((this.periodoGroup === 1 || this.periodoGroup === 2) && (this.turnoGroup >= 1 || this.turnoGroup <= 3)) {
+    if ((this.periodoGroup === 1 || this.periodoGroup === 2) && (this.turnoGroup === 1 || this.turnoGroup === 2 || this.turnoGroup === 3)) {
       return true;
     } else {
       return false;
     }
   }
+
   @Watch('date')
   public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
     this.dateFormatted = this.formatDate(value);
   }
+
   public async Print(): Promise < void > {
     if (this.dateToSend === null) {
       this.dateToSend = this.date;
     }
-    await this.reportApontamentoResfriado({
-      date: this.dateToSend,
-      period: this.periodoGroup,
-      turno: this.turnoGroup
-    });
+    switch(this.idBox){
+    case 1: 
+      await this.reportApontamentoProducao({
+        localUser: this.filialName, 
+        date: this.dateToSend,
+        period: this.periodoGroup,
+        turno: this.turnoGroup
+      }); 
+    }
     this.closeModal();
   }
 

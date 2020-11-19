@@ -1,7 +1,7 @@
 <template>
 <div>
   <v-list dense>
-    <v-list-group v-for="item in items" :key="item.title" v-model="item.active" :prepend-icon="item.icon" no-action>
+    <v-list-group v-for="item in itemsReports" :key="item.title" v-model="item.active" :prepend-icon="item.icon" no-action>
       <template v-slot:activator>
         <v-list-item-content>
           <v-list-item-title v-text="item.title"></v-list-item-title>
@@ -15,7 +15,8 @@
             </v-list-item-content>
           </v-list-item>
         </template>
-        <InputModals v-bind="{ nameBox }" v-on="{ closeModal }" />
+        <!-- Aqui via todos os templates de input de parametros para relatórios --> 
+        <InputModals v-bind="{ nameBox, idBox }" v-on="{ closeModal }" />
       </v-dialog>
     </v-list-group>
   </v-list>
@@ -27,6 +28,10 @@ import {
   Component,
   Vue
 } from 'vue-property-decorator';
+import {
+  Action,
+} from 'vuex-class';
+
 import InputModals from './inputModal.vue';
 @Component({
   components: {
@@ -34,30 +39,42 @@ import InputModals from './inputModal.vue';
   }
 })
 export default class ApontamentosRelatorios extends Vue {
+  @Action setSelectedIdReport
+  
   /* eslint-disable indent */
   private modalReports: boolean = false;
   private nameBox: any = null;
-  private items: Array < any > = [{
+  private idBox: any = null;
+
+  private itemsReports: Array < any > = [{
     icon: 'mdi-file-chart',
     title: 'Relatórios',
     items: [{
+        id: 1,
         title: 'Apontamento da Produção'
       },
       {
+        id: 2,
         title: 'Apontamento de Resfriados'
       },
       {
+        id: 3,
         title: 'Apontamento de Refeitório'
       },
     ]
   }, ]
 
-  public selectReport(item: any): void {
-
-    switch (item.title) {
-      case 'Apontamento de Resfriados':
-        this.nameBox = 'Impressão de Apontamento de Resfriados';
-        break;
+  public async selectReport(item: any): Promise<void> {
+    await this.setSelectedIdReport({ id: item.id });
+    switch (item.id) {
+      case 1:
+        this.nameBox = 'Impressão de Apontamento de Produção';
+        this.idBox = 1;
+      break;
+      case 2:
+        this.nameBox = 'Impressão de Apontamento de Refeitório';
+        this.idBox = 2;
+      break;
       default:
         break;
     }

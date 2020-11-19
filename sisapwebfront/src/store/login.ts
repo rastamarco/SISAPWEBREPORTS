@@ -101,7 +101,7 @@ export const login = {
           const UFeatures = new usersPermissionsViewModel();
           // PERMISSÕES DO USUÁRIO, MOSTRA EM QUAL SISTEMA ELE VAI SER REDIRECIONADO
           if (authData.userType === 'Controle da Produção' || authData.userType === 'Embalagem Primária' || authData.userType === 'Embalagem Secundária' || authData.userType === 'Oficina' ||
-        authData.userType === 'Operador de Apontamento' || authData.userType === 'PCP' || authData.userType === 'Expedição Controle') {
+          authData.userType === 'Operador de Apontamento' || authData.userType === 'PCP' || authData.userType === 'Expedição Controle') {
             UFeatures.isApontamento = true;
           } else if (authData.userType === 'Monitor da Qualidade') {
             UFeatures.isQualidade = true;

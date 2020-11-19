@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lar\\source\\repos\\SisapWebAPI\\sisapWebApi\\sisapWebApi.csproj": {}
+    "C:\\Users\\Lar\\source\\repos\\sisapWebApi\\SISAPWEBREPORTS\\sisapWebApi\\sisapWebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lar\\source\\repos\\SisapWebAPI\\sisapWebApi\\sisapWebApi.csproj": {
+    "C:\\Users\\Lar\\source\\repos\\sisapWebApi\\SISAPWEBREPORTS\\sisapWebApi\\sisapWebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lar\\source\\repos\\SisapWebAPI\\sisapWebApi\\sisapWebApi.csproj",
+        "projectUniqueName": "C:\\Users\\Lar\\source\\repos\\sisapWebApi\\SISAPWEBREPORTS\\sisapWebApi\\sisapWebApi.csproj",
         "projectName": "sisapWebApi",
-        "projectPath": "C:\\Users\\Lar\\source\\repos\\SisapWebAPI\\sisapWebApi\\sisapWebApi.csproj",
+        "projectPath": "C:\\Users\\Lar\\source\\repos\\sisapWebApi\\SISAPWEBREPORTS\\sisapWebApi\\sisapWebApi.csproj",
         "packagesPath": "C:\\Users\\Lar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lar\\source\\repos\\SisapWebAPI\\sisapWebApi\\obj\\",
+        "outputPath": "C:\\Users\\Lar\\source\\repos\\sisapWebApi\\SISAPWEBREPORTS\\sisapWebApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -45,6 +45,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Aspose.PDF": {
+              "target": "Package",
+              "version": "[20.11.0, )"
+            },
             "DocumentFormat.OpenXml": {
               "target": "Package",
               "version": "[2.11.3, )"
@@ -92,6 +96,14 @@
             "Microsoft.NETCore.Windows.ApiSets": {
               "target": "Package",
               "version": "[1.0.1, )"
+            },
+            "Spire.PDF": {
+              "target": "Package",
+              "version": "[6.11.6, )"
+            },
+            "System.Collections.NonGeneric": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             },
             "System.Windows.Extensions": {
               "target": "Package",
