@@ -2,6 +2,9 @@
 <v-card width="100%" height="325">
   <div class="title">
     <span class="title-box">{{ nameBox }} </span>
+    <div class="close-box">
+      <v-icon color="white" @click="closeModal()">mdi-close</v-icon>
+    </div>
   </div>
   <v-card-actions>
      <v-row>
@@ -17,13 +20,13 @@
       <v-col cols="12" sm="6" md="4">
         <small class="text-title">Turno </small>
         <v-radio-group v-model="turnoGroup" style="padding-left: 30px;">
-          <v-radio v-for="n in 3" :key="n" :label="`${n}º Turno`" :value="n"></v-radio>
+          <v-radio v-for="n in 4" :key="n" :label="getTurnos(n)" :value="n"></v-radio>
         </v-radio-group>
       </v-col>
-      <v-col cols="12" sm="6" md="4">
-        <small class="text-title">Período</small>
-        <v-radio-group v-model="periodoGroup" style="padding-left: 30px;">
-          <v-radio v-for="n in 2" :key="n" :label="`${n}º Período`" :value="n"></v-radio>
+      <v-col cols="12" sm="6" md="4" >
+        <small class="text-title" v-if="showPeriodApontamento()" >Período</small>
+        <v-radio-group v-model="periodoGroup" style="padding-left: 30px;" v-if="showPeriodApontamento()">
+          <v-radio v-for="n in 3" :key="n" :label="getPeriodo(n)" :value="n"></v-radio>
         </v-radio-group>
       </v-col>
     </v-row>
@@ -57,19 +60,44 @@ export default class RelatorioModals extends Vue {
   @Action setSelectedIdReport
 
   @Getter filialName
+  @Getter userFeatures
 
   private menu: boolean = false;
   private date = new Date().toISOString().substr(0, 10);
   private dateMax = new Date().toISOString().substr(0, 10);
   private dateFormatted = this.formatDate(new Date().toISOString().substr(0, 10))
   private dateToSend: any = null;
-  private turnoGroup: any = null;
-  private periodoGroup: any = null;
+  private turnoGroup: any = 1;
+  private periodoGroup: any = 1;
+
+  public getTurnos(n: any): any{
+    switch(n){
+    case 1: 
+      return '1º Turno';
+    case 2:
+      return '2º Turno';
+    case 3: 
+      return '3º Turno';
+    case 4:
+      return 'Todos';  
+    }
+  }
+
+  public getPeriodo(n: any): any{
+    switch(n){
+    case 1: 
+      return '1º Turno';
+    case 2:
+      return '2º Turno';
+    case 3: 
+      return 'Todos';
+    }
+  }
 
   public clearFields(): void {
     this.date = new Date().toISOString().substr(0, 10);
-    this.turnoGroup = null;
-    this.periodoGroup = null;
+    this.turnoGroup = 1;
+    this.periodoGroup = 1;
   }
 
   public closeModal(): void {
@@ -106,6 +134,14 @@ export default class RelatorioModals extends Vue {
     }
   }
 
+  public showPeriodApontamento(): boolean{
+    if ((this.filialName === 'UIC') && (this.userFeatures.isApontamento === true)){
+      return false;
+    } else { 
+      return true;
+    }
+  }
+
   @Watch('date')
   public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
     this.dateFormatted = this.formatDate(value);
@@ -117,23 +153,65 @@ export default class RelatorioModals extends Vue {
     }
     switch(this.idBox){
     case 1:
-      if (this.periodoGroup === null || this.turnoGroup === null) {
+      await this.ApontamentoProducao();
+      break;
+    case 2: 
+      // Outro Report
+      break; 
+    }
+    this.closeModal();
+  }
+
+  public async ApontamentoProducao(): Promise<void>{
+    switch(this.filialName){
+    case 'UIC':
+      if (this.turnoGroup === 4){
         await this.reportApontamentoProducao({
           localUser: this.filialName, 
           date: this.dateToSend,
-          idReport: 1
+          idReport: 15
         });
-      }else {
+      } else {
+        await this.reportApontamentoProducao({
+          localUser: this.filialName, 
+          date: this.dateToSend,
+          turno: this.turnoGroup,
+          idReport: 14
+        });
+      }
+      break;
+    default:
+      if (this.turnoGroup < 4 && this.periodoGroup < 3){
+        await this.reportApontamentoProducao({
+          localUser: this.filialName, 
+          date: this.dateToSend,
+          turno: this.turnoGroup,
+          period: this.periodoGroup,
+          idReport: 1,
+        });
+      }else if (this.turnoGroup === 4 && this.periodoGroup === 3){
+        await this.reportApontamentoProducao({
+          localUser: this.filialName, 
+          date: this.dateToSend,
+          idReport: 11,
+        });
+      }else if (this.turnoGroup === 4 && this.periodoGroup < 3){ 
         await this.reportApontamentoProducao({
           localUser: this.filialName, 
           date: this.dateToSend,
           period: this.periodoGroup,
-          turno: this.turnoGroup,
-          idReport: 11
+          idReport: 12,
         });
-      } 
+      }else if (this.turnoGroup < 4 && this.periodoGroup === 3){ 
+        await this.reportApontamentoProducao({
+          localUser: this.filialName, 
+          date: this.dateToSend,
+          turno: this.turnoGroup,
+          idReport: 13,
+        });
+      }
+      break;
     }
-    this.closeModal();
   }
 
 }
@@ -152,6 +230,15 @@ export default class RelatorioModals extends Vue {
   color: white;
   padding-left: 10px;
   font-size: 16px;
+  width:60%;
+}
+
+.title .close-box {
+  padding-right: 16px;
+  display:flex;
+  justify-content: flex-end;
+  font-size: 22px;
+  width:40%;
 }
 
 .date-input {

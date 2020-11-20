@@ -12,7 +12,11 @@ namespace sisapWebApi.Repositories.ReportItems
         {
             reportItems = new List<ReportRepository>();
             reportItems.Add(new ReportRepository(1, "ApontamentoDeProducao.frx"));
-            reportItems.Add(new ReportRepository(11,"ApontamentoDeProducaoR2.frx"));
+            reportItems.Add(new ReportRepository(11, "ApontamentoDeProducaoTODOS.frx"));
+            reportItems.Add(new ReportRepository(12, "ApontamentoDeProducaoTURNO-Periodo.frx"));
+            reportItems.Add(new ReportRepository(13, "ApontamentoDeProducaoPERIODO-Turno.frx"));
+            reportItems.Add(new ReportRepository(14, "ApontamentoDeProducaoUIC-Turno.frx"));
+            reportItems.Add(new ReportRepository(15, "ApontamentoDeProducaoUIC.frx"));
         }
     }
 }

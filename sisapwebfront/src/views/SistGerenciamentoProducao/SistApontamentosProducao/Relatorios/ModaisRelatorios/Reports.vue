@@ -2,24 +2,15 @@
 <div>
   <div class="action-buttons">
     <div class="save">
-      <v-menu transition="slide-y-transition" bottom dense>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn text color="primary" dark v-bind="attrs" v-on="on" class="btn-download">
-            <v-icon>mdi-download</v-icon>
-            Salvar
-          </v-btn>
-        </template>
-        <v-list dense>
-          <v-list-item v-for="(item, i) in itemsDownload" :key="i">
-            <v-list-item-title> {{ item.title }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+      <v-btn text color="primary" dark v-bind="attrs" v-on="on" class="btn-download" @click="DownloadDocument()">
+        <v-icon>mdi-download</v-icon>
+        Download
+      </v-btn>
     </div>
     <div class="export-excel">
       <v-btn text color="primary" dark class="btn-download" @click="fileExcel()">
         <v-icon>mdi-file-excel</v-icon>
-        Gerar Excel
+        Gerar Arquivo Excel
       </v-btn>
     </div>
     <div class="close-printer">
@@ -54,7 +45,7 @@ export default class Reports extends Vue {
 
   private backendPath: any = `${process.env.VUE_APP_API_URL}/api/reportgeneration/`;
   private pathReport: any = '?format=pdf&inline=true&parameter=';
-  
+  private pathDownload: any = '?format=pdf&attachment=true&parameter=';
   private itemsDownload: Array < any > = [{
       title: 'Download PDF',
       type: '1?format=pdf'
@@ -69,6 +60,10 @@ export default class Reports extends Vue {
   //   window.open(this.backendPath + this.idReport +'?format=xlsx');
   // }
 
+  public DownloadDocument(): void {
+      window.open(this.backendPath + this.idReport + this.pathDownload+this.params);
+  }
+  
   public async ClosePrinter(): Promise < void > {
     await this.noShowReport({ show: false }); 
     await this.setSelectedIdReport({ id: null });

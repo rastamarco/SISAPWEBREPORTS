@@ -44,7 +44,6 @@ export default class Home extends Vue {
         token: window.localStorage.token
       });
     }
-
   }
 }
 </script>

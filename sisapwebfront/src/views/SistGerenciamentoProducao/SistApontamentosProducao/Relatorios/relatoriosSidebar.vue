@@ -63,6 +63,7 @@ export default class ApontamentosRelatorios extends Vue {
   public async selectReport(item: any): Promise<void> {
     switch (item.id) {
       case 1:
+        // UIA 
         this.nameBox = 'Impressão de Apontamento de Produção';
         this.idBox = 1;
       break;

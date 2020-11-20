@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -25,7 +26,7 @@ namespace sisapWebApi.Repositories
             while (reader.Read())
             {
                 User user = new User();
-                user.codUsuario = (Int32)reader["COD_USUARIO"];
+                user.codUsuario = (int)reader["COD_USUARIO"];
                 user.nomeUsuario = reader.GetString(1);
                 user.login = reader.GetString(2);
                 user.senha = reader.GetString(3);
@@ -76,6 +77,7 @@ namespace sisapWebApi.Repositories
             DataContext dbconnection = new DataContext();
             if (dbconnection.state)
             {
+
                 var result = await getUserLogin("SELECT * FROM TB_USUARIO WHERE LOGIN = '" + login.ToLower() +
                                                 "' AND SENHA = '" + senha.ToLower() + "' AND COD_FILIAL = '" + filial.ToUpper()+"'", 
                                                 dbconnection.connection).ConfigureAwait(true);

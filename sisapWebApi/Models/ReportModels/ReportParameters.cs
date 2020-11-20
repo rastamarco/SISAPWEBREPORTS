@@ -9,11 +9,11 @@ namespace sisapWebApi.Models.ReportModels
     {
         public string InitialDate { get; set; }
         public string EndDate { get; set; }
-        public int Shift { get; set; }
-        public int Period { get; set; }
-        public int Sector { get; set; }
+        public string Shift { get; set; }
+        public string Period { get; set; }
+        public string Sector { get; set; }
         public string Name { get; set; }
         public string LocalUser { get; set; }
-        public int Id { get; set; }
+        public string Id { get; set; }
     }
 }

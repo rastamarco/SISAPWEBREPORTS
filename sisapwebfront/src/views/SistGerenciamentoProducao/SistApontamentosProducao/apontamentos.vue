@@ -8,13 +8,15 @@
     </v-sheet>
   </v-col>
   <v-col cols="12" sm="9">
-    <v-sheet min-height="70vh" rounded="lg">
+    <v-sheet  rounded="lg" height="84vh">
       <div class="initial" v-if="!showReport">
         <div class="system-text">
           <SystemTitles />
         </div>
         <div class="system-img">
           <v-img :src="require('../../../assets/logo-lar.png')" class="my-3" contain height="230" />
+        </div>
+        <div class="footer-initial">
         </div>
       </div>
       <Reports v-if="showReport" />
@@ -88,5 +90,6 @@ export default class Apontamentos extends Vue {
   width: 100%;
   height: 80%;
   padding-left: 50px;
+  padding-top: 50px;
 }
 </style>

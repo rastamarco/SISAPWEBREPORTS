@@ -49,7 +49,7 @@ namespace sisapWebApi.Controllers
                 {
                     // Aqui converto o parametro enviado do FRONT do Relatório se houver
                     var parametros = JsonConvert.DeserializeObject<ReportParameters>(query.Parameter);
-                    if ( parametros.LocalUser != null )
+                    if (parametros.LocalUser != null)
                         report.SetParameterValue("LocalUsuario", parametros.LocalUser);
                     if (parametros.InitialDate != null)
                         report.SetParameterValue("DataInicial", parametros.InitialDate);
@@ -57,13 +57,13 @@ namespace sisapWebApi.Controllers
                         report.SetParameterValue("DataFinal", parametros.EndDate);
                     if (parametros.Name != null)
                         report.SetParameterValue("Nome", parametros.Name);
-                    if (parametros.Sector != 0)
+                    if (parametros.Sector != null)
                         report.SetParameterValue("Setor", parametros.Sector);
-                    if (parametros.Shift != 0)
+                    if (parametros.Shift != null)
                         report.SetParameterValue("Turno", parametros.Shift);
-                    if (parametros.Period != 0)
+                    if (parametros.Period != null)
                         report.SetParameterValue("Periodo", parametros.Period);
-                    if (parametros.Id != 0)
+                    if (parametros.Id != null)
                         report.SetParameterValue("Id", parametros.Id);
                 }
                 // Aqui pega e carrega o arquivo com os parametros passados ou não

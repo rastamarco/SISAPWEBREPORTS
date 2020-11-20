@@ -9,6 +9,7 @@ using sisapWebApi.Context;
 using System.Runtime.CompilerServices;
 using sisapWebApi.Authorization;
 using sisapWebApi.Repositories;
+using System.Text;
 
 namespace sisapWebApi.Controllers
 {
@@ -26,7 +27,7 @@ namespace sisapWebApi.Controllers
             if (user == null)
                 return NotFound(new { message = "Usuário ou Senha inválidos!" });
             var token = TokenService.GenerateToken(user);
-            return new { user = user, token = token };
+            return (new { user = user, token = token });
         }
     }
 }
