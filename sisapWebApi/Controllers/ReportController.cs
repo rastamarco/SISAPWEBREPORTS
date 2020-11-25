@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using sisapWebApi.Models;
 using sisapWebApi.Repositories;
-using Aspose.Pdf;
 using sisapWebApi.Models.ReportModels;
 using Newtonsoft.Json;
 using sisapWebApi.Repositories.ReportItems;
@@ -76,26 +75,24 @@ namespace sisapWebApi.Controllers
                 }
 
                 ////////////////////////////////////////////////////////////////////
-                // Conversão para EXCEL, não está funcionando falta passar o arquivo em pdf ali no new Document
-                //if (query.Format == "xlsx")
-                //{
-                //    PDFSimpleExport pdf = new PDFSimpleExport();
-                //    // Use the stream to store the report, so as not to create unnecessary files
-                //    report.Export(pdf, stream);
+                //Conversão para EXCEL, não está funcionando falta passar o arquivo em pdf ali no new Document
+                if (query.Format == "xlsx")
+                {
+                    PDFSimpleExport pdf = new PDFSimpleExport();
+                    // Use the stream to store the report, so as not to create unnecessary files
+                    report.Export(pdf, stream);
 
-                //    var pdfFile = string.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", query.Format);
-                //    Document pdfDocument = new Document();
-                //    // Initialize ExcelSaveOptions
-                //    ExcelSaveOptions options = new ExcelSaveOptions();
-                //    // Set output format
-                //    options.Format = ExcelSaveOptions.ExcelFormat.XLSX;
-                //    // Save output file
-                //    pdfDocument.Save("C:\\Relatório.xlsx", options);
-                //}
+                    var pdfFile = string.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", "pdf");
+                    var excelFile = string.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", query.Format);
+                    var document = File(stream.ToArray(), mime, "wwwroot\\App_Data\\"+pdfFile);
+                    /// Crio um arquivo PDF temporário
+                    System.IO.File.WriteAllBytes("wwwroot\\App_Data\\" + pdfFile, document.FileContents);
+
+                }
                 //////////////////////////////////////////////////////////////////////
-                
                 // Obtenho o nome do relatório
                 var file = string.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", query.Format);
+
                 if (query.Inline)
                     // Aqui sempre vai mostrar o pdf no Frame 
                     return File(stream.ToArray(), mime);

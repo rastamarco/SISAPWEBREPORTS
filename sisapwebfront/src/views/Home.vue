@@ -8,6 +8,7 @@
   </v-app-bar>
   <v-container style="margin-top: 65px;">
     <apontamentos v-if="userFeatures.isApontamento" />
+    <expedicao v-if="userFeatures.isExpedicao" />
   </v-container>
 </div>
 </template>

@@ -39,7 +39,7 @@ import Cadastros from './Cadastros/cadastrosSidebar.vue';
 import Relatorios from './Relatorios/relatoriosSidebar.vue';
 import Etiquetas from './Etiquetas/etiquetasSidebarr.vue';
 
-import Reports from './Relatorios/ModaisRelatorios/Reports.vue';
+import Reports from './../../reports/Reports.vue';
 import SystemTitles from './../../header/system-tittles.vue';
 
 @Component({
@@ -56,8 +56,6 @@ export default class Apontamentos extends Vue {
   @Action reloadUser
 
   @Getter showReport
-
-  private reportApontamentoResfriado: boolean = false;
 
   beforeMount() {
     if (window.localStorage.token) {

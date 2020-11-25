@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="11/20/2020 16:44:28" ReportInfo.CreatorVersion="2020.4.9.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="11/25/2020 11:02:31" ReportInfo.CreatorVersion="2020.4.9.0">
   <Dictionary>
-    <FirebirdDataConnection Name="ApontProducaoUIC" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7BsA8vDfkeRO9AQx9bXsILRYmxq5mOU3Y2uDOm6o3o6lPN7OAN6e4h1SNYohebiJa+xIEq96MSVWh7iKIgXASBt7syBbZbvPRrfwH9OOqiV+ha1MKJhOYn+yAnI7XQ2dG0=">
+    <FirebirdDataConnection Name="ApontProducaoUIC" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7BsA8vDfkeRO9AQx9bXsILRYmxq5mOU3Y2uDOm6o3o6lPN7OAN6e4h1SNYohebiJa+xIEq96MSVWh7iKIgXASBt7syBbZbvPRrfwH9OOqiV+pnvOdjUv/EFL/+CyQoRPaY=">
       <TableDataSource Name="Table1" Alias="ApontProdUICSQL" DataType="System.Int32" Enabled="true" SelectCommand="select tb_movpallet.cod_turno, tb_movpallet.dt_producao, tb_movpallet.cod_produto, tb_cadastro.desc_embalagem, cast(sum(tb_movpallet.qt_caixas) as float) as TOTAL&#13;&#10;from tb_movpallet,tb_cadastro, tb_pallet where tb_pallet.cod_pallet = tb_movpallet.cod_pallet and tb_cadastro.cod_sicop = tb_movpallet.cod_produto and&#13;&#10;tb_pallet.cod_filial = 'UIC' and tb_movpallet.dt_producao = @DataProd AND&#13;&#10;tb_movpallet.cod_camara = 'I'&#13;&#10;group by&#13;&#10;tb_movpallet.cod_turno, tb_movpallet.dt_producao, tb_movpallet.cod_produto, tb_cadastro.desc_embalagem, tb_cadastro.qt_embalagem&#13;&#10;order by&#13;&#10;tb_movpallet.cod_produto, tb_movpallet.cod_turno&#13;&#10;">
         <Column Name="COD_TURNO" DataType="System.Int32"/>
         <Column Name="DT_PRODUCAO" DataType="System.DateTime"/>
@@ -12,6 +12,7 @@
       </TableDataSource>
     </FirebirdDataConnection>
     <Parameter Name="Data" DataType="System.String" Expression="[DataInicial]"/>
+    <Total Name="Total" Expression="[ApontProdUICSQL.TOTAL]" Evaluator="Data1" PrintOn="DataFooter1"/>
   </Dictionary>
   <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
     <PageHeaderBand Name="PageHeader1" Width="718.2" Height="123.07" Border.Lines="All">
@@ -35,7 +36,11 @@
       <TextObject Name="Text34" Left="142.75" Width="94.5" Height="15.12" Text="[ApontProdUICSQL.COD_PRODUTO]" Font="Arial, 10pt"/>
       <TextObject Name="Text35" Left="255.15" Width="368.55" Height="15.12" Text="[ApontProdUICSQL.DESC_EMBALAGEM]" Font="Arial, 10pt"/>
       <TextObject Name="Text36" Left="642.6" Width="66.15" Height="15.12" Text="[ApontProdUICSQL.TOTAL]" RightToLeft="true" Font="Arial, 10pt"/>
+      <DataFooterBand Name="DataFooter1" Top="149.97" Width="718.2" Height="18.9">
+        <TextObject Name="Text40" Left="9.45" Width="170.1" Height="18.9" Text="Qtde. Total Produzida" Font="Arial, 10pt, style=Bold"/>
+        <TextObject Name="Text41" Left="614.25" Width="94.5" Height="18.9" Text="[ToDouble([Total])]" Format="Number" Format.UseLocale="true" Format.DecimalDigits="3" RightToLeft="true" Font="Arial, 10pt"/>
+      </DataFooterBand>
     </DataBand>
-    <PageFooterBand Name="PageFooter1" Top="149.97" Width="718.2" Height="37.8"/>
+    <PageFooterBand Name="PageFooter1" Top="172.87" Width="718.2" Height="18.9"/>
   </ReportPage>
 </Report>

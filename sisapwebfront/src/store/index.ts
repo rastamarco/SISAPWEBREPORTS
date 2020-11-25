@@ -1,13 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { login } from './login';
-import { reportsApontamento } from './reportsApontamento';
+import { Apontamento } from './Apontamento';
+import { Expedicao } from './Expedicao';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     login,
-    reportsApontamento
+    Apontamento,
+    Expedicao
   }
 });

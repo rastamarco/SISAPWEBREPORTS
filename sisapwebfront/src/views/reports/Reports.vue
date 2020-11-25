@@ -46,6 +46,7 @@ export default class Reports extends Vue {
   private backendPath: any = `${process.env.VUE_APP_API_URL}/api/reportgeneration/`;
   private pathReport: any = '?format=pdf&inline=true&parameter=';
   private pathDownload: any = '?format=pdf&attachment=true&parameter=';
+  private pathDownloadXLSX: any = '?format=xlsx&attachment=true&parameter=';
   private itemsDownload: Array < any > = [{
       title: 'Download PDF',
       type: '1?format=pdf'
@@ -56,12 +57,12 @@ export default class Reports extends Vue {
     },
   ];
 
-  // public fileExcel(): void {
-  //   window.open(this.backendPath + this.idReport +'?format=xlsx');
-  // }
+  public fileExcel(): void {
+    window.open(this.backendPath + this.idReport + this.pathDownloadXLSX+this.params);
+  }
 
   public DownloadDocument(): void {
-      window.open(this.backendPath + this.idReport + this.pathDownload+this.params);
+    window.open(this.backendPath + this.idReport + this.pathDownload+this.params);
   }
   
   public async ClosePrinter(): Promise < void > {

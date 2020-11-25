@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Parameters from '../models/parameters.model';
 
-export const reportsApontamento = {
+export const Apontamento = {
   state:{
     showReport: false,
     queryReport: null,

@@ -81,13 +81,14 @@ export const login = {
 
           const UFeatures = new usersPermissionsViewModel();
           const systemRouter = response.data.user.tipoUsuario;
-          // PERMISSÕES DO USUÁRIO, MOSTRA EM QUAL SISTEMA ELE VAI SER REDIRECIONADO
-          if (systemRouter === 'Controle da Produção' || systemRouter === 'Embalagem Primária' || systemRouter === 'Emb. Secund�ria' || systemRouter === 'Oficina' ||
+          // PERMISSÕES DO USUÁRIO, MOSTRA EM QUAL SISTEMA ELE VAI SER REDIRECIONADO -------  REFATORAR!!!!
+          if (systemRouter === 'Controle da Produç�o' || systemRouter === 'Embalagem Primária' || (systemRouter === 'Embalagem Secund�ria' && decodeToken.user.login !== 'exp') || systemRouter === 'Oficina' ||
           systemRouter === 'Operador Apontamento' || systemRouter === 'PCP' || systemRouter === 'Expedição Controle') {
             UFeatures.isApontamento = true;
           } else if (systemRouter === 'Monitor da Qualidade') {
             UFeatures.isQualidade = true;
-          } else if (systemRouter === 'Expedição Carregamento' || systemRouter === 'Expedição Embalagem') {
+          } else if (systemRouter === 'Expedição Carregamen' || systemRouter === 'Expediç�o Embalagem' || systemRouter === 'Expediç�o Embarque' || systemRouter === 'Expediç�o Controle' 
+          || (systemRouter === 'Embalagem Secund�ria' && decodeToken.user.login === 'exp')) {
             UFeatures.isExpedicao = true;
           }  
 
