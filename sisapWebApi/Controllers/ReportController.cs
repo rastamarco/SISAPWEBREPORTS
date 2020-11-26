@@ -64,6 +64,8 @@ namespace sisapWebApi.Controllers
                         report.SetParameterValue("Periodo", parametros.Period);
                     if (parametros.Id != null)
                         report.SetParameterValue("Id", parametros.Id);
+                    if (parametros.NrPallet != null)
+                        report.SetParameterValue("NrPallet", parametros.NrPallet);
                 }
                 // Aqui pega e carrega o arquivo com os parametros passados ou não
                 report.Prepare();

@@ -15,5 +15,10 @@ export const Expedicao = {
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
     }, 
+
+    async reportMovimentoCamaraOperador({ commit }, options) {
+      console.log('Teste');
+      
+    }
   }
 };

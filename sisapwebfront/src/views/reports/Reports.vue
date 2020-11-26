@@ -2,7 +2,7 @@
 <div>
   <div class="action-buttons">
     <div class="save">
-      <v-btn text color="primary" dark v-bind="attrs" v-on="on" class="btn-download" @click="DownloadDocument()">
+      <v-btn text color="primary" dark class="btn-download" @click="DownloadDocument()">
         <v-icon>mdi-download</v-icon>
         Download
       </v-btn>

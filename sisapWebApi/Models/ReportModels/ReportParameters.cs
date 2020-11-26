@@ -15,5 +15,6 @@ namespace sisapWebApi.Models.ReportModels
         public string Name { get; set; }
         public string LocalUser { get; set; }
         public string Id { get; set; }
+        public string NrPallet { get; set; }
     }
 }

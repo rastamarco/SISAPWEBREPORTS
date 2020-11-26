@@ -35,7 +35,7 @@ import {
   Getter
 } from 'vuex-class';
 
-import Relatorios from './Relatorios/relatoriosSidebarExp.vue';
+import Relatorios from './Relatorios/relatorioSidebarExp.vue';
 
 import Reports from './../../reports/Reports.vue';
 import SystemTitles from './../../header/system-tittles.vue';

@@ -17,8 +17,15 @@ import {
 } from 'vuex-class';
 @Component
 export default class FormacaoPallet extends Vue {
-  private nrPallet: any = null;
+  @Prop() clearFields!: any; 
 
+  private nrPallet: any = null;
+  
+  @Watch('clearFields')
+  public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
+    this.nrPallet = null;
+  }
+  
   public SendNRPallet(nrPallet: any): void {
     this.$emit('getNrPallet', nrPallet);
   }

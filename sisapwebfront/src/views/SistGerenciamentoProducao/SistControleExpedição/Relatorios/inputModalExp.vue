@@ -8,28 +8,9 @@
   </div>
   <v-card-actions>
      <v-row>
-      <formacaoPallet v-on="{getNrPallet}" v-if= "idBox === 1"/>
-      <!-- <v-col cols="12" sm="6" md="4">
-        <v-menu v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
-          <template v-slot:activator="{ on, attrs }">
-            <small class="text-title">Data</small>
-            <v-text-field id="teste" v-model="dateFormatted" @blur="date = parseDate(dateFormatted)" prepend-icon="mdi-calendar" readonly outlined hide-details dense v-bind="attrs" v-on="on" class="date-input"></v-text-field>
-          </template>
-          <v-date-picker v-model="date" @input="setDate(date)" locale="pt" min="1950-01-01" :max="dateMax"></v-date-picker>
-        </v-menu>
-      </v-col>
-      <v-col cols="12" sm="6" md="4">
-        <small class="text-title">Turno </small>
-        <v-radio-group v-model="turnoGroup" style="padding-left: 30px;">
-          <v-radio v-for="n in 4" :key="n" :label="getTurnos(n)" :value="n"></v-radio>
-        </v-radio-group>
-      </v-col>
-      <v-col cols="12" sm="6" md="4" >
-        <small class="text-title" v-if="showPeriodApontamento()" >Período</small>
-        <v-radio-group v-model="periodoGroup" style="padding-left: 30px;" v-if="showPeriodApontamento()">
-          <v-radio v-for="n in 3" :key="n" :label="getPeriodo(n)" :value="n"></v-radio>
-        </v-radio-group>
-      </v-col> -->
+      <!-- Componentes para parametros -->
+      <formacaoPallet v-on="{getNrPallet}" v-bind="{clearFields}" v-if="idBox === 1"/>
+      
     </v-row>
     <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
       Cancelar
@@ -53,7 +34,7 @@ import {
   Action, Getter
 } from 'vuex-class';
 
-import formacaoPallet from './formacaoPallet.vue';
+import formacaoPallet from '../Relatorios/Parametros/formacaoPallet.vue';
 
 @Component ({
   components: {
@@ -74,6 +55,7 @@ export default class InputModalsExp extends Vue {
   private turnoGroup: any = 1;
   private periodoGroup: any = 1;
   private nrPallet: any = null;
+  private clearFields: boolean = false;
 
   public getNrPallet(nrPallet: any): void {
     this.nrPallet = nrPallet;
@@ -97,9 +79,10 @@ export default class InputModalsExp extends Vue {
 
   public async ReportFormacaoPallet(nrPallet: any): Promise<void> {
     await this.reportFormacaoPallets({ 
-      idReport: 16,
+      idReport: 2,
       nrPallet: nrPallet
     });
+    this.clearFields = true;
   } 
 }
 </script>
