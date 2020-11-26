@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="11/25/2020 11:02:56" ReportInfo.CreatorVersion="2020.4.9.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="11/26/2020 13:48:03" ReportInfo.CreatorVersion="2020.4.9.0">
   <Dictionary>
-    <FirebirdDataConnection Name="Apontamento" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7CICSqtOZ0uQDUYK/sUwCjRCpVpl2dPV1KpHrbdHcKplciAHbj0n5ta0p1teUo6+HdSo1qvGJKMH33al0CUDOssLnqhS4dvgpEQAK61mt5q+AZ4DV0Z7lR1nmiy+CEroAs=">
+    <FirebirdDataConnection Name="Apontamento" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttZin2GvIGXdTPtpvkUlSDw0=">
       <TableDataSource Alias="ApontamentoProducao" DataType="System.Int32" PropName="Table1" Enabled="true" SelectCommand="select t1.cod_sicop, SUM(T1.QT_PROD) as F_1, t2.qt_embalagem, t2.desc_embalagem, T1.DT_PRODUCAO, T1.ID_SEQUESTRADO, t2.tp_pallet&#13;&#10;From TB_MOVIMENTO T1, TB_CADASTRO T2&#13;&#10;where (T1.DT_PRODUCAO = @DataProd)&#13;&#10;            and (T1.COD_SICOP = T2.COD_SICOP) and (T1.qt_prod &lt;&gt; 0)&#13;&#10; and (T1.COD_FILIAL = @LocalUsuario) and  t1.cod_periodo = @PER&#13;&#10;GROUP BY T1.cod_sicop, T1.ID_SEQUESTRADO, t2.qt_embalagem, t2.desc_embalagem, T1.DT_PRODUCAO, t2.tp_pallet&#13;&#10; order by T1.DT_PRODUCAO, T1.COD_SICOP&#13;&#10;">
         <Column Name="COD_SICOP" DataType="System.Int32"/>
         <Column Name="F_1" DataType="System.Int64"/>
@@ -16,7 +16,7 @@
         <CommandParameter Name="PER" DataType="10" Expression="[Periodo]"/>
       </TableDataSource>
     </FirebirdDataConnection>
-    <FirebirdDataConnection Name="Detalhes" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7CICSqtOZ0uQDUYK/sUwCjRCpVpl2dPV1KpHrbdHcKplciAHbj0n5ta0p1teUo6+HdSo1qvGJKMH33al0CUDOssLnqhS4dvgpEQAK61mt5q+Nx3X+MJRe/MFtjcGXOrI6Q=">
+    <FirebirdDataConnection Name="Detalhes" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttZBmfA/TOs7CwSO8+pzmtRY=">
       <TableDataSource Name="Table" Alias="Resfriamento" DataType="System.Int32" Enabled="true" SelectCommand="select sum(t1.qt_prod) as F_1, t2.tp_resfriamento From TB_MOVIMENTO T1, TB_CADASTRO T2 where (T1.DT_PRODUCAO = @DataProd ) AND (T1.COD_TURNO = 1) AND (T1.COD_FILIAL = @FilialName) and T1.cod_sicop = t2.cod_sicop group by t2.tp_resfriamento">
         <Column Name="F_1" DataType="System.Int64"/>
         <Column Name="TP_RESFRIAMENTO" DataType="System.String"/>

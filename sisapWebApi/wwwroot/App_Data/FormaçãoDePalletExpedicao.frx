@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="11/26/2020 11:30:31" ReportInfo.CreatorVersion="2020.4.9.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="11/26/2020 13:49:35" ReportInfo.CreatorVersion="2020.4.9.0">
   <Dictionary>
-    <FirebirdDataConnection Name="FormPallet" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7BsA8vDfkeRO9AQx9bXsILRYmxq5mOU3Y2uDOm6o3o6lPN7OAN6e4h1SNYohebiJa+xIEq96MSVWh7iKIgXASBt7syBbZbvPRrfwH9OOqiV+pKWQGJstsuifwYLIIOiZ1g=">
+    <FirebirdDataConnection Name="FormPallet" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDMfHT2DRYle5RKKJKJQfiyRzqeeve8AtX/181GxfhsNhTbmrypkRda+ogE0C3GeUcy0gPEqsHigaa2XSo4dKh/x7sz3KBFaTguL6EEVwCNy2Z9K9mXTs//O9ysEuVBcuxkJ2etRlAqgU5g8bL5hBV2BdQA1g2BpQ0TL1dzaQGV5g=">
       <TableDataSource Name="Table" Alias="FormacaoPallet" DataType="System.Int32" Enabled="true" SelectCommand="select * from tb_pallet t1, tb_movpallet t2 where t1.nr_pallet = @Plt and t1.cod_pallet = t2.cod_pallet&#13;&#10;">
         <Column Name="COD_PALLET" DataType="System.Int32"/>
         <Column Name="DT_PALLET" DataType="System.DateTime"/>

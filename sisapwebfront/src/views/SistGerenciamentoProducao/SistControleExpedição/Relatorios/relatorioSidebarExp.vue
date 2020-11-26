@@ -68,7 +68,7 @@ export default class RelatorioSidebarExp extends Vue {
         this.idBox = 1;
       break;
       case 2:
-        this.nameBox = 'Relatório de Monitoramento Operador/Câmara';
+        this.nameBox = 'Relatório de Movimentação Operador/Câmara';
         this.idBox = 2;
       break;
       default:

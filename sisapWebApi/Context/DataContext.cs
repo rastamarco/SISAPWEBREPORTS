@@ -50,18 +50,5 @@ namespace sisapWebApi.Context
             // optionsBuilder.UseFirebird(new FbConnection(stringconnection.ToString())); 
         }
 
-        // public DbSet<User> Users { get; set; }
-
-        public DataSet GetDataSet(string name)
-        {
-            DataSet set = new DataSet(name);
-            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(User));
-            DataTable dt = new DataTable();
-            foreach (PropertyDescriptor p in props)
-                dt.Columns.Add(p.Name, p.PropertyType);
-            set.Tables.Add(dt);
-            return set;
-        }
-
     }
 }

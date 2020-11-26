@@ -1,5 +1,5 @@
 <template>
-<v-card width="100%" height="350">
+<v-card width="100%" height="435">
   <div class="title">
     <span class="title-box">{{ nameBox }} </span>
     <div class="close-box">
@@ -8,9 +8,11 @@
   </div>
   <v-card-actions>
      <v-row>
-      <!-- Componentes para parametros -->
+      <!-- Componentes para parametros Siga a sequencia que tudo vai dar certo! -->
+      <!-- Relatório de Formação de Pallet --> 
       <formacaoPallet v-on="{getNrPallet}" v-bind="{clearFields}" v-if="idBox === 1"/>
-      
+      <!-- Relatório de Movimento de Câmara/Operador -->
+      <movimentoCamaraOperador  v-on="{getShift, getMovement, getOperation, getCodSicop, getIdChambers, getInitialDate, getEndDate}" v-bind="{clearFields}" v-if="idBox === 2" />
     </v-row>
     <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
       Cancelar
@@ -35,10 +37,13 @@ import {
 } from 'vuex-class';
 
 import formacaoPallet from '../Relatorios/Parametros/formacaoPallet.vue';
+import movimentoCamaraOperador from '../Relatorios/Parametros/movimentoCamaraOperador.vue';
+
 
 @Component ({
   components: {
-    formacaoPallet
+    formacaoPallet,
+    movimentoCamaraOperador
   }
 })
 export default class InputModalsExp extends Vue {
@@ -47,7 +52,8 @@ export default class InputModalsExp extends Vue {
 
   @Action reportFormacaoPallets
   @Action setSelectedIdReport
-
+  @Action reportMovimentoCamaraOperador
+  
   @Getter filialName
   @Getter userFeatures
 
@@ -56,12 +62,48 @@ export default class InputModalsExp extends Vue {
   private periodoGroup: any = 1;
   private nrPallet: any = null;
   private clearFields: boolean = false;
-
+  private idChambers: any = null;
+  private InitialDate: any = null;
+  private EndDate: any = null;
+  private CodSicop: any = null;
+  private Operation: any = null;
+  private Movement: any = null;
+  private Shift: any = null;
+  
   public getNrPallet(nrPallet: any): void {
     this.nrPallet = nrPallet;
   }
-  
+
+  public getIdChambers(idChambers: any): void{
+    this.idChambers = idChambers;
+  }
+
+  public getCodSicop(codSicop: any): void{
+    this.CodSicop = codSicop;
+  }
+
+  public getOperation(operation: any): void{
+    this.Operation = operation;
+  }
+
+  public getMovement(movement: any): void{
+    this.Movement = movement;
+  }
+
+  public getShift(shift: any): void{
+    this.Shift = shift;
+  }
+
+  public getInitialDate(initialDate: any): void{
+    this.InitialDate = initialDate;
+  }
+
+  public getEndDate(endDate: any): void{
+    this.EndDate = endDate;
+  }
+
   public closeModal(): void {
+    this.clearFields = true;
     this.$emit('closeModal');
   }
 
@@ -71,7 +113,8 @@ export default class InputModalsExp extends Vue {
       await this.ReportFormacaoPallet(this.nrPallet);
       break;
     case 2: 
-      // Outro Report
+      await this.ReportMovimentoCamaraOperador(this.idChambers, this.Shift, 
+        this.Operation, this.Movement, this.InitialDate, this.EndDate);
       break; 
     }
     this.closeModal();
@@ -84,6 +127,17 @@ export default class InputModalsExp extends Vue {
     });
     this.clearFields = true;
   } 
+
+  public async ReportMovimentoCamaraOperador(idChambers: any, shift: any, operation: any, movement: any,
+    initialDate: any, endDate: any): Promise<void> {
+    // Fazer as Validações aqui para cada item enviado 
+
+    // await this.reportMovimentoCamaraOperador({
+    //   idReport: 3
+    // });
+    this.clearFields = true;
+  }
+
 }
 </script>
 
