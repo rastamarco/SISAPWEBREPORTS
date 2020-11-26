@@ -17,6 +17,7 @@ namespace sisapWebApi.Repositories.ReportItems
             reportItems.Add(new ReportRepository(13, "ApontamentoDeProducaoPERIODO-Turno.frx"));
             reportItems.Add(new ReportRepository(14, "ApontamentoDeProducaoUIC-Turno.frx"));
             reportItems.Add(new ReportRepository(15, "ApontamentoDeProducaoUIC.frx"));
+            reportItems.Add(new ReportRepository(16, "FormaçãoDePalletExpedicao.frx"));
         }
     }
 }

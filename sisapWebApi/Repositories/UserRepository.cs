@@ -32,7 +32,6 @@ namespace sisapWebApi.Repositories
                 user.senha = reader.GetString(3);
                 user.tipoUsuario = reader.GetString(4);
                 user.codFilial = reader.GetString(5);
-                user.grupoUsuario = reader.GetString(6);
                 users.Add(user);
             }
             return users;
@@ -53,7 +52,6 @@ namespace sisapWebApi.Repositories
                 user.senha = reader.GetString(3);
                 user.tipoUsuario = reader.GetString(4);
                 user.codFilial = reader.GetString(5);
-                user.grupoUsuario = reader.GetString(6);
             }
             return user;
         }

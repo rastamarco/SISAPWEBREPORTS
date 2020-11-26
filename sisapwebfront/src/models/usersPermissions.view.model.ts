@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export default class usersPermissionsViewModel {
   private _isApontamento?: boolean | any = false;
-  private _isQualidade?: boolean | any= false;
-  private _isExpedicao?: boolean | any= false;
+  private _isQualidade?: boolean | any = false;
+  private _isExpedicao?: boolean | any = false;
 
   get isApontamento(): boolean {
     return this._isApontamento;

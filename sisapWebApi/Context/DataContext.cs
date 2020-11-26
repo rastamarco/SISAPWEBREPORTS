@@ -21,7 +21,7 @@ namespace sisapWebApi.Context
         private static string pDataSource = "10.10.11.32";
         private static int pPort = 3050;
         private static int pDialect = 3;
-        private static string pCharset = "None";
+        private static string pCharset = "ISO8859_1";
         public FbConnection connection;
         public bool state = false;
         public DataContext ()

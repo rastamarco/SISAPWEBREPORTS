@@ -7,7 +7,7 @@
     <v-spacer></v-spacer>
   </v-app-bar>
   <v-container style="margin-top: 65px;">
-    <apontamentos v-if="userFeatures.isApontamento" />
+    <apontamentos v-if="userFeatures.isApontamento" /> 
     <expedicao v-if="userFeatures.isExpedicao" />
   </v-container>
 </div>
@@ -25,12 +25,14 @@ import {
 import headerBtn from './header/header-button.vue';
 import systemTabs from './header/system-tabs-admin.vue';
 import apontamentos from './SistGerenciamentoProducao/SistApontamentosProducao/apontamentos.vue';
+import expedicao from './SistGerenciamentoProducao/SistControleExpedição/expedicao.vue';
 
 @Component({
   components: {
     headerBtn,
     systemTabs,
     apontamentos,
+    expedicao
   }
 })
 export default class Home extends Vue {

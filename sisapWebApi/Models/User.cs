@@ -13,6 +13,5 @@ namespace sisapWebApi.Models
         public string senha { get; set; }
         public string tipoUsuario { get; set; }
         public string codFilial { get; set; }
-        public string grupoUsuario { get; set; }
     }
 }

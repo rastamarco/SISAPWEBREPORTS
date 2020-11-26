@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Parameters from '../models/parameters.model';
+import ParametersApontamento from '../models/parametersApontamento.model';
 
 export const Apontamento = {
   state:{
@@ -38,7 +38,7 @@ export const Apontamento = {
   },
   actions:{
     async reportApontamentoProducao ({ commit }, options){
-      const parameter = new Parameters();
+      const parameter = new ParametersApontamento();
       parameter.InitialDate = options.date;
       parameter.period = options.period;
       parameter.shift = options.turno;

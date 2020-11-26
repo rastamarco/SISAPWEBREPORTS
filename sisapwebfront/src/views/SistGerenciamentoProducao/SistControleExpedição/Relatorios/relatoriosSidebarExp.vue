@@ -1,0 +1,83 @@
+<template>
+<div>
+  <v-list dense>
+    <v-list-group v-for="item in itemsReports" :key="item.title" v-model="item.active" :prepend-icon="item.icon" no-action>
+      <template v-slot:activator>
+        <v-list-item-content>
+          <v-list-item-title v-text="item.title"></v-list-item-title>
+        </v-list-item-content>
+      </template>
+      <v-dialog v-model="modalReports" persistent width="40%">
+        <template v-slot:activator="{ on, attrs }">
+          <v-list-item v-for="child in item.items" :key="child.title" @click="selectReport(child)" v-on="on" v-bind="attrs">
+            <v-list-item-content>
+              <v-list-item-title v-text="child.title"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+        <!-- Aqui vai todos os templates de input de parametros para relatórios --> 
+        <InputModals v-bind="{ nameBox, idBox }" v-on="{ closeModal }" />
+      </v-dialog>
+    </v-list-group>
+  </v-list>
+</div>
+</template>
+
+<script lang="ts">
+import {
+  Component,
+  Vue
+} from 'vue-property-decorator';
+import {
+  Action,
+} from 'vuex-class';
+
+import InputModals from './inputModalExp.vue';
+@Component({
+  components: {
+    InputModals
+  }
+})
+export default class RelatorioSidebarExp extends Vue {
+  @Action setSelectedIdReport
+  
+  /* eslint-disable indent */
+  private modalReports: boolean = false;
+  private nameBox: any = null;
+  private idBox: any = null;
+
+  private itemsReports: Array < any > = [{
+    icon: 'mdi-file-chart',
+    title: 'Relatórios',
+    items: [{
+        id: 1,
+        title: 'Formação de Pallet'
+      },
+      {
+        id: 2,
+        title: 'Operador/Câmara'
+      }
+    ]
+  }, ]
+
+  public async selectReport(item: any): Promise<void> {
+    switch (item.id) {
+      case 1:
+        // UIA 
+        this.nameBox = 'Relatório de Formação de Pallet';
+        this.idBox = 1;
+      break;
+      case 2:
+        this.nameBox = 'Relatório de Monitoramento Operador/Câmara';
+        this.idBox = 2;
+      break;
+      default:
+        break;
+    }
+  }
+
+  public closeModal(): void {
+    this.modalReports = false;
+  }
+}
+</script>
