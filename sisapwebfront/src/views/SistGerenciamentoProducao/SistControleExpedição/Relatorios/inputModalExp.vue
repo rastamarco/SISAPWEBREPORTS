@@ -53,7 +53,8 @@ export default class InputModalsExp extends Vue {
   @Action reportFormacaoPallets
   @Action setSelectedIdReport
   @Action reportMovimentoCamaraOperador
-  
+  @Action reportMovimentoOperadorCamara
+
   @Getter filialName
   @Getter userFeatures
 
@@ -112,9 +113,9 @@ export default class InputModalsExp extends Vue {
     case 1:
       await this.ReportFormacaoPallet(this.nrPallet);
       break;
-    case 2: 
+    case 2:
       await this.ReportMovimentoCamaraOperador(this.idChambers, this.Shift, 
-        this.Operation, this.Movement, this.InitialDate, this.EndDate);
+        this.Operation, this.Movement, this.InitialDate, this.EndDate, this.CodSicop);
       break; 
     }
     this.closeModal();
@@ -129,13 +130,43 @@ export default class InputModalsExp extends Vue {
   } 
 
   public async ReportMovimentoCamaraOperador(idChambers: any, shift: any, operation: any, movement: any,
-    initialDate: any, endDate: any): Promise<void> {
+    initialDate: any, endDate: any, codSicop: any): Promise<void> {
     // Fazer as Validações aqui para cada item enviado 
-
-    // await this.reportMovimentoCamaraOperador({
-    //   idReport: 3
-    // });
+    switch(movement){
+    case '1':
+      // Movimentação por Câmaras
+      // Tipo de Operação
+      switch(operation){
+      case '1':
+        await this.reportMovimentoCamaraOperador({ chambers: idChambers, initDate: initialDate, endDate: endDate, codsicop: codSicop, shift: this.getShiftToSend(), idReport: 3 });
+        break;
+      case '2':
+        await this.reportMovimentoCamaraOperador({ chambers: idChambers, initDate: initialDate, endDate: endDate, codsicop: codSicop, shift: this.getShiftToSend(), idReport: 31 });
+        break;
+      case '3':
+        await this.reportMovimentoCamaraOperador({ chambers: idChambers, initDate: initialDate, endDate: endDate, codsicop: codSicop, shift: this.getShiftToSend(), idReport: 32 });
+        break;
+      }
+      break;
+    case '2':
+      // Movimentação por Operador
+      await this.reportMovimentoOperadorCamara({ chambers: idChambers, initDate: initialDate, endDate: endDate, idReport: 4 });
+      break;
+    } 
     this.clearFields = true;
+  }
+
+  public getShiftToSend(): any{
+    switch(this.Shift){
+    case '1': 
+      return '1';
+    case '2': 
+      return '2';
+    case '3': 
+      return '3';
+    case '4': 
+      return '';
+    }
   }
 
 }

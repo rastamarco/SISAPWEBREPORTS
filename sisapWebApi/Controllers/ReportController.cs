@@ -27,6 +27,7 @@ namespace sisapWebApi.Controllers
         // [Authorize]
         public async Task<IActionResult> GetReport(int id, [FromQuery] ReportQuery query)
         {
+            
             // Aqui obtenho a lista de Relatórios
             var reports = new ReportItems();
             
@@ -46,7 +47,7 @@ namespace sisapWebApi.Controllers
                 report.Load(reportPath); 
                 if (query.Parameter != null)
                 {
-                    // Aqui converto o parametro enviado do FRONT do Relatório se houver
+                    // Aqui converto o parametro enviado do FRONT do Relatório se houver mapeando os parametros
                     var parametros = JsonConvert.DeserializeObject<ReportParameters>(query.Parameter);
                     if (parametros.LocalUser != null)
                         report.SetParameterValue("LocalUsuario", parametros.LocalUser);
@@ -66,6 +67,10 @@ namespace sisapWebApi.Controllers
                         report.SetParameterValue("Id", parametros.Id);
                     if (parametros.NrPallet != null)
                         report.SetParameterValue("NrPallet", parametros.NrPallet);
+                    if (parametros.CodSicop != null)
+                        report.SetParameterValue("CodSicop", parametros.CodSicop);
+                    if (parametros.Chambers != null)
+                        report.SetParameterValue("Camaras", parametros.Chambers);
                 }
                 // Aqui pega e carrega o arquivo com os parametros passados ou não
                 report.Prepare();

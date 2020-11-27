@@ -25,7 +25,14 @@ export const Expedicao = {
     }, 
 
     async reportMovimentoCamaraOperador({ commit }, options) {
-      console.log('Teste');
+      console.log('Camara e Operadores');
+      const parameter = new ParametersExpedicao();
+      
+    },
+
+    async reportMovimentoOperadorCamara({ commit }, options) {
+      console.log('Operadores');
+      const parameter = new ParametersExpedicao();
       
     },
 

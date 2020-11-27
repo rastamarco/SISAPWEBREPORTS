@@ -16,5 +16,7 @@ namespace sisapWebApi.Models.ReportModels
         public string LocalUser { get; set; }
         public string Id { get; set; }
         public string NrPallet { get; set; }
+        public string CodSicop { get; set; }
+        public List<string> Chambers { get; set; }
     }
 }
