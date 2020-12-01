@@ -169,14 +169,16 @@ export default class RelatorioModals extends Vue {
         await this.reportApontamentoProducao({
           localUser: this.filialName, 
           date: this.dateToSend,
-          idReport: 15
+          idReport: 15,
+          reportModule: 1
         });
       } else {
         await this.reportApontamentoProducao({
           localUser: this.filialName, 
           date: this.dateToSend,
           turno: this.turnoGroup,
-          idReport: 14
+          idReport: 14,
+          reportModule: 1
         });
       }
       break;
@@ -188,12 +190,14 @@ export default class RelatorioModals extends Vue {
           turno: this.turnoGroup,
           period: this.periodoGroup,
           idReport: 1,
+          reportModule: 1
         });
       }else if (this.turnoGroup === 4 && this.periodoGroup === 3){
         await this.reportApontamentoProducao({
           localUser: this.filialName, 
           date: this.dateToSend,
           idReport: 11,
+          reportModule: 1
         });
       }else if (this.turnoGroup === 4 && this.periodoGroup < 3){ 
         await this.reportApontamentoProducao({
@@ -201,6 +205,7 @@ export default class RelatorioModals extends Vue {
           date: this.dateToSend,
           period: this.periodoGroup,
           idReport: 12,
+          reportModule: 1
         });
       }else if (this.turnoGroup < 4 && this.periodoGroup === 3){ 
         await this.reportApontamentoProducao({
@@ -208,6 +213,7 @@ export default class RelatorioModals extends Vue {
           date: this.dateToSend,
           turno: this.turnoGroup,
           idReport: 13,
+          reportModule: 1
         });
       }
       break;

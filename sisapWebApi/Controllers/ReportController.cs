@@ -27,18 +27,21 @@ namespace sisapWebApi.Controllers
         // [Authorize]
         public async Task<IActionResult> GetReport(int id, [FromQuery] ReportQuery query)
         {
-            
+
             // Aqui obtenho a lista de Relatórios
-            var reports = new ReportItems();
+            var reports = new Reports(query.reportModule);
             
+
             // Aqui crio o tipo do relatório (Sempre PDF)            
             string mime = "application/" + query.Format;
             
             // Aqui faço uma busca pelo relatório na lista de relatórios de acordo com o id dele 
             var reportItem = reports.reportItems.FirstOrDefault((p) => p.Id == id);
+
+
             if (reportItem != null)
             {
-                // Faz o registro do uso do FastReport na API
+                // Faz o registro do uso da conexão do FastReport na API
                 RegisteredObjects.AddConnection(typeof(FirebirdDataConnection));
                 string reportPath = ("wwwroot/App_Data/" + reportItem.ReportName); // Vejo onde que o arquivo Físico dele está
                 MemoryStream stream = new MemoryStream(); // Crio um Stream para ser lido no IFrame do Front

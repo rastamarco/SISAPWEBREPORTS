@@ -80,7 +80,6 @@ C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netc
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\sisapWebApi.runtimeconfig.dev.json
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\sisapWebApi.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\sisapWebApi.pdb
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\Aspose.PDF.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\DocumentFormat.OpenXml.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\EntityFramework.SqlServer.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\EntityFramework.dll
@@ -119,13 +118,9 @@ C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netc
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\SkiaSharp.dll
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\Spire.License.dll
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\Spire.Pdf.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\System.CodeDom.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\System.Diagnostics.PerformanceCounter.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\System.IO.Packaging.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
@@ -134,14 +129,8 @@ C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netc
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\runtimes\osx\native\libSkiaSharp.dylib
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\runtimes\tizen-armel\native\libSkiaSharp.so
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\runtimes\tizen-x86\native\libSkiaSharp.so
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\libSkiaSharp.dll
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\libSkiaSharp.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Diagnostics.PerformanceCounter.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\netcoreapp3.1\sisapWebApi.csprojAssemblyReference.cache
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\netcoreapp3.1\sisapWebApi.AssemblyInfoInputs.cache

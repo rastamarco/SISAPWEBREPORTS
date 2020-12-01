@@ -124,7 +124,8 @@ export default class InputModalsExp extends Vue {
   public async ReportFormacaoPallet(nrPallet: any): Promise<void> {
     await this.reportFormacaoPallets({ 
       idReport: 2,
-      nrPallet: nrPallet
+      nrPallet: nrPallet,
+      reportModule: 2
     });
     this.clearFields = true;
   } 
@@ -138,19 +139,19 @@ export default class InputModalsExp extends Vue {
       // Tipo de Operação
       switch(operation){
       case '1':
-        await this.reportMovimentoCamaraOperador({ chambers: idChambers, initDate: initialDate, endDate: endDate, codsicop: codSicop, shift: this.getShiftToSend(), idReport: 3 });
+        await this.reportMovimentoCamaraOperador({ chambers: idChambers, initDate: initialDate, endDate: endDate, codsicop: codSicop, shift: this.getShiftToSend(), idReport: 3, reportModule: 2 });
         break;
       case '2':
-        await this.reportMovimentoCamaraOperador({ chambers: idChambers, initDate: initialDate, endDate: endDate, codsicop: codSicop, shift: this.getShiftToSend(), idReport: 31 });
+        await this.reportMovimentoCamaraOperador({ chambers: idChambers, initDate: initialDate, endDate: endDate, codsicop: codSicop, shift: this.getShiftToSend(), idReport: 31, reportModule: 2 });
         break;
       case '3':
-        await this.reportMovimentoCamaraOperador({ chambers: idChambers, initDate: initialDate, endDate: endDate, codsicop: codSicop, shift: this.getShiftToSend(), idReport: 32 });
+        await this.reportMovimentoCamaraOperador({ chambers: idChambers, initDate: initialDate, endDate: endDate, codsicop: codSicop, shift: this.getShiftToSend(), idReport: 32, reportModule: 2 });
         break;
       }
       break;
     case '2':
       // Movimentação por Operador
-      await this.reportMovimentoOperadorCamara({ chambers: idChambers, initDate: initialDate, endDate: endDate, idReport: 4 });
+      await this.reportMovimentoOperadorCamara({ chambers: idChambers, initDate: initialDate, endDate: endDate, idReport: 4, reportModule: 2 });
       break;
     } 
     this.clearFields = true;

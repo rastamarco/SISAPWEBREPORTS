@@ -6,7 +6,8 @@ export const Apontamento = {
     showReport: false,
     queryReport: null,
     idReport: null,
-    params: null
+    params: null,
+    reportModule: null
   },
   getters:{
     showReport(state) {
@@ -20,6 +21,9 @@ export const Apontamento = {
     },
     params(state){
       return state.params;
+    },
+    reportModule(state){
+      return state.reportModule;
     }
   },
   mutations:{
@@ -34,6 +38,9 @@ export const Apontamento = {
     },
     setParams(state, value){
       state.params = value;
+    },
+    setReportModule(state, value){
+      state.reportModule = value;
     }
   },
   actions:{
@@ -45,6 +52,7 @@ export const Apontamento = {
       parameter.localUser = options.localUser;
       console.log(options.idReport);
       await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
     },

@@ -20,6 +20,7 @@ export const Expedicao = {
       const parameter = new ParametersExpedicao();
       parameter.nrPallet = options.nrPallet;
       await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
     }, 

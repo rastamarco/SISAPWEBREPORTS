@@ -45,10 +45,6 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
-            "Aspose.PDF": {
-              "target": "Package",
-              "version": "[20.11.0, )"
-            },
             "DocumentFormat.OpenXml": {
               "target": "Package",
               "version": "[2.11.3, )"
@@ -96,10 +92,6 @@
             "Microsoft.NETCore.Windows.ApiSets": {
               "target": "Package",
               "version": "[1.0.1, )"
-            },
-            "Spire.PDF": {
-              "target": "Package",
-              "version": "[6.11.6, )"
             },
             "System.Collections.NonGeneric": {
               "target": "Package",
