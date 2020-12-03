@@ -8,8 +8,8 @@ using sisapWebApi.Models;
 using sisapWebApi.Context;
 using System.Runtime.CompilerServices;
 using sisapWebApi.Authorization;
-using sisapWebApi.Repositories;
 using System.Text;
+using sisapWebApi.Services;
 
 namespace sisapWebApi.Controllers
 {
@@ -22,7 +22,7 @@ namespace sisapWebApi.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<dynamic>> Authenticate([FromBody] User authUser)
         {
-            var userContext= new UserRepository();
+            var userContext= new UserService();
             var user = await userContext.getUser(authUser.login, authUser.senha, authUser.codFilial).ConfigureAwait(true);
             if (user == null)
                 return NotFound(new { message = "Usuário ou Senha inválidos!" });

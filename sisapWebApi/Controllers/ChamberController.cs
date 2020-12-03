@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using sisapWebApi.Models;
-using sisapWebApi.Repositories;
-
+using sisapWebApi.Services;
 
 namespace sisapWebApi.Controllers
 {
@@ -18,7 +17,7 @@ namespace sisapWebApi.Controllers
         //[Authorize]
         public async Task<ActionResult<List<Chamber>>> GetUsersAsync(string filial)
         {
-            var chambersContext = new ChamberRepository();
+            var chambersContext = new ChamberService();
             var listChambers = await chambersContext.getAllChambersByLocal(filial).ConfigureAwait(true);
             return listChambers;
         }

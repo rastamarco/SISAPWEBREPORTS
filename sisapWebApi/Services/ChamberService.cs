@@ -1,32 +1,31 @@
-﻿using FirebirdSql.Data.FirebirdClient;
-using sisapWebApi.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FirebirdSql.Data.FirebirdClient;
+using sisapWebApi.Context;
+using sisapWebApi.Models;
+using sisapWebApi.Repository;
 
 namespace sisapWebApi.Services
 {
     public class ChamberService
     {
 
-        public async Task<List<Chamber>> getChambersByLocal(string select, FbConnection connection)
+        public async Task<List<Chamber>> getAllChambersByLocal(string filial)
         {
-            List<Chamber> chambers = new List<Chamber>();
-            FbDataReader reader = null;
-            FbCommand query = new FbCommand(select, connection);
-            reader = query.ExecuteReader();
 
-            while (reader.Read())
+            DataContext dbconnection = new DataContext();
+            ChamberRepository service = new ChamberRepository();
+            if (dbconnection.state)
             {
-                Chamber chamber = new Chamber();
-                chamber.cod_camara = reader.GetString(0);
-                chamber.desc_camara = reader.GetString(1);
-                chamber.cod_filial = reader.GetString(2);
-                chambers.Add(chamber);
+                var result = await service.getChambersByLocal("SELECT * FROM TB_CAMARA WHERE COD_FILIAL = '" + filial.ToUpper() +"'", dbconnection.connection).ConfigureAwait(true);
+                return result;
             }
-            return chambers;
-
+            else
+            {
+                return null;
+            }
         }
     }
 }

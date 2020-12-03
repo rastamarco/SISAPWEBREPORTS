@@ -155,6 +155,7 @@ export default class MovimentoCamaraOperador extends Vue {
   @Watch('idChambers')
   public async onPropertyChangedsChambers(value: any, oldValue: any): Promise < void > {
     this.$emit('getIdChambers', value); 
+     
   }
 
   public SendCodSicop(cod: any): void{
@@ -187,6 +188,7 @@ export default class MovimentoCamaraOperador extends Vue {
     this.$emit('getInitialDate', this.date);
     this.$emit('getEndDate', this.date2);
   }
+  
   async mounted() {
     if (this.allChambers === null) {
       this.isLoadingChambers = true;
@@ -195,7 +197,6 @@ export default class MovimentoCamaraOperador extends Vue {
     }
     this.InitialParameters();
   }
-
 }
 </script>
 <style scoped>

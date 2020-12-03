@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using FirebirdSql.Data.FirebirdClient;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
-using FastMember;
 using System.ComponentModel;
 
 namespace sisapWebApi.Context

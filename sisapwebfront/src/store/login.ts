@@ -82,15 +82,15 @@ export const login = {
           }
 
           const UFeatures = new usersPermissionsViewModel();
-          const systemRouter = response.data.user.tipoUsuario;
+          const typeUser = response.data.user.tipoUsuario;
           // PERMISSÕES DO USUÁRIO, MOSTRA EM QUAL SISTEMA ELE VAI SER REDIRECIONADO -------  REFATORAR!!!!
-          if (systemRouter === 'Controle da Produção' || systemRouter === 'Embalagem Primária' || systemRouter === 'Oficina' ||
-          systemRouter === 'Operador Apontamento' || systemRouter === 'PCP' || systemRouter === 'Expedição Controle') {
+          if (typeUser === 'Controle da Produção' || typeUser === 'Embalagem Primária' || typeUser === 'Oficina' || (typeUser === 'Embalagem Secundária' && response.data.user.login !== 'exp') ||
+          typeUser === 'Operador Apontamento' || typeUser === 'PCP' || typeUser === 'Expedição Controle') {
             UFeatures.isApontamento = true;
-          } else if (systemRouter === 'Monitor da Qualidade') {
+          } else if (typeUser === 'Monitor da Qualidade') {
             UFeatures.isQualidade = true;
-          } else if (systemRouter === 'Expedição Carregamen' || systemRouter === 'Expedição Embalagem' || systemRouter === 'Expedição Embarque' || systemRouter === 'Expedição Controle' 
-          || (systemRouter === 'Embalagem Secundária' && response.data.user.login === 'exp')) {
+          } else if (typeUser === 'Expedição Carregamen' || typeUser === 'Expedição Embalagem' || typeUser === 'Expedição Embarque' || typeUser === 'Expedição Controle' 
+          || (typeUser === 'Embalagem Secundária' && response.data.user.login === 'exp')) {
             UFeatures.isExpedicao = true;
           }  
           
@@ -98,7 +98,7 @@ export const login = {
             isAuthenticated: true,
             loginUser: response.data.user.login,
             filialName: decodeToken.Filial,
-            userType: systemRouter, 
+            userType: typeUser, 
             token: response.data.token,
             tokenExpiration: decodeToken.exp,
             isSysAdmin: isAdmin,
@@ -109,7 +109,7 @@ export const login = {
             isAuthenticated: true,
             loginUser: response.data.user.login,
             filialName: decodeToken.Filial,
-            userType: systemRouter,
+            userType: typeUser,
             token: response.data.token,
             isSysAdmin: isAdmin,
             nameUser: response.data.user.nomeUsuario,
@@ -146,7 +146,7 @@ export const login = {
       };
       const UFeatures = new usersPermissionsViewModel();
       // PERMISSÕES DO USUÁRIO, MOSTRA EM QUAL SISTEMA ELE VAI SER REDIRECIONADO
-      if (authData.userType === 'Controle da Produção' || authData.userType === 'Embalagem Primária' || authData.userType === 'Oficina' ||
+      if (authData.userType === 'Controle da Produção' || authData.userType === 'Embalagem Primária' || authData.userType === 'Oficina' ||  (authData.userType === 'Embalagem Secundária' && authData.loginUser !== 'exp') ||
           authData.userType === 'Operador Apontamento' || authData.userType === 'PCP' || authData.userType === 'Expedição Controle') {
         UFeatures.isApontamento = true;
       } else if (authData.userType === 'Monitor da Qualidade') {

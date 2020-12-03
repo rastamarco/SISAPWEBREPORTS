@@ -51,7 +51,7 @@ export default class Login extends Vue {
 
   @Getter isAuthenticated
 
-  private items = ['UIA', 'UIC', 'GBA', 'UPP'];
+  private items = ['UIA', 'UIC', 'GBA', 'UPP', 'SIF', 'UIAII', 'UIAIII', 'UIR'];
   private local = this.items[0];
   private user = null;
   private password = null;

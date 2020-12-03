@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using FastReport.Data;
 using FirebirdSql.Data.FirebirdClient;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -16,7 +17,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using sisapWebApi.Context;
-using sisapWebApi.Repositories;
+using sisapWebApi.Context.Interfaces;
+using sisapWebApi.Services;
 
 namespace sisapWebApi
 {
@@ -32,9 +34,15 @@ namespace sisapWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContextSQLServer>(opt => opt.UseSqlServer
+                (Configuration.GetConnectionString("ApontamentosProducao")));
             services.AddCors();
-            services.AddScoped<UserRepository>();
+            services.AddScoped<UserService>();
+            services.AddScoped<ChamberService>();
+            services.AddScoped<IRefeitorioRepo, RefeitorioService>();
             services.AddControllers();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var key = Encoding.ASCII.GetBytes(Settings.secret);
             services.AddAuthentication(x =>

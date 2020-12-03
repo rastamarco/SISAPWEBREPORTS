@@ -10,10 +10,9 @@ using FastReport.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using sisapWebApi.Models;
-using sisapWebApi.Repositories;
 using sisapWebApi.Models.ReportModels;
 using Newtonsoft.Json;
-using sisapWebApi.Repositories.ReportItems;
+using sisapWebApi.Services.ReportItems;
 
 namespace sisapWebApi.Controllers
 {

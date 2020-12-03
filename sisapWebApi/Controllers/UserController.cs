@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using sisapWebApi.Models;
-using sisapWebApi.Repositories;
+using sisapWebApi.Services;
 
 namespace sisapWebApi.Controllers
 {
@@ -20,7 +20,7 @@ namespace sisapWebApi.Controllers
         //[Authorize]
         public async Task<ActionResult<List<User>>> GetUsersAsync()
         {
-            var usersContext =  new UserRepository();
+            var usersContext =  new UserService();
             var listUsers = await usersContext.getAllUsers().ConfigureAwait(true);
             return listUsers;
         }
