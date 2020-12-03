@@ -11,7 +11,8 @@ export const login = {
     isSysAdmin: null,
     nameUser: null,
     idUser: null,
-    userFeatures: null
+    userFeatures: null,
+    loginUser: null
   },
   getters: {
     
@@ -38,6 +39,9 @@ export const login = {
     },
     userFeatures(state){
       return state.userFeatures;
+    },
+    loginUser(state){
+      return state.loginUser;
     }
     
   },
@@ -53,6 +57,7 @@ export const login = {
       state.isSysAdmin = value.isSysAdmin;
       state.nameUser = value.nameUser;
       state.idUser = value.idUser;
+      state.loginUser = value.loginUser;
     },
     setUserFeatures(state, value) {
       state.userFeatures = value;

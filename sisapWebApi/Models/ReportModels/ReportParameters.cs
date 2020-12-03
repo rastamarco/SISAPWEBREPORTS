@@ -18,5 +18,7 @@ namespace sisapWebApi.Models.ReportModels
         public string NrPallet { get; set; }
         public string CodSicop { get; set; }
         public List<string> Chambers { get; set; }
+        public string InitialHour { get; set; }
+        public string EndHour { get; set; }
     }
 }

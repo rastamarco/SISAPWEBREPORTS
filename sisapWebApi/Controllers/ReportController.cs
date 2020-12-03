@@ -46,34 +46,9 @@ namespace sisapWebApi.Controllers
                 MemoryStream stream = new MemoryStream(); // Crio um Stream para ser lido no IFrame do Front
                 Report report = new Report();
                 Config.WebMode = true;
-                report.Load(reportPath); 
+                report.Load(reportPath);
                 if (query.Parameter != null)
-                {
-                    // Aqui converto o parametro enviado do FRONT do Relatório se houver mapeando os parametros
-                    var parametros = JsonConvert.DeserializeObject<ReportParameters>(query.Parameter);
-                    if (parametros.LocalUser != null)
-                        report.SetParameterValue("LocalUsuario", parametros.LocalUser);
-                    if (parametros.InitialDate != null)
-                        report.SetParameterValue("DataInicial", parametros.InitialDate);
-                    if (parametros.EndDate != null)
-                        report.SetParameterValue("DataFinal", parametros.EndDate);
-                    if (parametros.Name != null)
-                        report.SetParameterValue("Nome", parametros.Name);
-                    if (parametros.Sector != null)
-                        report.SetParameterValue("Setor", parametros.Sector);
-                    if (parametros.Shift != null)
-                        report.SetParameterValue("Turno", parametros.Shift);
-                    if (parametros.Period != null)
-                        report.SetParameterValue("Periodo", parametros.Period);
-                    if (parametros.Id != null)
-                        report.SetParameterValue("Id", parametros.Id);
-                    if (parametros.NrPallet != null)
-                        report.SetParameterValue("NrPallet", parametros.NrPallet);
-                    if (parametros.CodSicop != null)
-                        report.SetParameterValue("CodSicop", parametros.CodSicop);
-                    if (parametros.Chambers != null)
-                        report.SetParameterValue("Camaras", parametros.Chambers);
-                }
+                   await GetParameters(query, report);
                 // Aqui pega e carrega o arquivo com os parametros passados ou não
                 report.Prepare();
                 // Converte para PDF
@@ -113,6 +88,38 @@ namespace sisapWebApi.Controllers
                 return NotFound();
         }
 
+        private static async Task GetParameters(ReportQuery query, Report report)
+        {
+
+            // Aqui converto o parametro enviado do FRONT do Relatório se houver mapeando os parametros
+            var parametros = JsonConvert.DeserializeObject<ReportParameters>(query.Parameter);
+            if (parametros.LocalUser != null)
+                report.SetParameterValue("LocalUsuario", parametros.LocalUser);
+            if (parametros.InitialDate != null)
+                report.SetParameterValue("DataInicial", parametros.InitialDate);
+            if (parametros.EndDate != null)
+                report.SetParameterValue("DataFinal", parametros.EndDate);
+            if (parametros.Name != null)
+                report.SetParameterValue("Nome", parametros.Name);
+            if (parametros.Sector != null)
+                report.SetParameterValue("Setor", parametros.Sector);
+            if (parametros.Shift != null)
+                report.SetParameterValue("Turno", parametros.Shift);
+            if (parametros.Period != null)
+                report.SetParameterValue("Periodo", parametros.Period);
+            if (parametros.Id != null)
+                report.SetParameterValue("Id", parametros.Id);
+            if (parametros.NrPallet != null)
+                report.SetParameterValue("NrPallet", parametros.NrPallet);
+            if (parametros.CodSicop != null)
+                report.SetParameterValue("CodSicop", parametros.CodSicop);
+            if (parametros.Chambers != null)
+                report.SetParameterValue("Camaras", parametros.Chambers);
+            if (parametros.Chambers != null)
+                report.SetParameterValue("HoraInicial", parametros.InitialHour);
+            if (parametros.Chambers != null)
+                report.SetParameterValue("HoraFinal", parametros.EndHour);
+        }
     }
 
 }

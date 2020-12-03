@@ -60,6 +60,7 @@ export default class RelatorioModals extends Vue {
   @Action setSelectedIdReport
 
   @Getter filialName
+  @Getter loginUser
   @Getter userFeatures
 
   private menu: boolean = false;
@@ -134,8 +135,9 @@ export default class RelatorioModals extends Vue {
     }
   }
 
+  // Restruturar essa parte, colocar em telas mesmo e tentar aproveitar o máximo cada item
   public showPeriodApontamento(): boolean{
-    if ((this.filialName === 'UIC') && (this.userFeatures.isApontamento === true)){
+    if (this.filialName === 'UIC' && this.userFeatures.isApontamento === true) {
       return false;
     } else { 
       return true;
@@ -157,6 +159,7 @@ export default class RelatorioModals extends Vue {
       break;
     case 2: 
       // Outro Report
+      await this.ApontamentoRefeitorio();
       break; 
     }
     this.closeModal();
@@ -218,6 +221,10 @@ export default class RelatorioModals extends Vue {
       }
       break;
     }
+  }
+
+  public async ApontamentoRefeitorio(): Promise<void>{
+    console.log('teste'); 
   }
 
 }

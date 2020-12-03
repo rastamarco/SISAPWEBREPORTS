@@ -31,6 +31,7 @@ namespace sisapWebApi.Services.ReportItems
             reportItems.Add(new ReportService(13, "ApontamentoDeProducaoPERIODO-Turno.frx"));
             reportItems.Add(new ReportService(14, "ApontamentoDeProducaoUIC-Turno.frx"));
             reportItems.Add(new ReportService(15, "ApontamentoDeProducaoUIC.frx"));
+            reportItems.Add(new ReportService(16, "ApontamentoDeRefeitorio.frx"));
         }
         
         public void ReportsExpedicao()
