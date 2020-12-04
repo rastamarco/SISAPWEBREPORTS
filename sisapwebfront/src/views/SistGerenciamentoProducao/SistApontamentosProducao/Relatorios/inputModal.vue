@@ -1,5 +1,5 @@
 <template>
-<v-card width="100%" height="325">
+<v-card width="100%" height="335">
   <div class="title">
     <span class="title-box">{{ nameBox }} </span>
     <div class="close-box">
@@ -7,29 +7,10 @@
     </div>
   </div>
   <v-card-actions>
-     <v-row>
-      <v-col cols="12" sm="6" md="4">
-        <v-menu v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
-          <template v-slot:activator="{ on, attrs }">
-            <small class="text-title">Data</small>
-            <v-text-field id="teste" v-model="dateFormatted" @blur="date = parseDate(dateFormatted)" prepend-icon="mdi-calendar" readonly outlined hide-details dense v-bind="attrs" v-on="on" class="date-input"></v-text-field>
-          </template>
-          <v-date-picker v-model="date" @input="setDate(date)" locale="pt" min="1950-01-01" :max="dateMax"></v-date-picker>
-        </v-menu>
-      </v-col>
-      <v-col cols="12" sm="6" md="4">
-        <small class="text-title">Turno </small>
-        <v-radio-group v-model="turnoGroup" style="padding-left: 30px;">
-          <v-radio v-for="n in 4" :key="n" :label="getTurnos(n)" :value="n"></v-radio>
-        </v-radio-group>
-      </v-col>
-      <v-col cols="12" sm="6" md="4" >
-        <small class="text-title" v-if="showPeriodApontamento()" >Período</small>
-        <v-radio-group v-model="periodoGroup" style="padding-left: 30px;" v-if="showPeriodApontamento()">
-          <v-radio v-for="n in 3" :key="n" :label="getPeriodo(n)" :value="n"></v-radio>
-        </v-radio-group>
-      </v-col>
-    </v-row>
+      <!-- Todos os Parametros vão aqui --> 
+      <ApontamentoProducao v-on="{getShift, getPeriod, getDate, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 1" />
+      <ApontamentoRefeitorio v-on="{getShift, getDate, getDateEnd, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 2" /> 
+
     <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
       Cancelar
     </v-btn>
@@ -48,117 +29,88 @@ import {
   Prop,
   Watch
 } from 'vue-property-decorator';
+import ApontamentoProducao from '../Relatorios/Parametros/ApontamentoProducao.vue';
+import ApontamentoRefeitorio from '../Relatorios/Parametros/ApontamentoRefeitorio.vue';
+
 import {
   Action, Getter
 } from 'vuex-class';
-@Component
-export default class RelatorioModals extends Vue {
+import _ from 'vuetify/es5/components/*';
+@Component({
+  components: {
+    ApontamentoProducao,
+    ApontamentoRefeitorio
+  }
+})
+export default class InputModals extends Vue {
+  
   @Prop() nameBox!: any
   @Prop() idBox!: any;
 
   @Action reportApontamentoProducao
+  @Action reportApontamentoRefeitorio
   @Action setSelectedIdReport
 
   @Getter filialName
   @Getter loginUser
   @Getter userFeatures
 
-  private menu: boolean = false;
-  private date = new Date().toISOString().substr(0, 10);
-  private dateMax = new Date().toISOString().substr(0, 10);
-  private dateFormatted = this.formatDate(new Date().toISOString().substr(0, 10))
-  private dateToSend: any = null;
-  private turnoGroup: any = 1;
-  private periodoGroup: any = 1;
+  private shift: any = null;
+  private period: any = null;
+  private date: any = null;
+  private dateEnd: any = null;
+  private clearFields: boolean = false;
+  private InitialHour: any = null;
+  private EndHour: any = null;
+  private isPeriod: any = null;
 
-  public getTurnos(n: any): any{
-    switch(n){
-    case 1: 
-      return '1º Turno';
-    case 2:
-      return '2º Turno';
-    case 3: 
-      return '3º Turno';
-    case 4:
-      return 'Todos';  
-    }
+  public getShift(shift: any): void {
+    this.shift = shift;
   }
 
-  public getPeriodo(n: any): any{
-    switch(n){
-    case 1: 
-      return '1º Turno';
-    case 2:
-      return '2º Turno';
-    case 3: 
-      return 'Todos';
-    }
+  public getPeriod(period: any): void{
+    this.period = period;
   }
 
-  public clearFields(): void {
-    this.date = new Date().toISOString().substr(0, 10);
-    this.turnoGroup = 1;
-    this.periodoGroup = 1;
+  public getDate(date: any, isPeriod: any): void{
+    this.date = date;
+    this.isPeriod = isPeriod;
   }
 
+  public getDateEnd(date: any, isPeriod: any): void{
+    this.dateEnd = date;
+    this.isPeriod = isPeriod;
+  }
+  
   public closeModal(): void {
-    this.clearFields();
+    this.clearFields = true;
     this.$emit('closeModal');
   }
-
-  public setDate(data: any): void {
-    this.dateToSend = data;
-    this.menu = false;
-  }
-
-  public formatDate(date: string): any {
-    if (!date) return null;
-    const [year, month, day] = date.split('-');
-    return `${day}/${month}/${year}`;
-  }
-
-  public parseDate(date: any): any {
-    if (!date) return null;
-
-    const [day, month, year] = date.split('/');
-    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-  }
-
+  
   public canPrint(): boolean {
-    if (this.idBox === 1){
+    switch(this.idBox){
+    case 1:
       return true;
-    } 
-    if ((this.periodoGroup === 1 || this.periodoGroup === 2) && (this.turnoGroup === 1 || this.turnoGroup === 2 || this.turnoGroup === 3)) {
-      return true;
-    } else {
-      return false;
+    case 2: 
+      if (this.date > this.dateEnd){
+        this.$swal('Ops!', 'A Data Inicial informada é maior que a Data Final, corrija-as e tente novamente', 'error');
+        this.clearFields = true;
+        return false;
+      } else { 
+        return true;
+      }
+    default:
+      return false;   
     }
-  }
-
-  // Restruturar essa parte, colocar em telas mesmo e tentar aproveitar o máximo cada item
-  public showPeriodApontamento(): boolean{
-    if (this.filialName === 'UIC' && this.userFeatures.isApontamento === true) {
-      return false;
-    } else { 
-      return true;
-    }
-  }
-
-  @Watch('date')
-  public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
-    this.dateFormatted = this.formatDate(value);
+    
   }
 
   public async Print(): Promise < void > {
-    if (this.dateToSend === null) {
-      this.dateToSend = this.date;
-    }
     switch(this.idBox){
     case 1:
       await this.ApontamentoProducao();
       break;
     case 2: 
-      // Outro Report
       await this.ApontamentoRefeitorio();
       break; 
     }
@@ -168,53 +120,53 @@ export default class RelatorioModals extends Vue {
   public async ApontamentoProducao(): Promise<void>{
     switch(this.filialName){
     case 'UIC':
-      if (this.turnoGroup === 4){
+      if (this.shift === 4){
         await this.reportApontamentoProducao({
           localUser: this.filialName, 
-          date: this.dateToSend,
+          date: this.date,
           idReport: 15,
           reportModule: 1
         });
       } else {
         await this.reportApontamentoProducao({
           localUser: this.filialName, 
-          date: this.dateToSend,
-          turno: this.turnoGroup,
+          date: this.date,
+          shift: this.shift,
           idReport: 14,
           reportModule: 1
         });
       }
       break;
     default:
-      if (this.turnoGroup < 4 && this.periodoGroup < 3){
+      if (this.shift < 4 && this.period < 3){
         await this.reportApontamentoProducao({
           localUser: this.filialName, 
-          date: this.dateToSend,
-          turno: this.turnoGroup,
-          period: this.periodoGroup,
+          date: this.date,
+          shift: this.shift,
+          period: this.period,
           idReport: 1,
           reportModule: 1
         });
-      }else if (this.turnoGroup === 4 && this.periodoGroup === 3){
+      }else if (this.shift === 4 && this.period === 3){
         await this.reportApontamentoProducao({
           localUser: this.filialName, 
-          date: this.dateToSend,
+          date: this.date,
           idReport: 11,
           reportModule: 1
         });
-      }else if (this.turnoGroup === 4 && this.periodoGroup < 3){ 
+      }else if (this.shift === 4 && this.period < 3){ 
         await this.reportApontamentoProducao({
           localUser: this.filialName, 
-          date: this.dateToSend,
-          period: this.periodoGroup,
+          date: this.date,
+          period: this.period,
           idReport: 12,
           reportModule: 1
         });
-      }else if (this.turnoGroup < 4 && this.periodoGroup === 3){ 
+      }else if (this.shift < 4 && this.period === 3){ 
         await this.reportApontamentoProducao({
           localUser: this.filialName, 
-          date: this.dateToSend,
-          turno: this.turnoGroup,
+          date: this.date,
+          shift: this.shift,
           idReport: 13,
           reportModule: 1
         });
@@ -224,7 +176,64 @@ export default class RelatorioModals extends Vue {
   }
 
   public async ApontamentoRefeitorio(): Promise<void>{
-    console.log('teste'); 
+    await this.getShiftHours();
+    let newShift;
+    if(this.shift === 4)
+      newShift = 'Todos';
+    else
+      newShift = this.shift;
+    
+    switch(this.isPeriod){
+    case false: 
+      await this.reportApontamentoRefeitorio({
+        InitialDate: this.date+' 00:00:00',
+        EndDate: this.date+' 23:59:59',
+        InitialHour: this.InitialHour,
+        EndHour:this.EndHour, 
+        shift: newShift, 
+        idReport: 16, 
+        reportModule: 1 
+      });
+      break;
+    case true:
+      if(this.date < this.dateEnd) {
+        await this.reportApontamentoRefeitorio({
+          InitialDate: this.date+' 00:00:00', 
+          EndDate: this.dateEnd+' 23:59:59',
+          InitialHour: this.InitialHour,
+          EndHour:this.EndHour, 
+          shift: newShift, 
+          idReport: 16, 
+          reportModule: 1 });
+      } else {  
+        this.$swal('Ops!', 'A Data Inicial informada é maior que a Data Final, corrija-as e tente novamente', 'error');
+      }
+    }
+  }
+
+  public async getShiftHours(): Promise<any>{
+    switch(this.shift){
+    case 1: 
+      this.InitialHour = '06:00:00';
+      this.EndHour = '15:30:59';
+      break;
+    case 2: 
+      this.InitialHour = '15:31:00';
+      this.EndHour = '23:59:59';
+      break;
+    case 3:
+      this.InitialHour = '00:00:00';
+      this.EndHour = '05:59:59';
+      break;
+    case 4:
+      this.InitialHour = '00:00:00';
+      this.EndHour = '23:59:59';
+      break;
+    }
+  }
+
+  public resetClearFields(): void{
+    this.clearFields = false;
   }
 
 }

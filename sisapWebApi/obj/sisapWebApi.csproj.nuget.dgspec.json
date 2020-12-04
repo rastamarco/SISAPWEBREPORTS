@@ -57,6 +57,10 @@
               "target": "Package",
               "version": "[2020.4.11, )"
             },
+            "FastReport.OpenSource.Data.MsSql": {
+              "target": "Package",
+              "version": "[2020.4.11, )"
+            },
             "FastReport.OpenSource.Export.PdfSimple": {
               "target": "Package",
               "version": "[2020.4.11, )"

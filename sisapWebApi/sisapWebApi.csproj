@@ -14,6 +14,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="EntityFramework.Firebird" Version="7.5.0" />
     <PackageReference Include="FastReport.OpenSource" Version="2020.4.11" />
+    <PackageReference Include="FastReport.OpenSource.Data.MsSql" Version="2020.4.11" />
     <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2020.4.11" />
     <PackageReference Include="FastReport.OpenSource.Web" Version="2020.4.11" />
     <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="7.5.0" />
@@ -62,6 +63,9 @@
     </Reference>
     <Reference Include="FastReport.Web">
       <HintPath>bin\Debug\netcoreapp3.1\FastReport.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SqlClient">
+      <HintPath>bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll</HintPath>
     </Reference>
   </ItemGroup>
 

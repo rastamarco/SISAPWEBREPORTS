@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "KZr3WrXam3c3OFqaG38x0vzoQugWOO7WvZnK2SmL62f9xPtcKK2kaQNDEA4fAzy9FNRKB2KJv4cCIffr9GFDLQ==",
+  "dgSpecHash": "4EkPSsWLo9em3quIXgdLXVcDYixDf4V4o20H+W5FXmjrifvdj7s1V6KFKCAkrV5LiNOmXBOJtxqW/t9pXj1PZA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Lar\\source\\repos\\sisapWebApi\\SISAPWEBREPORTS\\sisapWebApi\\sisapWebApi.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\Lar\\.nuget\\packages\\entityframework.firebird\\7.5.0\\entityframework.firebird.7.5.0.nupkg.sha512",
     "C:\\Users\\Lar\\.nuget\\packages\\fastreport.compat\\2020.3.8\\fastreport.compat.2020.3.8.nupkg.sha512",
     "C:\\Users\\Lar\\.nuget\\packages\\fastreport.opensource\\2020.4.11\\fastreport.opensource.2020.4.11.nupkg.sha512",
+    "C:\\Users\\Lar\\.nuget\\packages\\fastreport.opensource.data.mssql\\2020.4.11\\fastreport.opensource.data.mssql.2020.4.11.nupkg.sha512",
     "C:\\Users\\Lar\\.nuget\\packages\\fastreport.opensource.export.pdfsimple\\2020.4.11\\fastreport.opensource.export.pdfsimple.2020.4.11.nupkg.sha512",
     "C:\\Users\\Lar\\.nuget\\packages\\fastreport.opensource.web\\2020.4.11\\fastreport.opensource.web.2020.4.11.nupkg.sha512",
     "C:\\Users\\Lar\\.nuget\\packages\\firebirdsql.data.firebirdclient\\7.5.0\\firebirdsql.data.firebirdclient.7.5.0.nupkg.sha512",

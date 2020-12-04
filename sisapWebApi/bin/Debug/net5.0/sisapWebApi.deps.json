@@ -28,6 +28,7 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.0",
           "EntityFramework.Firebird": "7.5.0",
           "FastReport.OpenSource": "2020.4.11",
+          "FastReport.OpenSource.Data.MsSql": "2020.4.11",
           "FastReport.OpenSource.Export.PdfSimple": "2020.4.11",
           "FastReport.OpenSource.Web": "2020.4.11",
           "FirebirdSql.Data.FirebirdClient": "7.5.0",
@@ -448,6 +449,21 @@
         },
         "compile": {
           "lib/netstandard2.1/FastReport.dll": {}
+        }
+      },
+      "FastReport.OpenSource.Data.MsSql/2020.4.11": {
+        "dependencies": {
+          "FastReport.OpenSource": "2020.4.11",
+          "System.Data.SqlClient": "4.8.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FastReport.Data.MsSql.dll": {
+            "assemblyVersion": "2020.4.11.0",
+            "fileVersion": "2020.4.11.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/FastReport.Data.MsSql.dll": {}
         }
       },
       "FastReport.OpenSource.Export.PdfSimple/2020.4.11": {
@@ -4179,6 +4195,13 @@
       "sha512": "sha512-hYN8iW+wCzi4QTMzfqW1iz6GuNrcJ1JvVa6U3wYPsKWCThhg81/jAJbFIqfDpdank97ZvI4t89NA0aEyYHaiMA==",
       "path": "fastreport.opensource/2020.4.11",
       "hashPath": "fastreport.opensource.2020.4.11.nupkg.sha512"
+    },
+    "FastReport.OpenSource.Data.MsSql/2020.4.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3zhPWcFWMieGNnoLk5Te10ogAr9jwSie4g6l9BCmgif83Bm43VZn8zAvB+dHFc1iyWTzKfzZRqFIDttB90IdzA==",
+      "path": "fastreport.opensource.data.mssql/2020.4.11",
+      "hashPath": "fastreport.opensource.data.mssql.2020.4.11.nupkg.sha512"
     },
     "FastReport.OpenSource.Export.PdfSimple/2020.4.11": {
       "type": "package",

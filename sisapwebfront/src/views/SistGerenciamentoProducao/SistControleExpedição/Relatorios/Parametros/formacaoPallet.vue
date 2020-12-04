@@ -1,6 +1,6 @@
 <template>
       <v-col cols="12" sm="10" md="10" style="padding-top:15%;padding-left:20%;">
-        <small>Informe o número do Pallet: </small>
+        <span>Informe o número do Pallet: </span>
         <v-text-field dense outlined v-model="nrPallet" type="number" min="0" @input="SendNRPallet(nrPallet)"></v-text-field>
         <span style="color:black;opacity: 0.6;">* Para esse relatório só é necessário o nº do pallet. </span>
       </v-col>

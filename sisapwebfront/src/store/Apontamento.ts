@@ -48,19 +48,35 @@ export const Apontamento = {
       const parameter = new ParametersApontamento();
       parameter.InitialDate = options.date;
       parameter.period = options.period;
-      parameter.shift = options.turno;
+      parameter.shift = options.shift;
       parameter.localUser = options.localUser;
-      console.log(options.idReport);
       await commit('setIdReport', options.idReport);
       await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
     },
+    
     async noShowReport ({ commit }, options){ 
       await commit('setShowReport', options.show);
     },
+
     async setSelectedIdReport({ commit }, options) {
       await commit('setIdReport', options.id);
+    },
+
+    async reportApontamentoRefeitorio({commit}, options){
+      const parameter = new ParametersApontamento();
+      parameter.InitialDate = options.InitialDate;
+      if(options.EndDate){
+        parameter.EndDate = options.EndDate;
+      }
+      parameter.InitialHour = options.InitialHour;
+      parameter.EndHour = options.EndHour;
+      parameter.shift = options.shift;
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
     }
   }
 };
