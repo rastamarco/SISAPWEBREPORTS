@@ -31,7 +31,6 @@ const router = new VueRouter({
 });
 
 
-
 function isTokenValid(): boolean {
   const tokenEncoded: any = window.localStorage.getItem('token');
   const auth = tokenEncoded != null ? JSON.parse(atob(tokenEncoded)) : '';
@@ -41,7 +40,6 @@ function isTokenValid(): boolean {
 router.beforeEach((to, from, next) => {
   if (to.path === '/') {
     if (isTokenValid()) {
-      // TODO:  buscar as features admin
       next({
         path: '/Home',
         query: { redirect: to.fullPath }
@@ -51,9 +49,6 @@ router.beforeEach((to, from, next) => {
     }
   } else if (to.matched.some(record => record.meta.requiresAuth) && isTokenValid()) {
     next();
-    // } else if (to.path === '/changepassword') {
-    //   next();
-    // } else {
   } else {
     window.localStorage.removeItem('token');
     next({
