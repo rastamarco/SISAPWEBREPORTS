@@ -34,6 +34,5 @@ namespace sisapWebApi.Authorization
             return userToken.WriteToken(token);
         }
 
-
     }
 }

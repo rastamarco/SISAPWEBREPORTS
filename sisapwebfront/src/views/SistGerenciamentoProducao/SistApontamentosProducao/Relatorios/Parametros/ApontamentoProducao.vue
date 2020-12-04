@@ -1,10 +1,11 @@
 <template>
   <v-row>
-    <v-col cols="12" sm="6" md="4">
+    <v-col cols="12" sm="6" md="4" >
         <v-menu v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
           <template v-slot:activator="{ on, attrs }">
-            <span class="text-title">Data</span>
-            <v-text-field id="teste" v-model="dateFormatted" @blur="date = parseDate(dateFormatted)" prepend-icon="mdi-calendar" readonly outlined hide-details dense v-bind="attrs" v-on="on" class="date-input"></v-text-field>
+            <span style="padding-left: 20px;">Data</span>
+            <v-text-field id="teste" v-model="dateFormatted" @blur="date = parseDate(dateFormatted)" prepend-icon="mdi-calendar" readonly outlined 
+              hide-details dense v-bind="attrs" v-on="on" style="padding-left: 20px;" ></v-text-field>
           </template>
           <v-date-picker v-model="date" @input="setDate(date)" locale="pt" min="1950-01-01" :max="dateMax"></v-date-picker>
         </v-menu>
