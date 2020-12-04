@@ -54,9 +54,11 @@ export default class InputModalsExp extends Vue {
   @Action setSelectedIdReport
   @Action reportMovimentoCamaraOperador
   @Action reportMovimentoOperadorCamara
-
+  @Action noShowReport
+  
   @Getter filialName
   @Getter userFeatures
+  @Getter showReport
 
   private dateToSend: any = null;
   private turnoGroup: any = 1;
@@ -109,6 +111,9 @@ export default class InputModalsExp extends Vue {
   }
 
   public async Print(): Promise < void > {
+    if(this.showReport === true){
+      await this.noShowReport({show: false});
+    }
     switch(this.idBox){
     case 1:
       await this.ReportFormacaoPallet(this.nrPallet);

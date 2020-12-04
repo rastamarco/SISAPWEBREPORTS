@@ -19,7 +19,7 @@
         <v-text-field dense outlined v-model="user" placeholder="ex: qualidade" style="padding-top:10px;" append-icon="mdi-account"> </v-text-field>
         <span class="text-title"> Senha </span>
         <v-text-field dense outlined v-model="password" :type="show ? 'text' : 'password'" placeholder="*******" style="padding-top: 5px;" :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" @click:append="show = !show"> </v-text-field>
-        <v-btn color="primary" style="text-transform: none;width: 90px;margin-left: 190px;" @click="Login()">Login</v-btn>
+        <v-btn color="primary" type="button" style="text-transform: none;width: 90px;margin-left: 190px;" @click="Login()">Login</v-btn>
       </v-card>
       <v-progress-circular v-if="loading" indeterminate color="primary" style="position: absolute;margin-top:100px;" :size="100" :width="5">
       </v-progress-circular>
@@ -28,7 +28,7 @@
     </v-col>
     <v-col class="mb-5" cols="12">
       <h5 style="font-size: 11px;font-weight: bold;">Cooperativa Agroindustrial Lar</h5>
-      <h5 style="font-size: 11px;">SISAP</h5>
+      <h5 style="font-size: 11px;">SISAP Web</h5>
       <h6 style="font-size: 11px;">Versão 2.0.0</h6>
     </v-col>
   </v-row>

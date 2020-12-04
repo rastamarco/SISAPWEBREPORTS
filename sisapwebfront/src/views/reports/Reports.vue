@@ -79,6 +79,7 @@ export default class Reports extends Vue {
 .frame {
   padding-left: 15px;
   padding-right: 15px;
+  max-height: 100%;
 }
 
 .btn-download {

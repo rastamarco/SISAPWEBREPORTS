@@ -50,10 +50,12 @@ export default class InputModals extends Vue {
   @Action reportApontamentoProducao
   @Action reportApontamentoRefeitorio
   @Action setSelectedIdReport
+  @Action noShowReport
 
   @Getter filialName
   @Getter loginUser
   @Getter userFeatures
+  @Getter showReport
 
   private shift: any = null;
   private period: any = null;
@@ -106,6 +108,9 @@ export default class InputModals extends Vue {
   }
 
   public async Print(): Promise < void > {
+    if(this.showReport === true){
+      await this.noShowReport({show: false});
+    }
     switch(this.idBox){
     case 1:
       await this.ApontamentoProducao();
