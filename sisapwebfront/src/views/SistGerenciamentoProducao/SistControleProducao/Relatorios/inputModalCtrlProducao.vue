@@ -9,7 +9,7 @@
   <v-card-actions>
       <!-- Todos os Parametros vão aqui --> 
       <ApontamentoProducao v-on="{getShift, getPeriod, getDate, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 1" />
-      <MapaMensal v-on="{getLineProd, getMonthYear, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 2"/>
+      <MapaMensal v-on="{getLineProd, getMonthYear, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 2"/> 
 
     <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
       Cancelar
@@ -128,7 +128,7 @@ export default class InputModalCtrlProducao extends Vue {
     case 1:
       return true;
     case 2: 
-      return true;
+      return false;
     default:
       return false;   
     }
