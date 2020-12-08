@@ -18,6 +18,9 @@ namespace sisapWebApi.Services.ReportItems
                 case 2:
                     ReportsExpedicao();
                     break;
+                case 3:
+                    ReportsQualidade();
+                    break;
             }
             
         }
@@ -38,6 +41,12 @@ namespace sisapWebApi.Services.ReportItems
         {
             reportItems = new List<ReportService>();
             reportItems.Add(new ReportService(2, "FormaçãoDePalletExpedicao.frx"));
+        }
+
+        public void ReportsQualidade()
+        {
+            reportItems = new List<ReportService>();
+            reportItems.Add(new ReportService(3, "QualidadeFomentoMensal.frx"));
         }
     }
 }

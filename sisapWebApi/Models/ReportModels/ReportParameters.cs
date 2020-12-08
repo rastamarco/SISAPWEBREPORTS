@@ -20,5 +20,7 @@ namespace sisapWebApi.Models.ReportModels
         public List<string> Chambers { get; set; }
         public string InitialHour { get; set; }
         public string EndHour { get; set; }
+        public string Month { get; set; }
+        public string Year { get; set; }
     }
 }

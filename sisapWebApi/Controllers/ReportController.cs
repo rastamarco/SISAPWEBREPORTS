@@ -47,8 +47,9 @@ namespace sisapWebApi.Controllers
                 MemoryStream stream = new MemoryStream(); // Crio um Stream para ser lido no IFrame do Front
                 Report report = new Report();
                 Config.WebMode = true;
-                
+                // Aqui Carrega o Arquivo
                 report.Load(reportPath);
+                // Aqui verifica se possui parâmetros
                 if (query.Parameter != null)
                     await GetParameters(query, report);
                 // Aqui pega e carrega o arquivo com os parametros passados ou não
@@ -121,6 +122,11 @@ namespace sisapWebApi.Controllers
                 report.SetParameterValue("HoraInicial", parametros.InitialHour);
             if (parametros.EndHour != null)
                 report.SetParameterValue("HoraFinal", parametros.EndHour);
+            if (parametros.Month != null)
+                report.SetParameterValue("Mes", parametros.Month);
+            if (parametros.Year != null)
+                report.SetParameterValue("Ano", parametros.Year);
+
         }
     }
 

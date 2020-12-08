@@ -9,6 +9,7 @@
   <v-container  style="margin-top: 65px;">
     <apontamentos v-if="userFeatures.isApontamento" /> 
     <expedicao v-if="userFeatures.isExpedicao" />
+    <qualidade v-if="userFeatures.isQualidade" />
   </v-container>
 </div>
 </template>
@@ -26,13 +27,15 @@ import headerBtn from './header/header-button.vue';
 import systemTabs from './header/system-tabs-admin.vue';
 import apontamentos from './SistGerenciamentoProducao/SistApontamentosProducao/apontamentos.vue';
 import expedicao from './SistGerenciamentoProducao/SistControleExpedição/expedicao.vue';
+import qualidade from './SistGerenciamentoProducao/SistCTRLQualidade/qualidade.vue';
 
 @Component({
   components: {
     headerBtn,
     systemTabs,
     apontamentos,
-    expedicao
+    expedicao,
+    qualidade
   }
 })
 export default class Home extends Vue {

@@ -10,8 +10,10 @@ import vuetify from './plugins/vuetify';
 import Vuetify from 'vuetify';
 import axios from 'axios';
 import VueSweetalert2 from 'vue-sweetalert2';
+import VueTheMask from 'vue-the-mask';
 
 Vue.use(VueSweetalert2);
+Vue.use(VueTheMask);
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
 
