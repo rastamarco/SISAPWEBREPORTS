@@ -43,7 +43,7 @@ namespace sisapWebApi.Controllers
                 RegisteredObjects.AddConnection(typeof(MsSqlDataConnection));
                 string reportPath = ("wwwroot/App_Data/" + reportItem.ReportName); // Vejo onde que o arquivo Físico dele está
                 MemoryStream stream = new MemoryStream(); // Crio um Stream para ser lido no IFrame do Front
-                FastReport.Report report = new FastReport.Report();
+                Report report = new Report();
                 Config.WebMode = true;
                 // Aqui Carrega o Arquivo
                 report.Load(reportPath);

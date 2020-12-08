@@ -5,6 +5,7 @@ export default class usersPermissionsViewModel {
   private _isQualidade?: boolean | any = false;
   private _isExpedicao?: boolean | any = false;
   private _isProducao?: boolean | any = false;
+  private _isEtiquetas?: boolean | any = false;
 
   get isApontamento(): boolean {
     return this._isApontamento;
@@ -29,5 +30,11 @@ export default class usersPermissionsViewModel {
   }
   set isProducao(isProducao: boolean){
     this._isProducao = isProducao;
+  }
+  get isEtiquetas(): boolean{
+    return this._isEtiquetas;
+  }
+  set isEtiquetas(isEtiquetas: boolean){
+    this._isEtiquetas= isEtiquetas;
   }
 }

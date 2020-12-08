@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="11/26/2020 13:48:03" ReportInfo.CreatorVersion="2020.4.9.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="12/08/2020 15:44:37" ReportInfo.CreatorVersion="2020.4.9.0">
   <Dictionary>
-    <FirebirdDataConnection Name="Apontamento" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttZin2GvIGXdTPtpvkUlSDw0=">
+    <FirebirdDataConnection Name="Apontamento" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttfUCl9xA/JaxcEpaxgbpq9g=">
       <TableDataSource Alias="ApontamentoProducao" DataType="System.Int32" PropName="Table1" Enabled="true" SelectCommand="select t1.cod_sicop, SUM(T1.QT_PROD) as F_1, t2.qt_embalagem, t2.desc_embalagem, T1.DT_PRODUCAO, T1.ID_SEQUESTRADO, t2.tp_pallet&#13;&#10;From TB_MOVIMENTO T1, TB_CADASTRO T2&#13;&#10;where (T1.DT_PRODUCAO = @DataProd)&#13;&#10;            and (T1.COD_SICOP = T2.COD_SICOP) and (T1.qt_prod &lt;&gt; 0)&#13;&#10; and (T1.COD_FILIAL = @LocalUsuario) and  t1.cod_periodo = @PER&#13;&#10;GROUP BY T1.cod_sicop, T1.ID_SEQUESTRADO, t2.qt_embalagem, t2.desc_embalagem, T1.DT_PRODUCAO, t2.tp_pallet&#13;&#10; order by T1.DT_PRODUCAO, T1.COD_SICOP&#13;&#10;">
         <Column Name="COD_SICOP" DataType="System.Int32"/>
         <Column Name="F_1" DataType="System.Int64"/>
@@ -16,7 +16,7 @@
         <CommandParameter Name="PER" DataType="10" Expression="[Periodo]"/>
       </TableDataSource>
     </FirebirdDataConnection>
-    <FirebirdDataConnection Name="Detalhes" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttZBmfA/TOs7CwSO8+pzmtRY=">
+    <FirebirdDataConnection Name="Detalhes" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttdME5mJ71/2gVMxhTwag8Fc=">
       <TableDataSource Name="Table" Alias="Resfriamento" DataType="System.Int32" Enabled="true" SelectCommand="select sum(t1.qt_prod) as F_1, t2.tp_resfriamento From TB_MOVIMENTO T1, TB_CADASTRO T2 where (T1.DT_PRODUCAO = @DataProd ) AND (T1.COD_TURNO = 1) AND (T1.COD_FILIAL = @FilialName) and T1.cod_sicop = t2.cod_sicop group by t2.tp_resfriamento">
         <Column Name="F_1" DataType="System.Int64"/>
         <Column Name="TP_RESFRIAMENTO" DataType="System.String"/>
@@ -57,7 +57,7 @@
       <TextObject Name="Text32" Left="552.75" Top="2" Width="18.9" Height="15.12" Text="x" Font="Arial, 9pt"/>
     </DataBand>
     <DataBand Name="Data2" Top="155.52" Width="718.2" Height="13.68" DataSource="Table">
-      <TextObject Name="Text24" Left="9.9" Top="0.45" Width="292.95" Height="13.23" Text="[Insert([Resfriamento.TP_RESFRIAMENTO],0,[Resfriamento.TP_RESFRIAMENTO])]&#13;&#10;" Font="Arial, 7pt"/>
+      <TextObject Name="Text24" Left="9.9" Top="0.45" Width="292.95" Height="13.23" Text="[Resfriamento.TP_RESFRIAMENTO]&#13;&#10;" Font="Arial, 7pt"/>
       <TextObject Name="Text25" Left="340.65" Top="0.45" Width="122.85" Height="13.23" Text="[Abs([Resfriamento.F_1])]" RightToLeft="true" Font="Arial, 7pt"/>
       <DataHeaderBand Name="DataHeader1" Top="136.29" Width="718.2" Height="15.23">
         <TextObject Name="Text23" Left="9.45" Top="2" Width="359.1" Height="13.23" Text="Resumo da Produção por Tipo de Congelamento" Font="Arial, 7pt, style=Bold, Underline"/>

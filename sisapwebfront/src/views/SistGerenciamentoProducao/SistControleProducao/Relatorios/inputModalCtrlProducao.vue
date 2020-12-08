@@ -227,6 +227,7 @@ export default class InputModalCtrlProducao extends Vue {
     const endDate = this.date+ ' 23:59:59';
     await this.reportApontamentoRoboCMS({ initialDate: initialDate, endDate: endDate, idReport: 41, reportModule: 4 });
   }
+  
   public resetClearFields(): void{
     this.clearFields = false;
   }

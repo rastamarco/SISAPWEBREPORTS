@@ -99,6 +99,8 @@ export const login = {
             UFeatures.isExpedicao = true;
           } else if (typeUser === 'Produção' || typeUser === 'Gestão de Processos') {
             UFeatures.isProducao = true;
+          }  else if (typeUser === 'Etiqueta Exp' || typeUser === 'Etiqueta Insumo' || typeUser === 'Etiqueta Linguiça' || typeUser === 'Etiqueta')  {
+            UFeatures.isEtiquetas = true;
           } 
           
           const tokenData = {
@@ -163,7 +165,11 @@ export const login = {
         UFeatures.isExpedicao = true;
       } else if (authData.userType === 'Produção' || authData.userType === 'Gestão de Processos') {
         UFeatures.isProducao = true;
+      } else if (authData.userType === 'Etiqueta Exp' || authData.userType === 'Etiqueta Insumo' || authData.userType === 'Etiqueta Linguiça' || authData.userType === 'Etiqueta')  {
+        UFeatures.isEtiquetas = true;
       } 
+      
+
       
       await commit('setUserFeatures', UFeatures);
       await commit('setAuthData', authData);
