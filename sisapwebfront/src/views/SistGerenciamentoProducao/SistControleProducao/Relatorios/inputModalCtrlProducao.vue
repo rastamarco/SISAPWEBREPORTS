@@ -10,7 +10,7 @@
       <!-- Todos os Parametros vão aqui --> 
       <ApontamentoProducao v-on="{getShift, getPeriod, getDate, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 1" />
       <MapaMensal v-on="{getLineProd, getMonthYear, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 2"/> 
-
+      <ApontamentoRoboCMS v-on="{getDate, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 3" />
     <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
       Cancelar
     </v-btn>
@@ -31,6 +31,7 @@ import {
 } from 'vue-property-decorator';
 import ApontamentoProducao from '../../SistApontamentosProducao/Relatorios/Parametros/ApontamentoProducao.vue';
 import MapaMensal from '../Relatorios/Parametros/MapaMensalProducao.vue';
+import ApontamentoRoboCMS from '../Relatorios/Parametros/ApontamentoRoboCMS.vue';
 
 import {
   Action, Getter
@@ -39,7 +40,8 @@ import _ from 'vuetify/es5/components/*';
 @Component({
   components: {
     ApontamentoProducao,
-    MapaMensal
+    MapaMensal,
+    ApontamentoRoboCMS
   }
 })
 export default class InputModalCtrlProducao extends Vue {
@@ -52,6 +54,7 @@ export default class InputModalCtrlProducao extends Vue {
   @Action noShowReport
   @Action reportApontamentoProducao
   @Action reportMapaMensal
+  @Action reportApontamentoRoboCMS
 
   @Getter filialName
   @Getter loginUser
@@ -129,6 +132,8 @@ export default class InputModalCtrlProducao extends Vue {
       return true;
     case 2: 
       return false;
+    case 3: 
+      return true;
     default:
       return false;   
     }
@@ -145,7 +150,10 @@ export default class InputModalCtrlProducao extends Vue {
       break;
     case 2: 
       await this.MapaMensal();
-      break; 
+      break;
+    case 3: 
+      await this.ApontamentoRobo();
+      break;  
     }
     this.closeModal();
   }
@@ -214,6 +222,11 @@ export default class InputModalCtrlProducao extends Vue {
     await this.reportMapaMensal({ initialDate: initialDate, endDate: endDate, localUser: this.filialName, line: this.line, reportModule: 4, idReport: 4 });
   }
 
+  public async ApontamentoRobo(): Promise<void>{
+    const initialDate = this.date+ ' 00:00:00';
+    const endDate = this.date+ ' 23:59:59';
+    await this.reportApontamentoRoboCMS({ initialDate: initialDate, endDate: endDate, idReport: 41, reportModule: 4 });
+  }
   public resetClearFields(): void{
     this.clearFields = false;
   }

@@ -61,6 +61,11 @@ export default class CtrlProducaoRelatorios extends Vue {
         id: 2,
         title: 'Mapa Mensal',
         show: ''
+      },
+      {
+        id: 3,
+        title: 'Apontamento Robô CMS',
+        show: 'gestao'
       }
     ]
   }, ]
@@ -68,13 +73,16 @@ export default class CtrlProducaoRelatorios extends Vue {
   public async selectReport(item: any): Promise<void> {
     switch (item.id) {
       case 1:
-        // UIA 
         this.nameBox = 'Impressão de Apontamento de Produção';
         this.idBox = 1;
       break;
       case 2:
         this.nameBox = 'Mapa Mensal';
         this.idBox = 2;
+      break;
+      case 3:
+        this.nameBox = 'Apontamento de Robô - CMS';
+        this.idBox = 3;
       break;
       default:
         break;

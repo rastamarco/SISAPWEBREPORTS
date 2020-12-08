@@ -54,6 +54,7 @@ namespace sisapWebApi.Reports
         {
             reportItems = new List<ReportService>();
             reportItems.Add(new ReportService(4, "MapaMensalProducao.frx"));
+            reportItems.Add(new ReportService(41, "ApontamentoRoboCMS.frx"));
         }
     }
 }

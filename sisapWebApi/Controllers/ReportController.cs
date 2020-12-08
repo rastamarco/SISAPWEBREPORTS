@@ -93,6 +93,7 @@ namespace sisapWebApi.Controllers
         {
 
             // Aqui converto o parametro enviado do FRONT do Relatório se houver mapeando os parametros
+            // AS "EXPRESSION" nos relatórios devem ser de mesmo nome do parametros: Ex "LocalUSuario" --> [LocalUSuario]
             var parametros = JsonConvert.DeserializeObject<ReportParameters>(query.Parameter);
             if (parametros.LocalUser != null)
                 report.SetParameterValue("LocalUsuario", parametros.LocalUser);

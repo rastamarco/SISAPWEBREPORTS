@@ -97,7 +97,7 @@ export const login = {
           } else if (typeUser === 'Expedição Carregamen' || typeUser === 'Expedição Embalagem' || typeUser === 'Expedição Embarque' || typeUser === 'Expedição Controle' 
           || (typeUser === 'Embalagem Secundária' && response.data.user.login === 'exp')) {
             UFeatures.isExpedicao = true;
-          } else if (typeUser === 'Produção'){
+          } else if (typeUser === 'Produção' || typeUser === 'Gestão de Processos') {
             UFeatures.isProducao = true;
           } 
           
@@ -161,7 +161,7 @@ export const login = {
       } else if (authData.userType === 'Expedição Carregamen' || authData.userType === 'Expedição Embalagem' || authData.userType === 'Expedição Embarque' || authData.userType === 'Expedição Controle' 
           || (authData.userType === 'Embalagem Secundária' && authData.loginUser === 'exp')) {
         UFeatures.isExpedicao = true;
-      } else if (authData.userType === 'Produção'){
+      } else if (authData.userType === 'Produção' || authData.userType === 'Gestão de Processos') {
         UFeatures.isProducao = true;
       } 
       

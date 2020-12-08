@@ -1,8 +1,7 @@
 import ParametersProducao from '../models/parametersProducao.model';
 
-export const Qualidade = {
+export const Producao = {
   state:{
-    allChambers: null
   },
   getters:{
   },
@@ -15,6 +14,16 @@ export const Qualidade = {
       parameter.InitialDate = options.initialDate;
       parameter.EndDate = options.endDate;
       parameter.Line = options.line;
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
+    }, 
+
+    async reportApontamentoRoboCMS({ commit }, options){
+      const parameter = new ParametersProducao();
+      parameter.InitialDate = options.initialDate;
+      parameter.EndDate = options.endDate;
       await commit('setIdReport', options.idReport);
       await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 
