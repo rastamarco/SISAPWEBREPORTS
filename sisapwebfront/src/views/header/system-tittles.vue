@@ -4,6 +4,7 @@
     <h1 class="titles" v-if="userFeatures.isApontamento"> Sistema de Apontamento de Produção </h1>
     <h1 class="titles" v-if="userFeatures.isQualidade"> Sistema de Controle da Qualidade</h1>
     <h1 class="titles" v-if="userFeatures.isExpedicao"> Sistema de Controle da Expedição</h1>
+    <h1 class="titles" v-if="userFeatures.isProducao"> Sistema de Controle da Produção </h1>
   </v-col>
 </v-row>
 </template>

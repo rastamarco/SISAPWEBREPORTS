@@ -47,10 +47,10 @@ export default class InputModalCQ extends Vue {
   @Prop() nameBox!: any
   @Prop() idBox!: any;
 
-  @Action reportApontamentoProducao
-  @Action reportApontamentoRefeitorio
+  
   @Action setSelectedIdReport
   @Action noShowReport
+  @Action reportApontamentoProducao
   @Action reportQualidadeFomento
 
   @Getter filialName

@@ -10,9 +10,9 @@ using FastReport.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using sisapWebApi.Models;
-using sisapWebApi.Models.ReportModels;
+using sisapWebApi.Reports.ReportModels;
 using Newtonsoft.Json;
-using sisapWebApi.Services.ReportItems;
+using sisapWebApi.Reports;
 
 namespace sisapWebApi.Controllers
 {
@@ -21,15 +21,13 @@ namespace sisapWebApi.Controllers
     public class ReportController : ControllerBase
     {
 
-
         [HttpGet("{id}")]
         // [Authorize]
         public async Task<IActionResult> GetReport(int id, [FromQuery] ReportQuery query)
         {
 
             // Aqui obtenho a lista de Relatórios
-            var reports = new Reports(query.reportModule);
-            
+            var reports = new ReportModule(query.reportModule);
 
             // Aqui crio o tipo do relatório (Sempre PDF)            
             string mime = "application/" + query.Format;
@@ -45,7 +43,7 @@ namespace sisapWebApi.Controllers
                 RegisteredObjects.AddConnection(typeof(MsSqlDataConnection));
                 string reportPath = ("wwwroot/App_Data/" + reportItem.ReportName); // Vejo onde que o arquivo Físico dele está
                 MemoryStream stream = new MemoryStream(); // Crio um Stream para ser lido no IFrame do Front
-                Report report = new Report();
+                FastReport.Report report = new FastReport.Report();
                 Config.WebMode = true;
                 // Aqui Carrega o Arquivo
                 report.Load(reportPath);
@@ -91,7 +89,7 @@ namespace sisapWebApi.Controllers
                 return NotFound();
         }
 
-        private static async Task GetParameters(ReportQuery query, Report report)
+        private static async Task GetParameters(ReportQuery query, FastReport.Report report)
         {
 
             // Aqui converto o parametro enviado do FRONT do Relatório se houver mapeando os parametros
@@ -126,6 +124,8 @@ namespace sisapWebApi.Controllers
                 report.SetParameterValue("Mes", parametros.Month);
             if (parametros.Year != null)
                 report.SetParameterValue("Ano", parametros.Year);
+            if (parametros.Line!= null)
+                report.SetParameterValue("Linha", parametros.Line);
 
         }
     }

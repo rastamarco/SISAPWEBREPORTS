@@ -10,6 +10,7 @@
     <apontamentos v-if="userFeatures.isApontamento" /> 
     <expedicao v-if="userFeatures.isExpedicao" />
     <qualidade v-if="userFeatures.isQualidade" />
+    <ctrlProducao v-if="userFeatures.isProducao" />
   </v-container>
 </div>
 </template>
@@ -28,6 +29,7 @@ import systemTabs from './header/system-tabs-admin.vue';
 import apontamentos from './SistGerenciamentoProducao/SistApontamentosProducao/apontamentos.vue';
 import expedicao from './SistGerenciamentoProducao/SistControleExpedição/expedicao.vue';
 import qualidade from './SistGerenciamentoProducao/SistCTRLQualidade/qualidade.vue';
+import ctrlProducao from './SistGerenciamentoProducao/SistControleProducao/ctrlProducao.vue';
 
 @Component({
   components: {
@@ -35,7 +37,8 @@ import qualidade from './SistGerenciamentoProducao/SistCTRLQualidade/qualidade.v
     systemTabs,
     apontamentos,
     expedicao,
-    qualidade
+    qualidade,
+    ctrlProducao
   }
 })
 export default class Home extends Vue {
