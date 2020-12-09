@@ -11,7 +11,7 @@
         <template v-slot:activator="{ on, attrs }">
           <v-list-item v-for="child in item.items" :key="child.title" @click="selectReport(child)" v-on="on" v-bind="attrs">
             <v-list-item-content>
-              <v-list-item-title v-text="child.title"></v-list-item-title>
+              <v-list-item-title v-text="child.title" ></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </template>
@@ -28,17 +28,19 @@ import {
   Component,
   Vue
 } from 'vue-property-decorator';
+import _ from 'vuetify/es5/components/*';
 import {
   Action, Getter
 } from 'vuex-class';
 
-import InputModals from './inputModal.vue';
+import InputModals from './inputModalAgendamentoCarga.vue';
+
 @Component({
   components: {
     InputModals
   }
 })
-export default class ApontamentosRelatorios extends Vue {
+export default class SidebarAgendamentoCargas extends Vue {
   @Action setSelectedIdReport
   
   @Getter loginUser
@@ -53,28 +55,18 @@ export default class ApontamentosRelatorios extends Vue {
     title: 'Relatórios',
     items: [{
         id: 1,
-        title: 'Apontamento da Produção',
+        title: 'Agend. Sem Embarques',
         show: ''
-      },
-      {
-        id: 2,
-        title: 'Apontamento de Refeitório',
-        show: 'uia-congel'
       }
     ]
-  }, ]
+  }]
   private itemsReportsByUser: Array<any> = [];
-  
+
   public async selectReport(item: any): Promise<void> {
     switch (item.id) {
       case 1:
-        // UIA 
-        this.nameBox = 'Impressão de Apontamento de Produção';
+        this.nameBox = 'Agendamentos sem Embarques';
         this.idBox = 1;
-      break;
-      case 2:
-        this.nameBox = 'Impressão de Apontamento de Refeitório';
-        this.idBox = 2;
       break;
       default:
         break;
@@ -96,8 +88,8 @@ export default class ApontamentosRelatorios extends Vue {
       this.itemsReportsByUser[0].items = listReports;
   }
 
-   async mounted(){
-    this.listReportsByUserPermission();
+  async mounted(){
+    await this.listReportsByUserPermission();
   }
 }
 </script>

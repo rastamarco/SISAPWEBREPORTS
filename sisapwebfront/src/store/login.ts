@@ -88,20 +88,22 @@ export const login = {
 
           const UFeatures = new usersPermissionsViewModel();
           const typeUser = response.data.user.tipoUsuario;
-          // PERMISSÕES DO USUÁRIO, MOSTRA EM QUAL SISTEMA ELE VAI SER REDIRECIONADO -------  REFATORAR!!!!
+          // PERMISSÕES DO USUÁRIO, MOSTRA EM QUAL SISTEMA ELE VAI SER REDIRECIONADO 
           if (typeUser === 'Controle da Produção' || typeUser === 'Embalagem Primária' || typeUser === 'Oficina' || (typeUser === 'Embalagem Secundária' && response.data.user.login !== 'exp') ||
           typeUser === 'Operador Apontamento' || typeUser === 'PCP' || typeUser === 'Expedição Controle') {
             UFeatures.isApontamento = true;
           } else if (typeUser === 'Monitor da Qualidade') {
             UFeatures.isQualidade = true;
-          } else if (typeUser === 'Expedição Carregamen' || typeUser === 'Expedição Embalagem' || typeUser === 'Expedição Embarque' || typeUser === 'Expedição Controle' 
+          } else if (typeUser === 'Expedição Carregamen' || typeUser === 'Expedição Embalagem' || (typeUser === 'Expedição Embarque' && decodeToken.Filial === 'UIC') || typeUser === 'Expedição Controle' 
           || (typeUser === 'Embalagem Secundária' && response.data.user.login === 'exp')) {
             UFeatures.isExpedicao = true;
           } else if (typeUser === 'Produção' || typeUser === 'Gestão de Processos') {
             UFeatures.isProducao = true;
-          }  else if (typeUser === 'Etiqueta Exp' || typeUser === 'Etiqueta Insumo' || typeUser === 'Etiqueta Linguiça' || typeUser === 'Etiqueta')  {
+          } else if (typeUser === 'Etiqueta Exp' || typeUser === 'Etiqueta Insumo' || typeUser === 'Etiqueta Linguiça' || typeUser === 'Etiqueta')  {
             UFeatures.isEtiquetas = true;
-          } 
+          } else if (typeUser === 'Expedição Embarque' && decodeToken.Filial === 'UIA'){
+            UFeatures.isAgendamentoCarga = true;
+          }
           
           const tokenData = {
             isAuthenticated: true,
@@ -160,16 +162,17 @@ export const login = {
         UFeatures.isApontamento = true;
       } else if (authData.userType === 'Monitor da Qualidade') {
         UFeatures.isQualidade = true;
-      } else if (authData.userType === 'Expedição Carregamen' || authData.userType === 'Expedição Embalagem' || authData.userType === 'Expedição Embarque' || authData.userType === 'Expedição Controle' 
+      } else if (authData.userType === 'Expedição Carregamen' || authData.userType === 'Expedição Embalagem' || (authData.userType === 'Expedição Embarque' && authData.filialName === 'UIC') || authData.userType === 'Expedição Controle' 
           || (authData.userType === 'Embalagem Secundária' && authData.loginUser === 'exp')) {
         UFeatures.isExpedicao = true;
       } else if (authData.userType === 'Produção' || authData.userType === 'Gestão de Processos') {
         UFeatures.isProducao = true;
       } else if (authData.userType === 'Etiqueta Exp' || authData.userType === 'Etiqueta Insumo' || authData.userType === 'Etiqueta Linguiça' || authData.userType === 'Etiqueta')  {
         UFeatures.isEtiquetas = true;
-      } 
-      
-
+      } else if (authData.userType === 'Expedição Embarque' && authData.filialName === 'UIA'){
+        UFeatures.isAgendamentoCarga = true;
+      }
+    
       
       await commit('setUserFeatures', UFeatures);
       await commit('setAuthData', authData);

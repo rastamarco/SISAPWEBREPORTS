@@ -6,6 +6,7 @@ export default class usersPermissionsViewModel {
   private _isExpedicao?: boolean | any = false;
   private _isProducao?: boolean | any = false;
   private _isEtiquetas?: boolean | any = false;
+  private _isAgendamentoCarga?: boolean | any = false;
 
   get isApontamento(): boolean {
     return this._isApontamento;
@@ -36,5 +37,11 @@ export default class usersPermissionsViewModel {
   }
   set isEtiquetas(isEtiquetas: boolean){
     this._isEtiquetas= isEtiquetas;
+  }
+  get isAgendamentoCarga(): boolean{
+    return this._isAgendamentoCarga;
+  }
+  set isAgendamentoCarga(isAgendamentoCarga: boolean){
+    this._isAgendamentoCarga = isAgendamentoCarga;
   }
 }

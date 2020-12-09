@@ -6,6 +6,7 @@ import { Expedicao } from './Expedicao';
 import { Qualidade } from './Qualidade';
 import { Producao } from './Producao';
 import { Etiquetas } from './Etiquetas';
+import { AgendamentoCarga } from './AgendamentoCarga';
 
 Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     Expedicao,
     Qualidade,
     Producao,
-    Etiquetas
+    Etiquetas,
+    AgendamentoCarga
   }
 });
