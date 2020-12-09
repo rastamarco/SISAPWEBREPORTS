@@ -86,7 +86,7 @@ namespace sisapWebApi.Controllers
                 return NotFound();
         }
 
-        private static async Task GetParameters(ReportQuery query, FastReport.Report report)
+        private static async Task GetParameters(ReportQuery query, Report report)
         {
 
             // Aqui converto o parametro enviado do FRONT do Relatório se houver mapeando os parametros

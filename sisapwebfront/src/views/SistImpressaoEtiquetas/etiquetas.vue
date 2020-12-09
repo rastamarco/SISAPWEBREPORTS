@@ -14,7 +14,7 @@
           <SystemTitles />
         </div>
         <div class="system-img">
-          <v-img :src="require('../../../assets/logo-lar.png')" class="my-3" contain height="230" />
+          <v-img :src="require('../../assets/logo-lar.png')" class="my-3" contain height="230" />
         </div>
         <div class="footer-initial">
         </div>
@@ -37,8 +37,8 @@ import {
 
 import Relatorios from './Relatorios/relatorioSidebarEtiquetas.vue';
 
-import Reports from './../../reports/Reports.vue';
-import SystemTitles from './../../header/system-tittles.vue';
+import Reports from '../reports/Reports.vue';
+import SystemTitles from '../header/system-tittles.vue';
 
 @Component({
   components: {

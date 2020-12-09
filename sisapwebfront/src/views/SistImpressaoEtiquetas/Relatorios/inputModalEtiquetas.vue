@@ -28,7 +28,7 @@ import {
   Prop,
   Watch
 } from 'vue-property-decorator';
-import ApontamentoProducao from '../../SistApontamentosProducao/Relatorios/Parametros/ApontamentoProducao.vue';
+import ApontamentoProducao from '../../SistGerenciamentoProducao/SistApontamentosProducao/Relatorios/Parametros/ApontamentoProducao.vue';
 import EtiquetasPallets from '../Relatorios/Parametros/etiquetasPallets.vue';
 
 import {

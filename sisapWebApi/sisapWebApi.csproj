@@ -71,6 +71,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ImagesReports\" />
+    <Folder Include="Reports\ImagesReports\" />
   </ItemGroup>
 </Project>

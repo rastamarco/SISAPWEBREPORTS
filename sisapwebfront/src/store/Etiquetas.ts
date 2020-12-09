@@ -3,16 +3,23 @@ import ParametersEtiquetas from '../models/parametersEtiqueta.model';
 
 export const Etiquetas = {
   state:{
-    allProviders: null
+    allProviders: null,
+    loadingProviders: false
   },
   getters:{
     allProviders(state) {
       return state.allProviders;
     },
+    loadingProviders(state){
+      return state.loadingProviders;
+    }
   },
   mutations:{
     setAllProviders(state, value){
       state.allProviders = value;
+    },
+    setLoadingProviders(state, value){
+      state.loadingProviders = value;
     }
   },
   actions:{
@@ -26,6 +33,9 @@ export const Etiquetas = {
       if (response) {
         if (response.status === 200) {
           await commit('setAllProviders', response.data);
+          await commit('setLoadingProviders', true);
+        } else {
+          await commit('setLoadingProviders', false);
         }
       } 
     },

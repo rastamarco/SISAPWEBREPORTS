@@ -8,7 +8,8 @@
               item-text="desc_Fornecedor" 
               item-value="cod_Fornecedor" 
               dense 
-              label="Fornecedores" style="padding-top:5px;" hide-details no-data-text="Fornecedor não Encontrado!"></v-autocomplete>
+              label="Fornecedores " style="padding-top:5px;" hide-details no-data-text="Fornecedor não Encontrado!"></v-autocomplete>
+              <span style="font-size: 10px; opacity: 0.7;" v-if="loadingProviders === false">Não foi possível obter a lista de Fornecedores</span>
           </div>
           <div class="texts">
           <span style="font-size: 14px; opacity: 0.7;padding-top:3px;">Nº da Placa</span>
@@ -39,11 +40,13 @@ export default class EtiquetasPallets extends Vue {
   @Action getAllProviders
 
   @Getter allProviders
-  
+  @Getter loadingProviders
+
   private nrPlaca: any = null;
   private provider: any = null;
   private nrNote: any = null;
   private providerName: any = null;
+  // private loadingProviders: any = null;
 
   public Clear(): void{
     this.nrPlaca = null;

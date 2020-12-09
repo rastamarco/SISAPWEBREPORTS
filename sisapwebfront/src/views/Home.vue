@@ -31,7 +31,7 @@ import apontamentos from './SistGerenciamentoProducao/SistApontamentosProducao/a
 import expedicao from './SistGerenciamentoProducao/SistControleExpedição/expedicao.vue';
 import qualidade from './SistGerenciamentoProducao/SistCTRLQualidade/qualidade.vue';
 import ctrlProducao from './SistGerenciamentoProducao/SistControleProducao/ctrlProducao.vue';
-import etiquetas from './SistGerenciamentoProducao/SistImpressaoEtiquetas/etiquetas.vue';
+import etiquetas from './SistImpressaoEtiquetas/etiquetas.vue';
 
 @Component({
   components: {
