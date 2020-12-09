@@ -1,7 +1,7 @@
 <template>
 <div>
   <v-list dense>
-    <v-list-group v-for="item in itemsReports" :key="item.title" v-model="item.active" :prepend-icon="item.icon" no-action>
+    <v-list-group v-for="item in itemsReportsByUser" :key="item.title" v-model="item.active" :prepend-icon="item.icon" no-action>
       <template v-slot:activator>
         <v-list-item-content>
           <v-list-item-title v-text="item.title"></v-list-item-title>
@@ -29,7 +29,7 @@ import {
   Vue
 } from 'vue-property-decorator';
 import {
-  Action,
+  Action, Getter
 } from 'vuex-class';
 
 import InputModals from './inputModalExp.vue';
@@ -41,6 +41,7 @@ import InputModals from './inputModalExp.vue';
 export default class RelatorioSidebarExp extends Vue {
   @Action setSelectedIdReport
   
+  @Getter loginUser
   /* eslint-disable indent */
   private modalReports: boolean = false;
   private nameBox: any = null;
@@ -59,7 +60,7 @@ export default class RelatorioSidebarExp extends Vue {
       }
     ]
   }, ]
-
+  private itemsReportsByUser: Array<any> = [];
   public async selectReport(item: any): Promise<void> {
     switch (item.id) {
       case 1:
@@ -76,8 +77,23 @@ export default class RelatorioSidebarExp extends Vue {
     }
   }
 
+   public async  listReportsByUserPermission(): Promise<void> {
+      const listReports: Array<any>=[];
+      this.itemsReportsByUser.push({ icon: 'mdi-file-chart', title: 'Relatórios', items: null});
+      this.itemsReports[0].items.forEach(reportItems => {
+          if(reportItems.show ===  this.loginUser || reportItems.show === ''){ 
+            listReports.push(reportItems);
+          }
+      });
+      this.itemsReportsByUser[0].items = listReports;
+  }
+  
   public closeModal(): void {
     this.modalReports = false;
+  }
+
+  async mounted(){
+    this.listReportsByUserPermission();
   }
 }
 </script>
