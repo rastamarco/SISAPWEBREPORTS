@@ -11,7 +11,7 @@
         <template v-slot:activator="{ on, attrs }">
           <v-list-item v-for="child in item.items" :key="child.title" @click="selectReport(child)" v-on="on" v-bind="attrs">
             <v-list-item-content>
-              <v-list-item-title v-text="child.title" v-if="child.show === loginUser || child.show === ''"></v-list-item-title>
+              <v-list-item-title v-text="child.title"></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </template>
