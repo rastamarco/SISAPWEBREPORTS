@@ -3,11 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using sisapWebApi.Context.Interfaces;
 using sisapWebApi.DTO;
 using sisapWebApi.Models.SQLServer;
-using sisapWebApi.Services;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace sisapWebApi.Controllers

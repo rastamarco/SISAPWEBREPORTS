@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FirebirdSql.Data.FirebirdClient;
+using Microsoft.AspNetCore.Mvc;
 using sisapWebApi.Context;
-using sisapWebApi.Models;
+using sisapWebApi.Models.Firebird;
 using sisapWebApi.Repository;
 
 namespace sisapWebApi.Services
@@ -16,10 +17,10 @@ namespace sisapWebApi.Services
         {
 
             DataContext dbconnection = new DataContext();
-            ChamberRepository service = new ChamberRepository();
+            ChamberRepository repository = new ChamberRepository();
             if (dbconnection.state)
             {
-                var result = await service.getChambersByLocal("SELECT * FROM TB_CAMARA WHERE COD_FILIAL = '" + filial.ToUpper() +"'", dbconnection.connection).ConfigureAwait(true);
+                var result = await repository.getChambersByLocal("SELECT * FROM TB_CAMARA WHERE COD_FILIAL = '" + filial.ToUpper() +"'", dbconnection.connection).ConfigureAwait(true);
                 return result;
             }
             else

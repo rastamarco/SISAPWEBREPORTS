@@ -9,7 +9,7 @@
   <v-card-actions>
       <!-- Todos os Parametros vão aqui --> 
       <ApontamentoProducao v-on="{getShift, getPeriod, getDate, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 1" />
-      <EtiquetasPallets v-if="idBox === 2" />
+      <EtiquetasPallets v-on="{getNote, getNrPlaca, getProvider, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 2" />
     <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
       Cancelar
     </v-btn>
@@ -67,6 +67,9 @@ export default class InputModalEtiquetas extends Vue {
   private month: any = null;
   private year: any = null;
   private line: any = null;
+  private note: any = null;
+  private nrPlaca: string = '';
+  private idProvider: any = null;
 
   public getShift(shift: any): void {
     this.shift = shift;
@@ -91,6 +94,18 @@ export default class InputModalEtiquetas extends Vue {
     this.month = date.split('-')[1];
   }
 
+  public getNote(note: any): void { 
+    this.note = note;
+  }
+
+  public getNrPlaca(nrPlaca: any): void{
+    this.nrPlaca = nrPlaca;
+  }
+
+  public getProvider(idProvider: any): void{
+    this.idProvider = idProvider;
+  }
+
   public closeModal(): void {
     this.clearFields = true;
     this.$emit('closeModal');
@@ -100,6 +115,12 @@ export default class InputModalEtiquetas extends Vue {
     switch(this.idBox){
     case 1:
       return true;
+    case 2:
+      if (this.nrPlaca.length === 8 && this.idProvider !== null && this.note !== null){
+        return true;
+      } else { 
+        return false;
+      }
     default:
       return false;   
     }

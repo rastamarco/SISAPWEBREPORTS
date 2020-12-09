@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using sisapWebApi.Models;
+using sisapWebApi.Models.Firebird;
 using sisapWebApi.Services;
 
 namespace sisapWebApi.Controllers
@@ -20,8 +17,8 @@ namespace sisapWebApi.Controllers
         //[Authorize]
         public async Task<ActionResult<List<User>>> GetUsersAsync()
         {
-            var usersContext =  new UserService();
-            var listUsers = await usersContext.getAllUsers().ConfigureAwait(true);
+            var usersService =  new UserService();
+            var listUsers = await usersService.getAllUsers().ConfigureAwait(true);
             return listUsers;
         }
     }

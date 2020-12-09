@@ -1,8 +1,7 @@
 ﻿using FirebirdSql.Data.FirebirdClient;
-using sisapWebApi.Models;
+using sisapWebApi.Models.Firebird;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace sisapWebApi.Repository

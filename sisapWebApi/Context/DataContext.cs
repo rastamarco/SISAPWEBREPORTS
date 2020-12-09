@@ -1,14 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using sisapWebApi.Models;
 using System;
 using System.Data;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FirebirdSql.Data.FirebirdClient;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection;
-using System.ComponentModel;
 
 namespace sisapWebApi.Context
 {

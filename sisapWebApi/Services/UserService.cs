@@ -1,24 +1,16 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using FirebirdSql.Data.FirebirdClient;
-using Microsoft.AspNetCore.Mvc;
-using sisapWebApi.Models;
 using sisapWebApi.Context;
-using FastReport.Utils;
 using sisapWebApi.Repository;
+using sisapWebApi.Models.Firebird;
+using Microsoft.AspNetCore.Mvc;
 
 namespace sisapWebApi.Services
 {
     public class UserService
     {
 
-        public async Task<List<User>> getAllUsers()
+        public async Task<ActionResult<List<User>>> getAllUsers()
         {
 
             DataContext dbconnection = new DataContext();

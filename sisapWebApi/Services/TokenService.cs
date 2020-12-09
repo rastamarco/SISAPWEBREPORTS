@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using sisapWebApi.Models;
 using Microsoft.IdentityModel.Tokens;
+using sisapWebApi.Models.Firebird;
 
 namespace sisapWebApi.Authorization
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FastReport.Data;
@@ -9,10 +7,10 @@ using FastReport.Export.PdfSimple;
 using FastReport.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using sisapWebApi.Models;
 using sisapWebApi.Reports.ReportModels;
 using Newtonsoft.Json;
 using sisapWebApi.Reports;
+
 
 namespace sisapWebApi.Controllers
 {

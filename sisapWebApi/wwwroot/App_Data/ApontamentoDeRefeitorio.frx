@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="12/04/2020 16:04:04" ReportInfo.CreatorVersion="2020.4.9.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="12/09/2020 08:39:13" ReportInfo.CreatorVersion="2020.4.9.0">
   <Dictionary>
-    <MsSqlDataConnection Name="ApontamentoRefeitorio" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLLTVAEsLLHNiTy9XHYrAV8hHWOQnabp76PuZbx3rT+QoaorSDHiPtstukjFLVjrTm/Qa/Uf25uu1zDVOrRqJeJgYn3P8/ucbGtJcG/ntzJ0RE+5kYCUpvkTjC9QMkEb4SxwUIGYOJPqLSxhihXmFtfdldieRL8Gu7fn0jgzkYF3brM3g6ipQDe28BvsFGRpXsQtO+siPgxWwTQ+WiSsXnd993YAxtqnKJA7iKaIqbAkIsgbYli+sZRMzUQXeykUl7A==">
+    <MsSqlDataConnection Name="ApontamentoRefeitorio" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLLTVAEsLLHNiTy9XHYrAV8hHWOQnabp76PuZbx3rT+QoaorSDHiPtstukjFLVjrTm/Qa/Uf25uu1zDVOrRqJeJgYn3P8/ucbGtJcG/ntzJ0RE+5kYCUpvkTjC9QMkEb4SxwUIGYOJPqLSxhihXmFtfdldieRL8Gu7fn0jgzkYF3brM3g6ipQDe28BvsFGRpXsQtO+siPgxWwTQ+WiSsXnd993YAxtqnKJA7iKaIqbAkIAUQD/JhSAn1cUdscA96AhA==">
       <TableDataSource Name="Refeitorio" DataType="System.Int32" Enabled="true" TableName="Refeitorio" SelectCommand="SELECT NomeRefeitorio, CodigoRefeitorio, CodigoOrigem, sum(Peso) as QT_PESO, FORMAT(DataProducao, 'dd/MM/yyyy', 'en-US' ) as DataProducao, DATAImpressao FROM Refeitorio WHERE (DATAImpressao &gt;= @DTINI AND DATAImpressao &lt;= @DTFIM) AND ( CAST(DATAImpressao AS TIME) &gt;= @HORAINI AND CAST(DATAImpressao AS TIME) &lt;= @HORAFIM )  group by NomeRefeitorio ,CodigoRefeitorio, CodigoOrigem, DataProducao, DATAImpressao order by DATAImpressao&#13;&#10;">
         <Column Name="NomeRefeitorio" DataType="System.String"/>
         <Column Name="CodigoRefeitorio" DataType="System.String"/>
@@ -44,7 +44,7 @@
     <DataBand Name="Data1" Top="126.85" Width="718.2" Height="15.12" DataSource="Refeitorio">
       <TextObject Name="Text63" Left="9.45" Width="94.5" Height="15.12" Text="[Refeitorio.DATAImpressao]" Font="Arial, 10pt"/>
       <TextObject Name="Text64" Left="113.4" Width="94.5" Height="15.12" Text="[Refeitorio.DataProducao]" Font="Arial, 10pt"/>
-      <TextObject Name="Text65" Left="217.35" Width="94.5" Height="15.12" Text="[Refeitorio.NomeRefeitorio]" Font="Arial, 10pt"/>
+      <TextObject Name="Text65" Left="217.35" Width="236.25" Height="15.12" Text="[Refeitorio.NomeRefeitorio]" Font="Arial, 10pt"/>
       <TextObject Name="Text66" Left="453.6" Width="94.5" Height="15.12" Text="[Refeitorio.CodigoRefeitorio]" Font="Arial, 10pt"/>
       <TextObject Name="Text67" Left="567" Width="94.5" Height="15.12" Text="[Refeitorio.CodigoOrigem]" Font="Arial, 10pt"/>
       <TextObject Name="Text68" Left="670.95" Width="37.8" Height="15.12" Text="[Refeitorio.QT_PESO]" Font="Arial, 10pt"/>

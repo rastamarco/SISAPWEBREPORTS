@@ -1,5 +1,6 @@
 ﻿using FirebirdSql.Data.FirebirdClient;
 using sisapWebApi.Models;
+using sisapWebApi.Models.Firebird;
 using System;
 using System.Collections.Generic;
 using System.Linq;
