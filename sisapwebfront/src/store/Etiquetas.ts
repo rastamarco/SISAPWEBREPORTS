@@ -32,12 +32,14 @@ export const Etiquetas = {
 
     async reportEtiquetaPallet({ commit }, options){
       const parameter = new ParametersEtiquetas();
-      // parameter.InitialDate = options.initialDate;
-      // parameter.EndDate = options.endDate;
-      // await commit('setIdReport', options.idReport);
-      // await commit('setReportModule', options.reportModule);
-      // await commit('setParams', JSON.stringify(parameter)); 
-      // await commit('setShowReport', true);
+      parameter.providerName = options.providerName;
+      parameter.idProvider = options.idProvider;
+      parameter.nrPlaca = options.nrPlaca;
+      parameter.nrNote = options.nrNote;
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
     }, 
 
   }

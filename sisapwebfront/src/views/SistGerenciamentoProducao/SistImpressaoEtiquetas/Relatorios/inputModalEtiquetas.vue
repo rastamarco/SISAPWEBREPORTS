@@ -50,6 +50,7 @@ export default class InputModalEtiquetas extends Vue {
   @Action setSelectedIdReport
   @Action noShowReport
   @Action reportApontamentoProducao
+  @Action reportEtiquetaPallet
 
   @Getter filialName
   @Getter loginUser
@@ -70,6 +71,7 @@ export default class InputModalEtiquetas extends Vue {
   private note: any = null;
   private nrPlaca: string = '';
   private idProvider: any = null;
+  private providerName: any = null;
 
   public getShift(shift: any): void {
     this.shift = shift;
@@ -102,8 +104,9 @@ export default class InputModalEtiquetas extends Vue {
     this.nrPlaca = nrPlaca;
   }
 
-  public getProvider(idProvider: any): void{
+  public getProvider(idProvider: any, providerName: any): void{
     this.idProvider = idProvider;
+    this.providerName = providerName;
   }
 
   public closeModal(): void {
@@ -134,6 +137,9 @@ export default class InputModalEtiquetas extends Vue {
     switch(this.idBox){
     case 1:
       await this.ApontamentoProducao();
+      break;
+    case 2:
+      await this.EtiquetasPallets();
       break;
     }
     this.closeModal();
@@ -195,6 +201,12 @@ export default class InputModalEtiquetas extends Vue {
       }
       break;
     }
+  }
+
+  public async EtiquetasPallets(): Promise<void>{
+    await this.reportEtiquetaPallet({
+      idProvider: this.idProvider, providerName: this.providerName, 
+      nrPlaca: this.nrPlaca, nrNote: this.note, idReport: 5, reportModule: 5 });
   }
  
   public resetClearFields(): void{

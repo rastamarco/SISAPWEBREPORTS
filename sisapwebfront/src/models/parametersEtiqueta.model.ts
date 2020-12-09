@@ -3,6 +3,8 @@ export default class ParametersEtiquetas {
   EndDate !: string | any 
   InitialDate !: string | any
   nrPlaca !: string | any 
-  nrNota !: string | any
-  CodFornecedor !: string |any
+  nrNote !: string | any
+  idProvider !: string |any
+  providerName !: string | any
+  ticketType !: string | any
 }

@@ -43,6 +43,7 @@ export default class EtiquetasPallets extends Vue {
   private nrPlaca: any = null;
   private provider: any = null;
   private nrNote: any = null;
+  private providerName: any = null;
 
   public Clear(): void{
     this.nrPlaca = null;
@@ -64,7 +65,12 @@ export default class EtiquetasPallets extends Vue {
 
   @Watch('provider')
   public async onPropertyChangedProvider(value: any, oldValue: any): Promise < void > {
-    this.$emit('getProvider', value);
+    for(let i = 0; i< this.allProviders.length; i++) {
+      if(this.allProviders[i].cod_Fornecedor === value){
+        this.providerName = this.allProviders[i].desc_Fornecedor;
+      }
+    }
+    this.$emit('getProvider', value, this.providerName);
   }
 
   @Watch('nrNote')
@@ -77,7 +83,10 @@ export default class EtiquetasPallets extends Vue {
   }
 
   async mounted(){
-    await this.getAllProviders();
+    if (this.allProviders === null){
+      await this.getAllProviders();
+    }
+    
   }
   
 }

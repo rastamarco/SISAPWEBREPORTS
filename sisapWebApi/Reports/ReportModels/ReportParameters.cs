@@ -20,5 +20,10 @@ namespace sisapWebApi.Reports.ReportModels
         public string Month { get; set; }
         public string Year { get; set; }
         public string Line { get; set; }
+        public string IdProvider { get; set; }
+        public string ProviderName { get; set; }
+        public string TicketType { get; set; }
+        public string NrPlaca { get; set; }
+        public string NrNote { get; set; }
     }
 }

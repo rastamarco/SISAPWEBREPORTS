@@ -11,22 +11,25 @@ namespace sisapWebApi.Reports
             switch (typeModule)
             {
                 case 1:
-                    ReportsApontamento();
+                    ReportsPointing();
                     break;
                 case 2:
-                    ReportsExpedicao();
+                    ReportsExpedition();
                     break;
                 case 3:
-                    ReportsQualidade();
+                    ReportsQuality();
                     break;
                 case 4:
-                    ReportsProducao();
+                    ReportsProduction();
+                    break;
+                case 5:
+                    ReportsTickets();
                     break;
             }
             
         }
 
-        public void ReportsApontamento()
+        public void ReportsPointing()
         {
             reportItems = new List<ReportService>();
             reportItems.Add(new ReportService(1, "ApontamentoDeProducao.frx"));
@@ -38,23 +41,28 @@ namespace sisapWebApi.Reports
             reportItems.Add(new ReportService(16, "ApontamentoDeRefeitorio.frx"));
         }
         
-        public void ReportsExpedicao()
+        public void ReportsExpedition()
         {
             reportItems = new List<ReportService>();
             reportItems.Add(new ReportService(2, "FormaçãoDePalletExpedicao.frx"));
         }
 
-        public void ReportsQualidade()
+        public void ReportsQuality()
         {
             reportItems = new List<ReportService>();
             reportItems.Add(new ReportService(3, "QualidadeFomentoMensal.frx"));
         }
 
-        public void ReportsProducao()
+        public void ReportsProduction()
         {
             reportItems = new List<ReportService>();
             reportItems.Add(new ReportService(4, "MapaMensalProducao.frx"));
             reportItems.Add(new ReportService(41, "ApontamentoRoboCMS.frx"));
+        }
+        public void ReportsTickets()
+        {
+            reportItems = new List<ReportService>();
+            reportItems.Add(new ReportService(5, "EtiquetasPallet.frx"));
         }
     }
 }

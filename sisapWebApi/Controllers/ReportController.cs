@@ -33,7 +33,6 @@ namespace sisapWebApi.Controllers
             // Aqui faço uma busca pelo relatório na lista de relatórios de acordo com o id dele 
             var reportItem = reports.reportItems.FirstOrDefault((p) => p.Id == id);
 
-
             if (reportItem != null)
             {
                 // Faz o registro do uso da conexão do FastReport na API
@@ -125,6 +124,16 @@ namespace sisapWebApi.Controllers
                 report.SetParameterValue("Ano", parametros.Year);
             if (parametros.Line!= null)
                 report.SetParameterValue("Linha", parametros.Line);
+            if (parametros.IdProvider != null)
+                report.SetParameterValue("CodFornecedor", parametros.IdProvider);
+            if (parametros.ProviderName != null)
+                report.SetParameterValue("NomeFornecedor", parametros.ProviderName);
+            if (parametros.TicketType != null)
+                report.SetParameterValue("TipoEtiqueta", parametros.TicketType);
+            if (parametros.NrPlaca != null)
+                report.SetParameterValue("NrPlaca", parametros.NrPlaca);
+            if (parametros.NrNote != null)
+                report.SetParameterValue("NrNote", parametros.NrNote);
 
         }
     }
