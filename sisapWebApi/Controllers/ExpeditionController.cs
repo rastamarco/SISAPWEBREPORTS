@@ -9,11 +9,11 @@ using sisapWebApi.Models.Firebird;
 
 namespace sisapWebApi.Controllers
 {
-    [Route("api/chambers")]
+    [Route("api/expedition")]
     [ApiController]
-    public class ChamberController : ControllerBase
+    public class ExpeditionController : ControllerBase
     {
-        [HttpGet("{filial}")]
+        [HttpGet("chambers/{filial}")]
         //[Authorize]
         public async Task<ActionResult<List<Chamber>>> GetUsersAsync(string filial)
         {

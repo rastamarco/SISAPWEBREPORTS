@@ -60,6 +60,7 @@ export default class SidebarAgendamentoCargas extends Vue {
       }
     ]
   }]
+  
   private itemsReportsByUser: Array<any> = [];
 
   public async selectReport(item: any): Promise<void> {

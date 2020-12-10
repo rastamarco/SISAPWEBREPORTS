@@ -134,6 +134,8 @@ namespace sisapWebApi.Controllers
                 report.SetParameterValue("NrPlaca", parametros.NrPlaca);
             if (parametros.NrNote != null)
                 report.SetParameterValue("NrNote", parametros.NrNote);
+            if (parametros.City != null)
+                report.SetParameterValue("Municipio", parametros.City);
 
         }
     }

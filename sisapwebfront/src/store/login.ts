@@ -103,6 +103,8 @@ export const login = {
             UFeatures.isEtiquetas = true;
           } else if (typeUser === 'Logística'){
             UFeatures.isAgendamentoCarga = true;
+          } else if (typeUser === 'SIF'){
+            UFeatures.isApontamentoParada = true;
           }
           
           const tokenData = {
@@ -171,9 +173,10 @@ export const login = {
         UFeatures.isEtiquetas = true;
       } else if (authData.userType === 'Logística'){
         UFeatures.isAgendamentoCarga = true;
+      }  else if (authData.userType === 'SIF'){
+        UFeatures.isApontamentoParada = true;
       }
     
-      
       await commit('setUserFeatures', UFeatures);
       await commit('setAuthData', authData);
       await commit('setIsAuthenticated', true);

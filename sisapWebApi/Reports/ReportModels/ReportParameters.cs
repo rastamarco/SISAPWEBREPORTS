@@ -25,5 +25,6 @@ namespace sisapWebApi.Reports.ReportModels
         public string TicketType { get; set; }
         public string NrPlaca { get; set; }
         public string NrNote { get; set; }
+        public string City { get; set; }
     }
 }

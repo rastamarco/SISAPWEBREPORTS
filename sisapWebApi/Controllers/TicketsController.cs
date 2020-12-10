@@ -9,12 +9,12 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace sisapWebApi.Controllers
 {
-    [Route("api/providers")]
+    [Route("api/tickets")]
     [ApiController]
-    public class ProvidersController : ControllerBase
+    public class TicketsController : ControllerBase
     {
 
-        [HttpGet("all")]
+        [HttpGet("providers/all")]
         //[Authorize]
         public async Task<ActionResult<List<Provider>>> GetProvidersAsync()
         {

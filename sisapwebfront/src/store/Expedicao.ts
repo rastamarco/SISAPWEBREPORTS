@@ -38,7 +38,7 @@ export const Expedicao = {
     },
 
     async getChambersByFilial({ commit }, options){
-      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/chambers/${options.filial}?`;
+      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/expedition/chambers/${options.filial}?`;
       const response = await axios({
         method: 'get',
         url: routeAPILogin

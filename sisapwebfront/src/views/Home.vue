@@ -13,6 +13,7 @@
     <ctrlProducao v-if="userFeatures.isProducao" />
     <etiquetas v-if="userFeatures.isEtiquetas" />
     <agendamentoCargas v-if="userFeatures.isAgendamentoCarga" />
+    <apontamentoParadas v-if="userFeatures.isApontamentoParada" />
   </v-container>
 </div>
 </template>
@@ -34,6 +35,7 @@ import qualidade from './SistGerenciamentoProducao/SistCTRLQualidade/qualidade.v
 import ctrlProducao from './SistGerenciamentoProducao/SistControleProducao/ctrlProducao.vue';
 import etiquetas from './SistImpressaoEtiquetas/etiquetas.vue';
 import agendamentoCargas from './SistAgendamentoDeCargas/agendamentoCargas.vue';
+import apontamentoParadas from './SistApontamentoParadas/apontamentoParadas.vue';
 
 @Component({
   components: {
@@ -44,7 +46,8 @@ import agendamentoCargas from './SistAgendamentoDeCargas/agendamentoCargas.vue';
     qualidade,
     ctrlProducao,
     etiquetas,
-    agendamentoCargas
+    agendamentoCargas,
+    apontamentoParadas
   }
 })
 export default class Home extends Vue {

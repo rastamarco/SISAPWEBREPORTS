@@ -7,6 +7,7 @@
     <h1 class="titles" v-if="userFeatures.isProducao"> Sistema de Controle da Produção </h1>
     <h1 class="titles" v-if="userFeatures.isEtiquetas"> Sistema de Impressão de Etiquetas </h1>
     <h1 class="titles" v-if="userFeatures.isAgendamentoCarga"> Sistema de Agendamento de Cargas </h1>
+    <h1 class="titles" v-if="userFeatures.isApontamentoParada"> Sistema de Apontamento de Paradas </h1>
   </v-col>
 </v-row>
 </template>

@@ -25,7 +25,7 @@ export const Etiquetas = {
   actions:{
 
     async getAllProviders({commit}, options){
-      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/providers/all`;
+      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/scheduling/providers/all`;
       const response = await axios({
         method: 'get',
         url: routeAPILogin

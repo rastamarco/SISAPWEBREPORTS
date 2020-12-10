@@ -28,6 +28,9 @@ namespace sisapWebApi.Reports
                 case 6:
                     ReportsScheduling();
                     break;
+                case 7:
+                    ReportsStops();
+                    break;
             }
             
         }
@@ -72,6 +75,14 @@ namespace sisapWebApi.Reports
         {
             reportItems = new List<ReportService>();
             reportItems.Add(new ReportService(6, "AgendamentoSemCargas.frx"));
+        }
+
+
+        public void ReportsStops()
+        {
+            reportItems = new List<ReportService>();
+            reportItems.Add(new ReportService(7, "CondenacoesPorMunicipioTODOS.frx"));
+            reportItems.Add(new ReportService(71, "CondenacoesPorMunicipio.frx"));
         }
     }
 }
