@@ -7,7 +7,7 @@ export const Apontamento = {
     queryReport: null,
     idReport: null,
     params: null,
-    reportModule: null
+    reportModule: null,
   },
   getters:{
     showReport(state) {
@@ -58,11 +58,14 @@ export const Apontamento = {
     
     async noShowReport ({ commit }, options){ 
       await commit('setShowReport', options.show);
+      await commit('setIdReport', null);
+      await commit('setReportModule', null);
     },
 
     async setSelectedIdReport({ commit }, options) {
       await commit('setIdReport', options.id);
     },
+
 
     async reportApontamentoRefeitorio({commit}, options){
       const parameter = new ParametersApontamento();
@@ -78,5 +81,6 @@ export const Apontamento = {
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
     }
+
   }
 };

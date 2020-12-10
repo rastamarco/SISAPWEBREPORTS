@@ -52,15 +52,18 @@ export default class RelatorioSidebarExp extends Vue {
     title: 'Relatórios',
     items: [{
         id: 1,
-        title: 'Formação de Pallet'
+        title: 'Formação de Pallet',
+        show: ''
       },
       {
         id: 2,
-        title: 'Operador/Câmara'
+        title: 'Operador/Câmara',
+        show: ''
       }
     ]
   }, ]
   private itemsReportsByUser: Array<any> = [];
+
   public async selectReport(item: any): Promise<void> {
     switch (item.id) {
       case 1:

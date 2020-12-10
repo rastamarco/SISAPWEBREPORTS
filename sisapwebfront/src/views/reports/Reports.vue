@@ -7,12 +7,12 @@
         Download
       </v-btn>
     </div>
-    <div class="export-excel">
+    <!-- <div class="export-excel">
       <v-btn text color="primary" dark class="btn-download" @click="fileExcel()">
         <v-icon>mdi-file-excel</v-icon>
         Gerar Arquivo Excel
       </v-btn>
-    </div>
+    </div> -->
     <div class="close-printer">
       <v-btn text right color="primary" dark class="btn-download" @click="ClosePrinter()">
         <v-icon>mdi-close</v-icon>
@@ -20,7 +20,9 @@
       </v-btn>
     </div>
   </div>
+  <div class="holds-the-iframe">
   <iframe v-bind:src="backendPath+idReport+pathReport+moduleReport+reportModule+parameters+params" width="100%" height="560" class="frame" type="application/pdf" />
+  </div>
 </div>
 </template>
 
@@ -43,7 +45,7 @@ export default class Reports extends Vue {
   @Getter idReport
   @Getter params
   @Getter reportModule 
-
+  
   private backendPath: any = `${process.env.VUE_APP_API_URL}/api/reportgeneration/`;
   private pathReport: any = '?format=pdf&inline=true';
   private pathDownload: any = '?format=pdf&attachment=true';
@@ -72,9 +74,10 @@ export default class Reports extends Vue {
     await this.noShowReport({ show: false }); 
     await this.setSelectedIdReport({ id: null });
   }
+
+
 }
 </script>
-
 <style scoped>
 .frame {
   padding-left: 15px;
@@ -97,19 +100,24 @@ export default class Reports extends Vue {
 
 .action-buttons .save {
   display: flex;
-  width: 35%;
+  width: 50%;
   justify-content: flex-start;
 }
 
-.action-buttons .export-excel {
+/* .action-buttons .export-excel {
   display: flex;
   width: 30%;
   justify-content: center;
-}
+} */
 
 .action-buttons .close-printer {
   display: flex;
-  width: 35%;
+  width: 50%;
   justify-content: flex-end;
 }
+
+.holds-the-iframe {
+  background:url(../../assets/loading_reports.gif) center center no-repeat;
+}
+
 </style>

@@ -49,6 +49,7 @@ export default class InputModalAgendamentoCarga extends Vue {
  
   @Action setSelectedIdReport
   @Action noShowReport
+  @Action reportAgendamentoSemEmbarque
 
   @Getter filialName
   @Getter loginUser
@@ -87,12 +88,15 @@ export default class InputModalAgendamentoCarga extends Vue {
     }
     switch(this.idBox){
     case 1:
-      // await this.ApontamentoProducao();
+      await this.AgendamentoSemEmbarques();
       break;
     }
     this.closeModal();
   }
 
+  public async AgendamentoSemEmbarques(): Promise<void>{
+    await this.reportAgendamentoSemEmbarque({initialDate: this.initialDate, endDate: this.endDate, idReport: 6, reportModule:6 });
+  }
  
   public resetClearFields(): void{
     this.clearFields = false;

@@ -13,7 +13,6 @@
     <ctrlProducao v-if="userFeatures.isProducao" />
     <etiquetas v-if="userFeatures.isEtiquetas" />
     <agendamentoCargas v-if="userFeatures.isAgendamentoCarga" />
-    
   </v-container>
 </div>
 </template>

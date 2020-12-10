@@ -94,14 +94,14 @@ export const login = {
             UFeatures.isApontamento = true;
           } else if (typeUser === 'Monitor da Qualidade') {
             UFeatures.isQualidade = true;
-          } else if (typeUser === 'Expedição Carregamen' || typeUser === 'Expedição Embalagem' || (typeUser === 'Expedição Embarque' && decodeToken.Filial === 'UIC') || typeUser === 'Expedição Controle' 
+          } else if (typeUser === 'Expedição Carregamen' || typeUser === 'Expedição Embalagem' || typeUser === 'Expedição Embarque' || typeUser === 'Expedição Controle' 
           || (typeUser === 'Embalagem Secundária' && response.data.user.login === 'exp')) {
             UFeatures.isExpedicao = true;
           } else if (typeUser === 'Produção' || typeUser === 'Gestão de Processos') {
             UFeatures.isProducao = true;
           } else if (typeUser === 'Etiqueta Exp' || typeUser === 'Etiqueta Insumo' || typeUser === 'Etiqueta Linguiça' || typeUser === 'Etiqueta')  {
             UFeatures.isEtiquetas = true;
-          } else if (typeUser === 'Expedição Embarque' && decodeToken.Filial === 'UIA'){
+          } else if (typeUser === 'Logística'){
             UFeatures.isAgendamentoCarga = true;
           }
           
@@ -162,14 +162,14 @@ export const login = {
         UFeatures.isApontamento = true;
       } else if (authData.userType === 'Monitor da Qualidade') {
         UFeatures.isQualidade = true;
-      } else if (authData.userType === 'Expedição Carregamen' || authData.userType === 'Expedição Embalagem' || (authData.userType === 'Expedição Embarque' && authData.filialName === 'UIC') || authData.userType === 'Expedição Controle' 
+      } else if (authData.userType === 'Expedição Carregamen' || authData.userType === 'Expedição Embalagem' || authData.userType === 'Expedição Embarque' || authData.userType === 'Expedição Controle' 
           || (authData.userType === 'Embalagem Secundária' && authData.loginUser === 'exp')) {
         UFeatures.isExpedicao = true;
       } else if (authData.userType === 'Produção' || authData.userType === 'Gestão de Processos') {
         UFeatures.isProducao = true;
       } else if (authData.userType === 'Etiqueta Exp' || authData.userType === 'Etiqueta Insumo' || authData.userType === 'Etiqueta Linguiça' || authData.userType === 'Etiqueta')  {
         UFeatures.isEtiquetas = true;
-      } else if (authData.userType === 'Expedição Embarque' && authData.filialName === 'UIA'){
+      } else if (authData.userType === 'Logística'){
         UFeatures.isAgendamentoCarga = true;
       }
     

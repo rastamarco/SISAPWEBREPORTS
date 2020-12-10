@@ -41,8 +41,8 @@ import InputModals from './inputModalAgendamentoCarga.vue';
   }
 })
 export default class SidebarAgendamentoCargas extends Vue {
-  @Action setSelectedIdReport
-  
+  @Action setLoadingReports 
+
   @Getter loginUser
   
   /* eslint-disable indent */

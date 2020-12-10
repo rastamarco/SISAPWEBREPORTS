@@ -81,7 +81,7 @@ export default class AgendamentosSemEmbarqueCargas extends Vue {
   }
 
   public SendDate2(date: any): void {
-    this.menu = false;
+    this.menu2 = false;
     this.$emit('getEndDate', date);
   }
 
