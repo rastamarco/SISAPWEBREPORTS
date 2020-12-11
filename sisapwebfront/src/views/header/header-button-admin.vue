@@ -22,7 +22,7 @@
         <v-list-item-action>
           <v-icon color="primary">mdi-home</v-icon>
         </v-list-item-action>
-        <v-list-item-title>Home</v-list-item-title>
+        <v-list-item-title>Painel Inicial</v-list-item-title>
       </v-list-item>
       <v-list-item @click="ChangeSystem(1)" dense>
         <v-list-item-action>
@@ -38,7 +38,7 @@
       </v-list-item>
       <v-list-item @click="ChangeSystem(3)" dense>
         <v-list-item-action>
-          <v-icon color="primary">mdi-logout</v-icon>
+          <v-icon color="primary">mdi-factory</v-icon>
         </v-list-item-action>
         <v-list-item-title>Controle da Produção</v-list-item-title>
       </v-list-item>
