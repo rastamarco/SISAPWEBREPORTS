@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="EntityFramework.Firebird" Version="7.5.0" />
+    <!--<PackageReference Include="EntityFrameworkCore.FirebirdSQL" Version="2.1.2.2" />-->
     <PackageReference Include="FastReport.OpenSource" Version="2020.4.11" />
     <PackageReference Include="FastReport.OpenSource.Data.MsSql" Version="2020.4.11" />
     <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2020.4.11" />

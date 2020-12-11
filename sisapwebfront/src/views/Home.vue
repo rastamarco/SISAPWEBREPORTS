@@ -1,7 +1,6 @@
 <template>
 <div class="grey lighten-3">
   <v-app-bar app color="primary">
-    <systemTabs v-if="isSysAdmin" v-bind="{system}"/>
     <headerButtonAdmin v-if="isSysAdmin" v-on="{getSystem}"/>
     <h2 class="title-header-admin" v-if="isSysAdmin"> {{systemName}} </h2>
     <h2 class="title-header" v-if="!isSysAdmin"> Portal SISAP </h2>

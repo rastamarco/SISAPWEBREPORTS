@@ -36,6 +36,8 @@ namespace sisapWebApi
         {
             services.AddDbContext<DataContextSQLServer>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("ApontamentosProducao")));
+            //services.AddDbContext<DataContextFirebird>(opt => opt.UseFirebird
+            //    (Configuration.GetConnectionString("UIA")));
             services.AddCors();
             services.AddScoped<UserService>();
             services.AddScoped<ChamberService>();

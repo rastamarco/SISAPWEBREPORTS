@@ -1,3 +1,10 @@
+C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.csprojAssemblyReference.cache
+C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.AssemblyInfoInputs.cache
+C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.AssemblyInfo.cs
+C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.csproj.CoreCompileInputs.cache
+C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\net5.0\appsettings.json
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\net5.0\sisapWebApi.exe
@@ -141,13 +148,6 @@ C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\net5
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\net5.0\FastReport.Editor.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\net5.0\FastReport.Firebird.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\net5.0\FastReport.Web.dll
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.csprojAssemblyReference.cache
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.AssemblyInfoInputs.cache
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.AssemblyInfo.cs
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.csproj.CoreCompileInputs.cache
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\staticwebassets\sisapWebApi.StaticWebAssets.Manifest.cache
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\staticwebassets\sisapWebApi.StaticWebAssets.xml
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\scopedcss\bundle\sisapWebApi.styles.css
