@@ -3,7 +3,6 @@ import VueRouter, { RouteConfig } from 'vue-router';
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Reports from '../views/reports/Reports.vue';
-import Apontamento from '../views/SistGerenciamentoProducao/SistApontamentosProducao/apontamentos.vue';
 import moment from 'moment';
 
 Vue.use(VueRouter);
@@ -15,8 +14,8 @@ const routes: Array<RouteConfig> = [
     component: Login,
   },
   {
-    path: '/Home',
-    name: 'Home',
+    path: '/PortalSISAP',
+    name: 'PortalSISAP',
     component: Home,
     meta: { requiresAuth: true }
   },
@@ -42,7 +41,7 @@ router.beforeEach((to, from, next) => {
   if (to.path === '/') {
     if (isTokenValid()) {
       next({
-        path: '/Home',
+        path: '/PortalSISAP',
         query: { redirect: to.fullPath }
       });
     } else {

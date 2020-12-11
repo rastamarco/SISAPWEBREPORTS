@@ -72,7 +72,7 @@ export default class Login extends Vue {
       const tokenEncoded: any = window.localStorage.getItem('token');
       const tokenDecoded = JSON.parse(atob(tokenEncoded));
       this.$root.$data.$token = tokenDecoded;
-      this.$router.push('Home');
+      this.$router.push('PortalSISAP');
     }
     this.clearFields();
   }

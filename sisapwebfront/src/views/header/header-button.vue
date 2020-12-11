@@ -19,20 +19,18 @@
     </v-list>
     <v-divider></v-divider>
     <v-list>
-      <v-list-item>
+      <v-list-item disabled>
         <v-list-item-action>
           <v-icon color="primary">mdi-help-circle</v-icon>
         </v-list-item-action>
         <v-list-item-title>Ajuda</v-list-item-title>
       </v-list-item>
-
-      <v-list-item>
+      <v-list-item disabled>
         <v-list-item-action>
           <v-icon color="primary">mdi-comment-question</v-icon>
         </v-list-item-action>
         <v-list-item-title>Sobre</v-list-item-title>
       </v-list-item>
-
       <v-list-item @click="logout()">
         <v-list-item-action>
           <v-icon color="primary">mdi-logout</v-icon>
