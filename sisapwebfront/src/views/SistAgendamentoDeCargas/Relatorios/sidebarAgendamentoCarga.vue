@@ -44,7 +44,7 @@ export default class SidebarAgendamentoCargas extends Vue {
   @Action setLoadingReports 
 
   @Getter loginUser
-  
+  @Getter isSysAdmin
   /* eslint-disable indent */
   private modalReports: boolean = false;
   private nameBox: any = null;
@@ -80,13 +80,20 @@ export default class SidebarAgendamentoCargas extends Vue {
 
   public async  listReportsByUserPermission(): Promise<void> {
       const listReports: Array<any>=[];
-      this.itemsReportsByUser.push({ icon: 'mdi-file-chart', title: 'Relatórios', items: null});
-      this.itemsReports[0].items.forEach(reportItems => {
-          if(reportItems.show ===  this.loginUser || reportItems.show === ''){ 
-            listReports.push(reportItems);
-          }
-      });
-      this.itemsReportsByUser[0].items = listReports;
+      switch(this.isSysAdmin){
+        case true: 
+          this.itemsReportsByUser = this.itemsReports;
+          break;
+        case false: 
+          this.itemsReportsByUser.push({ icon: 'mdi-file-chart', title: 'Relatórios', items: null});
+          this.itemsReports[0].items.forEach(reportItems => {
+            if(reportItems.show ===  this.loginUser || reportItems.show === ''){ 
+              listReports.push(reportItems);
+            }
+          });
+          this.itemsReportsByUser[0].items = listReports;
+        break;
+      }
   }
 
   async mounted(){

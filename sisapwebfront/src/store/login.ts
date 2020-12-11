@@ -75,11 +75,9 @@ export const login = {
         url: routeAPILogin,
         data: user
       });
-      console.log(response);
       if (response) {
         if (response.status === 200) {
           const decodeToken = JSON.parse(decodeURIComponent(escape(atob(response.data.token.split('.')[1]))));
-          console.log(decodeToken);
           
           let isAdmin = false;
           if (decodeToken.TipoUsuario === 'Administrador'){
@@ -116,7 +114,7 @@ export const login = {
             tokenExpiration: decodeToken.exp,
             isSysAdmin: isAdmin,
             nameUser: response.data.user.nomeUsuario,
-            idUser: response.data.user.codUsuario
+            idUser: response.data.user.codUsuario,
           };
           const authData = {
             isAuthenticated: true,
@@ -132,7 +130,6 @@ export const login = {
           
           const tokenEncoded = btoa(JSON.stringify(tokenData));
           window.localStorage.setItem('token', tokenEncoded);
-          console.log(UFeatures);
           await commit('setUserFeatures', UFeatures);
           await commit('setAuthData', authData);
         } else {
@@ -143,7 +140,7 @@ export const login = {
       }
     },
 
-    async reloadUser({ commit }, options){
+    async reloadUser({ commit, dispatch }, options){
       const decodeToken = JSON.parse(atob(options.token));
 
       const authData = {
@@ -157,6 +154,7 @@ export const login = {
         nameUser: decodeToken.nameUser,
         idUser: decodeToken.idUser
       };
+
       const UFeatures = new usersPermissionsViewModel();
       // PERMISSÕES DO USUÁRIO, MOSTRA EM QUAL SISTEMA ELE VAI SER REDIRECIONADO
       if (authData.userType === 'Controle da Produção' || authData.userType === 'Embalagem Primária' || authData.userType === 'Oficina' ||  (authData.userType === 'Embalagem Secundária' && authData.loginUser !== 'exp') ||
@@ -175,12 +173,13 @@ export const login = {
         UFeatures.isAgendamentoCarga = true;
       }  else if (authData.userType === 'SIF'){
         UFeatures.isApontamentoParada = true;
-      }
-    
+      } 
+      
       await commit('setUserFeatures', UFeatures);
       await commit('setAuthData', authData);
       await commit('setIsAuthenticated', true);
-    }
+    },
+
   }
 
 };

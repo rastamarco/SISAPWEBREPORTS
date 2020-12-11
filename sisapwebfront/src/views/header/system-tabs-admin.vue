@@ -1,5 +1,5 @@
 <template>
-<v-tabs centered background-color="primary">
+<v-tabs centered background-color="primary" v-model="tabs">
   <v-tab v-for="link in links" :key="link" style="text-transform: none;">
     {{ link }}
   </v-tab>
@@ -9,12 +9,20 @@
 <script lang="ts">
 import {
   Component,
-  Vue
+  Vue,
+  Watch
 } from 'vue-property-decorator';
 @Component({})
 export default class TabsSystems extends Vue {
-  private links = ['Apontamento', 'Expedição', 'C. de Qualidade', 'C. de Ovos', 'C. de Produção',
-    'RH', 'SIF', 'Usuários', 'Filiais', 'Cartão Ponto', 'Manutenção', 'Docas Emb.'
-  ];
+  private links = [
+    'Home', 'Apontamento', 'Expedição', 'Ctrl. de Qualidade', 'Ctrl. de Produção', 'Imp. Etiquetas', 
+    'SIF', 'Apont. Paradas'];
+  private tabs: any = null;
+  
+  @Watch('tabs')
+  public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
+    this.$emit('getSystem', value);
+  }
+
 }
 </script>
