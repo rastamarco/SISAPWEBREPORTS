@@ -25,12 +25,7 @@
         </v-list-item-action>
         <v-list-item-title>Ajuda</v-list-item-title>
       </v-list-item>
-      <v-list-item disabled>
-        <v-list-item-action>
-          <v-icon color="primary">mdi-comment-question</v-icon>
-        </v-list-item-action>
-        <v-list-item-title>Sobre</v-list-item-title>
-      </v-list-item>
+      <about />
       <v-list-item @click="logout()">
         <v-list-item-action>
           <v-icon color="primary">mdi-logout</v-icon>
@@ -51,7 +46,13 @@ import {
   Getter
 } from 'vuex-class';
 
-@Component
+import about from './about.vue';
+
+@Component({
+  components: {
+    about
+  }
+})
 export default class HeaderButton extends Vue {
   @Getter filialName
   @Getter nameUser

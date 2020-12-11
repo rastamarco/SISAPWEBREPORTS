@@ -115,7 +115,7 @@ export default class Home extends Vue {
 <style scoped>
 .title-header {
   padding-left: 25px;
-  font-size: 28px;
+  font-size: 24px;
   color: white;
 }
 

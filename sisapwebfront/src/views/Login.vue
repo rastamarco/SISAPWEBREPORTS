@@ -12,6 +12,7 @@
       <h6>Entre com suas credenciais de Acesso ao Sistema</h6>
     </v-col>
     <v-col class="box-card-login" cols="12">
+    <v-form @submit.prevent="submit">
       <v-card width="500" height="320" elevation="2" class="card-items">
         <span class="text-title"> Local </span>
         <v-select dense :items="items" v-model="local" outlined style="padding-top:10px;" append-icon="mdi-map-marker"></v-select>
@@ -19,8 +20,10 @@
         <v-text-field dense outlined v-model="user" placeholder="ex: qualidade" style="padding-top:10px;" append-icon="mdi-account"> </v-text-field>
         <span class="text-title"> Senha </span>
         <v-text-field dense outlined v-model="password" :type="show ? 'text' : 'password'" placeholder="*******" style="padding-top: 5px;" :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" @click:append="show = !show"> </v-text-field>
-        <v-btn color="primary" type="button" style="text-transform: none;width: 90px;margin-left: 190px;" @click="Login()">Login</v-btn>
+        <v-btn color="primary" type="submit" style="text-transform: none;width: 90px;margin-left: 190px;">Login</v-btn>
       </v-card>
+      </v-form>
+    
       <v-progress-circular v-if="loading" indeterminate color="primary" style="position: absolute;margin-top:100px;" :size="100" :width="5">
       </v-progress-circular>
     </v-col>
@@ -58,7 +61,7 @@ export default class Login extends Vue {
   private show = false;
   private loading = false;
 
-  public async Login(): Promise < void > {
+  public async submit(): Promise < void > {
     this.loading = true;
     await this.doLogin({
       codFilial: this.local,
