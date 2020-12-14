@@ -25,7 +25,7 @@ export const ApontamentoParada = {
   actions:{
 
     async getAllCities({commit}, options){
-      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/stops/city/all`;
+      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/stops/city/all?${options.filialName}`;
       const response = await axios({
         method: 'get',
         url: routeAPILogin

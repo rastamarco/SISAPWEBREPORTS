@@ -16,10 +16,10 @@ namespace sisapWebApi.Controllers
 
         [HttpGet("providers/all")]
         //[Authorize]
-        public async Task<ActionResult<List<Provider>>> GetProvidersAsync()
+        public async Task<ActionResult<List<Provider>>> GetProvidersAsync(string filial)
         {
             var providerService = new ProviderService();
-            var listProviders = await providerService.GetProviders().ConfigureAwait(true);
+            var listProviders = await providerService.GetProviders(filial).ConfigureAwait(true);
             return listProviders;
         }
     }

@@ -16,7 +16,7 @@ namespace sisapWebApi.Services
         public async Task<List<Chamber>> getAllChambersByLocal(string filial)
         {
 
-            DataContext dbconnection = new DataContext();
+            DataContext dbconnection = new DataContext(filial);
             ChamberRepository repository = new ChamberRepository();
             if (dbconnection.state)
             {

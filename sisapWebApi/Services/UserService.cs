@@ -10,10 +10,10 @@ namespace sisapWebApi.Services
     public class UserService
     {
 
-        public async Task<ActionResult<List<User>>> getAllUsers()
+        public async Task<ActionResult<List<User>>> getAllUsers(string filial)
         {
 
-            DataContext dbconnection = new DataContext();
+            DataContext dbconnection = new DataContext(filial);
             UserRepository service = new UserRepository();
             if (dbconnection.state)
             {
@@ -28,7 +28,7 @@ namespace sisapWebApi.Services
 
         public async Task<User> getUser(string login, string senha, string filial)
         {
-            DataContext dbconnection = new DataContext();
+            DataContext dbconnection = new DataContext(filial);
             UserRepository service = new UserRepository();
             if (dbconnection.state)
             {

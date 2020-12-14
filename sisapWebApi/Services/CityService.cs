@@ -11,10 +11,10 @@ namespace sisapWebApi.Services
     public class CityService
     {
 
-        public async Task<ActionResult<List<City>>> GetCities()
+        public async Task<ActionResult<List<City>>> GetCities(string filial)
         {
 
-            DataContext dbconnection = new DataContext();
+            DataContext dbconnection = new DataContext(filial);
             CityRepository repository = new CityRepository();
             if (dbconnection.state)
             {

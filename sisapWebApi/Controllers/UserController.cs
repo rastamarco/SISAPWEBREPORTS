@@ -15,10 +15,10 @@ namespace sisapWebApi.Controllers
         // GET: api
         [HttpGet("all")]
         //[Authorize]
-        public async Task<ActionResult<List<User>>> GetUsersAsync()
+        public async Task<ActionResult<List<User>>> GetUsersAsync(string filial)
         {
             var usersService =  new UserService();
-            var listUsers = await usersService.getAllUsers().ConfigureAwait(true);
+            var listUsers = await usersService.getAllUsers(filial).ConfigureAwait(true);
             return listUsers;
         }
     }

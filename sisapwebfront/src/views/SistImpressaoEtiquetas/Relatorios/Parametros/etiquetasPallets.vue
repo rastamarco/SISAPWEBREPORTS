@@ -41,6 +41,7 @@ export default class EtiquetasPallets extends Vue {
 
   @Getter allProviders
   @Getter loadingProviders
+  @Getter filialName
 
   private nrPlaca: any = null;
   private provider: any = null;
@@ -87,7 +88,7 @@ export default class EtiquetasPallets extends Vue {
 
   async mounted(){
     if (this.allProviders === null){
-      await this.getAllProviders();
+      await this.getAllProviders({filialName: this.filialName});
     }
     
   }

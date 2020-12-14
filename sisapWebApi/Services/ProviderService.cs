@@ -11,10 +11,10 @@ namespace sisapWebApi.Services
     public class ProviderService
     {
 
-        public async Task<ActionResult<List<Provider>>> GetProviders()
+        public async Task<ActionResult<List<Provider>>> GetProviders(string filial)
         {
 
-            DataContext dbconnection = new DataContext();
+            DataContext dbconnection = new DataContext(filial);
             ProviderRepository repository = new ProviderRepository();
             if (dbconnection.state)
             {

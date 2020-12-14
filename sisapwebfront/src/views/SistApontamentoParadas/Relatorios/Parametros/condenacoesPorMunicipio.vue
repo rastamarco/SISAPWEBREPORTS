@@ -54,6 +54,7 @@ export default class CondenacoesPorMunicipio extends Vue {
 
   @Getter allCities
   @Getter loadingCities
+  @Getter filialName
 
   private date: any = new Date().toISOString().substr(0, 10) ;
   private menu: boolean = false;
@@ -123,7 +124,7 @@ export default class CondenacoesPorMunicipio extends Vue {
   async mounted(){
     await this.initialParameters();
     if (this.allCities === null){
-      await this.getAllCities();
+      await this.getAllCities({filialName: this.filialName });
     }
     
   }

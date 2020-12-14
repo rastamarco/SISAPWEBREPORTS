@@ -16,10 +16,10 @@ namespace sisapWebApi.Controllers
 
         [HttpGet("city/all")]
         //[Authorize]
-        public async Task<ActionResult<List<City>>> GetProvidersAsync()
+        public async Task<ActionResult<List<City>>> GetProvidersAsync(string filial)
         {
             var cityService = new CityService();
-            var listCities = await cityService.GetCities().ConfigureAwait(true);
+            var listCities = await cityService.GetCities(filial).ConfigureAwait(true);
             return listCities;
         }
     }
