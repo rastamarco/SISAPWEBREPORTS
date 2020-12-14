@@ -17,13 +17,13 @@
             <v-col cols="4" sm="3" md="9" class="title-initial">
                   <span style="font-size: 16px;font-weight: bold;text-align:center;">SISAP Web <small>Versão 2.0.0</small></span><br>
                   <span style="font-size: 14px;text-align:center;">Sistema de Apontamento de Produção, Controle da <br>Produção, Controle de Qualidade, Embarques, Paradas e Expedição da Produção.</span><br>
-                  <span style="font-size: 14px;">
+                  <span style="font-size: 14px;padding-left:15px;">
                     UIA - Unidade Industrial de Aves I, II, III e IV<br>
                     UIC - Unidade Industrial de Carnes<br>
                     UPO - Unidade Produtora de Ovos<br>
                     UIS - Unidade Industrial de Soja<br>
                   </span><br>
-                  <span style="font-size: 15px;font-weight: bold;">Ultima Atualização: 11/12/2020 </span>
+                  <span style="font-size: 15px;font-weight: bold;padding-left:15px;">Ultima Atualização: 11/12/2020 </span>
             </v-col>
           </v-row>
           <v-btn rounded text absolute bottom right color="primary" style="text-transform: none;" @click="dialog = false">Fechar</v-btn>

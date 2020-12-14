@@ -8,6 +8,7 @@ import { Producao } from './Producao';
 import { Etiquetas } from './Etiquetas';
 import { AgendamentoCarga } from './AgendamentoCarga';
 import { ApontamentoParada } from './ApontamentoParada';
+import { ControleOvos } from './ControleOvos'; 
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     Producao,
     Etiquetas,
     AgendamentoCarga,
-    ApontamentoParada
+    ApontamentoParada,
+    ControleOvos
   }
 });

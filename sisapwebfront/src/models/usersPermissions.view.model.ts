@@ -8,6 +8,7 @@ export default class usersPermissionsViewModel {
   private _isEtiquetas?: boolean | any = false;
   private _isAgendamentoCarga?: boolean | any = false;
   private _isApontamentoParada?: boolean | any = false;
+  private _isControleOvos?: boolean | any = false;
 
   get isApontamento(): boolean {
     return this._isApontamento;
@@ -50,5 +51,11 @@ export default class usersPermissionsViewModel {
   }
   set isApontamentoParada(isApontamentoParada: boolean){
     this._isApontamentoParada = isApontamentoParada;
+  }
+  get isControleOvos(): boolean{
+    return this._isControleOvos;
+  }
+  set isControleOvos(isControleOvos: boolean){
+    this._isControleOvos = isControleOvos;
   }
 }

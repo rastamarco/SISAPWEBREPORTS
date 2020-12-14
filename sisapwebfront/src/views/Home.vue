@@ -40,6 +40,7 @@ import etiquetas from './SistImpressaoEtiquetas/etiquetas.vue';
 import agendamentoCargas from './SistAgendamentoDeCargas/agendamentoCargas.vue';
 import apontamentoParadas from './SistApontamentoParadas/apontamentoParadas.vue';
 import adminHome from './adminManager/adminHome.vue';
+import controleOvos from './SistCTLRColetaOvos/ctrlOvos.vue';
 import _ from 'vuetify/es5/components/*';
 
 @Component({
@@ -53,7 +54,8 @@ import _ from 'vuetify/es5/components/*';
     etiquetas,
     agendamentoCargas,
     apontamentoParadas,
-    adminHome
+    adminHome,
+    controleOvos
   }
 })
 export default class Home extends Vue {
@@ -98,6 +100,9 @@ export default class Home extends Vue {
     case 7:
       this.systemName = 'Sistema de Agendamento de Cargas';
       break;  
+    case 8:
+      this.systemName = 'Sistema de Controle de Coleta de Ovos';
+      break; 
     }
   }
 

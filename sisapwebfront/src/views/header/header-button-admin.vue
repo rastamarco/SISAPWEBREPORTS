@@ -67,6 +67,12 @@
         </v-list-item-action>
         <v-list-item-title>Agendamento de Cargas</v-list-item-title>
       </v-list-item>
+      <v-list-item @click="ChangeSystem(8)" dense>
+        <v-list-item-action>
+          <v-icon color="primary">mdi-egg</v-icon>
+        </v-list-item-action>
+        <v-list-item-title>Controle de Ovos</v-list-item-title>
+      </v-list-item>
     </v-list>
   </v-card>
   </v-menu>
