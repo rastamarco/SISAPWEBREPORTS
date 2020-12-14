@@ -101,9 +101,6 @@ export default class Home extends Vue {
     }
   }
 
-  mounted(){
-    console.log(this.userType);
-  }
   beforeMount() {
     if (window.localStorage.token) {
       this.reloadUser({

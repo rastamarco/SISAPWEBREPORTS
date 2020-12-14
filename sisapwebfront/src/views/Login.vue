@@ -13,7 +13,7 @@
     </v-col>
     <v-col class="box-card-login" cols="12">
     <v-form @submit.prevent="submit">
-      <v-card width="500" height="320" elevation="2" class="card-items">
+      <v-card width="500" height="320" elevation="2" class="card-items" >
         <span class="text-title"> Local </span>
         <v-select dense :items="items" v-model="local" outlined style="padding-top:10px;" append-icon="mdi-map-marker"></v-select>
         <span class="text-title"> Usuário </span>
@@ -54,7 +54,7 @@ export default class Login extends Vue {
 
   @Getter isAuthenticated
 
-  private items = ['UIA', 'UIC', 'GBA', 'UPP', 'SIF', 'UIAII', 'UIAIII', 'UIR'];
+  private items = ['UIA', 'UIC', 'GBA', 'UPP', 'SIF', 'UIAII', 'UIAIII'];
   private local = this.items[0];
   private user = null;
   private password = null;

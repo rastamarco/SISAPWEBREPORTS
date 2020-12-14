@@ -57,7 +57,7 @@ namespace sisapWebApi.Controllers
                 }
 
                 ////////////////////////////////////////////////////////////////////
-                //Conversão para EXCEL, não está funcionando falta passar o arquivo em pdf ali no new Document
+                //Conversão para EXCEL, não está funcionando AINDA
                 if (query.Format == "xlsx")
                 {
                     PDFSimpleExport pdf = new PDFSimpleExport();

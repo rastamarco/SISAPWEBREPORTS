@@ -87,7 +87,7 @@ export default class RelatorioSidebarExp extends Vue {
         case true: 
           this.itemsReportsByUser = this.itemsReports;
           break;
-        case false: 
+        default: 
           this.itemsReportsByUser.push({ icon: 'mdi-file-chart', title: 'Relatórios', items: null});
           this.itemsReports[0].items.forEach(reportItems => {
             if(reportItems.show ===  this.loginUser || reportItems.show === ''){ 

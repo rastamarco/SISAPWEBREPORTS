@@ -79,10 +79,7 @@ export const login = {
         if (response.status === 200) {
           const decodeToken = JSON.parse(decodeURIComponent(escape(atob(response.data.token.split('.')[1]))));
           
-          let isAdmin = false;
-          if (decodeToken.TipoUsuario === 'Administrador'){
-            isAdmin = true;
-          }
+          
 
           const UFeatures = new usersPermissionsViewModel();
           const typeUser = response.data.user.tipoUsuario;
@@ -105,6 +102,11 @@ export const login = {
             UFeatures.isApontamentoParada = true;
           }
           
+          let isAdmin = false;
+          if (decodeToken.TipoUsuario === 'Administrador'){
+            isAdmin = true;
+          }
+
           const tokenData = {
             isAuthenticated: true,
             loginUser: response.data.user.login,
@@ -154,7 +156,7 @@ export const login = {
         nameUser: decodeToken.nameUser,
         idUser: decodeToken.idUser
       };
-
+      
       const UFeatures = new usersPermissionsViewModel();
       // PERMISSÕES DO USUÁRIO, MOSTRA EM QUAL SISTEMA ELE VAI SER REDIRECIONADO
       if (authData.userType === 'Controle da Produção' || authData.userType === 'Embalagem Primária' || authData.userType === 'Oficina' ||  (authData.userType === 'Embalagem Secundária' && authData.loginUser !== 'exp') ||

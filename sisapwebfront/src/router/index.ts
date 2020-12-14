@@ -19,8 +19,9 @@ const routes: Array<RouteConfig> = [
     component: Home,
     meta: { requiresAuth: true }
   },
-  { path: '/reports', 
-    component: Reports 
+  { path: '/Local',
+    name: 'Local', 
+    component: Login 
   }
 ];
 
