@@ -95,13 +95,13 @@ export const login = {
           } else if (typeUser === 'Expedição Carregamen' || typeUser === 'Expedição Embalagem' || typeUser === 'Expedição Embarque' || typeUser === 'Expedição Controle' 
           || (typeUser === 'Embalagem Secundária' && response.data.user.login === 'exp')) {
             UFeatures.isExpedicao = true;
-          } else if (typeUser === 'Produção' || typeUser === 'Gestão de Processos') {
+          } else if (typeUser === 'Produção' || typeUser === 'Gestão de Processos' || typeUser === 'Ergonomia' || typeUser === 'Abate') {
             UFeatures.isProducao = true;
           } else if (typeUser === 'Etiqueta Exp' || typeUser === 'Etiqueta Insumo' || typeUser === 'Etiqueta Linguiça' || typeUser === 'Etiqueta')  {
             UFeatures.isEtiquetas = true;
           } else if (typeUser === 'Logística'){
             UFeatures.isAgendamentoCarga = true;
-          } else if (typeUser === 'SIF'){
+          } else if (typeUser === 'SIF' || typeUser === 'Manutenção' || typeUser === 'Apontamento Paradas'){
             UFeatures.isApontamentoParada = true;
           }
           
@@ -165,13 +165,13 @@ export const login = {
       } else if (authData.userType === 'Expedição Carregamen' || authData.userType === 'Expedição Embalagem' || authData.userType === 'Expedição Embarque' || authData.userType === 'Expedição Controle' 
           || (authData.userType === 'Embalagem Secundária' && authData.loginUser === 'exp')) {
         UFeatures.isExpedicao = true;
-      } else if (authData.userType === 'Produção' || authData.userType === 'Gestão de Processos') {
+      } else if (authData.userType === 'Produção' || authData.userType === 'Gestão de Processos' || authData.userType === 'Ergonomia' || authData.userType === 'Abate') {
         UFeatures.isProducao = true;
       } else if (authData.userType === 'Etiqueta Exp' || authData.userType === 'Etiqueta Insumo' || authData.userType === 'Etiqueta Linguiça' || authData.userType === 'Etiqueta')  {
         UFeatures.isEtiquetas = true;
       } else if (authData.userType === 'Logística'){
         UFeatures.isAgendamentoCarga = true;
-      }  else if (authData.userType === 'SIF'){
+      }  else if (authData.userType === 'SIF' ||  authData.userType === 'Manutenção'  || authData.userType === 'Apontamento Paradas'){
         UFeatures.isApontamentoParada = true;
       } 
       

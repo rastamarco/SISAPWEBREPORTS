@@ -1,14 +1,14 @@
 <template>
 <div class="grey lighten-3">
   <v-app-bar app color="primary">
-    <headerButtonAdmin v-if="isSysAdmin" v-on="{getSystem}"/>
-    <h2 class="title-header-admin" v-if="isSysAdmin"> {{systemName}} </h2>
-    <h2 class="title-header" v-if="!isSysAdmin"> Portal SISAP </h2>
+    <headerButtonAdmin v-if="isSysAdmin || userType === 'Consultoria'" v-on="{getSystem}"/>
+    <h2 class="title-header-admin" v-if="isSysAdmin || userType === 'Consultoria'"> {{systemName}} </h2>
+    <h2 class="title-header" v-if="!isSysAdmin && userType !== 'Consultoria'"> Portal SISAP </h2>
     <headerBtn />
     <v-spacer></v-spacer>
   </v-app-bar>
   <v-container  style="margin-top: 65px;">
-    <adminHome v-if="isSysAdmin === true && this.system === 0" />
+    <adminHome v-if="(isSysAdmin === true || userType === 'Consultoria') && this.system === 0"  />
     <apontamentos v-if="userFeatures.isApontamento || this.system === 1" /> 
     <expedicao v-if="userFeatures.isExpedicao || this.system === 2" />
     <qualidade v-if="userFeatures.isQualidade || this.system === 3"/>
@@ -62,6 +62,7 @@ export default class Home extends Vue {
 
   @Getter isSysAdmin
   @Getter userFeatures
+  @Getter userType
 
   private system: any = null;
   private systemName: any = null;
@@ -100,6 +101,9 @@ export default class Home extends Vue {
     }
   }
 
+  mounted(){
+    console.log(this.userType);
+  }
   beforeMount() {
     if (window.localStorage.token) {
       this.reloadUser({

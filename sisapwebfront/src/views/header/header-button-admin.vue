@@ -12,7 +12,8 @@
           <img src="https://www.lar.ind.br/logo_lar.png" dense>
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title><b>Menu do Administrador</b> </v-list-item-title>
+          <v-list-item-title v-if="isSysAdmin"><b>Menu do Administrador</b> </v-list-item-title>
+          <v-list-item-title v-if="userType === 'Consultoria'"><b>Consultoria</b> </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
@@ -81,6 +82,8 @@ import {
 
 @Component
 export default class HeaderButtonAdmin extends Vue {
+  @Getter isSysAdmin
+  @Getter userType
 
   private menu: boolean = false;
 
