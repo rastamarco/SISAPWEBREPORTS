@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="12/15/2020 14:14:24" ReportInfo.CreatorVersion="2020.4.9.0">
+  <Dictionary>
+    <FirebirdDataConnection Name="FichaOvos" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls8wAakA4PRUQNmvWV0Qhsr4ayhxUxX+p3A04wUgYtIi1F8kkbgVpkRuX0rpaag36Z+rS28R8B9miAk1TkRDdgrXPUIBocxOZc17Uy3W9ip+twWpD4wL+2Bjv+ejij0fazaogtEBuUUNLuZS+kSML2L0VKkNZjWCJ0biSlikn6HTJ9On8ZVslYI5xymeoEXX1QwtC8iJu6fNnjStx+JcJZx8IYJ/yGQmpzKjxsvPe0Zc2jRST5oytLbnrQhoJ7KN66pE2BB023888LsNQb/qXCeU=">
+      <TableDataSource Name="Table" Alias="Ovos" DataType="System.Int32" Enabled="true" SelectCommand="select * from tb_romaneio_ovos&#13;&#10;where DT_ROMANEIO = @DATA&#13;&#10;and  NR_ROMANEIO = @COD&#13;&#10;">
+        <Column Name="NR_ROMANEIO" DataType="System.Int32"/>
+        <Column Name="MAT_PRODUTOR" DataType="System.Int32"/>
+        <Column Name="DT_RECOLHA" DataType="System.DateTime"/>
+        <Column Name="DT_ROMANEIO" DataType="System.DateTime"/>
+        <Column Name="CLAS_DATA" DataType="System.DateTime"/>
+        <Column Name="CLAS_HORA" DataType="System.TimeSpan"/>
+        <Column Name="NR_INSCREST" DataType="System.String"/>
+        <Column Name="NO_ENDERECO" DataType="System.String"/>
+        <Column Name="NO_TRANSPORTADOR" DataType="System.String"/>
+        <Column Name="NR_PLACA" DataType="System.String"/>
+        <Column Name="QTCXVERMELHO" DataType="System.Decimal"/>
+        <Column Name="QTCXBRANCO" DataType="System.Decimal"/>
+        <Column Name="QTUNIDVERMELHO" DataType="System.Decimal"/>
+        <Column Name="QTUNIDBRANCO" DataType="System.Decimal"/>
+        <Column Name="TRIN_QTCXVERMELHO" DataType="System.Decimal"/>
+        <Column Name="TRIN_QTCXBRANCO" DataType="System.Decimal"/>
+        <Column Name="TRIN_QTUNIDVERMELHO" DataType="System.Decimal"/>
+        <Column Name="TRIN_QTUNIDBRANCO" DataType="System.Decimal"/>
+        <Column Name="NR_AVES" DataType="System.Int32"/>
+        <Column Name="NR_AVESMORTAS" DataType="System.Int32"/>
+        <Column Name="DESC_OBSERVACOES" DataType="System.String"/>
+        <Column Name="NO_FRETEIRO" DataType="System.String"/>
+        <Column Name="QT_ENTREGUE" DataType="System.Int32"/>
+        <Column Name="DT_TRANSF" DataType="System.DateTime"/>
+        <Column Name="HO_TRANSF" DataType="System.TimeSpan"/>
+        <Column Name="COD_TURNO" DataType="System.Int32"/>
+        <Column Name="COD_PERIODO" DataType="System.Int32"/>
+        <Column Name="ID_CLASSIFICA" DataType="System.String"/>
+        <Column Name="CLAS_TOTALOVOS" DataType="System.Int32"/>
+        <Column Name="CLAS_OVOSSUPERJUMBO" DataType="System.Int32"/>
+        <Column Name="CLAS_OVOSJUMBO" DataType="System.Int32"/>
+        <Column Name="CLAS_OVOSEXTRA" DataType="System.Int32"/>
+        <Column Name="CLAS_OVOSGRANDE" DataType="System.Int32"/>
+        <Column Name="CLAS_OVOSMEDIO" DataType="System.Int32"/>
+        <Column Name="CLAS_OVOSPEQUENO" DataType="System.Int32"/>
+        <Column Name="CLAS_OVOSINDUSTRIAL" DataType="System.Int32"/>
+        <Column Name="CLAS_TOTALOVOSTRIN" DataType="System.Int32"/>
+        <Column Name="CLAS_CX30DZ" DataType="System.Decimal"/>
+        <Column Name="CLAS_OVOSSUJO" DataType="System.Int32"/>
+        <Column Name="COD_MATRICULA" DataType="System.Int32"/>
+        <Column Name="ID_CLASSIFICADORA" DataType="System.String"/>
+        <Column Name="CLASSIFI_HORA" DataType="System.TimeSpan"/>
+        <Column Name="CLAS_PERDAS" DataType="System.Int32"/>
+        <CommandParameter Name="DATA" DataType="5" Expression="[DATAINICIAL]"/>
+        <CommandParameter Name="COD" DataType="10" Expression="[ROMANEIO]"/>
+      </TableDataSource>
+    </FirebirdDataConnection>
+    <Parameter Name="DATAINICIAL" DataType="System.String" Expression="[DataInicial]"/>
+    <Parameter Name="ROMANEIO" DataType="System.String" Expression="[Romaneio]"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <PageHeaderBand Name="PageHeader1" Width="718.2" Height="68.6" Border.Lines="All">
+      <TextObject Name="txtTitutlo" Left="227.55" Top="32.35" Width="283.5" Height="18.9" Text="Relatório de Romaneio de Ovos" Font="Arial, 13pt, style=Bold"/>
+      <PictureObject Name="Picture1" Left="9.45" Top="2.45" Width="75.6" Height="56.7" ImageFormat="Png" Image="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"/>
+      <TextObject Name="Text1" Left="673.7" Top="1" Width="37.8" Height="18.9" Text="[Page#]" RightToLeft="true" Font="Arial, 10pt"/>
+      <TextObject Name="Text2" Left="619.45" Top="1" Width="56.7" Height="18.9" Text="Página" Font="Arial, 10pt"/>
+      <TextObject Name="Text18" Left="85.05" Top="3" Width="359.1" Height="11.34" Text="Cooperativa Agroindustrial Lar - U.D.M - Unidade de Distribuição de Mercadorias" Font="Arial, 7pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="72.6" Width="718.2" Height="510.3" DataSource="Table">
+      <TextObject Name="Text19" Left="9.45" Width="94.5" Height="15.12" Text="Romaneio" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text20" Left="119.3" Width="94.5" Height="15.12" Text="Data Recolha" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text21" Left="225.7" Width="94.5" Height="15.12" Text="Produtor" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text22" Left="567" Width="103.95" Height="15.12" Text="Cad. Produtor" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text23" Left="9.45" Top="18.9" Width="94.5" Height="15.12" Text="[Ovos.NR_ROMANEIO]" Font="Arial, 10pt"/>
+      <TextObject Name="Text24" Left="118.3" Top="18.9" Width="94.5" Height="15.12" Text="[Ovos.DT_ROMANEIO]" Font="Arial, 10pt"/>
+      <TextObject Name="Text25" Left="226.8" Top="18.9" Width="103.95" Height="15.12" Text="[Ovos.MAT_PRODUTOR]" Font="Arial, 10pt"/>
+      <TextObject Name="Text26" Left="567" Top="18.9" Width="103.95" Height="15.12" Text="[Ovos.NR_INSCREST]" Font="Arial, 10pt"/>
+      <TextObject Name="Text27" Left="9.45" Top="47.25" Width="94.5" Height="15.12" Text="Endereço" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text28" Left="274.05" Top="47.25" Width="94.5" Height="15.12" Text="Transportador" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text29" Left="567" Top="47.25" Width="94.5" Height="15.12" Text="Placa Veículo" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text30" Left="9.45" Top="66.15" Width="236.25" Height="15.12" Text="[Ovos.NO_ENDERECO]" Font="Arial, 10pt"/>
+      <TextObject Name="Text31" Left="274.05" Top="66.15" Width="207.9" Height="15.12" Text="[Ovos.NO_TRANSPORTADOR]" Font="Arial, 10pt"/>
+      <TextObject Name="Text32" Left="567" Top="66.15" Width="94.5" Height="15.12" Text="[Ovos.NR_PLACA]" Font="Arial, 10pt"/>
+      <TextObject Name="Text33" Left="9.45" Top="94.5" Width="94.5" Height="15.12" Text="Freteiro" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text34" Left="274.05" Top="94.5" Width="94.5" Height="15.12" Text="Freteiro" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text35" Left="567" Top="94.5" Width="47.25" Height="15.12" Text="Turno" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text36" Left="9.45" Top="113.4" Width="236.25" Height="15.12" Text="[Ovos.NO_FRETEIRO]" Font="Arial, 10pt"/>
+      <TextObject Name="Text37" Left="274.05" Top="113.4" Width="255.15" Height="15.12" Text="[Ovos.NO_FRETEIRO]" Font="Arial, 10pt"/>
+      <TextObject Name="Text38" Left="580" Top="113.4" Width="28.35" Height="15.12" Text="[Ovos.COD_TURNO]" Font="Arial, 10pt"/>
+      <TextObject Name="Text39" Left="646.15" Top="94.5" Width="56.7" Height="15.12" Text="Período" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text40" Left="661.5" Top="113.4" Width="28.35" Height="15.12" Text="[Ovos.COD_PERIODO]" Font="Arial, 10pt"/>
+      <TableObject Name="Table1" Top="141.75" Width="179.52" Height="37.8" Border.Lines="All">
+        <TableColumn Name="Column1" Width="89.76"/>
+        <TableColumn Name="Column2" Width="89.76"/>
+        <TableRow Name="Row1" Height="37.8">
+          <TableCell Name="Cell1" Border.Lines="Right" Font="Arial, 10pt">
+            <TextObject Name="Text41" Left="9.45" Top="9.45" Width="66.15" Height="15.12" Text="CÓDIGO" Font="Arial, 8pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell2" Border.Lines="Bottom" Font="Arial, 10pt">
+            <TextObject Name="Text42" Left="8" Top="9.45" Width="75.6" Height="15.12" Text="DESCRIÇÃO" Font="Arial, 8pt, style=Bold"/>
+          </TableCell>
+        </TableRow>
+      </TableObject>
+      <TableObject Name="Table1" Left="179.55" Top="141.75" Width="302.44" Height="37.8" Border.Lines="Right, Top, Bottom">
+        <TableColumn Name="Column3" Width="151.22"/>
+        <TableColumn Name="Column4" Width="151.22"/>
+        <TableRow Name="Row2">
+          <TableCell Name="Cell3" Border.Lines="Left, Right, Bottom" Font="Arial, 10pt">
+            <TextObject Name="Text43" Left="40.45" Top="2" Width="85.05" Height="15.12" Text="OVOS BONS" Font="Arial, 8pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell4" Border.Lines="Right, Bottom" Font="Arial, 10pt">
+            <TextObject Name="Text44" Left="24.9" Top="2" Width="113.4" Height="15.12" Text="OVOS TRINCADOS" Font="Arial, 8pt, style=Bold"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row3">
+          <TableCell Name="Cell8" Border.Lines="Left, Right" Font="Arial, 10pt">
+            <TextObject Name="Text45" Left="14.9" Top="2" Width="56.7" Height="15.12" Text="CAIXAS" Font="Arial, 8pt, style=Bold"/>
+            <TextObject Name="Text47" Left="97.5" Top="2" Width="37.8" Height="15.12" Text="UNID" Font="Arial, 8pt, style=Bold"/>
+            <LineObject Name="Line1" Left="77.6" Height="18.9"/>
+          </TableCell>
+          <TableCell Name="Cell9" Font="Arial, 10pt">
+            <TextObject Name="Text46" Left="101.45" Top="2" Width="37.8" Height="15.12" Text="UNID" Font="Arial, 8pt, style=Bold"/>
+            <TextObject Name="Text48" Left="13.45" Top="2" Width="56.7" Height="15.12" Text="CAIXAS" Font="Arial, 8pt, style=Bold"/>
+            <LineObject Name="Line2" Left="80.05" Height="18.9"/>
+          </TableCell>
+        </TableRow>
+      </TableObject>
+      <TableObject Name="Table1" Left="481.95" Top="141.75" Width="236.25" Height="37.8" Border.Lines="All">
+        <TableColumn Name="Column5" Width="78.75"/>
+        <TableColumn Name="Column6" Width="78.75"/>
+        <TableColumn Name="Column7" Width="78.75"/>
+        <TableRow Name="Row4" Height="37.8">
+          <TableCell Name="Cell10" Border.Lines="Right" Font="Arial, 10pt">
+            <TextObject Name="Text49" Left="2.9" Top="6.45" Width="75.6" Height="24.57" Anchor="Top, Bottom, Left, Right" Border.Lines="Right" Text="TOTAL UNIDADES" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell11" Border.Lines="Right" Font="Arial, 10pt">
+            <TextObject Name="Text50" Left="2.9" Top="6.45" Width="75.6" Height="24.57" Text="QTDE AVES NO AVIÁRIO" HorzAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell12" Font="Arial, 10pt">
+            <TextObject Name="Text51" Left="7.45" Top="6.45" Width="64.7" Height="24.57" Text="AVES MORTAS" HorzAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          </TableCell>
+        </TableRow>
+      </TableObject>
+      <TableObject Name="Table1" Top="179.55" Width="718.58" Height="37.8" Border.Lines="Left, Right, Bottom">
+        <TableColumn Name="Column8" Width="89.59"/>
+        <TableColumn Name="Column9" Width="90.72"/>
+        <TableColumn Name="Column10" Width="76.73"/>
+        <TableColumn Name="Column11" Width="73.71"/>
+        <TableColumn Name="Column12" Width="80.14"/>
+        <TableColumn Name="Column13" Width="71.44"/>
+        <TableColumn Name="Column14" Width="79.38"/>
+        <TableColumn Name="Column15" Width="77.49"/>
+        <TableColumn Name="Column16" Width="79.38"/>
+        <TableRow Name="Row5">
+          <TableCell Name="Cell13" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text52" Left="19.45" Top="2" Width="47.25" Height="15.12" Text="2320" Font="Arial, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell14" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text54" Left="3.45" Top="0.55" Width="94.5" Height="15.12" Text="VERMELHOS" Font="Arial, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell20" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text56" Left="6" Top="1" Width="66.15" Height="15.12" Text="[Ovos.QTCXVERMELHO]" HorzAlign="Center" Font="Arial, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell21" Font="Arial, 10pt">
+            <TextObject Name="Text58" Left="4" Top="1" Width="66.15" Height="15.12" Text="[Ovos.QTUNIDVERMELHO]" HorzAlign="Center" Font="Arial, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell22" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text60" Left="7.9" Top="1" Width="66.15" Height="15.12" Text="[Ovos.TRIN_QTCXVERMELHO]" HorzAlign="Center" Font="Arial, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell23" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text62" Left="2.45" Top="2" Width="66.15" Height="15.12" Text="[Ovos.TRIN_QTUNIDVERMELHO]" HorzAlign="Center" Font="Arial, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell24" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text91" Left="6.45" Top="2" Width="66.15" Height="15.12" Text="[Ovos.QT_ENTREGUE]" HorzAlign="Center" Font="Arial, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell30" Border.Lines="All" Font="Arial, 9pt">
+            <TextObject Name="Text65" Left="5.45" Top="2" Width="66.15" Height="15.12" Text="[Ovos.NR_AVES]" HorzAlign="Center" Font="Arial, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell32" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text66" Left="6.45" Top="1" Width="66.15" Height="15.12" Text="[Ovos.NR_AVESMORTAS]" HorzAlign="Center" Font="Arial, 9pt"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row6">
+          <TableCell Name="Cell18" Font="Arial, 10pt">
+            <TextObject Name="Text53" Left="18.45" Top="2" Width="47.25" Height="15.12" Text="2321" Font="Arial, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell19" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text55" Left="6.45" Top="2" Width="75.6" Height="15.12" Text="BRANCOS" Font="Arial, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell25" Font="Arial, 10pt">
+            <TextObject Name="Text57" Left="6" Top="2" Width="66.15" Height="15.12" Text="[Ovos.QTCXBRANCO]" HorzAlign="Center" Font="Arial, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell26" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text59" Left="4" Top="2" Width="66.15" Height="15.12" Text="[Ovos.QTUNIDBRANCO]" HorzAlign="Center" Font="Arial, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell27" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text61" Left="7.45" Top="2" Width="66.15" Height="15.12" Text="[Ovos.TRIN_QTCXBRANCO]" HorzAlign="Center" Font="Arial, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell28" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text63" Left="2" Top="2" Width="66.15" Height="15.12" Text="[Ovos.TRIN_QTUNIDBRANCO]" HorzAlign="Center" Font="Arial, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell29" Border.Lines="All" Font="Arial, 10pt"/>
+          <TableCell Name="Cell31" Border.Lines="All" Font="Arial, 9pt"/>
+          <TableCell Name="Cell33" Font="Arial, 10pt"/>
+        </TableRow>
+      </TableObject>
+      <TextObject Name="Text67" Left="5" Top="229.8" Width="122.85" Height="15.12" Text="OBSERVAÇÕES:" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text68" Left="7.45" Top="263.6" Width="689.85" Height="62.37" Text="[Ovos.DESC_OBSERVACOES]" Font="Arial, 10pt"/>
+      <TextObject Name="Text69" Left="212" Top="340.65" Width="320.3" Height="18.9" Text="RESULTADO DA CLASSIFICADORA DE OVOS" Font="Arial, 10pt, style=Bold"/>
+      <LineObject Name="Line3" Top="330.75" Width="718.2"/>
+      <TableObject Name="Table3" Top="368.55" Width="292.95" Height="132.3" Border.Lines="All">
+        <TableColumn Name="Column17" Width="97.65"/>
+        <TableColumn Name="Column18" Width="97.65"/>
+        <TableColumn Name="Column19" Width="97.65"/>
+        <TableRow Name="Row7">
+          <TableCell Name="Cell34" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text70" Left="11.45" Top="3" Width="75.6" Height="15.12" Text="DESCRIÇÃO" Font="Arial, 8pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell35" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text71" Left="16.45" Top="3" Width="66.15" Height="15.12" Text="UNIDADE" Font="Arial, 8pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell36" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text72" Left="21.45" Top="3" Width="56.7" Height="15.12" Text="CAIXAS" Font="Arial, 8pt, style=Bold"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row8">
+          <TableCell Name="Cell39" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text73" Left="2.45" Top="3" Width="94.5" Height="15.12" Text="SUPER JUMBO" Font="Arial, 8pt"/>
+          </TableCell>
+          <TableCell Name="Cell40" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text79" Left="7.45" Top="3" Width="85.05" Height="15.12" Text="[Ovos.CLAS_OVOSSUPERJUMBO]" HorzAlign="Center" Font="Arial, 8pt"/>
+          </TableCell>
+          <TableCell Name="Cell41" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text80" Left="9.45" Top="1" Width="75.6" Height="15.12" Font="Arial, 8pt"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row9">
+          <TableCell Name="Cell44" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text74" Left="19.45" Top="2" Width="47.25" Height="15.12" Text="JUMBO" Font="Arial, 8pt"/>
+          </TableCell>
+          <TableCell Name="Cell45" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text81" Left="7.45" Top="2" Width="85.05" Height="15.12" Text="[Ovos.CLAS_OVOSJUMBO]" HorzAlign="Center" Font="Arial, 8pt"/>
+          </TableCell>
+          <TableCell Name="Cell46" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text82" Left="10.9" Top="2" Width="75.6" Height="15.12" Font="Arial, 8pt"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row10">
+          <TableCell Name="Cell49" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text75" Left="18.45" Top="2" Width="47.25" Height="15.12" Text="EXTRA" Font="Arial, 8pt"/>
+          </TableCell>
+          <TableCell Name="Cell50" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text83" Left="7.45" Top="2" Width="85.05" Height="15.12" Text="[Ovos.CLAS_OVOSEXTRA]" HorzAlign="Center" Font="Arial, 8pt"/>
+          </TableCell>
+          <TableCell Name="Cell51" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text84" Left="10.9" Top="2" Width="75.6" Height="15.12" Font="Arial, 8pt"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row11">
+          <TableCell Name="Cell54" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text76" Left="12.9" Width="56.7" Height="15.12" Text="GRANDE" Font="Arial, 8pt"/>
+          </TableCell>
+          <TableCell Name="Cell55" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text85" Left="8.45" Top="2" Width="85.05" Height="15.12" Text="[Ovos.CLAS_OVOSGRANDE]" HorzAlign="Center" Font="Arial, 8pt"/>
+          </TableCell>
+          <TableCell Name="Cell56" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text86" Left="10.9" Top="2" Width="75.6" Height="15.12" Font="Arial, 8pt"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row12">
+          <TableCell Name="Cell59" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text77" Left="17.9" Top="3" Width="47.25" Height="15.12" Text="MÉDIO" Font="Arial, 8pt"/>
+          </TableCell>
+          <TableCell Name="Cell60" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text87" Left="8.45" Top="1" Width="85.05" Height="15.12" Text="[Ovos.CLAS_OVOSMEDIO]" HorzAlign="Center" Font="Arial, 8pt"/>
+          </TableCell>
+          <TableCell Name="Cell61" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text88" Left="10.9" Top="2" Width="75.6" Height="15.12" Font="Arial, 8pt"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row13">
+          <TableCell Name="Cell64" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text78" Left="13.45" Top="4" Width="66.15" Height="15.12" Text="PEQUENO" Font="Arial, 8pt"/>
+          </TableCell>
+          <TableCell Name="Cell65" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text89" Left="8.45" Width="85.05" Height="15.12" Text="[Ovos.CLAS_OVOSPEQUENO]" HorzAlign="Center" Font="Arial, 8pt"/>
+          </TableCell>
+          <TableCell Name="Cell66" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text90" Left="10.9" Top="2" Width="75.6" Height="15.12" Font="Arial, 8pt"/>
+          </TableCell>
+        </TableRow>
+      </TableObject>
+      <LineObject Name="Line4" Left="292.95" Top="368.55" Width="425.25"/>
+      <LineObject Name="Line5" Left="292.95" Top="500.4" Width="425.25"/>
+      <TableObject Name="Table1" Left="330.75" Top="434.7" Width="387.32" Height="66.17" Border.Lines="All">
+        <TableColumn Name="Column20" Width="96.83"/>
+        <TableColumn Name="Column21" Width="96.83"/>
+        <TableColumn Name="Column22" Width="96.83"/>
+        <TableColumn Name="Column23" Width="96.83"/>
+        <TableRow Name="Row14" Height="47.26">
+          <TableCell Name="Cell67" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text92" Left="7.45" Top="5.45" Width="85.05" Height="37.8" Text="MÁQUINA LIGADA" HorzAlign="Center" Font="Arial, 9pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell68" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text93" Left="6.45" Top="5.45" Width="85.05" Height="37.8" Text="TOTAL DE OVOS" HorzAlign="Center" Font="Arial, 9pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell69" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text94" Left="7.8" Top="5.55" Width="85.05" Height="37.8" Text="TOTAL CAIXAS 30DZ" HorzAlign="Center" Font="Arial, 9pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell70" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text95" Left="7" Top="5.45" Width="85.05" Height="37.8" Text="TOTAL TRINCADO" HorzAlign="Center" Font="Arial, 9pt, style=Bold"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row15" Height="18.91">
+          <TableCell Name="Cell72" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text96" Left="4.45" Top="3.45" Width="85.05" Height="15.12" Text="[Ovos.CLAS_HORA]" HorzAlign="Center" Font="Arial, 10pt"/>
+          </TableCell>
+          <TableCell Name="Cell73" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text97" Left="4" Top="2" Width="85.05" Height="15.12" Text="[Ovos.CLAS_TOTALOVOS]" HorzAlign="Center" Font="Arial, 10pt"/>
+          </TableCell>
+          <TableCell Name="Cell74" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text98" Left="4" Top="2" Width="85.05" Height="15.12" Text="[Ovos.CLAS_CX30DZ]" HorzAlign="Center" Font="Arial, 10pt"/>
+          </TableCell>
+          <TableCell Name="Cell75" Border.Lines="All" Font="Arial, 10pt">
+            <TextObject Name="Text99" Left="3.45" Top="2" Width="85.05" Height="15.12" Text="[Ovos.CLAS_TOTALOVOSTRIN]" HorzAlign="Center" Font="Arial, 10pt"/>
+          </TableCell>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="586.9" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

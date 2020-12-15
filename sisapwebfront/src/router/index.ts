@@ -2,7 +2,6 @@ import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
-import Reports from '../views/reports/Reports.vue';
 import moment from 'moment';
 
 Vue.use(VueRouter);

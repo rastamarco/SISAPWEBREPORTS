@@ -16,6 +16,9 @@
     <etiquetas v-if="userFeatures.isEtiquetas || this.system === 5" />
     <agendamentoCargas v-if="userFeatures.isAgendamentoCarga || this.system === 6" />
     <apontamentoParadas v-if="userFeatures.isApontamentoParada || this.system === 7" />
+    <controleOvos v-if="userFeatures.isControleOvos || this.system === 8" />
+    <integracaoUIA2 v-if="userFeatures.isQualidadeUIA2 || this.system === 9" />
+    <integracaoUIA2 v-if="userFeatures.isIntegracaoUIA2 || this.system === 10" />
   </v-container>
 </div>
 </template>
@@ -41,6 +44,7 @@ import agendamentoCargas from './SistAgendamentoDeCargas/agendamentoCargas.vue';
 import apontamentoParadas from './SistApontamentoParadas/apontamentoParadas.vue';
 import adminHome from './adminManager/adminHome.vue';
 import controleOvos from './SistCTLRColetaOvos/ctrlOvos.vue';
+import integracaoUIA2 from './SistIntegracaoEmbarquesProducao/integracaoUIA2.vue';
 import _ from 'vuetify/es5/components/*';
 
 @Component({
@@ -55,7 +59,8 @@ import _ from 'vuetify/es5/components/*';
     agendamentoCargas,
     apontamentoParadas,
     adminHome,
-    controleOvos
+    controleOvos,
+    integracaoUIA2
   }
 })
 export default class Home extends Vue {
@@ -65,6 +70,7 @@ export default class Home extends Vue {
   @Getter isSysAdmin
   @Getter userFeatures
   @Getter userType
+  @Getter filialName
 
   private system: any = null;
   private systemName: any = null;
@@ -75,34 +81,54 @@ export default class Home extends Vue {
 
   @Watch('system')
   public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
-    switch(value){
-    case 0:
-      this.systemName = 'Home';
+    switch(this.filialName){
+    case 'UIA':
+      switch(value){
+      case 0:
+        this.systemName = 'Home';
+        break;
+      case 1:
+        this.systemName = 'Sistema de Apontamento de Produção';
+        break;
+      case 2:
+        this.systemName = 'Sistema de Controle da Expedição';
+        break;
+      case 3:
+        this.systemName = 'Sistema de Controle da Produção';
+        break;
+      case 4:
+        this.systemName = 'Sistema de Controle da Qualidade';
+        break;
+      case 5:
+        this.systemName = 'Sistema de Impressão de Etiquetas';
+        break;
+      case 6:
+        this.systemName = 'Sistema de Apontamento de Paradas';
+        break; 
+      case 7:
+        this.systemName = 'Sistema de Agendamento de Cargas';  
+        break;
+      }
       break;
-    case 1:
-      this.systemName = 'Sistema de Apontamento de Produção';
+    case 'UIAII':
+      switch(value){  
+      case 9:
+        this.systemName = 'Sistema de Integração de Embarques e Produção';
+        break;
+      case 10:
+        this.systemName = 'Sistema de Controle de Qualidade';
+        break;
+      }
       break;
-    case 2:
-      this.systemName = 'Sistema de Controle da Expedição';
+    case 'UIAIII':
       break;
-    case 3:
-      this.systemName = 'Sistema de Controle da Produção';
+    case 'UPO':
+      switch(value){ 
+      case 8:
+        this.systemName = 'Sistema de Controle de Coleta de Ovos';
+        break;
+      }
       break;
-    case 4:
-      this.systemName = 'Sistema de Controle da Qualidade';
-      break;
-    case 5:
-      this.systemName = 'Sistema de Impressão de Etiquetas';
-      break;
-    case 6:
-      this.systemName = 'Sistema de Apontamento de Paradas';
-      break; 
-    case 7:
-      this.systemName = 'Sistema de Agendamento de Cargas';
-      break;  
-    case 8:
-      this.systemName = 'Sistema de Controle de Coleta de Ovos';
-      break; 
     }
   }
 

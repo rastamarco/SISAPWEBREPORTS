@@ -83,25 +83,40 @@ export const login = {
 
           const UFeatures = new usersPermissionsViewModel();
           const typeUser = response.data.user.tipoUsuario;
+          const localUser = response.data.user.codFilial;
           // PERMISSÕES DO USUÁRIO, MOSTRA EM QUAL SISTEMA ELE VAI SER REDIRECIONADO 
-          if (typeUser === 'Controle da Produção' || typeUser === 'Embalagem Primária' || typeUser === 'Oficina' || (typeUser === 'Embalagem Secundária' && response.data.user.login !== 'exp') ||
-          typeUser === 'Operador Apontamento' || typeUser === 'PCP' || typeUser === 'Expedição Controle') {
-            UFeatures.isApontamento = true;
-          } else if (typeUser === 'Monitor da Qualidade') {
-            UFeatures.isQualidade = true;
-          } else if (typeUser === 'Expedição Carregamen' || typeUser === 'Expedição Embalagem' || typeUser === 'Expedição Embarque' || typeUser === 'Expedição Controle' 
-          || (typeUser === 'Embalagem Secundária' && response.data.user.login === 'exp')) {
-            UFeatures.isExpedicao = true;
-          } else if (typeUser === 'Produção' || typeUser === 'Gestão de Processos' || typeUser === 'Ergonomia' || typeUser === 'Abate') {
-            UFeatures.isProducao = true;
-          } else if (typeUser === 'Etiqueta Exp' || typeUser === 'Etiqueta Insumo' || typeUser === 'Etiqueta Linguiça' || typeUser === 'Etiqueta')  {
-            UFeatures.isEtiquetas = true;
-          } else if (typeUser === 'Logística'){
-            UFeatures.isAgendamentoCarga = true;
-          } else if (typeUser === 'SIF' || typeUser === 'Manutenção' || typeUser === 'Apontamento Paradas'){
-            UFeatures.isApontamentoParada = true;
+          switch(localUser){
+          case 'UDM':
+            UFeatures.isControleOvos = true;
+            break;
+          case 'UIAII':
+            if (typeUser === 'Integração' || typeUser === 'Expedição Carregamen' || typeUser === 'Gerência') {
+              UFeatures.isIntegracaoUIA2 = true; 
+            } else if (typeUser === 'Monitor da Qualidade') {
+              UFeatures.isQualidadeUIA2 = true;
+            } 
+            break;
+          default: 
+            if (typeUser === 'Controle da Produção' || typeUser === 'Embalagem Primária' || typeUser === 'Oficina' || (typeUser === 'Embalagem Secundária' && response.data.user.login !== 'exp') ||
+            typeUser === 'Operador Apontamento' || typeUser === 'PCP' || typeUser === 'Expedição Controle') {
+              UFeatures.isApontamento = true;
+            } else if (typeUser === 'Monitor da Qualidade') {
+              UFeatures.isQualidade = true;
+            } else if (typeUser === 'Expedição Carregamen' || typeUser === 'Expedição Embalagem' || typeUser === 'Expedição Embarque' || typeUser === 'Expedição Controle' 
+            || (typeUser === 'Embalagem Secundária' && response.data.user.login === 'exp')) {
+              UFeatures.isExpedicao = true;
+            } else if (typeUser === 'Produção' || typeUser === 'Gestão de Processos' || typeUser === 'Ergonomia' || typeUser === 'Abate') {
+              UFeatures.isProducao = true;
+            } else if (typeUser === 'Etiqueta Exp' || typeUser === 'Etiqueta Insumo' || typeUser === 'Etiqueta Linguiça' || typeUser === 'Etiqueta')  {
+              UFeatures.isEtiquetas = true;
+            } else if (typeUser === 'Logística'){
+              UFeatures.isAgendamentoCarga = true;
+            } else if (typeUser === 'SIF' || typeUser === 'Manutenção' || typeUser === 'Apontamento Paradas'){
+              UFeatures.isApontamentoParada = true;
+            } 
+            break;
           }
-          
+        
           let isAdmin = false;
           if (decodeToken.TipoUsuario === 'Administrador'){
             isAdmin = true;
@@ -158,24 +173,37 @@ export const login = {
       };
       
       const UFeatures = new usersPermissionsViewModel();
-      // PERMISSÕES DO USUÁRIO, MOSTRA EM QUAL SISTEMA ELE VAI SER REDIRECIONADO
-      if (authData.userType === 'Controle da Produção' || authData.userType === 'Embalagem Primária' || authData.userType === 'Oficina' ||  (authData.userType === 'Embalagem Secundária' && authData.loginUser !== 'exp') ||
+      switch(authData.filialName){
+      case 'UDM':
+        UFeatures.isControleOvos = true;
+        break;
+      case 'UIAII':
+        if (authData.userType === 'Integração' || authData.userType === 'Expedição Carregamen' || authData.userType === 'Gerência') {
+          UFeatures.isIntegracaoUIA2 = true; 
+        } else if (authData.userType === 'Monitor da Qualidade') {
+          UFeatures.isQualidadeUIA2 = true;
+        } 
+        break;
+      default:
+        if (authData.userType === 'Controle da Produção' || authData.userType === 'Embalagem Primária' || authData.userType === 'Oficina' ||  (authData.userType === 'Embalagem Secundária' && authData.loginUser !== 'exp') ||
           authData.userType === 'Operador Apontamento' || authData.userType === 'PCP' || authData.userType === 'Expedição Controle') {
-        UFeatures.isApontamento = true;
-      } else if (authData.userType === 'Monitor da Qualidade') {
-        UFeatures.isQualidade = true;
-      } else if (authData.userType === 'Expedição Carregamen' || authData.userType === 'Expedição Embalagem' || authData.userType === 'Expedição Embarque' || authData.userType === 'Expedição Controle' 
-          || (authData.userType === 'Embalagem Secundária' && authData.loginUser === 'exp')) {
-        UFeatures.isExpedicao = true;
-      } else if (authData.userType === 'Produção' || authData.userType === 'Gestão de Processos' || authData.userType === 'Ergonomia' || authData.userType === 'Abate') {
-        UFeatures.isProducao = true;
-      } else if (authData.userType === 'Etiqueta Exp' || authData.userType === 'Etiqueta Insumo' || authData.userType === 'Etiqueta Linguiça' || authData.userType === 'Etiqueta')  {
-        UFeatures.isEtiquetas = true;
-      } else if (authData.userType === 'Logística'){
-        UFeatures.isAgendamentoCarga = true;
-      }  else if (authData.userType === 'SIF' ||  authData.userType === 'Manutenção'  || authData.userType === 'Apontamento Paradas'){
-        UFeatures.isApontamentoParada = true;
-      } 
+          UFeatures.isApontamento = true;
+        } else if (authData.userType === 'Monitor da Qualidade') {
+          UFeatures.isQualidade = true;
+        } else if (authData.userType === 'Expedição Carregamen' || authData.userType === 'Expedição Embalagem' || authData.userType === 'Expedição Embarque' || authData.userType === 'Expedição Controle' 
+              || (authData.userType === 'Embalagem Secundária' && authData.loginUser === 'exp')) {
+          UFeatures.isExpedicao = true;
+        } else if (authData.userType === 'Produção' || authData.userType === 'Gestão de Processos' || authData.userType === 'Ergonomia' || authData.userType === 'Abate') {
+          UFeatures.isProducao = true;
+        } else if (authData.userType === 'Etiqueta Exp' || authData.userType === 'Etiqueta Insumo' || authData.userType === 'Etiqueta Linguiça' || authData.userType === 'Etiqueta')  {
+          UFeatures.isEtiquetas = true;
+        } else if (authData.userType === 'Logística'){
+          UFeatures.isAgendamentoCarga = true;
+        }  else if (authData.userType === 'SIF' ||  authData.userType === 'Manutenção'  || authData.userType === 'Apontamento Paradas'){
+          UFeatures.isApontamentoParada = true;
+        } 
+        break; 
+      }     
       
       await commit('setUserFeatures', UFeatures);
       await commit('setAuthData', authData);

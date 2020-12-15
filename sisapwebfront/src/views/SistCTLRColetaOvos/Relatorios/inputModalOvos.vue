@@ -9,6 +9,7 @@
   <v-card-actions>
       <!-- Todos os Parametros vão aqui --> 
       <ApontamentoProducao v-on="{getShift, getPeriod, getDate, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 1" />
+      <RomaneioOvos v-on="{getRomaneioOvos, getDate, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 2" />
     <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
       Cancelar
     </v-btn>
@@ -28,6 +29,7 @@ import {
   Watch
 } from 'vue-property-decorator';
 import ApontamentoProducao from '../../SistGerenciamentoProducao/SistApontamentosProducao/Relatorios/Parametros/ApontamentoProducao.vue';
+import RomaneioOvos from '../Relatorios/Parametros/romaneioOvos.vue';
 
 import {
   Action, Getter
@@ -35,7 +37,8 @@ import {
 import _ from 'vuetify/es5/components/*';
 @Component({
   components: {
-    ApontamentoProducao
+    ApontamentoProducao,
+    RomaneioOvos
   }
 })
 export default class InputModalOvos extends Vue {
@@ -47,6 +50,7 @@ export default class InputModalOvos extends Vue {
   @Action setSelectedIdReport
   @Action noShowReport
   @Action reportApontamentoProducao
+  @Action reportFichaOvos
 
   @Getter filialName
   @Getter loginUser
@@ -64,10 +68,7 @@ export default class InputModalOvos extends Vue {
   private month: any = null;
   private year: any = null;
   private line: any = null;
-  private note: any = null;
-  private nrPlaca: string = '';
-  private idProvider: any = null;
-  private providerName: any = null;
+  private romaneio: any = null;
 
   public getShift(shift: any): void {
     this.shift = shift;
@@ -92,6 +93,10 @@ export default class InputModalOvos extends Vue {
     this.month = date.split('-')[1];
   }
 
+  public getRomaneioOvos(romaneio: any): void{
+    this.romaneio = romaneio;
+  }
+
   public closeModal(): void {
     this.clearFields = true;
     this.$emit('closeModal');
@@ -100,6 +105,8 @@ export default class InputModalOvos extends Vue {
   public canPrint(): boolean {
     switch(this.idBox){
     case 1:
+      return true;
+    case 2:
       return true;
     default:
       return false;   
@@ -115,7 +122,10 @@ export default class InputModalOvos extends Vue {
     case 1:
       await this.ApontamentoProducao();
       break;
+    case 2:
+      await this.ControleFichaOvos();
     }
+
     this.closeModal();
   }
 
@@ -177,6 +187,15 @@ export default class InputModalOvos extends Vue {
     }
   }
  
+  public async ControleFichaOvos(): Promise<void>{
+    if (this.romaneio !== null) {
+      await this.reportFichaOvos({romaneio: this.romaneio, initialDate: this.date, idReport: 8, reportModule: 8 });
+    } else { 
+      await this.reportFichaOvos({ initialDate: this.date, idReport: 81, reportModule: 8 });
+    }
+    
+  }
+
   public resetClearFields(): void{
     this.clearFields = false;
   }

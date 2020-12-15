@@ -56,16 +56,17 @@ export default class SidebarOvos extends Vue {
     items: [{
         id: 1,
         title: 'Apontamento da Produção',
-        show: 'linguica'
+        show: ''
       },
       {
         id: 2,
-        title: 'Fichas de Ovos',
+        title: 'Ficha de Ovos',
         show: ''
       }
 
     ]
   }]
+  
   private itemsReportsByUser: Array<any> = [];
 
   public async selectReport(item: any): Promise<void> {
@@ -75,7 +76,7 @@ export default class SidebarOvos extends Vue {
         this.idBox = 1;
       break;
       case 2:
-        this.nameBox = 'Fichas de Ovos';
+        this.nameBox = 'Ficha de Ovos';
         this.idBox = 2;
       break;
       default:

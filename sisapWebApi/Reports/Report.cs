@@ -31,6 +31,9 @@ namespace sisapWebApi.Reports
                 case 7:
                     ReportsStops();
                     break;
+                case 8:
+                    ReportsEggs();
+                    break;
             }
             
         }
@@ -83,6 +86,12 @@ namespace sisapWebApi.Reports
             reportItems = new List<ReportService>();
             reportItems.Add(new ReportService(7, "CondenacoesPorMunicipioTODOS.frx"));
             reportItems.Add(new ReportService(71, "CondenacoesPorMunicipio.frx"));
+        }
+        public void ReportsEggs()
+        {
+            reportItems = new List<ReportService>();
+            reportItems.Add(new ReportService(8, "FichaOvos.frx"));
+            reportItems.Add(new ReportService(81, "FichaOvos-TODOSDIA.frx"));
         }
     }
 }

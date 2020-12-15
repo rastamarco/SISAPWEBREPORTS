@@ -73,6 +73,18 @@
         </v-list-item-action>
         <v-list-item-title>Controle de Ovos</v-list-item-title>
       </v-list-item>
+      <v-list-item @click="ChangeSystem(9)" dense>
+        <v-list-item-action>
+          <v-icon color="primary">mdi-registered-trademark</v-icon>
+        </v-list-item-action>
+        <v-list-item-title>Controle de Qualidade</v-list-item-title>
+      </v-list-item>
+      <v-list-item @click="ChangeSystem(10)" dense>
+        <v-list-item-action>
+          <v-icon color="primary">mdi-factory</v-icon>
+        </v-list-item-action>
+        <v-list-item-title>Integração Emb. e Produção</v-list-item-title>
+      </v-list-item>
     </v-list>
   </v-card>
   </v-menu>
