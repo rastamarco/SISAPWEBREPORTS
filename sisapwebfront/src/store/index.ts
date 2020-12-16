@@ -10,7 +10,6 @@ import { AgendamentoCarga } from './AgendamentoCarga';
 import { ApontamentoParada } from './ApontamentoParada';
 import { ControleOvos } from './ControleOvos'; 
 import { IntegracaoUIA2 } from './IntegracaoUIA2';
-import { QualidadeUIA2 } from './QualidadeUIA2';
 
 Vue.use(Vuex);
 
@@ -26,6 +25,5 @@ export default new Vuex.Store({
     ApontamentoParada,
     ControleOvos,
     IntegracaoUIA2,
-    QualidadeUIA2
   }
 });

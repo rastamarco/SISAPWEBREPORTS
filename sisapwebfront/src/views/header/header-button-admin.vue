@@ -25,61 +25,55 @@
         </v-list-item-action>
         <v-list-item-title>Painel Inicial</v-list-item-title>
       </v-list-item>
-      <v-list-item @click="ChangeSystem(1)" dense>
+      <v-list-item @click="ChangeSystem(1)" dense v-if="filialName === 'UIA' || filialName === 'UIC' || filialName === 'SIF' || filialName === 'GBA' || filialName === 'UPP'">
         <v-list-item-action>
           <v-icon color="primary">mdi-elevator</v-icon>
         </v-list-item-action>
         <v-list-item-title>Apontamentos de Produção</v-list-item-title>
       </v-list-item>
-      <v-list-item @click="ChangeSystem(2)" dense>
+      <v-list-item @click="ChangeSystem(2)" dense v-if="filialName === 'UIA' || filialName === 'UIC' || filialName === 'SIF' || filialName === 'GBA' || filialName === 'UPP'">
         <v-list-item-action>
           <v-icon color="primary">mdi-bus-double-decker</v-icon>
         </v-list-item-action>
         <v-list-item-title>Controle da Expedição</v-list-item-title>
       </v-list-item>
-      <v-list-item @click="ChangeSystem(3)" dense>
+      <v-list-item @click="ChangeSystem(3)" dense v-if="filialName === 'UIA' || filialName === 'UIAIII' || filialName === 'UIC' || filialName === 'SIF' || filialName === 'GBA' || filialName === 'UPP'">
         <v-list-item-action>
           <v-icon color="primary">mdi-factory</v-icon>
         </v-list-item-action>
         <v-list-item-title>Controle da Produção</v-list-item-title>
       </v-list-item>
-      <v-list-item @click="ChangeSystem(4)" dense>
+      <v-list-item @click="ChangeSystem(4)" dense v-if="filialName === 'UIA' || filialName === 'UIAII' || filialName === 'UIAIII' || filialName === 'UIC' || filialName === 'SIF' || filialName === 'GBA' || filialName === 'UPP'">
         <v-list-item-action>
           <v-icon color="primary">mdi-registered-trademark</v-icon>
         </v-list-item-action>
         <v-list-item-title>Controle de Qualidade</v-list-item-title>
       </v-list-item>
-      <v-list-item @click="ChangeSystem(5)" dense>
+      <v-list-item @click="ChangeSystem(5)" dense v-if="filialName === 'UIA' || filialName === 'UIC' || filialName === 'SIF' || filialName === 'GBA' || filialName === 'UPP'">
         <v-list-item-action>
           <v-icon color="primary">mdi-ticket-percent</v-icon>
         </v-list-item-action>
         <v-list-item-title>Impressão de Etiquetas</v-list-item-title>
       </v-list-item>
-      <v-list-item @click="ChangeSystem(6)" dense>
+      <v-list-item @click="ChangeSystem(6)" dense v-if="filialName === 'UIA' || filialName === 'UIC' || filialName === 'SIF' || filialName === 'GBA' || filialName === 'UPP'">
         <v-list-item-action>
           <v-icon color="primary">mdi-stop-circle</v-icon>
         </v-list-item-action>
         <v-list-item-title>Apontamento de Paradas</v-list-item-title>
       </v-list-item>
-      <v-list-item @click="ChangeSystem(7)" dense>
+      <v-list-item @click="ChangeSystem(7)" dense v-if="filialName === 'UIA' || filialName === 'UIC' || filialName === 'SIF' || filialName === 'GBA' || filialName === 'UPP'">
         <v-list-item-action>
           <v-icon color="primary">mdi-pencil-box</v-icon>
         </v-list-item-action>
         <v-list-item-title>Agendamento de Cargas</v-list-item-title>
       </v-list-item>
-      <v-list-item @click="ChangeSystem(8)" dense>
+      <v-list-item @click="ChangeSystem(8)" dense v-if="filialName === 'UDM'">
         <v-list-item-action>
           <v-icon color="primary">mdi-egg</v-icon>
         </v-list-item-action>
         <v-list-item-title>Controle de Ovos</v-list-item-title>
       </v-list-item>
-      <v-list-item @click="ChangeSystem(9)" dense>
-        <v-list-item-action>
-          <v-icon color="primary">mdi-registered-trademark</v-icon>
-        </v-list-item-action>
-        <v-list-item-title>Controle de Qualidade</v-list-item-title>
-      </v-list-item>
-      <v-list-item @click="ChangeSystem(10)" dense>
+      <v-list-item @click="ChangeSystem(9)" dense v-if="filialName === 'UIAII'">
         <v-list-item-action>
           <v-icon color="primary">mdi-factory</v-icon>
         </v-list-item-action>
@@ -102,6 +96,7 @@ import {
 export default class HeaderButtonAdmin extends Vue {
   @Getter isSysAdmin
   @Getter userType
+  @Getter filialName
 
   private menu: boolean = false;
 

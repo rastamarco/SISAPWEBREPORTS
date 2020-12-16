@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="holds-the-iframe">
-  <iframe v-bind:src="backendPath+idReport+pathReport+moduleReport+reportModule+parameters+params" width="100%" height="560" class="frame" type="application/pdf" />
+  <iframe v-bind:src="backendPath+idReport+pathReport+moduleReport+reportModule+filial+filialName+parameters+params" width="100%" height="560" class="frame" type="application/pdf" />
   </div>
 </div>
 </template>
@@ -45,12 +45,14 @@ export default class Reports extends Vue {
   @Getter idReport
   @Getter params
   @Getter reportModule 
-  
+  @Getter filialName 
+
   private backendPath: any = `${process.env.VUE_APP_API_URL}/api/reportgeneration/`;
   private pathReport: any = '?format=pdf&inline=true';
   private pathDownload: any = '?format=pdf&attachment=true';
   private pathDownloadXLSX: any = '?format=xlsx&attachment=true';
   private moduleReport: any = '&reportmodule=';
+  private filial: any = '&filialname=';
   private parameters: any = '&parameter=';
   private itemsDownload: Array < any > = [{
       title: 'Download PDF',

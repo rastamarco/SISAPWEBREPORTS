@@ -23,9 +23,8 @@ namespace sisapWebApi.Controllers
         // [Authorize]
         public async Task<IActionResult> GetReport(int id, [FromQuery] ReportQuery query)
         {
-
             // Aqui obtenho a lista de Relatórios
-            var reports = new ReportModule(query.reportModule);
+            var reports = new ReportModule(query.reportModule, query.filialName);
 
             // Aqui crio o tipo do relatório (Sempre PDF)            
             string mime = "application/" + query.Format;

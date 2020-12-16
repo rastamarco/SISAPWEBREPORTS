@@ -11,14 +11,13 @@
     <adminHome v-if="(isSysAdmin === true || userType === 'Consultoria') && this.system === 0"  />
     <apontamentos v-if="userFeatures.isApontamento || this.system === 1" /> 
     <expedicao v-if="userFeatures.isExpedicao || this.system === 2" />
-    <qualidade v-if="userFeatures.isQualidade || this.system === 3"/>
-    <ctrlProducao v-if="userFeatures.isProducao || this.system === 4" />
+    <ctrlProducao v-if="userFeatures.isProducao || this.system === 3" />
+    <qualidade v-if="userFeatures.isQualidade || this.system === 4"/>
     <etiquetas v-if="userFeatures.isEtiquetas || this.system === 5" />
     <agendamentoCargas v-if="userFeatures.isAgendamentoCarga || this.system === 6" />
     <apontamentoParadas v-if="userFeatures.isApontamentoParada || this.system === 7" />
     <controleOvos v-if="userFeatures.isControleOvos || this.system === 8" />
-    <integracaoUIA2 v-if="userFeatures.isQualidadeUIA2 || this.system === 9" />
-    <integracaoUIA2 v-if="userFeatures.isIntegracaoUIA2 || this.system === 10" />
+    <integracaoUIA2 v-if="userFeatures.isIntegracaoUIA2 || this.system === 9" />
   </v-container>
 </div>
 </template>
@@ -112,17 +111,25 @@ export default class Home extends Vue {
       break;
     case 'UIAII':
       switch(value){  
+      case 4:
+        this.systemName = 'Sistema de Controle da Qualidade';
+        break;
       case 9:
         this.systemName = 'Sistema de Integração de Embarques e Produção';
-        break;
-      case 10:
-        this.systemName = 'Sistema de Controle de Qualidade';
         break;
       }
       break;
     case 'UIAIII':
+      switch(value){ 
+      case 3:
+        this.systemName = 'Sistema de Controle da Produção';
+        break;
+      case 4:
+        this.systemName = 'Sistema de Controle da Qualidade';
+        break;
+      }
       break;
-    case 'UPO':
+    case 'UDM':
       switch(value){ 
       case 8:
         this.systemName = 'Sistema de Controle de Coleta de Ovos';

@@ -10,7 +10,6 @@ export default class usersPermissionsViewModel {
   private _isApontamentoParada?: boolean | any = false;
   private _isControleOvos?: boolean | any = false;
   private _isIntegracaoUIA2?: boolean | any = false;
-  private _isQualidadeUIA2?: boolean | any = false;
 
   get isApontamento(): boolean {
     return this._isApontamento;
@@ -65,12 +64,6 @@ export default class usersPermissionsViewModel {
   }
   set isIntegracaoUIA2(isIntegracaoUIA2: boolean){
     this._isIntegracaoUIA2 = isIntegracaoUIA2;
-  }
-  get isQualidadeUIA2(): boolean{
-    return this._isQualidadeUIA2;
-  }
-  set isQualidadeUIA2(isQualidadeUIA2: boolean){
-    this._isQualidadeUIA2 = isQualidadeUIA2;
   }
   
 }

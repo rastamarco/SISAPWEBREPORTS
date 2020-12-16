@@ -21,25 +21,25 @@
               color="primary"
             ></v-progress-circular>
         </div>
-        <small>Matrícula</small>
-        <v-text-field dense outlined v-model="codSicop" type="number" min="0" @input="SendCodSicop(codSicop)" hide-details></v-text-field>
+        <small>Matrícula <small>(Somente números)</small></small>
+        <v-text-field dense outlined v-model="codSicop" type="number" min="0" @input="SendCodSicop(codSicop)" hide-details style="transform: scale(0.8);"></v-text-field>
       </v-col>
       <v-col cols="4" sm="3" md="7" style="padding-left:10px;">
         <small>Tipo de Movimentação</small>
-        <v-radio-group v-model="rgTypeMove" dense row style="margin:0;">
+        <v-radio-group v-model="rgTypeMove" dense row style="margin:0;transform: scale(0.9);">
           <v-radio label="Por Câmara" value="1"></v-radio>
           <v-radio label="Por Operador" value="2" ></v-radio>
         </v-radio-group>
          <hr>
         <small>Tipo de Operação</small>
-        <v-radio-group v-model="rgTypeOperation" row dense style="margin:0;">
-          <v-radio label="Armazenado" value="1"></v-radio>
+        <v-radio-group v-model="rgTypeOperation" row dense style="margin:0;transform: scale(0.9);">
+          <v-radio label="Armazenado" value="1" ></v-radio>
           <v-radio label="Expedido" value="2" ></v-radio>
           <v-radio label="Todos" value="3" ></v-radio>
         </v-radio-group>
          <hr>
         <small>Turno</small>
-        <v-radio-group v-model="rgShift" row dense style="margin:0;">
+        <v-radio-group v-model="rgShift" row dense :disabled="rgTypeMove === '2'" style="margin:0;transform: scale(0.9);">
           <v-radio label="1º" value="1"></v-radio>
           <v-radio label="2º" value="2" ></v-radio>
           <v-radio label="3º" value="3" ></v-radio>
@@ -52,17 +52,17 @@
         <v-menu v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
           <template v-slot:activator="{ on, attrs }">
             <v-text-field  v-model="dateFormatted" @blur="date = parseDate(dateFormatted)" prepend-icon="mdi-calendar" 
-            readonly outlined hide-details dense v-bind="attrs" v-on="on" style="padding-top:5px;"></v-text-field>
+            readonly outlined hide-details dense v-bind="attrs" v-on="on" style="padding-top:5px;transform: scale(0.8);"></v-text-field>
           </template>
           <v-date-picker v-model="date" @input="setDate(date)" locale="pt" min="1950-01-01" :max="dateMax" ></v-date-picker>
         </v-menu>
       </v-col>
       <v-col cols="2" sm="2" md="5" style="padding-left:40px;padding-top:0;">
-        <small class="text-title">Data Final</small>
+        <small class="text-title">Data Final <small>(Somente se for  período)</small></small>
         <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
           <template v-slot:activator="{ on, attrs }">
             <v-text-field  v-model="dateFormatted2" @blur="date2 = parseDate(dateFormatted2)" prepend-icon="mdi-calendar" 
-            readonly outlined hide-details dense v-bind="attrs" v-on="on" style="padding-top:5px;"></v-text-field>
+            readonly outlined hide-details dense v-bind="attrs" v-on="on" style="padding-top:5px;transform: scale(0.8);"></v-text-field>
           </template>
           <v-date-picker v-model="date2" @input="setDate(date2)" locale="pt" min="1950-01-01" :max="dateMax" ></v-date-picker>
         </v-menu>
@@ -104,7 +104,6 @@ export default class MovimentoCamaraOperador extends Vue {
   private dateMax = new Date().toISOString().substr(0, 10);
   private isLoadingChambers: boolean = false;
 
-
   @Watch('clearFields')
   public async onPropertyChangedsClearFields(value: any, oldValue: any): Promise < void > {
     this.idChambers.splice(0, this.idChambers.length);
@@ -112,6 +111,7 @@ export default class MovimentoCamaraOperador extends Vue {
     this.rgTypeOperation = '3';
     this.rgTypeMove = '1';
     this.rgShift = '4';
+    this.$emit('resetClearFields');
   }
 
   @Watch('selectChambers')
@@ -155,7 +155,6 @@ export default class MovimentoCamaraOperador extends Vue {
   @Watch('idChambers')
   public async onPropertyChangedsChambers(value: any, oldValue: any): Promise < void > {
     this.$emit('getIdChambers', value); 
-     
   }
 
   public SendCodSicop(cod: any): void{

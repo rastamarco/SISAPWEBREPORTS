@@ -26,13 +26,25 @@ export const Expedicao = {
     }, 
 
     async reportMovimentoCamaraOperador({ commit }, options) {
-      console.log('Camara e Operadores');
       const parameter = new ParametersExpedicao();
-      
+      parameter.Chambers = options.chambers;
+      parameter.InitialDate = options.initialDate;
+      if(options.codSicop){
+        parameter.CodSicop = options.codSicop;
+      }
+      if(options.endDate){
+        parameter.EndDate = options.endDate;
+      }
+      if(options.shift){
+        parameter.Shift = options.shift;
+      }
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
     },
 
     async reportMovimentoOperadorCamara({ commit }, options) {
-      console.log('Operadores');
       const parameter = new ParametersExpedicao();
       
     },

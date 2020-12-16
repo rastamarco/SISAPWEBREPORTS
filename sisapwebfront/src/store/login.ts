@@ -93,7 +93,7 @@ export const login = {
             if (typeUser === 'Integração' || typeUser === 'Expedição Carregamen' || typeUser === 'Gerência') {
               UFeatures.isIntegracaoUIA2 = true; 
             } else if (typeUser === 'Monitor da Qualidade') {
-              UFeatures.isQualidadeUIA2 = true;
+              UFeatures.isQualidade = true;
             } 
             break;
           default: 
@@ -181,7 +181,7 @@ export const login = {
         if (authData.userType === 'Integração' || authData.userType === 'Expedição Carregamen' || authData.userType === 'Gerência') {
           UFeatures.isIntegracaoUIA2 = true; 
         } else if (authData.userType === 'Monitor da Qualidade') {
-          UFeatures.isQualidadeUIA2 = true;
+          UFeatures.isQualidade = true;
         } 
         break;
       default:

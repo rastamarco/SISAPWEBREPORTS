@@ -12,12 +12,12 @@
       <!-- Relatório de Formação de Pallet --> 
       <formacaoPallet v-on="{getNrPallet}" v-bind="{clearFields}" v-if="idBox === 1"/>
       <!-- Relatório de Movimento de Câmara/Operador -->
-      <movimentoCamaraOperador  v-on="{getShift, getMovement, getOperation, getCodSicop, getIdChambers, getInitialDate, getEndDate}" v-bind="{clearFields}" v-if="idBox === 2" />
+      <movimentoCamaraOperador  v-on="{getShift, getMovement, getOperation, getCodSicop, getIdChambers, getInitialDate, getEndDate, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 2" />
     </v-row>
     <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
       Cancelar
     </v-btn>
-    <v-btn absolute rounded bottom right color="primary" @click="Print()" style="text-transform: none;">
+    <v-btn absolute rounded bottom right color="primary" @click="Print()" :disabled="!canPrint()" style="text-transform: none;">
       <v-icon>mdi-printer</v-icon>
       Imprimir
     </v-btn> 
@@ -38,7 +38,6 @@ import {
 
 import formacaoPallet from '../Relatorios/Parametros/formacaoPallet.vue';
 import movimentoCamaraOperador from '../Relatorios/Parametros/movimentoCamaraOperador.vue';
-
 
 @Component ({
   components: {
@@ -105,6 +104,35 @@ export default class InputModalsExp extends Vue {
     this.EndDate = endDate;
   }
 
+  public canPrint(): boolean {
+    switch(this.idBox){
+    case 1:
+      if(this.nrPallet !== null && this.nrPallet !== ''){
+        return true;
+      } else { 
+        return false;
+      }
+    case 2:
+      if(this.idChambers !== null){
+        return true;
+      } else { 
+        return false;
+      }
+    default: 
+      return false;
+    }
+  }
+
+  public addDay(date: string): any {
+    if (!date) return null;
+    const [year, month, day] = date.split('-');
+    return `${year}-${month}-${parseInt(day)+1}`;
+  }
+
+  public resetClearFields(): void{
+    this.clearFields = false;
+  }
+
   public closeModal(): void {
     this.clearFields = true;
     this.$emit('closeModal');
@@ -119,8 +147,7 @@ export default class InputModalsExp extends Vue {
       await this.ReportFormacaoPallet(this.nrPallet);
       break;
     case 2:
-      await this.ReportMovimentoCamaraOperador(this.idChambers, this.Shift, 
-        this.Operation, this.Movement, this.InitialDate, this.EndDate, this.CodSicop);
+      await this.ReportMovimentoCamaraOperador();
       break; 
     }
     this.closeModal();
@@ -135,28 +162,39 @@ export default class InputModalsExp extends Vue {
     this.clearFields = true;
   } 
 
-  public async ReportMovimentoCamaraOperador(idChambers: any, shift: any, operation: any, movement: any,
-    initialDate: any, endDate: any, codSicop: any): Promise<void> {
+  public async ReportMovimentoCamaraOperador(): Promise<void> {
     // Fazer as Validações aqui para cada item enviado 
-    switch(movement){
+    let initDate = '';
+    let finalDate = '';
+    if(this.InitialDate === this.EndDate) {
+      initDate = this.InitialDate;
+      finalDate = this.addDay(this.InitialDate);
+    } else if(this.InitialDate > this.EndDate) {
+      this.$swal('Ops!', 'A data Final é menor que a data Inicial.','warning');
+      return;
+    } else if(this.InitialDate < this.EndDate) {
+      initDate = this.InitialDate;
+      finalDate = this.EndDate;
+    }
+    switch(this.Movement){
     case '1':
       // Movimentação por Câmaras
       // Tipo de Operação
-      switch(operation){
+      switch(this.Operation){
       case '1':
-        await this.reportMovimentoCamaraOperador({ chambers: idChambers, initDate: initialDate, endDate: endDate, codsicop: codSicop, shift: this.getShiftToSend(), idReport: 3, reportModule: 2 });
+        await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, codsicop: this.CodSicop, shift: this.getShiftToSend(), idReport: 2, reportModule: 2 });
         break;
       case '2':
-        await this.reportMovimentoCamaraOperador({ chambers: idChambers, initDate: initialDate, endDate: endDate, codsicop: codSicop, shift: this.getShiftToSend(), idReport: 31, reportModule: 2 });
+        await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, codsicop: this.CodSicop, shift: this.getShiftToSend(), idReport: 21, reportModule: 2 });
         break;
       case '3':
-        await this.reportMovimentoCamaraOperador({ chambers: idChambers, initDate: initialDate, endDate: endDate, codsicop: codSicop, shift: this.getShiftToSend(), idReport: 32, reportModule: 2 });
+        await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, codsicop: this.CodSicop, idReport: 22, reportModule: 2 });
         break;
       }
       break;
     case '2':
       // Movimentação por Operador
-      await this.reportMovimentoOperadorCamara({ chambers: idChambers, initDate: initialDate, endDate: endDate, idReport: 4, reportModule: 2 });
+      await this.reportMovimentoOperadorCamara({ chambers:this.idChambers, initialDate: this.InitialDate, endDate: this.EndDate, codsicop: this.CodSicop, idReport: 23, reportModule: 2 });
       break;
     } 
     this.clearFields = true;
