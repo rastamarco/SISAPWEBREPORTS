@@ -95,7 +95,7 @@ export default class InputModalAgendamentoCarga extends Vue {
   }
 
   public async AgendamentoSemEmbarques(): Promise<void>{
-    await this.reportAgendamentoSemEmbarque({initialDate: this.initialDate, endDate: this.endDate, idReport: 6, reportModule:6 });
+    await this.reportAgendamentoSemEmbarque({initialDate: this.initialDate, endDate: this.endDate, idReport: 1, reportModule:6 });
   }
  
   public resetClearFields(): void{

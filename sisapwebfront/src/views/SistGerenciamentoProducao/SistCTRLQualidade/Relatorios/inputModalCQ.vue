@@ -191,7 +191,7 @@ export default class InputModalCQ extends Vue {
   public async QualidadeFomentoMensal(): Promise<void>{
     const initialDate = this.year+'-'+this.month+'-01';
     const endDate = this.year+'-'+this.month+'-30';
-    await this.reportQualidadeFomento({ month: this.month, year: this.year, initialDate: initialDate, endDate: endDate ,reportModule: 3, idReport: 3 });
+    await this.reportQualidadeFomento({ month: this.month, year: this.year, initialDate: initialDate, endDate: endDate ,reportModule: 3, idReport: 1 });
   }
 
   public async getShiftHours(): Promise<any>{

@@ -219,13 +219,13 @@ export default class InputModalCtrlProducao extends Vue {
   public async MapaMensal(): Promise<void>{
     const initialDate = this.year+'-'+this.month+'-01';
     const endDate = this.year+'-'+this.month+'-30';
-    await this.reportMapaMensal({ initialDate: initialDate, endDate: endDate, localUser: this.filialName, line: this.line, reportModule: 4, idReport: 4 });
+    await this.reportMapaMensal({ initialDate: initialDate, endDate: endDate, localUser: this.filialName, line: this.line, reportModule: 4, idReport: 1 });
   }
 
   public async ApontamentoRobo(): Promise<void>{
     const initialDate = this.date+ ' 00:00:00';
     const endDate = this.date+ ' 23:59:59';
-    await this.reportApontamentoRoboCMS({ initialDate: initialDate, endDate: endDate, idReport: 41, reportModule: 4 });
+    await this.reportApontamentoRoboCMS({ initialDate: initialDate, endDate: endDate, idReport: 11, reportModule: 4 });
   }
   
   public resetClearFields(): void{

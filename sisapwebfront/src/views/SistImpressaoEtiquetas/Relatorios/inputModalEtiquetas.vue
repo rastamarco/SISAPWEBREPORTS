@@ -206,7 +206,7 @@ export default class InputModalEtiquetas extends Vue {
   public async EtiquetasPallets(): Promise<void>{
     await this.reportEtiquetaPallet({
       idProvider: this.idProvider, providerName: this.providerName, 
-      nrPlaca: this.nrPlaca, nrNote: this.note, idReport: 5, reportModule: 5 });
+      nrPlaca: this.nrPlaca, nrNote: this.note, idReport: 1, reportModule: 5 });
   }
  
   public resetClearFields(): void{

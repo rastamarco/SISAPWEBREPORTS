@@ -155,7 +155,7 @@ export default class InputModalsExp extends Vue {
 
   public async ReportFormacaoPallet(nrPallet: any): Promise<void> {
     await this.reportFormacaoPallets({ 
-      idReport: 2,
+      idReport: 1,
       nrPallet: nrPallet,
       reportModule: 2
     });

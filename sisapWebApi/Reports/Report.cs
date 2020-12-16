@@ -35,7 +35,7 @@ namespace sisapWebApi.Reports
                     ReportsEggs(filial);
                     break;
             }
-            
+
         }
 
         public void ReportsPointing(string filial)
@@ -177,71 +177,71 @@ namespace sisapWebApi.Reports
         public void UIAExpedition()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(2, "FormaçãoDePalletExpedicao.frx"));
-            reportItems.Add(new ReportService(21, "FormaçãoDePalletExpedicao.frx"));
-            reportItems.Add(new ReportService(22, "FormaçãoDePalletExpedicao.frx"));
-            reportItems.Add(new ReportService(23, "FormaçãoDePalletExpedicao.frx"));
+            reportItems.Add(new ReportService(1, "FormaçãoDePalletExpedicao.frx"));
+            reportItems.Add(new ReportService(11, "FormaçãoDePalletExpedicao.frx"));
+            reportItems.Add(new ReportService(12, "FormaçãoDePalletExpedicao.frx"));
+            reportItems.Add(new ReportService(13, "FormaçãoDePalletExpedicao.frx"));
         }
 
         public void UIA2Expedition()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(2, "FormaçãoDePalletExpedicao.frx"));
-            reportItems.Add(new ReportService(21, "FormaçãoDePalletExpedicao.frx"));
-            reportItems.Add(new ReportService(22, "FormaçãoDePalletExpedicao.frx"));
-            reportItems.Add(new ReportService(23, "FormaçãoDePalletExpedicao.frx"));
+            reportItems.Add(new ReportService(1, "FormaçãoDePalletExpedicao.frx"));
+            reportItems.Add(new ReportService(11, "FormaçãoDePalletExpedicao.frx"));
+            reportItems.Add(new ReportService(12, "FormaçãoDePalletExpedicao.frx"));
+            reportItems.Add(new ReportService(13, "FormaçãoDePalletExpedicao.frx"));
         }
 
         public void UIAQuality()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(3, "QualidadeFomentoMensal.frx"));
+            reportItems.Add(new ReportService(1, "QualidadeFomentoMensal.frx"));
         }
 
         public void UIA2Quality()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(3, "QualidadeFomentoMensal.frx"));
+            reportItems.Add(new ReportService(1, "QualidadeFomentoMensal.frx"));
         }
 
         public void UIAProduction()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(4, "MapaMensalProducao.frx"));
-            reportItems.Add(new ReportService(41, "ApontamentoRoboCMS.frx"));
+            reportItems.Add(new ReportService(1, "MapaMensalProducao.frx"));
+            reportItems.Add(new ReportService(11, "ApontamentoRoboCMS.frx"));
         }
 
         public void UIA2Production()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(4, "MapaMensalProducao.frx"));
-            reportItems.Add(new ReportService(41, "ApontamentoRoboCMS.frx"));
+            reportItems.Add(new ReportService(1, "MapaMensalProducao.frx"));
+            reportItems.Add(new ReportService(11, "ApontamentoRoboCMS.frx"));
         }
 
         public void UIATickets()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(5, "EtiquetasPallet.frx"));
+            reportItems.Add(new ReportService(1, "EtiquetasPallet.frx"));
         }
 
         public void UIAScheduling()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(6, "AgendamentoSemCargas.frx"));
+            reportItems.Add(new ReportService(1, "AgendamentoSemCargas.frx"));
         }
 
         public void UIAStops()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(7, "CondenacoesPorMunicipioTODOS.frx"));
-            reportItems.Add(new ReportService(71, "CondenacoesPorMunicipio.frx"));
+            reportItems.Add(new ReportService(1, "CondenacoesPorMunicipioTODOS.frx"));
+            reportItems.Add(new ReportService(11, "CondenacoesPorMunicipio.frx"));
         }
 
         public void UDMEggs()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(8, "FichaOvos.frx"));
-            reportItems.Add(new ReportService(81, "FichaOvos-TODOSDIA.frx"));
+            reportItems.Add(new ReportService(1, "FichaOvos.frx"));
+            reportItems.Add(new ReportService(11, "FichaOvos-TODOSDIA.frx"));
         }
     }
 }

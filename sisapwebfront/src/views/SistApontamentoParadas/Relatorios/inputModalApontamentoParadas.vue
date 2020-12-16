@@ -109,10 +109,10 @@ export default class InputModalApontamentoParadas extends Vue {
   public async AgendamentoDeParadas(): Promise<void>{
     switch(this.allSelecteds){
     case true: 
-      await this.reportCondenacoesMunicipio({initialDate: this.initialDate, endDate: this.endDate, idReport: 7, reportModule:7 });
+      await this.reportCondenacoesMunicipio({initialDate: this.initialDate, endDate: this.endDate, idReport: 1, reportModule:7 });
       break;
     case false:
-      await this.reportCondenacoesMunicipio({idCity: this.idCity, initialDate: this.initialDate, endDate: this.endDate, idReport: 71, reportModule:7 });
+      await this.reportCondenacoesMunicipio({idCity: this.idCity, initialDate: this.initialDate, endDate: this.endDate, idReport: 11, reportModule:7 });
       break;
     }
   }

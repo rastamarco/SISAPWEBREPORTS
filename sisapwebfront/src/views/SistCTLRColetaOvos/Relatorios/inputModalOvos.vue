@@ -189,9 +189,9 @@ export default class InputModalOvos extends Vue {
  
   public async ControleFichaOvos(): Promise<void>{
     if (this.romaneio !== null) {
-      await this.reportFichaOvos({romaneio: this.romaneio, initialDate: this.date, idReport: 8, reportModule: 8 });
+      await this.reportFichaOvos({romaneio: this.romaneio, initialDate: this.date, idReport: 1, reportModule: 8 });
     } else { 
-      await this.reportFichaOvos({ initialDate: this.date, idReport: 81, reportModule: 8 });
+      await this.reportFichaOvos({ initialDate: this.date, idReport: 11, reportModule: 8 });
     }
     
   }

@@ -65,11 +65,11 @@ export default class Reports extends Vue {
   ];
 
   public fileExcel(): void {
-    window.open(this.backendPath + this.idReport + this.pathDownloadXLSX+this.moduleReport+this.reportModule+this.parameters+this.params);
+    window.open(this.backendPath + this.idReport + this.pathDownloadXLSX+this.moduleReport+this.reportModule+this.filial+this.filialName+this.parameters+this.params);
   }
 
   public DownloadDocument(): void {
-    window.open(this.backendPath + this.idReport + this.pathDownload+this.moduleReport+this.reportModule+this.parameters+this.params);
+    window.open(this.backendPath + this.idReport + this.pathDownload+this.moduleReport+this.reportModule+this.filial+this.filialName+this.parameters+this.params);
   }
   
   public async ClosePrinter(): Promise < void > {
