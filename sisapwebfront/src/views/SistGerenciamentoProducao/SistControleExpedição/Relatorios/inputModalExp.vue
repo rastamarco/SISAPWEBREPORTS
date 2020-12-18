@@ -51,7 +51,7 @@ export default class InputModalsExp extends Vue {
 
   @Action reportFormacaoPallets
   @Action setSelectedIdReport
-  @Action reportMovimentoCamaraOperador
+  @Action reportMovimentoCamara
   @Action reportMovimentoOperadorCamara
   @Action noShowReport
   
@@ -133,8 +133,23 @@ export default class InputModalsExp extends Vue {
     this.clearFields = false;
   }
 
-  public closeModal(): void {
+  public clearInputs(): void{
+    this.dateToSend = null;
+    this.turnoGroup = 1;
+    this.periodoGroup = 1;
+    this.nrPallet = null;
+    this.idChambers = null;
+    this.InitialDate = null;
+    this.EndDate = null;
+    this.CodSicop = null;
+    this.Operation = null;
+    this.Movement = null;
+    this.Shift = null;
+  }
+
+  public async closeModal(): Promise<void> {
     this.clearFields = true;
+    await this.clearInputs();
     this.$emit('closeModal');
   }
 
@@ -150,7 +165,6 @@ export default class InputModalsExp extends Vue {
       await this.ReportMovimentoCamaraOperador();
       break; 
     }
-    this.closeModal();
   }
 
   public async ReportFormacaoPallet(nrPallet: any): Promise<void> {
@@ -159,7 +173,7 @@ export default class InputModalsExp extends Vue {
       nrPallet: nrPallet,
       reportModule: 2
     });
-    this.clearFields = true;
+    this.closeModal();
   } 
 
   public async ReportMovimentoCamaraOperador(): Promise<void> {
@@ -182,22 +196,43 @@ export default class InputModalsExp extends Vue {
       // Tipo de Operação
       switch(this.Operation){
       case '1':
-        await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, codsicop: this.CodSicop, shift: this.getShiftToSend(), idReport: 2, reportModule: 2 });
+        if (this.haveRegistration() === true){
+          await this.reportMovimentoCamara({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, shift: this.getShiftToSend(), idReport: 2, reportModule: 2 });
+          this.closeModal();
+        } else { 
+          this.$swal('Ops!', 'Informe a matrícula do Operador para continuar', 'warning');
+        }
+        
         break;
       case '2':
-        await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, codsicop: this.CodSicop, shift: this.getShiftToSend(), idReport: 21, reportModule: 2 });
+        if (this.haveRegistration() === true){
+          await this.reportMovimentoCamara({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, shift: this.getShiftToSend(), idReport: 21, reportModule: 2 });
+          this.closeModal();
+        } else { 
+          this.$swal('Ops!', 'Informe a matrícula do Operador para continuar', 'warning');
+        }
         break;
       case '3':
-        await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, codsicop: this.CodSicop, idReport: 22, reportModule: 2 });
+        if (this.haveRegistration() === true){
+          await this.reportMovimentoCamara({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, idReport: 23, reportModule: 2 });
+          this.closeModal();
+        } else { 
+          await this.reportMovimentoCamara({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 22, reportModule: 2 });
+          this.closeModal();
+        }
         break;
       }
       break;
     case '2':
       // Movimentação por Operador
-      await this.reportMovimentoOperadorCamara({ chambers:this.idChambers, initialDate: this.InitialDate, endDate: this.EndDate, codsicop: this.CodSicop, idReport: 23, reportModule: 2 });
+      if (this.haveRegistration() === true){
+        await this.reportMovimentoOperadorCamara({ chambers:this.idChambers, initialDate: this.InitialDate, endDate: this.EndDate, codsicop: this.CodSicop, idReport: 23, reportModule: 2 });
+        this.closeModal();
+      } else { 
+        this.$swal('Ops!', 'Informe a matrícula do Operador para continuar', 'warning');
+      }
       break;
     } 
-    this.clearFields = true;
   }
 
   public getShiftToSend(): any{
@@ -207,9 +242,17 @@ export default class InputModalsExp extends Vue {
     case '2': 
       return '2';
     case '3': 
-      return '3';
+      return '0';
     case '4': 
       return '';
+    }
+  }
+
+  public haveRegistration(): boolean{
+    if (this.CodSicop !== null){
+      return true;
+    } else { 
+      return false;
     }
   }
 

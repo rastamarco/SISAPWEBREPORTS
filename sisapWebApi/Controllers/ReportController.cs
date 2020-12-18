@@ -137,6 +137,8 @@ namespace sisapWebApi.Controllers
                 report.SetParameterValue("Municipio", parametros.City);
             if (parametros.Romaneio != null)
                 report.SetParameterValue("Romaneio", parametros.Romaneio);
+            if (parametros.Registration != null)
+                report.SetParameterValue("Matricula", parametros.Registration);
 
         }
     }

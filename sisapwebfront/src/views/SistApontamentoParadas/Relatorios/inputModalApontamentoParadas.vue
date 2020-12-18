@@ -63,8 +63,17 @@ export default class InputModalApontamentoParadas extends Vue {
   private cityName: any = null;
   private allSelecteds: boolean = false;
 
-  public closeModal(): void {
+  public clearInputs(): void{
+    this.initialDate = null;
+    this.endDate = null;
+    this.idCity = null;
+    this.cityName = null;
+    this.allSelecteds = false;
+  }
+
+  public async closeModal(): Promise<void> {
     this.clearFields = true;
+    await this.clearInputs();
     this.$emit('closeModal');
   }
 

@@ -2,7 +2,7 @@
       <v-row >
       <v-col cols="2" sm="2" md="5" style="padding-left:40px;">
         <small>Selecione a(s) Câmara(s):</small>
-        <v-checkbox v-model="selectChambers" label="Todas" dense style="transform: scale(0.95);margin:0;"></v-checkbox>
+        <v-checkbox v-model="selectChambers" label="Todas" dense style="transform: scale(0.95);margin:0;" :disabled="allChambers === null"></v-checkbox>
         <div class="content-checkbox" v-if="!isLoadingChambers" > 
           <div v-for="items in allChambers" :key="items.cod_camara">
             <v-checkbox
@@ -13,6 +13,7 @@
               dense
             ></v-checkbox>
           </div>
+          <small v-if="allChambers === null">Não foi possível obter a lista de câmaras.</small>
         </div>
         <div class="loading" v-if="isLoadingChambers">
           <v-progress-circular
@@ -21,7 +22,7 @@
               color="primary"
             ></v-progress-circular>
         </div>
-        <small>Matrícula <small>(Somente números)</small></small>
+        <small>Matrícula <small>(Obrigatório se for por Operador)</small></small>
         <v-text-field dense outlined v-model="codSicop" type="number" min="0" @input="SendCodSicop(codSicop)" hide-details style="transform: scale(0.8);"></v-text-field>
       </v-col>
       <v-col cols="4" sm="3" md="7" style="padding-left:10px;">
@@ -111,6 +112,9 @@ export default class MovimentoCamaraOperador extends Vue {
     this.rgTypeOperation = '3';
     this.rgTypeMove = '1';
     this.rgShift = '4';
+    this.codSicop = null;
+    this.date = new Date().toISOString().substr(0, 10);
+    this.date2 = new Date().toISOString().substr(0, 10);
     this.$emit('resetClearFields');
   }
 
@@ -154,7 +158,11 @@ export default class MovimentoCamaraOperador extends Vue {
 
   @Watch('idChambers')
   public async onPropertyChangedsChambers(value: any, oldValue: any): Promise < void > {
-    this.$emit('getIdChambers', value); 
+    if(value.length !== 0) {
+      this.$emit('getIdChambers', value);
+    }else { 
+      this.$emit('getIdChambers', null);
+    }
   }
 
   public SendCodSicop(cod: any): void{

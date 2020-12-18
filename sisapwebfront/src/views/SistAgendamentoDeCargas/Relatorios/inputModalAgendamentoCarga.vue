@@ -60,8 +60,14 @@ export default class InputModalAgendamentoCarga extends Vue {
   private initialDate: any = null;
   private endDate: any = null;
 
-  public closeModal(): void {
+  public clearInputs(): void{
+    this.initialDate = null;
+    this.endDate = null;
+  }
+
+  public async closeModal(): Promise<void> {
     this.clearFields = true;
+    await this.clearInputs();
     this.$emit('closeModal');
   }
 

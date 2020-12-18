@@ -178,9 +178,11 @@ namespace sisapWebApi.Reports
         {
             reportItems = new List<ReportService>();
             reportItems.Add(new ReportService(1, "FormaçãoDePalletExpedicao.frx"));
-            reportItems.Add(new ReportService(11, "FormaçãoDePalletExpedicao.frx"));
-            reportItems.Add(new ReportService(12, "FormaçãoDePalletExpedicao.frx"));
-            reportItems.Add(new ReportService(13, "FormaçãoDePalletExpedicao.frx"));
+            reportItems.Add(new ReportService(2, "MovimentoCamaraArmazenados.frx"));
+            reportItems.Add(new ReportService(21, "MovimentoCamaraExpedidos.frx"));
+            reportItems.Add(new ReportService(22, "MovimentoCamaraTODOS.frx"));
+            reportItems.Add(new ReportService(23, "MovimentoCamaraTODOS-Matricula.frx"));
+
         }
 
         public void UIA2Expedition()

@@ -84,8 +84,19 @@ export default class InputModals extends Vue {
     this.isPeriod = isPeriod;
   }
   
-  public closeModal(): void {
+  public clearInputs(): void{
+    this.shift = null;
+    this.period = null;
+    this.date = null;
+    this.dateEnd = null;
+    this.InitialHour = null;
+    this.EndHour = null;
+    this.isPeriod = null;
+  }
+
+  public async closeModal(): Promise<void> {
     this.clearFields = true;
+    await this.clearInputs();
     this.$emit('closeModal');
   }
   

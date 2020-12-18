@@ -7,4 +7,5 @@ export default class ParametersExpedicao {
   CodSicop !: string | any
   Chambers !: Array<any> | any
   Shift !: string | any
+  Registration !: string | any
 }
