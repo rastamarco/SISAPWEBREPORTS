@@ -48,6 +48,7 @@ export default class MapaMensalProducao extends Vue {
   public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
     this.date = new Date().toISOString().substr(0, 7);
     this.rgLineProd = 1;
+    this.initialParameters();
     this.$emit('resetClearFields');
   }
 

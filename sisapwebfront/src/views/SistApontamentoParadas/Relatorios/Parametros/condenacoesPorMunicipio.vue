@@ -71,6 +71,7 @@ export default class CondenacoesPorMunicipio extends Vue {
   public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
     this.date = new Date().toISOString().substr(0, 10);
     this.date2 = new Date().toISOString().substr(0, 10);
+    this.initialParameters();
     this.$emit('resetClearFields');
   }
 

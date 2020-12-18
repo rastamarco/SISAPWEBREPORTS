@@ -41,6 +41,7 @@ export default class RomaneioOvos extends Vue {
   public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
     this.date = new Date().toISOString().substr(0, 10);
     this.romaneio = null;
+    this.initialParameters();
     this.$emit('resetClearFields');
   }
 

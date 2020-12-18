@@ -35,6 +35,7 @@ export default class ApontamentoRoboCMS extends Vue {
   @Watch('clearFields')
   public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
     this.date = new Date().toISOString().substr(0, 10);
+    this.initialParameters();
     this.$emit('resetClearFields');
   }
 

@@ -25,7 +25,7 @@ export const Expedicao = {
       await commit('setShowReport', true);
     }, 
 
-    async reportMovimentoCamara({ commit }, options) {
+    async reportMovimentoCamaraOperador({ commit }, options) {
       const parameter = new ParametersExpedicao();
       const chamberToReport: Array<any> = [];
       // 8 CAMARAS, caso aumente, coloca mais aqui e mais parametros no relatorio que vai dar certo ou implemente uma forma melhor =) 
@@ -51,11 +51,6 @@ export const Expedicao = {
       await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
-    },
-
-    async reportMovimentoOperadorCamara({ commit }, options) {
-      const parameter = new ParametersExpedicao();
-      
     },
 
     async getChambersByFilial({ commit }, options){

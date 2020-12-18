@@ -27,7 +27,6 @@ namespace sisapWebApi.Reports.ReportModels
         public string NrNote { get; set; }
         public string City { get; set; }
         public string Romaneio { get; set; }
-
         public string Registration { get; set; }
 
     }

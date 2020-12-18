@@ -182,7 +182,13 @@ namespace sisapWebApi.Reports
             reportItems.Add(new ReportService(21, "MovimentoCamaraExpedidos.frx"));
             reportItems.Add(new ReportService(22, "MovimentoCamaraTODOS.frx"));
             reportItems.Add(new ReportService(23, "MovimentoCamaraTODOS-Matricula.frx"));
-
+            reportItems.Add(new ReportService(24, "MovimentoCamaraArmazenados-SemMatricula.frx"));
+            reportItems.Add(new ReportService(25, "MovimentoCamaraExpedidos-SemMatricula.frx"));
+            reportItems.Add(new ReportService(26, "MovimentoCamaraArmazenados-SemMatriculaTodos.frx"));
+            reportItems.Add(new ReportService(27, "MovimentoCamaraExpedidos-SemMatriculaTodos.frx"));
+            reportItems.Add(new ReportService(28, "MovimentoCamaraTodosOperadoresArmazenados.frx"));
+            reportItems.Add(new ReportService(29, "MovimentoCamaraTodosOperadoresExpedidos.frx"));
+            reportItems.Add(new ReportService(3, "MovimentoCamaraTodosOperadoresArmazenadosExpedidos.frx"));
         }
 
         public void UIA2Expedition()

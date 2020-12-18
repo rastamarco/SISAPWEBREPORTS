@@ -96,25 +96,9 @@ export default class InputModalOvos extends Vue {
   public getRomaneioOvos(romaneio: any): void{
     this.romaneio = romaneio;
   }
-
-  public clearInputs(): void{
-    this.shift = null;
-    this.period = null;
-    this.date = null;
-    this.dateEnd = null;
-    this.clearFields = false;
-    this.InitialHour = null;
-    this.EndHour = null;
-    this.isPeriod = null;
-    this.month = null;
-    this.year = null;
-    this.line = null;
-    this.romaneio = null;
-  }
   
   public async closeModal(): Promise<void> {
     this.clearFields = true;
-    await this.clearInputs();
     this.$emit('closeModal');
   }
   

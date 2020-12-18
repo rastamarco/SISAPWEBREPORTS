@@ -51,8 +51,7 @@ export default class InputModalsExp extends Vue {
 
   @Action reportFormacaoPallets
   @Action setSelectedIdReport
-  @Action reportMovimentoCamara
-  @Action reportMovimentoOperadorCamara
+  @Action reportMovimentoCamaraOperador
   @Action noShowReport
   
   @Getter filialName
@@ -133,23 +132,8 @@ export default class InputModalsExp extends Vue {
     this.clearFields = false;
   }
 
-  public clearInputs(): void{
-    this.dateToSend = null;
-    this.turnoGroup = 1;
-    this.periodoGroup = 1;
-    this.nrPallet = null;
-    this.idChambers = null;
-    this.InitialDate = null;
-    this.EndDate = null;
-    this.CodSicop = null;
-    this.Operation = null;
-    this.Movement = null;
-    this.Shift = null;
-  }
-
   public async closeModal(): Promise<void> {
     this.clearFields = true;
-    await this.clearInputs();
     this.$emit('closeModal');
   }
 
@@ -182,7 +166,7 @@ export default class InputModalsExp extends Vue {
     let finalDate = '';
     if(this.InitialDate === this.EndDate) {
       initDate = this.InitialDate;
-      finalDate = this.addDay(this.InitialDate);
+      finalDate = this.InitialDate;
     } else if(this.InitialDate > this.EndDate) {
       this.$swal('Ops!', 'A data Final é menor que a data Inicial.','warning');
       return;
@@ -196,43 +180,82 @@ export default class InputModalsExp extends Vue {
       // Tipo de Operação
       switch(this.Operation){
       case '1':
-        if (this.haveRegistration() === true){
-          await this.reportMovimentoCamara({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, shift: this.getShiftToSend(), idReport: 2, reportModule: 2 });
-          this.closeModal();
+        if(this.Shift < 3){
+          if (this.haveRegistration() === true){
+            await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, idReport: 2, reportModule: 2 });
+          } else {
+            await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, shift: this.getShiftToSend(), idReport: 24, reportModule: 2 }); 
+          }
         } else { 
-          this.$swal('Ops!', 'Informe a matrícula do Operador para continuar', 'warning');
+          await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 26, reportModule: 2 });
         }
-        
         break;
       case '2':
-        if (this.haveRegistration() === true){
-          await this.reportMovimentoCamara({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, shift: this.getShiftToSend(), idReport: 21, reportModule: 2 });
-          this.closeModal();
+        if(this.Shift < 3){
+          if (this.haveRegistration() === true){
+            await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, idReport: 21, reportModule: 2 });
+          } else { 
+            await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, shift: this.getShiftToSend(), idReport: 25, reportModule: 2 });
+          }
         } else { 
-          this.$swal('Ops!', 'Informe a matrícula do Operador para continuar', 'warning');
+          await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 27, reportModule: 2 });
         }
         break;
       case '3':
         if (this.haveRegistration() === true){
-          await this.reportMovimentoCamara({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, idReport: 23, reportModule: 2 });
-          this.closeModal();
+          await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, idReport: 23, reportModule: 2 });
         } else { 
-          await this.reportMovimentoCamara({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 22, reportModule: 2 });
-          this.closeModal();
+          await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 22, reportModule: 2 });
         }
         break;
       }
+      this.closeModal();
       break;
     case '2':
       // Movimentação por Operador
-      if (this.haveRegistration() === true){
-        await this.reportMovimentoOperadorCamara({ chambers:this.idChambers, initialDate: this.InitialDate, endDate: this.EndDate, codsicop: this.CodSicop, idReport: 23, reportModule: 2 });
-        this.closeModal();
-      } else { 
-        this.$swal('Ops!', 'Informe a matrícula do Operador para continuar', 'warning');
-      }
+      this.ReportMovimentoOperador();
       break;
     } 
+  }
+
+  public async ReportMovimentoOperador(): Promise<void> {
+    let initDate = '';
+    let finalDate = '';
+    if(this.InitialDate === this.EndDate) {
+      initDate = this.InitialDate;
+      finalDate = this.InitialDate;
+    } else if(this.InitialDate > this.EndDate) {
+      this.$swal('Ops!', 'A data Final é menor que a data Inicial.','warning');
+      return;
+    } else if(this.InitialDate < this.EndDate) {
+      initDate = this.InitialDate;
+      finalDate = this.EndDate;
+    }
+    switch(this.Operation){
+    case '1':
+      if (this.haveRegistration() === true){
+        await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, idReport: 2, reportModule: 2 });
+      } else {
+        await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 28, reportModule: 2 }); 
+      }
+      break;
+    case '2':
+      if (this.haveRegistration() === true){
+        await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, idReport: 21, reportModule: 2 });
+        
+      } else {
+        await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 29, reportModule: 2 }); 
+      }
+      break;
+    case '3':
+      if (this.haveRegistration() === true){
+        await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, idReport: 23, reportModule: 2 });
+      } else {
+        await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 3, reportModule: 2 }); 
+      }
+      break;
+    }
+    this.closeModal();
   }
 
   public getShiftToSend(): any{

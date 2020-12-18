@@ -22,7 +22,7 @@
               color="primary"
             ></v-progress-circular>
         </div>
-        <small>Matrícula <small>(Obrigatório se for por Operador)</small></small>
+        <small>Matrícula <small>(Opcional)</small></small>
         <v-text-field dense outlined v-model="codSicop" type="number" min="0" @input="SendCodSicop(codSicop)" hide-details style="transform: scale(0.8);"></v-text-field>
       </v-col>
       <v-col cols="4" sm="3" md="7" style="padding-left:10px;">
@@ -89,7 +89,7 @@ export default class MovimentoCamaraOperador extends Vue {
  
   @Prop() clearFields!: any; 
 
-  private codSicop: any = null;
+  private codSicop: any | number = null;
   private idChambers: Array<any> = [];
   private selectChambers: boolean = false;
   private rgTypeMove: any = '1';
@@ -115,6 +115,7 @@ export default class MovimentoCamaraOperador extends Vue {
     this.codSicop = null;
     this.date = new Date().toISOString().substr(0, 10);
     this.date2 = new Date().toISOString().substr(0, 10);
+    this.InitialParameters();
     this.$emit('resetClearFields');
   }
 
@@ -189,6 +190,7 @@ export default class MovimentoCamaraOperador extends Vue {
   }
 
   public InitialParameters(): void{
+    this.$emit('getCodSicop', null);
     this.$emit('getOperation', '3');
     this.$emit('getMovement', '1');
     this.$emit('getShift', '4');
