@@ -60,7 +60,13 @@ export default class RelatorioSidebarExp extends Vue {
         id: 2,
         title: 'Operador/Câmara',
         show: ''
+      },
+      {
+        id: 3,
+        title: 'Mapa de Câmaras',
+        show: ''
       }
+
     ]
   }, ]
   private itemsReportsByUser: Array<any> = [];
@@ -75,6 +81,10 @@ export default class RelatorioSidebarExp extends Vue {
       case 2:
         this.nameBox = 'Relatório de Movimentação Operador/Câmara';
         this.idBox = 2;
+      break;
+      case 3:
+        this.nameBox = 'Relatório de Mapa de Câmaras';
+        this.idBox = 3;
       break;
       default:
         break;

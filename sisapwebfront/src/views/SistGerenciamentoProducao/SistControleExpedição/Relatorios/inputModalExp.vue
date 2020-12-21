@@ -13,6 +13,8 @@
       <formacaoPallet v-on="{getNrPallet}" v-bind="{clearFields}" v-if="idBox === 1"/>
       <!-- Relatório de Movimento de Câmara/Operador -->
       <movimentoCamaraOperador  v-on="{getShift, getMovement, getOperation, getCodSicop, getIdChambers, getInitialDate, getEndDate, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 2" />
+      <!-- Mapa de Câmaras -->
+      <mapaCamara v-on="{getIdChambers, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 3" />
     </v-row>
     <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
       Cancelar
@@ -38,11 +40,13 @@ import {
 
 import formacaoPallet from '../Relatorios/Parametros/formacaoPallet.vue';
 import movimentoCamaraOperador from '../Relatorios/Parametros/movimentoCamaraOperador.vue';
+import mapaCamara from '../Relatorios/Parametros/mapaCamaras.vue';
 
 @Component ({
   components: {
     formacaoPallet,
-    movimentoCamaraOperador
+    movimentoCamaraOperador,
+    mapaCamara
   }
 })
 export default class InputModalsExp extends Vue {
