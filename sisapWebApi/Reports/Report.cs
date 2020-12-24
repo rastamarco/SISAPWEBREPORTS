@@ -153,103 +153,103 @@ namespace sisapWebApi.Reports
         public void UIAPointing()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "ApontamentoDeProducao.frx"));
-            reportItems.Add(new ReportService(11, "ApontamentoDeProducaoTODOS.frx"));
-            reportItems.Add(new ReportService(12, "ApontamentoDeProducaoTURNO-Periodo.frx"));
-            reportItems.Add(new ReportService(13, "ApontamentoDeProducaoPERIODO-Turno.frx"));
-            reportItems.Add(new ReportService(14, "ApontamentoDeProducaoUIC-Turno.frx"));
-            reportItems.Add(new ReportService(15, "ApontamentoDeProducaoUIC.frx"));
-            reportItems.Add(new ReportService(16, "ApontamentoDeRefeitorio.frx"));
+            reportItems.Add(new ReportService(1, "Pointing/ApontamentoDeProducao.frx"));
+            reportItems.Add(new ReportService(11, "Pointing/ApontamentoDeProducaoTODOS.frx"));
+            reportItems.Add(new ReportService(12, "Pointing/ApontamentoDeProducaoTURNO-Periodo.frx"));
+            reportItems.Add(new ReportService(13, "Pointing/ApontamentoDeProducaoPERIODO-Turno.frx"));
+            reportItems.Add(new ReportService(14, "Pointing/ApontamentoDeProducaoUIC-Turno.frx"));
+            reportItems.Add(new ReportService(15, "Pointing/ApontamentoDeProducaoUIC.frx"));
+            reportItems.Add(new ReportService(16, "Pointing/ApontamentoDeRefeitorio.frx"));
         }
 
         public void UIA2Pointing()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "ApontamentoDeProducao.frx"));
-            reportItems.Add(new ReportService(11, "ApontamentoDeProducaoTODOS.frx"));
-            reportItems.Add(new ReportService(12, "ApontamentoDeProducaoTURNO-Periodo.frx"));
-            reportItems.Add(new ReportService(13, "ApontamentoDeProducaoPERIODO-Turno.frx"));
-            reportItems.Add(new ReportService(14, "ApontamentoDeProducaoUIC-Turno.frx"));
-            reportItems.Add(new ReportService(15, "ApontamentoDeProducaoUIC.frx"));
-            reportItems.Add(new ReportService(16, "ApontamentoDeRefeitorio.frx"));
+            reportItems.Add(new ReportService(1, "Pointing/ApontamentoDeProducao.frx"));
+            reportItems.Add(new ReportService(11, "Pointing/ApontamentoDeProducaoTODOS.frx"));
+            reportItems.Add(new ReportService(12, "Pointing/ApontamentoDeProducaoTURNO-Periodo.frx"));
+            reportItems.Add(new ReportService(13, "Pointing/ApontamentoDeProducaoPERIODO-Turno.frx"));
+            reportItems.Add(new ReportService(14, "Pointing/ApontamentoDeProducaoUIC-Turno.frx"));
+            reportItems.Add(new ReportService(15, "Pointing/ApontamentoDeProducaoUIC.frx"));
+            reportItems.Add(new ReportService(16, "Pointing/ApontamentoDeRefeitorio.frx"));
         }
 
         public void UIAExpedition()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "FormaçãoDePalletExpedicao.frx"));
-            reportItems.Add(new ReportService(2, "MovimentoCamaraArmazenados.frx"));
-            reportItems.Add(new ReportService(21, "MovimentoCamaraExpedidos.frx"));
-            reportItems.Add(new ReportService(22, "MovimentoCamaraTODOS.frx"));
-            reportItems.Add(new ReportService(23, "MovimentoCamaraTODOS-Matricula.frx"));
-            reportItems.Add(new ReportService(24, "MovimentoCamaraArmazenados-SemMatricula.frx"));
-            reportItems.Add(new ReportService(25, "MovimentoCamaraExpedidos-SemMatricula.frx"));
-            reportItems.Add(new ReportService(26, "MovimentoCamaraArmazenados-SemMatriculaTodos.frx"));
-            reportItems.Add(new ReportService(27, "MovimentoCamaraExpedidos-SemMatriculaTodos.frx"));
-            reportItems.Add(new ReportService(28, "MovimentoCamaraTodosOperadoresArmazenados.frx"));
-            reportItems.Add(new ReportService(29, "MovimentoCamaraTodosOperadoresExpedidos.frx"));
-            reportItems.Add(new ReportService(3, "MovimentoCamaraTodosOperadoresArmazenadosExpedidos.frx"));
+            reportItems.Add(new ReportService(1, "Expedition/FormaçãoDePalletExpedicao.frx"));
+            reportItems.Add(new ReportService(2, "Expedition/MovimentoCamaraArmazenados.frx"));
+            reportItems.Add(new ReportService(21, "Expedition/MovimentoCamaraExpedidos.frx"));
+            reportItems.Add(new ReportService(22, "Expedition/MovimentoCamaraTODOS.frx"));
+            reportItems.Add(new ReportService(23, "Expedition/MovimentoCamaraTODOS-Matricula.frx"));
+            reportItems.Add(new ReportService(24, "Expedition/MovimentoCamaraArmazenados-SemMatricula.frx"));
+            reportItems.Add(new ReportService(25, "Expedition/MovimentoCamaraExpedidos-SemMatricula.frx"));
+            reportItems.Add(new ReportService(26, "Expedition/MovimentoCamaraArmazenados-SemMatriculaTodos.frx"));
+            reportItems.Add(new ReportService(27, "Expedition/MovimentoCamaraExpedidos-SemMatriculaTodos.frx"));
+            reportItems.Add(new ReportService(28, "Expedition/MovimentoCamaraTodosOperadoresArmazenados.frx"));
+            reportItems.Add(new ReportService(29, "Expedition/MovimentoCamaraTodosOperadoresExpedidos.frx"));
+            reportItems.Add(new ReportService(3, "Expedition/MovimentoCamaraTodosOperadoresArmazenadosExpedidos.frx"));
         }
 
         public void UIA2Expedition()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "FormaçãoDePalletExpedicao.frx"));
-            reportItems.Add(new ReportService(11, "FormaçãoDePalletExpedicao.frx"));
-            reportItems.Add(new ReportService(12, "FormaçãoDePalletExpedicao.frx"));
-            reportItems.Add(new ReportService(13, "FormaçãoDePalletExpedicao.frx"));
+            reportItems.Add(new ReportService(1, "Expedition/FormaçãoDePalletExpedicao.frx"));
+            reportItems.Add(new ReportService(11, "Expedition/FormaçãoDePalletExpedicao.frx"));
+            reportItems.Add(new ReportService(12, "Expedition/FormaçãoDePalletExpedicao.frx"));
+            reportItems.Add(new ReportService(13, "Expedition/FormaçãoDePalletExpedicao.frx"));
         }
 
         public void UIAQuality()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "QualidadeFomentoMensal.frx"));
+            reportItems.Add(new ReportService(1, "Quality/QualidadeFomentoMensal.frx"));
         }
 
         public void UIA2Quality()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "QualidadeFomentoMensal.frx"));
+            reportItems.Add(new ReportService(1, "Quality/QualidadeFomentoMensal.frx"));
         }
 
         public void UIAProduction()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "MapaMensalProducao.frx"));
-            reportItems.Add(new ReportService(11, "ApontamentoRoboCMS.frx"));
+            reportItems.Add(new ReportService(1, "Production/MapaMensalProducao.frx"));
+            reportItems.Add(new ReportService(11, "Production/ApontamentoRoboCMS.frx"));
         }
 
         public void UIA2Production()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "MapaMensalProducao.frx"));
-            reportItems.Add(new ReportService(11, "ApontamentoRoboCMS.frx"));
+            reportItems.Add(new ReportService(1, "Production/MapaMensalProducao.frx"));
+            reportItems.Add(new ReportService(11, "Production/ApontamentoRoboCMS.frx"));
         }
 
         public void UIATickets()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "EtiquetasPallet.frx"));
+            reportItems.Add(new ReportService(1, "Tickets/EtiquetasPallet.frx"));
         }
 
         public void UIAScheduling()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "AgendamentoSemCargas.frx"));
+            reportItems.Add(new ReportService(1, "Scheduling/AgendamentoSemCargas.frx"));
         }
 
         public void UIAStops()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "CondenacoesPorMunicipioTODOS.frx"));
-            reportItems.Add(new ReportService(11, "CondenacoesPorMunicipio.frx"));
+            reportItems.Add(new ReportService(1, "Stops/CondenacoesPorMunicipioTODOS.frx"));
+            reportItems.Add(new ReportService(11, "Stops/CondenacoesPorMunicipio.frx"));
         }
 
         public void UDMEggs()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "FichaOvos.frx"));
-            reportItems.Add(new ReportService(11, "FichaOvos-TODOSDIA.frx"));
+            reportItems.Add(new ReportService(1, "Eggs/FichaOvos.frx"));
+            reportItems.Add(new ReportService(11, "Eggs/FichaOvos-TODOSDIA.frx"));
         }
     }
 }

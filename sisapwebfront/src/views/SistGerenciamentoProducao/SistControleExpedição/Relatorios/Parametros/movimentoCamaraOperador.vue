@@ -115,7 +115,7 @@ export default class MovimentoCamaraOperador extends Vue {
     this.codSicop = null;
     this.date = new Date().toISOString().substr(0, 10);
     this.date2 = new Date().toISOString().substr(0, 10);
-    this.InitialParameters();
+    await this.InitialParameters();
     this.$emit('resetClearFields');
   }
 
