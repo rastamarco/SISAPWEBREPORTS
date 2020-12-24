@@ -151,7 +151,10 @@ export default class InputModalsExp extends Vue {
       break;
     case 2:
       await this.ReportMovimentoCamaraOperador();
-      break; 
+      break;
+    case 3:
+      await this.ReportMapaCamaras();
+      break;  
     }
   }
 
@@ -260,6 +263,10 @@ export default class InputModalsExp extends Vue {
       break;
     }
     this.closeModal();
+  }
+
+  public async ReportMapaCamaras(): Promise<void>{
+    // Pensar em algo para verificação das câmaras
   }
 
   public getShiftToSend(): any{

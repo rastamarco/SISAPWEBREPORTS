@@ -1,7 +1,7 @@
 <template>
       <v-row >
       <v-col cols="12" sm="6" md="12" class="content">
-        <span>Selecione a(s) Câmara(s):</span>
+        <span style="font-size: 18px;">Selecione a(s) Câmara(s):</span>
         <v-checkbox v-model="selectChambers" label="Todas" style="margin:0;padding-right: 115px;" :disabled="allChambers === null"></v-checkbox>
         <div class="content-checkbox" v-if="!isLoadingChambers" > 
           <div v-for="items in allChambers" :key="items.cod_camara">
@@ -53,13 +53,22 @@ export default class MapaCamaras extends Vue {
       this.allChambers.forEach(chambers =>{
         this.idChambers.push(chambers.cod_camara);
       });
-    }else{
-      this.idChambers.splice(0, this.idChambers.length);
+    } else {
+      if (this.idChambers.length === this.allChambers.length){
+        this.idChambers.splice(0, this.idChambers.length);
+      } else {
+        this.selectChambers = false; 
+      } 
     }
   }
 
   @Watch('idChambers')
   public async onPropertyChangedsChambers(value: any, oldValue: any): Promise < void > {
+    for(let i = 0; i < this.allChambers.length; i++){
+      if (this.idChambers.length !== this.allChambers.length){
+        this.selectChambers = false; 
+      } 
+    }
     if(value.length !== 0) {
       this.$emit('getIdChambers', value);
     }else { 

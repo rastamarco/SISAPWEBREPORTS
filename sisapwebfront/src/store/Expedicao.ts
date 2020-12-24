@@ -64,6 +64,11 @@ export const Expedicao = {
           await commit('setAllChambers', response.data);
         }
       } 
+    },
+
+    async reportCamara({commit }, options){
+      const parameter = new ParametersExpedicao();
+      
     }
   }
 };
