@@ -19,7 +19,7 @@
         <div class="footer-initial">
         </div>
       </div>
-      <Reports v-if="showReport" />
+      <Reports v-if="showReport" style="height:100%;" />
     </v-sheet>
   </v-col>
 </v-row>

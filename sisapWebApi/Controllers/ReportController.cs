@@ -57,19 +57,19 @@ namespace sisapWebApi.Controllers
 
                 ////////////////////////////////////////////////////////////////////
                 //Conversão para EXCEL, não está funcionando AINDA
-                if (query.Format == "xlsx")
-                {
-                    PDFSimpleExport pdf = new PDFSimpleExport();
-                    // Use the stream to store the report, so as not to create unnecessary files
-                    report.Export(pdf, stream);
+                //if (query.Format == "xlsx")
+                //{
+                //    PDFSimpleExport pdf = new PDFSimpleExport();
+                //    // Use the stream to store the report, so as not to create unnecessary files
+                //    report.Export(pdf, stream);
 
-                    var pdfFile = string.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", "pdf");
-                    var excelFile = string.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", query.Format);
-                    var document = File(stream.ToArray(), mime, "wwwroot\\App_Data\\"+pdfFile);
-                    /// Crio um arquivo PDF temporário
-                    System.IO.File.WriteAllBytes("wwwroot\\App_Data\\" + pdfFile, document.FileContents);
+                //    var pdfFile = string.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", "pdf");
+                //    var excelFile = string.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", query.Format);
+                //    var document = File(stream.ToArray(), mime, "wwwroot\\App_Data\\"+pdfFile);
+                //    /// Crio um arquivo PDF temporário
+                //    System.IO.File.WriteAllBytes("wwwroot\\App_Data\\" + pdfFile, document.FileContents);
 
-                }
+                //}
                 //////////////////////////////////////////////////////////////////////
                 // Obtenho o nome do relatório
                 var file = string.Concat(Path.GetFileNameWithoutExtension(reportPath), ".", query.Format);

@@ -56,6 +56,7 @@ export default class InputModalsExp extends Vue {
   @Action reportFormacaoPallets
   @Action setSelectedIdReport
   @Action reportMovimentoCamaraOperador
+  @Action reportCamara
   @Action noShowReport
   
   @Getter filialName
@@ -116,6 +117,12 @@ export default class InputModalsExp extends Vue {
         return false;
       }
     case 2:
+      if(this.idChambers !== null){
+        return true;
+      } else { 
+        return false;
+      }
+    case 3:
       if(this.idChambers !== null){
         return true;
       } else { 
@@ -187,22 +194,31 @@ export default class InputModalsExp extends Vue {
       // Tipo de Operação
       switch(this.Operation){
       case '1':
-        if(this.Shift < 3){
+        if(this.Shift <= 3){
           if (this.haveRegistration() === true){
             await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, idReport: 2, reportModule: 2 });
           } else {
-            await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, shift: this.getShiftToSend(), idReport: 24, reportModule: 2 }); 
+            const shifts = this.getShiftToSend();
+            console.log(shifts);
+            const sendIdReport: any = null;
+            if (shifts === '1' || shifts === '2' || shifts === '0'){ 
+              await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: this.getIdReportChambersArmz(shifts), reportModule: 2 }); 
+            }
           }
         } else { 
           await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 26, reportModule: 2 });
         }
         break;
       case '2':
-        if(this.Shift < 3){
+        if(this.Shift <= 3){
           if (this.haveRegistration() === true){
             await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, idReport: 21, reportModule: 2 });
-          } else { 
-            await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, shift: this.getShiftToSend(), idReport: 25, reportModule: 2 });
+          } else {
+            const shifts = this.getShiftToSend();
+            const sendIdReport: any = null;
+            if (shifts === '1' || shifts === '2' || shifts === '0'){  
+              await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: this.getIdReportChambersExp(shifts), reportModule: 2 });
+            }
           }
         } else { 
           await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 27, reportModule: 2 });
@@ -211,8 +227,14 @@ export default class InputModalsExp extends Vue {
       case '3':
         if (this.haveRegistration() === true){
           await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, idReport: 23, reportModule: 2 });
-        } else { 
-          await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 22, reportModule: 2 });
+        } else {
+          const shifts = this.getShiftToSend();
+          const sendIdReport: any = null;
+          if (shifts === '1' || shifts === '2' || shifts === '0'){ 
+            await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: this.getIdReportChambers(shifts), reportModule: 2 });
+          } else {
+            await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 22, reportModule: 2 });
+          }   
         }
         break;
       }
@@ -258,7 +280,15 @@ export default class InputModalsExp extends Vue {
       if (this.haveRegistration() === true){
         await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.CodSicop, idReport: 23, reportModule: 2 });
       } else {
-        await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 3, reportModule: 2 }); 
+        const shifts = this.getShiftToSend();
+        const sendIdReport: any = null;
+        if (shifts === '1' || shifts === '2' || shifts === '0'){ 
+          // Mandar com turno
+          await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, shift: shifts, idReport: this.getIdReportOperador(shifts), reportModule: 2 }); 
+        } else { 
+          await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 3, reportModule: 2 }); 
+        }
+         
       }
       break;
     }
@@ -266,7 +296,8 @@ export default class InputModalsExp extends Vue {
   }
 
   public async ReportMapaCamaras(): Promise<void>{
-    // Pensar em algo para verificação das câmaras
+    await this.reportCamara({chambers: this.idChambers, reportModule: 2, idReport: 41});
+    this.closeModal();
   }
 
   public getShiftToSend(): any{
@@ -287,6 +318,50 @@ export default class InputModalsExp extends Vue {
       return true;
     } else { 
       return false;
+    }
+  }
+
+  public getIdReportOperador(shifts): any{
+    switch(shifts){
+    case '1': 
+      return 31;
+    case '2':
+      return 32;
+    case '0': 
+      return 33;
+    }
+  }
+
+  public getIdReportChambers(shifts): any{
+    switch(shifts){
+    case '1': 
+      return 34;
+    case '2':
+      return 35;
+    case '0': 
+      return 36;
+    }
+  }
+
+  public getIdReportChambersArmz(shifts): any{
+    switch(shifts){
+    case '1': 
+      return 24;
+    case '2':
+      return 37;
+    case '0': 
+      return 38;
+    }
+  }
+
+  public getIdReportChambersExp(shifts): any{
+    switch(shifts){
+    case '1': 
+      return 25;
+    case '2':
+      return 39;
+    case '0': 
+      return 4;
     }
   }
 

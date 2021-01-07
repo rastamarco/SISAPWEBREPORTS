@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="holds-the-iframe">
-  <iframe v-bind:src="backendPath+idReport+pathReport+moduleReport+reportModule+filial+filialName+parameters+params" width="100%" height="560" class="frame" type="application/pdf" />
+    <iframe v-bind:src="backendPath+idReport+pathReport+moduleReport+reportModule+filial+filialName+parameters+params" width="100%" height="560" class="frame" type="application/pdf" />
   </div>
 </div>
 </template>
@@ -81,23 +81,13 @@ export default class Reports extends Vue {
 }
 </script>
 <style scoped>
-.frame {
-  padding-left: 15px;
-  padding-right: 15px;
-  max-height: 100%;
-}
-
-.btn-download {
-  margin: 10px;
-  text-transform: none;
-}
 
 .action-buttons {
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 40px;
+  height: 5%;
 }
 
 .action-buttons .save {
@@ -118,8 +108,20 @@ export default class Reports extends Vue {
   justify-content: flex-end;
 }
 
+.action-buttons .close-printer .btn-download, .action-buttons .save .btn-download {
+  margin: 10px;
+  text-transform: none;
+}
+
 .holds-the-iframe {
   background:url(../../assets/loading_reports.gif) center center no-repeat;
+  height: 95%;
+}
+
+.holds-the-iframe .frame{
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 99%;
 }
 
 </style>

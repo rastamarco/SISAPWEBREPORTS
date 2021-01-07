@@ -40,11 +40,11 @@
         </v-radio-group>
          <hr>
         <small>Turno</small>
-        <v-radio-group v-model="rgShift" row dense :disabled="rgTypeMove === '2'" style="margin:0;transform: scale(0.9);">
+        <v-radio-group v-model="rgShift" :disabled="codSicop !== null && codSicop !== ''" row dense  style="margin:0;transform: scale(0.9);">
           <v-radio label="1º" value="1"></v-radio>
           <v-radio label="2º" value="2" ></v-radio>
           <v-radio label="3º" value="3" ></v-radio>
-          <v-radio label="Todos" value=4 ></v-radio>
+          <v-radio label="Todos" value="4"></v-radio>
         </v-radio-group>
          <hr>
       </v-col>
@@ -59,7 +59,7 @@
         </v-menu>
       </v-col>
       <v-col cols="2" sm="2" md="5" style="padding-left:40px;padding-top:0;">
-        <small class="text-title">Data Final <small>(Somente se for  período)</small></small>
+        <small class="text-title">Data Final <small>(Para Períodos e Datas Únicas)</small></small>
         <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
           <template v-slot:activator="{ on, attrs }">
             <v-text-field  v-model="dateFormatted2" @blur="date2 = parseDate(dateFormatted2)" prepend-icon="mdi-calendar" 

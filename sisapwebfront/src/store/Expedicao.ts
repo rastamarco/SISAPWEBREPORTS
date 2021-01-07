@@ -44,7 +44,7 @@ export const Expedicao = {
       if(options.endDate){
         parameter.EndDate = options.endDate;
       }
-      if(options.shift){
+      if(options.shift || options.shift !== ''){
         parameter.Shift = options.shift;
       }
       await commit('setIdReport', options.idReport);
@@ -68,7 +68,19 @@ export const Expedicao = {
 
     async reportCamara({commit }, options){
       const parameter = new ParametersExpedicao();
-      
+      const chamberToReport: Array<any> = [];
+      // 8 CAMARAS, caso aumente, coloca mais aqui e mais parametros no relatorio que vai dar certo ou implemente uma forma melhor =) 
+      for(let i = 0; i < 8;i++){
+        if(options.chambers[i] === undefined || options.chambers[i] === null){
+          chamberToReport.push('');  
+        }else{
+          chamberToReport.push(options.chambers[i]);
+        }
+      }
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
     }
   }
 };

@@ -178,17 +178,28 @@ namespace sisapWebApi.Reports
         {
             reportItems = new List<ReportService>();
             reportItems.Add(new ReportService(1, "Expedition/FormaçãoDePalletExpedicao.frx"));
-            reportItems.Add(new ReportService(2, "Expedition/MovimentoCamaraArmazenados.frx"));
-            reportItems.Add(new ReportService(21, "Expedition/MovimentoCamaraExpedidos.frx"));
+            reportItems.Add(new ReportService(2, "Expedition/MovimentoOperadorArmazenados.frx"));
+            reportItems.Add(new ReportService(21, "Expedition/MovimentoOperadorExpedidos.frx"));
             reportItems.Add(new ReportService(22, "Expedition/MovimentoCamaraTODOS.frx"));
-            reportItems.Add(new ReportService(23, "Expedition/MovimentoCamaraTODOS-Matricula.frx"));
-            reportItems.Add(new ReportService(24, "Expedition/MovimentoCamaraArmazenados-SemMatricula.frx"));
-            reportItems.Add(new ReportService(25, "Expedition/MovimentoCamaraExpedidos-SemMatricula.frx"));
+            reportItems.Add(new ReportService(23, "Expedition/MovimentoOperadorTODOS-Matricula.frx"));
+            reportItems.Add(new ReportService(24, "Expedition/MovimentoCamaraArmazenados-SemMatriculaTurno1.frx"));
+            reportItems.Add(new ReportService(25, "Expedition/MovimentoCamaraExpedidos-SemMatriculaTurno1.frx"));
             reportItems.Add(new ReportService(26, "Expedition/MovimentoCamaraArmazenados-SemMatriculaTodos.frx"));
             reportItems.Add(new ReportService(27, "Expedition/MovimentoCamaraExpedidos-SemMatriculaTodos.frx"));
-            reportItems.Add(new ReportService(28, "Expedition/MovimentoCamaraTodosOperadoresArmazenados.frx"));
-            reportItems.Add(new ReportService(29, "Expedition/MovimentoCamaraTodosOperadoresExpedidos.frx"));
-            reportItems.Add(new ReportService(3, "Expedition/MovimentoCamaraTodosOperadoresArmazenadosExpedidos.frx"));
+            reportItems.Add(new ReportService(28, "Expedition/MovimentoOperadorArmazenadosSemMatricula.frx"));
+            reportItems.Add(new ReportService(29, "Expedition/MovimentoOperadorExpedidosSemMatricula.frx"));
+            reportItems.Add(new ReportService(3, "Expedition/MovimentoOperadorTodosArmazenadosExpedidos.frx"));
+            reportItems.Add(new ReportService(31, "Expedition/MovimentoOperadorTodosArmazenadosExpedidosTurno1.frx"));
+            reportItems.Add(new ReportService(32, "Expedition/MovimentoOperadorTodosArmazenadosExpedidosTurno2.frx"));
+            reportItems.Add(new ReportService(33, "Expedition/MovimentoOperadorTodosArmazenadosExpedidosTurno3.frx"));
+            reportItems.Add(new ReportService(34, "Expedition/MovimentoCamaraTODOSTurno1.frx"));
+            reportItems.Add(new ReportService(35, "Expedition/MovimentoCamaraTODOSTurno2.frx"));
+            reportItems.Add(new ReportService(36, "Expedition/MovimentoCamaraTODOSTurno3.frx"));
+            reportItems.Add(new ReportService(37, "Expedition/MovimentoCamaraArmazenados-SemMatriculaTurno2.frx"));
+            reportItems.Add(new ReportService(38, "Expedition/MovimentoCamaraArmazenados-SemMatriculaTurno3.frx"));
+            reportItems.Add(new ReportService(39, "Expedition/MovimentoCamaraExpedidos-SemMatriculaTurno2.frx"));
+            reportItems.Add(new ReportService(4, "Expedition/MovimentoCamaraExpedidos-SemMatriculaTurno3.frx"));
+            reportItems.Add(new ReportService(41, "Expedition/MapaCamara.frx"));
         }
 
         public void UIA2Expedition()

@@ -53,14 +53,15 @@ export default class Login extends Vue {
   @Action doLogin
 
   @Getter isAuthenticated
-
-  private items = ['UIA', 'UIC', 'GBA', 'UPP', 'SIF', 'UIAII', 'UIAIII', 'UDM'];
-  private local = this.items[0];
+  
+  private items: any = null;
+  private local: any = null;
   private user = null;
   private password = null;
   private show = false;
   private loading = false;
-
+  private url: any = null;
+  
   public async submit(): Promise < void > {
     this.loading = true;
     await this.doLogin({
@@ -84,6 +85,36 @@ export default class Login extends Vue {
     this.password = null;
     this.user = null;
     this.local = this.items[0];
+  }
+
+  public GetItemsByFilial(url: any): void{
+    const filial = url.split('//');
+    switch (filial[1]){
+    case '10.10.11.32/':
+      this.items = ['UIA', 'UIC', 'GBA', 'UPP', 'SIF'];
+      this.local = this.items[0];
+      break;
+    case '10.10.128.100/':
+      this.items = ['UIAII'];
+      this.local = this.items[0];
+      break;
+    case '192.168.1.246/':
+      this.items = ['UIAIII'];
+      this.local = this.items[0];
+      break;
+    case '172.16.5.66/':
+      this.items = ['UDM'];
+      this.local = this.items[0];
+      break;
+    case 'localhost:8080/':
+      this.items = ['UIA', 'UIC', 'GBA', 'UPP', 'SIF', 'UIAII', 'UIAIII', 'UDM'];
+      this.local = this.items[0];
+      break;
+    }
+  }
+
+  mounted() {
+    this.GetItemsByFilial(window.location.href);
   }
 }
 </script>
