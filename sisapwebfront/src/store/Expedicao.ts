@@ -1,18 +1,33 @@
 import axios from 'axios';
 import ParametersExpedicao from '../models/parametersExpedicao.model';
+import Product from '../models/product.model';
 
 export const Expedicao = {
   state:{
-    allChambers: null
+    allChambers: null,
+    productName: null,
+    validPallet: null
   },
   getters:{
     allChambers(state){
       return state.allChambers;
+    },
+    productName(state){
+      return state.productName;
+    },
+    validPallet(state){
+      return state.validPallet;
     }
   },
   mutations:{
     setAllChambers(state, value) {
       state.allChambers = value;
+    },
+    setProductName(state, value) {
+      state.productName = value;
+    },
+    setValidPallet(state, value){
+      state.validPallet = value;
     }
   },
   actions:{
@@ -81,6 +96,47 @@ export const Expedicao = {
       await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
+    },
+
+    async getProductName({ commit }, options){
+      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/informations/product/${options.productId}/${options.filialName}?`;
+      const response = await axios({
+        method: 'get',
+        url: routeAPILogin
+      });
+      if (response) {
+        if (response.status === 200) {
+          await commit('setProductName', response.data);
+        } else {
+          await commit('setProductName', null);
+        }
+      } 
+    },
+
+    async getValidPallet({ commit }, options){
+      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/expedition/pallet/${options.filialName}/${options.nrPallet}?`;
+      const response = await axios({
+        method: 'get',
+        url: routeAPILogin
+      });
+      if (response) {
+        if (response.status === 200) {
+          await commit('setValidPallet', response.data);
+        } else {
+          await commit('setValidPallet', null);
+        }
+      } 
+    },
+
+    async ReportLocalizacaoProdutos({commit}, options){
+      const parameter = new ParametersExpedicao();
+      parameter.CodSicop = options.codSicop;
+      parameter.nrPallet = options.nrPallet;
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
     }
+
   }
 };

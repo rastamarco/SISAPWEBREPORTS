@@ -40,7 +40,7 @@ namespace sisapWebApi
             //    (Configuration.GetConnectionString("UIA")));
             services.AddCors();
             services.AddScoped<UserService>();
-            services.AddScoped<ChamberService>();
+            services.AddScoped<ExpeditionService>();
             services.AddScoped<IRefeitorioRepo, RefeitorioService>();
             services.AddControllers();
 

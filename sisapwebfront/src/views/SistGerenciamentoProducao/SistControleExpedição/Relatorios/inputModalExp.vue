@@ -15,6 +15,9 @@
       <movimentoCamaraOperador  v-on="{getShift, getMovement, getOperation, getCodSicop, getIdChambers, getInitialDate, getEndDate, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 2" />
       <!-- Mapa de Câmaras -->
       <mapaCamara v-on="{getIdChambers, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 3" />
+      <!-- Localização de Produtos -->
+      <localizacaoProduto v-on="{getNrPallet, getCodSicop, GetEmptyPositions,  resetClearFields}" v-bind="{clearFields}" v-if="idBox === 4" />
+
     </v-row>
     <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
       Cancelar
@@ -41,12 +44,14 @@ import {
 import formacaoPallet from '../Relatorios/Parametros/formacaoPallet.vue';
 import movimentoCamaraOperador from '../Relatorios/Parametros/movimentoCamaraOperador.vue';
 import mapaCamara from '../Relatorios/Parametros/mapaCamaras.vue';
+import localizacaoProduto from '../Relatorios/Parametros/localizacaoProdutos.vue';
 
 @Component ({
   components: {
     formacaoPallet,
     movimentoCamaraOperador,
-    mapaCamara
+    mapaCamara,
+    localizacaoProduto
   }
 })
 export default class InputModalsExp extends Vue {
@@ -58,7 +63,8 @@ export default class InputModalsExp extends Vue {
   @Action reportMovimentoCamaraOperador
   @Action reportCamara
   @Action noShowReport
-  
+  @Action ReportLocalizacaoProdutos
+
   @Getter filialName
   @Getter userFeatures
   @Getter showReport
@@ -75,7 +81,8 @@ export default class InputModalsExp extends Vue {
   private Operation: any = null;
   private Movement: any = null;
   private Shift: any = null;
-  
+  private position: boolean = false;
+
   public getNrPallet(nrPallet: any): void {
     this.nrPallet = nrPallet;
   }
@@ -108,6 +115,10 @@ export default class InputModalsExp extends Vue {
     this.EndDate = endDate;
   }
 
+  public GetEmptyPositions(position: any): void{
+    this.position = position;
+  }
+
   public canPrint(): boolean {
     switch(this.idBox){
     case 1:
@@ -124,6 +135,12 @@ export default class InputModalsExp extends Vue {
       }
     case 3:
       if(this.idChambers !== null){
+        return true;
+      } else { 
+        return false;
+      }
+    case 4:
+      if(this.nrPallet !== null && this.nrPallet !== '' && this.CodSicop !== null && this.CodSicop !== ''){
         return true;
       } else { 
         return false;
@@ -161,6 +178,9 @@ export default class InputModalsExp extends Vue {
       break;
     case 3:
       await this.ReportMapaCamaras();
+      break; 
+    case 4:
+      await this.ReportLocalizaProdutos();
       break;  
     }
   }
@@ -300,6 +320,11 @@ export default class InputModalsExp extends Vue {
     this.closeModal();
   }
 
+  public async ReportLocalizaProdutos(): Promise<void>{
+    await this.ReportLocalizacaoProdutos({codSicop: this.CodSicop, nrPallet: this.nrPallet, reportModule: 2, idReport: 42});
+    this.closeModal();
+  }
+
   public getShiftToSend(): any{
     switch(this.Shift){
     case '1': 
@@ -381,7 +406,7 @@ export default class InputModalsExp extends Vue {
   color: white;
   padding-left: 10px;
   font-size: 16px;
-  width:60%;
+  width:70%;
 }
 
 .title .close-box {
@@ -389,7 +414,7 @@ export default class InputModalsExp extends Vue {
   display:flex;
   justify-content: flex-end;
   font-size: 22px;
-  width:40%;
+  width:30%;
 }
 
 .date-input {

@@ -1,17 +1,9 @@
 <template>
       <v-row >
       <v-col cols="12" sm="6" md="12" class="content">
-        <span style="font-size: 17px;">Selecione a(s) Câmara(s):</span>
-        <v-checkbox v-model="selectChambers" label="Todas" style="margin:0;padding-right: 115px;" :disabled="allChambers === null"></v-checkbox>
-        <div class="content-checkbox" v-if="!isLoadingChambers" > 
-          <div v-for="items in allChambers" :key="items.cod_camara">
-            <v-checkbox
-              v-model="idChambers"
-              :label="items.cod_camara"
-              :value="items.cod_camara"
-              class="item-checkbox"
-            ></v-checkbox>
-          </div>
+        <span style="font-size: 17px;">Selecione a Câmara:</span>
+        <div class="content-checkbox" v-if="!isLoadingChambers" >  
+          <v-select dense :items="allChambers" v-model="idChambers" item-value="cod_camara" item-text="cod_camara" outlined style="padding-top:10px;" append-icon="mdi-format-columns"></v-select>
           <small v-if="allChambers === null">Não foi possível obter a lista de Câmaras.</small>
         </div>
         <div class="loading" v-if="isLoadingChambers">
@@ -97,7 +89,7 @@ export default class MapaCamaras extends Vue {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 10%;
+  padding-top: 15%;
 }
 
 .loading{

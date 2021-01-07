@@ -10,7 +10,7 @@ using sisapWebApi.Repository;
 
 namespace sisapWebApi.Services
 {
-    public class ChamberService
+    public class ExpeditionService
     {
 
         public async Task<List<Chamber>> getAllChambersByLocal(string filial)
@@ -21,6 +21,22 @@ namespace sisapWebApi.Services
             if (dbconnection.state)
             {
                 var result = await repository.getChambersByLocal("SELECT * FROM TB_CAMARA WHERE COD_FILIAL = '" + filial.ToUpper() +"'", dbconnection.connection).ConfigureAwait(true);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<Pallet> GetNrPallet(string filial, int nrpallet)
+        {
+
+            DataContext dbconnection = new DataContext(filial);
+            PalletRepository repository = new PalletRepository();
+            if (dbconnection.state)
+            {
+                var result = await repository.GetPallet("SELECT NR_PALLET, ID_ATIVO FROM TB_PALLET WHERE NR_PALLET = '" + nrpallet + "'", dbconnection.connection).ConfigureAwait(true);
                 return result;
             }
             else

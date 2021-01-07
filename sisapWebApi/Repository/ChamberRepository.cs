@@ -27,7 +27,6 @@ namespace sisapWebApi.Repository
                 chambers.Add(chamber);
             }
             return chambers;
-
         }
     }
 }
