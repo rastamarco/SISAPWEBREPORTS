@@ -71,7 +71,16 @@ export default class RelatorioSidebarExp extends Vue {
         title: 'Localização de Produtos',
         show: ''
       },
-
+      {
+        id: 5,
+        title: 'Histórico Câmara/Pallets',
+        show: ''
+      },
+      {
+        id: 6,
+        title: 'Posições Vazias nas Câmaras',
+        show: ''
+      },
     ]
   }, ]
   private itemsReportsByUser: Array<any> = [];
@@ -94,6 +103,14 @@ export default class RelatorioSidebarExp extends Vue {
       case 4:
         this.nameBox = 'Relatório de Extrato de Localização de Produtos';
         this.idBox = 4;
+      break;
+      case 5:
+        this.nameBox = 'Relatório de Histórico de Câmara/Pallets';
+        this.idBox = 5;
+      break;
+      case 6:
+        this.nameBox = 'Relatório de Posições Vazias nas Câmaras';
+        this.idBox = 6;
       break;
       default:
         break;

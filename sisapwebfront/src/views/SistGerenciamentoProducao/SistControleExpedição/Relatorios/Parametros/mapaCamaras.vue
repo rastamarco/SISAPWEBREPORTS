@@ -3,8 +3,8 @@
       <v-col cols="12" sm="6" md="12" class="content">
         <span style="font-size: 17px;">Selecione a Câmara:</span>
         <div class="content-checkbox" v-if="!isLoadingChambers" >  
-          <v-select dense :items="allChambers" v-model="idChambers" item-value="cod_camara" item-text="cod_camara" outlined style="padding-top:10px;" append-icon="mdi-format-columns"></v-select>
-          <small v-if="allChambers === null">Não foi possível obter a lista de Câmaras.</small>
+          <v-select dense :items="allChambers" v-model="idChambers" placeholder="Selecione" item-value="cod_camara" item-text="cod_camara" outlined style="padding-top:10px;" append-icon="mdi-format-columns"></v-select>
+          <small v-if="allChambers === null" style="color: red;">Não foi possível obter a lista de Câmaras.</small>
         </div>
         <div class="loading" v-if="isLoadingChambers">
           <v-progress-circular

@@ -17,6 +17,8 @@
       <mapaCamara v-on="{getIdChambers, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 3" />
       <!-- Localização de Produtos -->
       <localizacaoProduto v-on="{getNrPallet, getCodSicop, GetEmptyPositions,  resetClearFields}" v-bind="{clearFields}" v-if="idBox === 4" />
+      <!-- Histórico Camara Pallet -->
+      <historicoCamaraPallet v-on="{getIdChambers, getEndDate, getCodSicop, getInitialDate,  resetClearFields, GetStatus}" v-bind="{clearFields}" v-if="idBox === 5" />
 
     </v-row>
     <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
@@ -45,13 +47,15 @@ import formacaoPallet from '../Relatorios/Parametros/formacaoPallet.vue';
 import movimentoCamaraOperador from '../Relatorios/Parametros/movimentoCamaraOperador.vue';
 import mapaCamara from '../Relatorios/Parametros/mapaCamaras.vue';
 import localizacaoProduto from '../Relatorios/Parametros/localizacaoProdutos.vue';
+import historicoCamaraPallet from '../Relatorios/Parametros/historicoCamaraPallet.vue';
 
 @Component ({
   components: {
     formacaoPallet,
     movimentoCamaraOperador,
     mapaCamara,
-    localizacaoProduto
+    localizacaoProduto,
+    historicoCamaraPallet
   }
 })
 export default class InputModalsExp extends Vue {
@@ -64,6 +68,8 @@ export default class InputModalsExp extends Vue {
   @Action reportCamara
   @Action noShowReport
   @Action ReportLocalizacaoProdutos
+  @Action ReportHistoricoCamaraPallet
+  @Action ReportPosicaoCamaraVazia
 
   @Getter filialName
   @Getter userFeatures
@@ -82,7 +88,9 @@ export default class InputModalsExp extends Vue {
   private Movement: any = null;
   private Shift: any = null;
   private position: boolean = false;
+  private Status: any = null;
 
+  //#region ------------- Get Parameters 
   public getNrPallet(nrPallet: any): void {
     this.nrPallet = nrPallet;
   }
@@ -119,6 +127,24 @@ export default class InputModalsExp extends Vue {
     this.position = position;
   }
 
+  public GetStatus(status: any): void {
+    this.Status = status;
+  }
+
+  @Watch('idBox')
+  public async onPropertyChangedsIdBox(value: any, oldValue: any): Promise < void > {
+    console.log(value);
+    switch(value){
+    case 6:
+      this.closeModal();
+      await this.ReportPosicaoVazia();
+      break;
+    }
+  }
+
+  //#endregion --------------------------------------------------
+
+  //#region ------------- Prints, Reset Fields ....
   public canPrint(): boolean {
     switch(this.idBox){
     case 1:
@@ -140,7 +166,13 @@ export default class InputModalsExp extends Vue {
         return false;
       }
     case 4:
-      if(this.nrPallet !== null && this.nrPallet !== '' && this.CodSicop !== null && this.CodSicop !== ''){
+      if((this.nrPallet !== null && this.nrPallet !== '') || (this.CodSicop !== null && this.CodSicop !== '')){
+        return true;
+      } else { 
+        return false;
+      }
+    case 5:
+      if(this.Status !==  null && this.idChambers !== null){
         return true;
       } else { 
         return false;
@@ -181,10 +213,15 @@ export default class InputModalsExp extends Vue {
       break; 
     case 4:
       await this.ReportLocalizaProdutos();
+      break;
+    case 5: 
+      await this.ReportCamaraPallet();
       break;  
     }
   }
+  //#endregion ---------------------------------
 
+  //#region ------------- Report Methods
   public async ReportFormacaoPallet(nrPallet: any): Promise<void> {
     await this.reportFormacaoPallets({ 
       idReport: 1,
@@ -321,10 +358,53 @@ export default class InputModalsExp extends Vue {
   }
 
   public async ReportLocalizaProdutos(): Promise<void>{
-    await this.ReportLocalizacaoProdutos({codSicop: this.CodSicop, nrPallet: this.nrPallet, reportModule: 2, idReport: 42});
+    if (this.nrPallet === null){
+      await this.ReportLocalizacaoProdutos({codSicop: this.CodSicop, nrPallet: this.nrPallet, reportModule: 2, idReport: 42});
+    } else { 
+      await this.ReportLocalizacaoProdutos({codSicop: this.CodSicop, nrPallet: this.nrPallet, reportModule: 2, idReport: 43});
+    }
     this.closeModal();
   }
 
+  public async ReportCamaraPallet(): Promise<void> {
+    if(this.CodSicop === null){
+      switch(this.Status){
+      case 'Armazenado(s)':
+        await this.ReportHistoricoCamaraPallet({idChamber: this.idChambers, initialDate: this.InitialDate, endDate: this.EndDate, filialName: this.filialName, reportModule: 2, idReport: 45});
+        break;
+      case 'Expedido(s)':
+        await this.ReportHistoricoCamaraPallet({idChamber: this.idChambers, initialDate: this.InitialDate, endDate: this.EndDate, filialName: this.filialName, reportModule: 2, idReport: 46});
+        break;
+      case 'Excluído(s)':
+        await this.ReportHistoricoCamaraPallet({idChamber: this.idChambers, initialDate: this.InitialDate, endDate: this.EndDate, filialName: this.filialName, reportModule: 2, idReport: 47});
+        break;
+      }
+    } else {
+      // o relatório com produto;
+      switch(this.Status){
+      case 'Armazenado(s)':
+        await this.ReportHistoricoCamaraPallet({idChamber: this.idChambers, initialDate: this.InitialDate, endDate: this.EndDate, filialName: this.filialName, codSicop: this.CodSicop, reportModule: 2, idReport: 48});
+        break;
+      case 'Expedido(s)':
+        await this.ReportHistoricoCamaraPallet({idChamber: this.idChambers, initialDate: this.InitialDate, endDate: this.EndDate, filialName: this.filialName, codSicop: this.CodSicop, reportModule: 2, idReport: 49});
+        break;
+      case 'Excluído(s)':
+        await this.ReportHistoricoCamaraPallet({idChamber: this.idChambers, initialDate: this.InitialDate, endDate: this.EndDate, filialName: this.filialName, codSicop: this.CodSicop, reportModule: 2, idReport: 50});
+        break;
+      }
+    }
+    
+ 
+    // await this.ReportHistoricoCamaraPallet({codSicop: this.CodSicop, nrPallet: this.nrPallet, reportModule: 2, idReport: 45});
+    this.closeModal();    
+  }
+
+  public async ReportPosicaoVazia(): Promise<void> {
+    await this.ReportPosicaoCamaraVazia({filialName: this.filialName, idReport: 51, reportModule: 2 });
+  }
+  //#endregion --------------------------------------------------
+
+  //#region ------------- Print Informations
   public getShiftToSend(): any{
     switch(this.Shift){
     case '1': 
@@ -390,6 +470,7 @@ export default class InputModalsExp extends Vue {
     }
   }
 
+  //#endregion --------------------------------
 }
 </script>
 

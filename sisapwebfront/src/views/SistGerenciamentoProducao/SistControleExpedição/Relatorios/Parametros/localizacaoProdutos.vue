@@ -2,24 +2,24 @@
       <v-row >
       <v-col cols="12" sm="6" md="12" class="content">
         <br>
-        <span>Produto</span>
+        <span>Produto <small>(Somente Números)</small></span>
         <div class="product-input">  
-          <v-text-field v-model="product" filled dense type="number" min="0" @blur="GetProductName(product)" hide-details class="input-text"></v-text-field>
+          <v-text-field v-model="product" outlined dense placeholder="ex: 01234569" type="number" min="0" @blur="GetProductName(product)" hide-details class="input-text"></v-text-field>
           <v-progress-circular v-if="isGettingProduct" :size="25" indeterminate color="primary" class="input-loading"></v-progress-circular>
           <small  class="input-loading" v-if="!isGettingProduct">{{productDescription}}</small>
         </div>
         <br>
-        <span>Número do Pallet</span>
+        <span>Número do Pallet <small>(Somente Números)</small></span>
         <div class="product-input">  
-          <v-text-field v-model="nrPallet" filled dense type="number" min="0" @blur="GetPalletStatus(nrPallet)" hide-details class="input-text"></v-text-field>
+          <v-text-field v-model="nrPallet" outlined placeholder="ex: 01234569" dense type="number" min="0" @blur="GetPalletStatus(nrPallet)" hide-details class="input-text"></v-text-field>
           <v-progress-circular v-if="isGettingPallet" :size="25" indeterminate color="primary" class="input-loading"></v-progress-circular>
           <small  class="input-loading" v-if="!isGettingPallet">{{palletStatus}}</small>
         </div>
-        <v-checkbox
+        <!-- <v-checkbox
               v-model="positions"
               label="Listar apenas posições disponíveis(Vazias)"
               dense>
-        </v-checkbox>
+        </v-checkbox> -->
       </v-col>
     </v-row>
 </template>
@@ -82,16 +82,16 @@ export default class LocalizacaoProduto extends Vue {
 
   @Watch('nrPallet')
   public async onPropertyChangedsPallet(value: any, oldValue: any): Promise < void > {
-    if(value && value !== null){
+    if(value && value !== null && value !== ''){
       this.isGettingPallet = true;
     }
+    this.$emit('getNrPallet', value);
   }
 
   @Watch('positions')
   public async onPropertyChangedsPositions(value: any, oldValue: any): Promise < void > {
     this.$emit('GetEmptyPositions', true);
   }
-
 
   public async GetProductName(product: number): Promise<void>{
     if(product && product !== null){

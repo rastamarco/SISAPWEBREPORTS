@@ -13,7 +13,7 @@
               dense
             ></v-checkbox>
           </div>
-          <small v-if="allChambers === null">Não foi possível obter a lista de câmaras.</small>
+          <small v-if="allChambers === null" style="color: red;">Não foi possível obter a lista de câmaras.</small>
         </div>
         <div class="loading" v-if="isLoadingChambers">
           <v-progress-circular
@@ -23,7 +23,7 @@
             ></v-progress-circular>
         </div>
         <small>Matrícula <small>(Opcional)</small></small>
-        <v-text-field dense outlined v-model="codSicop" type="number" min="0" @input="SendCodSicop(codSicop)" hide-details style="transform: scale(0.8);"></v-text-field>
+        <v-text-field dense outlined v-model="codSicop" placeholder="ex: 12345" type="number" min="0" @input="SendCodSicop(codSicop)" hide-details style="transform: scale(0.8);"></v-text-field>
       </v-col>
       <v-col cols="4" sm="3" md="7" style="padding-left:10px;">
         <small>Tipo de Movimentação</small>

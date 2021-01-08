@@ -83,19 +83,28 @@ export const Expedicao = {
 
     async reportCamara({commit }, options){
       const parameter = new ParametersExpedicao();
-      const chamberToReport: Array<any> = [];
-      // 8 CAMARAS, caso aumente, coloca mais aqui e mais parametros no relatorio que vai dar certo ou implemente uma forma melhor =) 
-      for(let i = 0; i < 8;i++){
-        if(options.chambers[i] === undefined || options.chambers[i] === null){
-          chamberToReport.push('');  
-        }else{
-          chamberToReport.push(options.chambers[i]);
-        }
-      }
       await commit('setIdReport', options.idReport);
       await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
+    },
+
+    async ReportHistoricoCamaraPallet({commit}, options){
+      const parameter = new ParametersExpedicao();
+      const chamberToReport: Array<any> = [];
+      if(options.codSicop){
+        parameter.CodSicop = options.codSicop;
+      }
+      chamberToReport.push(options.idChamber);
+      parameter.Chambers = chamberToReport;
+      parameter.InitialDate = options.initialDate;
+      parameter.EndDate = options.endDate;
+      parameter.localUser = options.filialName;
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
+
     },
 
     async getProductName({ commit }, options){
@@ -136,7 +145,15 @@ export const Expedicao = {
       await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
-    }
+    },
 
+    async ReportPosicaoCamaraVazia({commit}, options){
+      const parameter = new ParametersExpedicao();
+      parameter.localUser = options.filialname;
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
+    }
   }
 };

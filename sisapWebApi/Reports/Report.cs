@@ -200,7 +200,16 @@ namespace sisapWebApi.Reports
             reportItems.Add(new ReportService(39, "Expedition/MovimentoCamaraExpedidos-SemMatriculaTurno2.frx"));
             reportItems.Add(new ReportService(4, "Expedition/MovimentoCamaraExpedidos-SemMatriculaTurno3.frx"));
             reportItems.Add(new ReportService(41, "Expedition/MapaCamara.frx"));
-            reportItems.Add(new ReportService(42, "Expedition/MapaCamara.frx"));
+            reportItems.Add(new ReportService(42, "Expedition/LocalizacaoProdutosComProduto.frx"));
+            reportItems.Add(new ReportService(43, "Expedition/LocalizacaoProdutos.frx"));
+            reportItems.Add(new ReportService(44, "Expedition/LocalizacaoProdutosRuasVazias.frx"));
+            reportItems.Add(new ReportService(45, "Expedition/HistoricoCamaraPalletArmazenados.frx"));
+            reportItems.Add(new ReportService(46, "Expedition/HistoricoCamaraPalletExpedidos.frx"));
+            reportItems.Add(new ReportService(47, "Expedition/HistoricoCamaraPalletExcluidos.frx"));
+            reportItems.Add(new ReportService(48, "Expedition/HistoricoCamaraPalletArmazenadosProduto.frx"));
+            reportItems.Add(new ReportService(49, "Expedition/HistoricoCamaraPalletExpedidosProduto.frx"));
+            reportItems.Add(new ReportService(50, "Expedition/HistoricoCamaraPalletExcluidosProduto.frx"));
+            reportItems.Add(new ReportService(51, "Expedition/PosicoesVaziasNasCamaras.frx"));
         }
 
         public void UIA2Expedition()
