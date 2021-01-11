@@ -40,7 +40,8 @@ import InputModals from './inputModalExp.vue';
 })
 export default class RelatorioSidebarExp extends Vue {
   @Action setSelectedIdReport
-  
+  @Action SetIdBox
+
   @Getter loginUser
   @Getter isSysAdmin
   /* eslint-disable indent */
@@ -81,6 +82,11 @@ export default class RelatorioSidebarExp extends Vue {
         title: 'Posições Vazias nas Câmaras',
         show: ''
       },
+      {
+        id: 7,
+        title: 'Produtos Estocado nas Câmaras',
+        show: ''
+      },
     ]
   }, ]
   private itemsReportsByUser: Array<any> = [];
@@ -109,12 +115,19 @@ export default class RelatorioSidebarExp extends Vue {
         this.idBox = 5;
       break;
       case 6:
+        // Não possui Tela de Parametros
         this.nameBox = 'Relatório de Posições Vazias nas Câmaras';
         this.idBox = 6;
       break;
+      case 7:
+        this.nameBox = 'Relatório de Pesos por Produtos nas Câmaras';
+        this.idBox = 7;
+      break;
       default:
         break;
+      
     }
+    this.SetIdBox({id : this.idBox});
   }
 
    public async  listReportsByUserPermission(): Promise<void> {

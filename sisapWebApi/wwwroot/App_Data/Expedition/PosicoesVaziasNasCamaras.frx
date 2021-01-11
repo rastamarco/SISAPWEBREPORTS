@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="01/08/2021 17:45:58" ReportInfo.CreatorVersion="2020.4.9.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="01/11/2021 09:21:01" ReportInfo.CreatorVersion="2020.4.9.0">
   <Dictionary>
-    <FirebirdDataConnection Name="MapaCamara" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttc5zSzpJmzoVN9VWwQ8fd/o=">
+    <FirebirdDataConnection Name="MapaCamara" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttbfmNbplRtV6Y8TVtSnF79M=">
       <TableDataSource Name="Table" Alias="ListaCamara" DataType="System.Int32" Enabled="true" SelectCommand="select count(nr_rua) as QT, cod_camara from tb_rua&#13;&#10;where&#13;&#10;tb_rua.desc_status = 'Vazio' and tb_rua.cod_filial = @FILIAL&#13;&#10;group by&#13;&#10;tb_rua.cod_camara&#13;&#10;">
         <Column Name="COD_CAMARA" DataType="System.String"/>
         <Column Name="QT" DataType="System.Int32"/>
@@ -9,6 +9,7 @@
       </TableDataSource>
     </FirebirdDataConnection>
     <Parameter Name="FILIAL" DataType="System.String" Expression="[LocalUsuario]"/>
+    <Total Name="Total" Expression="[ListaCamara.QT]" Evaluator="Data1" PrintOn="PageFooter1"/>
   </Dictionary>
   <ReportPage Name="Page1" RawPaperSize="9" Watermark.Font="Arial, 60pt" ExtraDesignWidth="true">
     <PageHeaderBand Name="PageHeader1" Width="718.2" Height="122.85" Border.Lines="All">
@@ -16,13 +17,18 @@
       <TextObject Name="Text1" Left="212.65" Top="37.35" Width="349.65" Height="15.12" Text="Relação de Espaços Disponíveis p/ Armazenagem" Font="Arial, 10pt, style=Bold"/>
       <TextObject Name="Text2" Left="660" Width="56.7" Height="18.9" Text="[Page#]" Font="Arial, 10pt"/>
       <TextObject Name="Text3" Left="601.9" Width="56.7" Height="18.9" Text="Página" Font="Arial, 10pt"/>
-      <TextObject Name="Text4" Left="9.45" Top="105.95" Width="56.7" Height="15.12" Text="Câmara" Font="Arial, 8pt, style=Bold"/>
-      <TextObject Name="Text5" Left="85.05" Top="105.95" Width="85.05" Height="15.12" Text="Quantidade" Font="Arial, 8pt, style=Bold"/>
+      <TextObject Name="Text4" Left="9.45" Top="105.95" Width="66.15" Height="15.12" Text="Câmara" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text5" Left="85.05" Top="105.95" Width="85.05" Height="15.12" Text="Quantidade" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text10" Left="89.05" Top="1" Width="160.65" Height="15.12" Text="Cooperativa AgroIndustrial Lar" Font="Arial, 8pt"/>
     </PageHeaderBand>
     <DataBand Name="Data1" Top="126.85" Width="718.2" Height="18.9" Border.Lines="All" DataSource="Table">
-      <TextObject Name="Text6" Left="9.45" Width="56.7" Height="18.9" Text="[ListaCamara.COD_CAMARA]" Font="Arial, 10pt"/>
-      <TextObject Name="Text7" Left="85.05" Width="56.7" Height="18.9" Text="[ListaCamara.QT]" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Left="9.45" Width="56.7" Height="18.9" Text="[ListaCamara.COD_CAMARA]" HorzAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="91.05" Width="56.7" Height="18.9" Text="[ListaCamara.QT]" HorzAlign="Center" Font="Arial, 10pt"/>
+      <DataFooterBand Name="DataFooter1" Top="149.75" Width="718.2" Height="37.8">
+        <TextObject Name="Text8" Left="14.45" Width="56.7" Height="15.12" Text="Total" Font="Arial, 10pt, style=Bold"/>
+        <TextObject Name="Text9" Left="81.05" Width="56.7" Height="15.12" Text="[Total]" RightToLeft="true" Font="Arial, 10pt"/>
+      </DataFooterBand>
     </DataBand>
-    <PageFooterBand Name="PageFooter1" Top="149.75" Width="718.2" Height="37.8"/>
+    <PageFooterBand Name="PageFooter1" Top="191.55" Width="718.2" Height="37.8"/>
   </ReportPage>
 </Report>

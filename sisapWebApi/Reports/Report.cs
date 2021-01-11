@@ -210,6 +210,7 @@ namespace sisapWebApi.Reports
             reportItems.Add(new ReportService(49, "Expedition/HistoricoCamaraPalletExpedidosProduto.frx"));
             reportItems.Add(new ReportService(50, "Expedition/HistoricoCamaraPalletExcluidosProduto.frx"));
             reportItems.Add(new ReportService(51, "Expedition/PosicoesVaziasNasCamaras.frx"));
+            reportItems.Add(new ReportService(52, "Expedition/PesoProdutoCamara.frx"));
         }
 
         public void UIA2Expedition()

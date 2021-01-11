@@ -6,7 +6,8 @@ export const Expedicao = {
   state:{
     allChambers: null,
     productName: null,
-    validPallet: null
+    validPallet: null,
+    box: null
   },
   getters:{
     allChambers(state){
@@ -17,6 +18,9 @@ export const Expedicao = {
     },
     validPallet(state){
       return state.validPallet;
+    },
+    box(state){
+      return state.box;
     }
   },
   mutations:{
@@ -28,7 +32,10 @@ export const Expedicao = {
     },
     setValidPallet(state, value){
       state.validPallet = value;
-    }
+    },
+    setBox(state, value){
+      state.box = value;
+    },
   },
   actions:{
     async reportFormacaoPallets({ commit }, options){
@@ -149,11 +156,30 @@ export const Expedicao = {
 
     async ReportPosicaoCamaraVazia({commit}, options){
       const parameter = new ParametersExpedicao();
-      parameter.localUser = options.filialname;
+      parameter.localUser = options.filialName;
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
+    },
+
+    async SetIdBox({commit}, options){
+      commit('setBox', options.id);
+    },
+
+    async ReportPesoProdutoCamara({commit}, options){
+      const parameter = new ParametersExpedicao();
+      const chamberToReport: Array<any> = [];
+      if(options.codSicop){
+        parameter.CodSicop = options.codSicop;
+      }
+      chamberToReport.push(options.idChamber);
+      parameter.Chambers = chamberToReport;
       await commit('setIdReport', options.idReport);
       await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
     }
+
   }
 };

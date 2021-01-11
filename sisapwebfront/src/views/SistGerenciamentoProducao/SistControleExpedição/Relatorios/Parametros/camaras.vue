@@ -27,7 +27,7 @@ import {
   Action, Getter
 } from 'vuex-class';
 @Component
-export default class MapaCamaras extends Vue {
+export default class Camaras extends Vue {
   @Action getChambersByFilial
 
   @Getter filialName

@@ -14,7 +14,7 @@
       <!-- Relatório de Movimento de Câmara/Operador -->
       <movimentoCamaraOperador  v-on="{getShift, getMovement, getOperation, getCodSicop, getIdChambers, getInitialDate, getEndDate, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 2" />
       <!-- Mapa de Câmaras -->
-      <mapaCamara v-on="{getIdChambers, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 3" />
+      <camaras v-on="{getIdChambers, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 3 || idBox === 7" />
       <!-- Localização de Produtos -->
       <localizacaoProduto v-on="{getNrPallet, getCodSicop, GetEmptyPositions,  resetClearFields}" v-bind="{clearFields}" v-if="idBox === 4" />
       <!-- Histórico Camara Pallet -->
@@ -45,7 +45,7 @@ import {
 
 import formacaoPallet from '../Relatorios/Parametros/formacaoPallet.vue';
 import movimentoCamaraOperador from '../Relatorios/Parametros/movimentoCamaraOperador.vue';
-import mapaCamara from '../Relatorios/Parametros/mapaCamaras.vue';
+import camaras from '../Relatorios/Parametros/camaras.vue';
 import localizacaoProduto from '../Relatorios/Parametros/localizacaoProdutos.vue';
 import historicoCamaraPallet from '../Relatorios/Parametros/historicoCamaraPallet.vue';
 
@@ -53,13 +53,13 @@ import historicoCamaraPallet from '../Relatorios/Parametros/historicoCamaraPalle
   components: {
     formacaoPallet,
     movimentoCamaraOperador,
-    mapaCamara,
+    camaras,
     localizacaoProduto,
     historicoCamaraPallet
   }
 })
 export default class InputModalsExp extends Vue {
-  @Prop() nameBox!: any
+  @Prop() nameBox!: any;
   @Prop() idBox!: any;
 
   @Action reportFormacaoPallets
@@ -70,10 +70,13 @@ export default class InputModalsExp extends Vue {
   @Action ReportLocalizacaoProdutos
   @Action ReportHistoricoCamaraPallet
   @Action ReportPosicaoCamaraVazia
+  @Action SetIdBox
+  @Action ReportPesoProdutoCamara
 
   @Getter filialName
   @Getter userFeatures
   @Getter showReport
+  @Getter box;
 
   private dateToSend: any = null;
   private turnoGroup: any = 1;
@@ -131,15 +134,15 @@ export default class InputModalsExp extends Vue {
     this.Status = status;
   }
 
-  @Watch('idBox')
-  public async onPropertyChangedsIdBox(value: any, oldValue: any): Promise < void > {
-    console.log(value);
+  @Watch('box')
+  public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
     switch(value){
-    case 6:
+    case 6: 
       this.closeModal();
       await this.ReportPosicaoVazia();
+      await this.SetIdBox({id: null});
       break;
-    }
+    } 
   }
 
   //#endregion --------------------------------------------------
@@ -173,6 +176,12 @@ export default class InputModalsExp extends Vue {
       }
     case 5:
       if(this.Status !==  null && this.idChambers !== null){
+        return true;
+      } else { 
+        return false;
+      }
+    case 7:
+      if(this.idChambers !== null){
         return true;
       } else { 
         return false;
@@ -216,7 +225,10 @@ export default class InputModalsExp extends Vue {
       break;
     case 5: 
       await this.ReportCamaraPallet();
-      break;  
+      break;
+    case 7: 
+      await this.ReportPesosProdutoNasCamaras();
+      break;   
     }
   }
   //#endregion ---------------------------------
@@ -393,14 +405,18 @@ export default class InputModalsExp extends Vue {
         break;
       }
     }
-    
- 
     // await this.ReportHistoricoCamaraPallet({codSicop: this.CodSicop, nrPallet: this.nrPallet, reportModule: 2, idReport: 45});
     this.closeModal();    
   }
 
   public async ReportPosicaoVazia(): Promise<void> {
+    this.closeModal();
     await this.ReportPosicaoCamaraVazia({filialName: this.filialName, idReport: 51, reportModule: 2 });
+  }
+
+  public async ReportPesosProdutoNasCamaras(): Promise<void> {
+    await this.ReportPesoProdutoCamara({idChamber: this.idChambers, idReport: 52, reportModule: 2});
+    this.closeModal();
   }
   //#endregion --------------------------------------------------
 
@@ -471,6 +487,15 @@ export default class InputModalsExp extends Vue {
   }
 
   //#endregion --------------------------------
+  async mounted(){
+    // Forçando aparecer a leitura do idBox no inicio para  abrir o relatório direto caso for o id 6 que não precisa de parametros
+    switch(this.box){
+    case 6: 
+      this.closeModal();
+      await this.ReportPosicaoVazia();
+      break;
+    } 
+  }
 }
 </script>
 
