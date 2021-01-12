@@ -8,4 +8,8 @@ export default class ParametersExpedicao {
   Chambers !: Array<any> | any
   Shift !: string | any
   Registration !: string | any
+  nrCarga !: string | any
+  nrConteiner !: string | any
+  nrConfereNte !: number | any
+  nrNote !: number | any
 }

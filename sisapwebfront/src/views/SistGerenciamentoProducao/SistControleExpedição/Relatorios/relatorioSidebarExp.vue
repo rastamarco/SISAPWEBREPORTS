@@ -87,6 +87,16 @@ export default class RelatorioSidebarExp extends Vue {
         title: 'Produtos Estocado nas Câmaras',
         show: ''
       },
+      {
+        id: 8,
+        title: 'Produtos Embarcados',
+        show: ''
+      },
+      {
+        id: 9,
+        title: 'Embarques por Período',
+        show: ''
+      },
     ]
   }, ]
   private itemsReportsByUser: Array<any> = [];
@@ -122,6 +132,14 @@ export default class RelatorioSidebarExp extends Vue {
       case 7:
         this.nameBox = 'Relatório de Pesos por Produtos nas Câmaras';
         this.idBox = 7;
+      break;
+      case 8:
+        this.nameBox = 'Relatório de Produtos Embarcados';
+        this.idBox = 8;
+      break;
+      case 9:
+        this.nameBox = 'Relatório de Embarques por Período';
+        this.idBox = 9;
       break;
       default:
         break;

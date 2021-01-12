@@ -13,12 +13,16 @@
       <formacaoPallet v-on="{getNrPallet}" v-bind="{clearFields}" v-if="idBox === 1"/>
       <!-- Relatório de Movimento de Câmara/Operador -->
       <movimentoCamaraOperador  v-on="{getShift, getMovement, getOperation, getCodSicop, getIdChambers, getInitialDate, getEndDate, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 2" />
-      <!-- Mapa de Câmaras -->
+      <!-- Mapa de Câmaras || Peso de Produtos Estocados nas Câmaras-->
       <camaras v-on="{getIdChambers, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 3 || idBox === 7" />
       <!-- Localização de Produtos -->
       <localizacaoProduto v-on="{getNrPallet, getCodSicop, GetEmptyPositions,  resetClearFields}" v-bind="{clearFields}" v-if="idBox === 4" />
       <!-- Histórico Camara Pallet -->
       <historicoCamaraPallet v-on="{getIdChambers, getEndDate, getCodSicop, getInitialDate,  resetClearFields, GetStatus}" v-bind="{clearFields}" v-if="idBox === 5" />
+      <!-- Produtos Embarcados --> 
+      <produtosEmbarcados v-on="{getNrCarga, getNrConteiner, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 8" />
+      <!-- Embarques Períodos --> 
+      <embarquesPeriodos v-on="{getInitialDate, getEndDate, getNrConferente }" v-bind="{clearFields}" v-if="idBox === 9" />
 
     </v-row>
     <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
@@ -48,6 +52,8 @@ import movimentoCamaraOperador from '../Relatorios/Parametros/movimentoCamaraOpe
 import camaras from '../Relatorios/Parametros/camaras.vue';
 import localizacaoProduto from '../Relatorios/Parametros/localizacaoProdutos.vue';
 import historicoCamaraPallet from '../Relatorios/Parametros/historicoCamaraPallet.vue';
+import produtosEmbarcados from '../Relatorios/Parametros/produtosEmbarcados.vue';
+import embarquesPeriodos from '../Relatorios/Parametros/embarquesPeriodo.vue';
 
 @Component ({
   components: {
@@ -55,7 +61,9 @@ import historicoCamaraPallet from '../Relatorios/Parametros/historicoCamaraPalle
     movimentoCamaraOperador,
     camaras,
     localizacaoProduto,
-    historicoCamaraPallet
+    historicoCamaraPallet,
+    produtosEmbarcados,
+    embarquesPeriodos
   }
 })
 export default class InputModalsExp extends Vue {
@@ -72,6 +80,8 @@ export default class InputModalsExp extends Vue {
   @Action ReportPosicaoCamaraVazia
   @Action SetIdBox
   @Action ReportPesoProdutoCamara
+  @Action ReportProdutosEmbarcados
+  @Action ReportEmbarquesPeriodo
 
   @Getter filialName
   @Getter userFeatures
@@ -92,8 +102,11 @@ export default class InputModalsExp extends Vue {
   private Shift: any = null;
   private position: boolean = false;
   private Status: any = null;
-
+  private nrCarga: any = null;
+  private nrConteiner: any = null;
+  private nrConferente: any = null;
   //#region ------------- Get Parameters 
+
   public getNrPallet(nrPallet: any): void {
     this.nrPallet = nrPallet;
   }
@@ -134,6 +147,18 @@ export default class InputModalsExp extends Vue {
     this.Status = status;
   }
 
+  public getNrCarga(carga: any): void {
+    this.nrCarga = carga;
+  }
+
+  public getNrConteiner(nrCont: any): void {
+    this.nrConteiner = nrCont;
+  }
+
+  public getNrConferente(nrConf: any): void {
+    this.nrConferente = nrConf;
+  }
+
   @Watch('box')
   public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
     switch(value){
@@ -148,6 +173,7 @@ export default class InputModalsExp extends Vue {
   //#endregion --------------------------------------------------
 
   //#region ------------- Prints, Reset Fields ....
+
   public canPrint(): boolean {
     switch(this.idBox){
     case 1:
@@ -186,6 +212,14 @@ export default class InputModalsExp extends Vue {
       } else { 
         return false;
       }
+    case 8:
+      if(this.nrCarga !== null  && this.nrConteiner != null){
+        return true;
+      } else { 
+        return false;
+      }
+    case 9:
+      return true;
     default: 
       return false;
     }
@@ -228,12 +262,20 @@ export default class InputModalsExp extends Vue {
       break;
     case 7: 
       await this.ReportPesosProdutoNasCamaras();
-      break;   
+      break;
+    case 8: 
+      await this.ReportProdEmbarcados();
+      break; 
+    case 9: 
+      await this.ReportEmbarquesPeriodos();
+      break;     
     }
   }
+
   //#endregion ---------------------------------
 
   //#region ------------- Report Methods
+
   public async ReportFormacaoPallet(nrPallet: any): Promise<void> {
     await this.reportFormacaoPallets({ 
       idReport: 1,
@@ -418,9 +460,37 @@ export default class InputModalsExp extends Vue {
     await this.ReportPesoProdutoCamara({idChamber: this.idChambers, idReport: 52, reportModule: 2});
     this.closeModal();
   }
+
+  public async ReportProdEmbarcados(): Promise<void> {
+    await this.ReportProdutosEmbarcados({nrCarga: this.nrCarga, nrConteiner: this.nrConteiner, initialDate: this.InitialDate, idReport: 53, reportModule: 2});
+    this.closeModal();
+  }
+
+  public async ReportEmbarquesPeriodos(): Promise<void> {
+    let initDate = '';
+    let finalDate = '';
+    if(this.InitialDate === this.EndDate) {
+      initDate = this.InitialDate;
+      finalDate = this.InitialDate;
+    } else if(this.InitialDate > this.EndDate) {
+      this.$swal('Ops!', 'A data Final é menor que a data Inicial.','warning');
+      return;
+    } else if(this.InitialDate < this.EndDate) {
+      initDate = this.InitialDate;
+      finalDate = this.EndDate;
+    }
+    if(this.nrConferente === null){
+      await this.ReportEmbarquesPeriodo({initialDate: initDate, endDate: finalDate, idReport: 54, reportModule: 2 });
+    }else { 
+      await this.ReportEmbarquesPeriodo({initialDate: initDate, endDate: finalDate, nrConferente: this.nrConferente, idReport: 55, reportModule: 2 });
+    }
+    this.closeModal();
+  }
+
   //#endregion --------------------------------------------------
 
   //#region ------------- Print Informations
+
   public getShiftToSend(): any{
     switch(this.Shift){
     case '1': 

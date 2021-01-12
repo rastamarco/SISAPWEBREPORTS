@@ -179,7 +179,33 @@ export const Expedicao = {
       await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
+    },
+
+    async ReportProdutosEmbarcados({commit}, options){
+      const parameter = new ParametersExpedicao();
+      parameter.InitialDate = options.initialDate;
+      parameter.nrCarga = options.nrCarga;
+      parameter.nrConteiner = options.nrConteiner;
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
+    },
+
+    async ReportEmbarquesPeriodo({commit}, options){
+      const parameter = new ParametersExpedicao();
+      parameter.InitialDate = options.initialDate;
+      parameter.EndDate = options.endDate;
+      if (options.nrConferente){
+        parameter.nrNote = options.nrConferente;
+      }
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
+
     }
+
 
   }
 };
