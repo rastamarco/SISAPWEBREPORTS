@@ -28,13 +28,12 @@
           <v-text-field v-model="codSicop" outlined placeholder="ex: 123456" dense  hide-details style="padding-top: 6px;margin-left:20%;"></v-text-field>
           <small style="margin-left:20%;color: red;font-size: 11px;" v-if="employeValid">Matrícula Inválida!<br> Informe uma matrícula correta</small>
         </div>
-        <div class="input" v-if="idBox === 10">
+        <div class="input" v-if="box === 10">
           <span>Turno</span>  
           <v-radio-group v-model="rgShift"  row  dense  style="margin:0;transform: scale(0.9);">
           <v-radio label="1º Turno" value="1"></v-radio>
           <v-radio label="2º Turno"  value="2" ></v-radio>
-          <v-radio label="3º Turno" value="3" ></v-radio>
-          <v-radio label="Todos" value="4"></v-radio>
+          <v-radio label="Todos" value="3"></v-radio>
         </v-radio-group>
         </div>
       </v-col>
@@ -72,7 +71,7 @@ export default class RelatorioEmbarquesPeriodo extends Vue {
   @Getter box
 
   private codSicop: any = null;
-  private rgShift: any = '4';
+  private rgShift: any = '3';
   private menu: boolean = false;
   private menu2: boolean = false;
   private date = new Date().toISOString().substr(0, 10);
@@ -89,7 +88,7 @@ export default class RelatorioEmbarquesPeriodo extends Vue {
     this.dateFormatted2 = new Date().toISOString().substr(0, 10);
     this.date2 = new Date().toISOString().substr(0, 10);
     this.codSicop = null;
-    this.rgShift = '4';
+    this.rgShift = '3';
     this.employeValid = false;
   }
 
@@ -182,9 +181,27 @@ export default class RelatorioEmbarquesPeriodo extends Vue {
    }
 
    public async ReportEmbarquesDesembarques(): Promise<void> {
-     // if(this.)
-    
-     await this.ReportEmbarquesDesembarque({});
+     let initDate = '';
+     let finalDate = '';
+     if(this.date === this.date2) {
+       initDate = this.date;
+       finalDate = this.date;
+     } else if(this.date > this.date2) {
+       this.$swal('Ops!', 'A data Final é menor que a data Inicial.','warning');
+       return;
+     } else if(this.date < this.date2) {
+       initDate = this.date;
+       finalDate = this.date2;
+     }
+     if(this.codSicop === null && this.rgShift < 3){
+       await this.ReportEmbarquesDesembarque({initialDate: initDate, endDate: finalDate, idReport: 56, reportModule: 2 });
+     }else if(this.codSicop === null && this.rgShift === 3) { 
+       await this.ReportEmbarquesDesembarque({initialDate: initDate, endDate: finalDate, nrConferente: this.codSicop, idReport: 57, reportModule: 2 });
+     } else if (this.codSicop !== null && this.rgShift < 3){
+       await this.ReportEmbarquesDesembarque({initialDate: initDate, endDate: finalDate, nrConferente: this.codSicop, idReport: 58, reportModule: 2 });
+     } else if (this.codSicop !== null && this.rgShift === 3){
+       await this.ReportEmbarquesDesembarque({initialDate: initDate, endDate: finalDate, nrConferente: this.codSicop, idReport: 59, reportModule: 2 });
+     }
    }
 
    public closeModal(): void {

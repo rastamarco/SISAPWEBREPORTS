@@ -41,7 +41,8 @@ import InputModals from './inputModalExp.vue';
 export default class RelatorioSidebarExp extends Vue {
   @Action setSelectedIdReport
   @Action SetIdBox
-
+  @Action reloadUser
+  
   @Getter loginUser
   @Getter isSysAdmin
   /* eslint-disable indent */
@@ -181,7 +182,15 @@ export default class RelatorioSidebarExp extends Vue {
   }
 
   async mounted(){
-    this.listReportsByUserPermission();
+    if(this.loginUser === null || this.isSysAdmin === null){
+       await this.reloadUser({
+        token: window.localStorage.token
+      });
+      this.listReportsByUserPermission();
+    }
+    if(this.itemsReportsByUser.length === 0){
+      this.listReportsByUserPermission();
+    }
   }
 }
 </script>

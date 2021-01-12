@@ -242,6 +242,6 @@ export const Expedicao = {
       await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
-    }
+    },
   }
 };
