@@ -64,7 +64,9 @@ export default class RelatorioEmbarquesPeriodo extends Vue {
   @Action GetEmployeRegister
   @Action ReportEmbarquesPeriodo
   @Action ReportEmbarquesDesembarque
+  @Action noShowReport
 
+  @Getter showReport
   @Getter validEmploye
   @Getter filialName
   @Getter box
@@ -146,6 +148,9 @@ export default class RelatorioEmbarquesPeriodo extends Vue {
    }
 
    public async Print(): Promise < void > {
+     if(this.showReport === true){
+       await this.noShowReport({show: false});
+     }
      switch (this.box){
      case 9: 
        await this.ReportEmbarquesPeriodos();

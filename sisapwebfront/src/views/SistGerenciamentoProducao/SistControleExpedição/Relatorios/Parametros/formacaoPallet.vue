@@ -33,7 +33,7 @@ export default class FormacaoPallet extends Vue {
   @Action reportFormacaoPallets
 
   @Getter showReport
-
+  
   private nrPallet: any = null;
   
   @Watch('clearFields')
@@ -49,6 +49,9 @@ export default class FormacaoPallet extends Vue {
   }
 
   public async Print(): Promise<void> {
+    if(this.showReport === true){
+      await this.noShowReport({show: false});
+    }
     await this.reportFormacaoPallets({ 
       idReport: 1,
       nrPallet: this.nrPallet,

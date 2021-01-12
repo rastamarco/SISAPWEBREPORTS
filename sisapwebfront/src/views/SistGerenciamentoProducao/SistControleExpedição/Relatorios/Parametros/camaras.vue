@@ -39,7 +39,9 @@ export default class Camaras extends Vue {
   @Action reportCamara
   @Action ReportPesoProdutoCamara
   @Action SetIdBox
-  
+  @Action noShowReport
+
+  @Getter showReport
   @Getter filialName
   @Getter allChambers
   @Getter box
@@ -89,6 +91,9 @@ export default class Camaras extends Vue {
    }
 
    public async Print(): Promise<void> {
+     if(this.showReport === true){
+       await this.noShowReport({show: false});
+     }
      if(this.box === 3){
        await this.reportCamara({chambers: this.idChambers, reportModule: 2, idReport: 41});
      }else { 

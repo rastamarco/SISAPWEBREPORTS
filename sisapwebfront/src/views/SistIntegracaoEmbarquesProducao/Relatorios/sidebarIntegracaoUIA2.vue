@@ -42,7 +42,8 @@ import InputModals from './inputModalIntegracao.vue';
 })
 export default class SidebarIntegracaoUIA2 extends Vue {
   @Action setSelectedIdReport
-  
+  @Action reloadUser
+
   @Getter loginUser
   @Getter isSysAdmin
   /* eslint-disable indent */
@@ -97,7 +98,15 @@ export default class SidebarIntegracaoUIA2 extends Vue {
   }
 
   async mounted(){
-    await this.listReportsByUserPermission();
+    if(this.loginUser === null || this.isSysAdmin === null){
+       await this.reloadUser({
+        token: window.localStorage.token
+      });
+      this.listReportsByUserPermission();
+    }
+    if(this.itemsReportsByUser.length === 0){
+      this.listReportsByUserPermission();
+    }
   }
 }
 </script>

@@ -46,7 +46,10 @@ export default class ProdutosEmbarcados extends Vue {
   @Prop() clearFields!: any; 
   
   @Action ReportProdutosEmbarcados
+  @Action noShowReport
 
+  @Getter showReport
+  
   private nrCarga: any = null;
   private nrConteiner: any = null;
   private menu: boolean = false;
@@ -104,6 +107,9 @@ export default class ProdutosEmbarcados extends Vue {
    }
 
    public async Print(): Promise < void > {
+     if(this.showReport === true){
+       await this.noShowReport({show: false});
+     }
      await this.ReportProdutosEmbarcados({nrCarga: this.nrCarga, nrConteiner: this.nrConteiner, initialDate: this.date, idReport: 53, reportModule: 2});
      this.closeModal();
    }

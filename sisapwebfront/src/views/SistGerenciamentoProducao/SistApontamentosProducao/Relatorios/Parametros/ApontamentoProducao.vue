@@ -5,7 +5,7 @@
           <template v-slot:activator="{ on, attrs }">
             <span style="padding-left: 20px;">Data</span>
             <v-text-field id="teste" v-model="dateFormatted" @blur="date = parseDate(dateFormatted)" prepend-icon="mdi-calendar" readonly outlined 
-              hide-details dense v-bind="attrs" v-on="on" style="padding-left: 20px;" ></v-text-field>
+              hide-details dense v-bind="attrs" v-on="on" style="padding-left: 20px;padding-top: 5px;" ></v-text-field>
           </template>
           <v-date-picker v-model="date" @input="setDate(date)" locale="pt" min="1950-01-01" :max="dateMax"></v-date-picker>
         </v-menu>
@@ -21,7 +21,14 @@
         <v-radio-group v-model="periodoGroup" style="padding-left: 30px;" v-if="showPeriodApontamento()">
           <v-radio v-for="n in 3" :key="n" :label="getPeriods(n)" :value="n"></v-radio>
         </v-radio-group>
-    </v-col> 
+    </v-col>
+    <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
+      Cancelar
+    </v-btn>
+    <v-btn absolute rounded bottom right color="primary" @click="Print()" style="text-transform: none;">
+      <v-icon>mdi-printer</v-icon>
+      Imprimir
+    </v-btn>  
   </v-row>
 </template>
 <script lang="ts">
@@ -41,6 +48,10 @@ export default class ApontamentoProducao extends Vue {
 
   @Prop() clearFields!: any;
 
+  @Action reportApontamentoProducao
+  @Action noShowReport
+
+  @Getter showReport
   @Getter filialName
   @Getter loginUser
   @Getter userFeatures
@@ -58,7 +69,6 @@ export default class ApontamentoProducao extends Vue {
     this.date = new Date().toISOString().substr(0, 10);
     this.turnoGroup = 1;
     this.periodoGroup = 1;
-    this.InitialParameters();
   }
 
   @Watch('clearFields')
@@ -93,7 +103,6 @@ export default class ApontamentoProducao extends Vue {
 
   public setDate(data: any): void {
     this.dateToSend = data;
-    this.$emit('getDate', this.dateToSend);
     this.menu = false;
   }
 
@@ -116,16 +125,6 @@ export default class ApontamentoProducao extends Vue {
     this.setDate(value);
   }
 
-  @Watch('turnoGroup')
-  public async onPropertyChangedTurnoGroup(value: any, oldValue: any): Promise <void>{
-    this.$emit('getShift', value);
-  }
-
-  @Watch('periodoGroup')
-  public async onPropertyChangedPeriodoGroup(value: any, oldValue: any): Promise <void>{
-    this.$emit('getPeriod', value);
-  }
-
   public showPeriodApontamento(): boolean{
     if (this.filialName === 'UIC' && this.userFeatures.isApontamento === true) {
       return false;
@@ -134,16 +133,74 @@ export default class ApontamentoProducao extends Vue {
     }
   }
 
-  public InitialParameters(): void{
-    this.setDate(this.date);
-    this.$emit('getShift', this.turnoGroup);
-    this.$emit('getPeriod', this.periodoGroup);
+  public closeModal(): void {
+    this.$emit('closeModal');
   }
 
-  async mounted(){
-    this.InitialParameters();
+  public async Print(): Promise < void > {
+    if(this.showReport === true){
+      await this.noShowReport({show: false});
+    }
+    await this.ApontamentoProducao();
+    this.closeModal();
   }
 
+  public async ApontamentoProducao(): Promise<void>{
+    switch(this.filialName){
+    case 'UIC':
+      if (this.turnoGroup === 4){
+        await this.reportApontamentoProducao({
+          localUser: this.filialName, 
+          date: this.date,
+          idReport: 15,
+          reportModule: 1
+        });
+      } else {
+        await this.reportApontamentoProducao({
+          localUser: this.filialName, 
+          date: this.date,
+          shift: this.turnoGroup,
+          idReport: 14,
+          reportModule: 1
+        });
+      }
+      break;
+    default:
+      if (this.turnoGroup < 4 && this.periodoGroup < 3){
+        await this.reportApontamentoProducao({
+          localUser: this.filialName, 
+          date: this.date,
+          shift: this.turnoGroup,
+          period: this.periodoGroup,
+          idReport: 1,
+          reportModule: 1
+        });
+      }else if (this.turnoGroup === 4 && this.periodoGroup === 3){
+        await this.reportApontamentoProducao({
+          localUser: this.filialName, 
+          date: this.date,
+          idReport: 11,
+          reportModule: 1
+        });
+      }else if (this.turnoGroup === 4 && this.periodoGroup < 3){ 
+        await this.reportApontamentoProducao({
+          localUser: this.filialName, 
+          date: this.date,
+          period: this.periodoGroup,
+          idReport: 12,
+          reportModule: 1
+        });
+      }else if (this.turnoGroup < 4 && this.periodoGroup === 3){ 
+        await this.reportApontamentoProducao({
+          localUser: this.filialName, 
+          date: this.date,
+          shift: this.turnoGroup,
+          idReport: 13,
+          reportModule: 1
+        });
+      }
+      break;
+    }
+  }
 }
-
 </script>

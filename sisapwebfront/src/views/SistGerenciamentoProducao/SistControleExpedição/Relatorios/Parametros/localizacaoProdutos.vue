@@ -47,7 +47,9 @@ export default class LocalizacaoProduto extends Vue {
   @Action getProductName
   @Action getValidPallet
   @Action ReportLocalizacaoProdutos
+  @Action noShowReport
 
+  @Getter showReport
   @Getter productName
   @Getter validPallet
   @Getter filialName
@@ -104,6 +106,9 @@ export default class LocalizacaoProduto extends Vue {
   }
 
   public async Print(): Promise < void > {
+    if(this.showReport === true){
+      await this.noShowReport({show: false});
+    }
     if (this.nrPallet === null){
       await this.ReportLocalizacaoProdutos({codSicop: this.product, nrPallet: this.nrPallet, reportModule: 2, idReport: 42});
     } else { 

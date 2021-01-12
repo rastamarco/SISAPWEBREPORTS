@@ -79,7 +79,9 @@ export default class HistoricoCamaraPallet extends Vue {
   @Action getProductName
   @Action getChambersByFilial
   @Action ReportHistoricoCamaraPallet
+  @Action noShowReport
 
+  @Getter showReport
   @Getter filialName
   @Getter allChambers
   @Getter productName
@@ -146,6 +148,9 @@ export default class HistoricoCamaraPallet extends Vue {
   }
 
   public async Print(): Promise < void > {
+    if(this.showReport === true){
+      await this.noShowReport({show: false});
+    }
     if(this.codSicop === null){
       switch(this.status){
       case 'Armazenado(s)':

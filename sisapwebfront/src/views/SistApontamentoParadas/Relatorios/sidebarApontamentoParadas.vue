@@ -42,7 +42,8 @@ import InputModals from './inputModalApontamentoParadas.vue';
 })
 export default class SidebarApontamentoParadas extends Vue {
   @Action setLoadingReports 
-
+  @Action reloadUser
+  
   @Getter loginUser
   @Getter isSysAdmin
   /* eslint-disable indent */
@@ -97,7 +98,15 @@ export default class SidebarApontamentoParadas extends Vue {
   }
 
   async mounted(){
-    await this.listReportsByUserPermission();
+    if(this.loginUser === null || this.isSysAdmin === null){
+       await this.reloadUser({
+        token: window.localStorage.token
+      });
+      this.listReportsByUserPermission();
+    }
+    if(this.itemsReportsByUser.length === 0){
+      this.listReportsByUserPermission();
+    }
   }
 }
 </script>

@@ -24,6 +24,13 @@
           <v-radio v-for="n in 4" :key="n" :label="getShifts(n)" :value="n"></v-radio>
         </v-radio-group>
       </v-col>
+      <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
+      Cancelar
+    </v-btn>
+    <v-btn absolute rounded bottom right color="primary" @click="Print()" style="text-transform: none;">
+      <v-icon>mdi-printer</v-icon>
+      Imprimir
+    </v-btn>  
   </v-row>
 </template>
 <script lang="ts">
@@ -44,6 +51,10 @@ export default class ApontamentoRefeitorio extends Vue {
 
   @Prop() clearFields!: any;
 
+  @Action reportApontamentoRefeitorio
+  @Action noShowReport
+
+  @Getter showReport
   @Getter filialName
   @Getter loginUser
   @Getter userFeatures
@@ -59,18 +70,21 @@ export default class ApontamentoRefeitorio extends Vue {
   private dateToSend2: any = null;
   private turnoGroup: any = 1;
   private isPeriod: boolean = false;
+  private InitialHour: any = null;
+  private EndHour: any = null;
 
   public clear(): void {
     this.date = new Date().toISOString().substr(0, 10);
     this.date2 = new Date().toISOString().substr(0, 10);
     this.turnoGroup = 1;
     this.isPeriod = false;
-    this.InitialParameters();
+    this.dateToSend = null;
+    this.dateToSend2 = null;
   }
 
   @Watch('clearFields')
   public async onPropertyChangedClearFields(value: any, oldValue: any): Promise < void > {
-    await this.clear();
+    this.clear();
     this.$emit('resetClearFields');
   }
 
@@ -95,7 +109,7 @@ export default class ApontamentoRefeitorio extends Vue {
     }else{
       newDate = data;
     }
-    this.$emit('getDate', newDate, this.isPeriod);
+    this.getDate(newDate, this.isPeriod);
     this.menu = false;
   }
 
@@ -106,8 +120,18 @@ export default class ApontamentoRefeitorio extends Vue {
     }else{
       newDate = data;
     }
-    this.$emit('getDateEnd', newDate, this.isPeriod);
+    this.getDateEnd(newDate, this.isPeriod);
     this.menu2 = false;
+  }
+
+  public getDate(date: any, isPeriod: any): void{
+    this.dateToSend = date;
+    this.isPeriod = isPeriod;
+  }
+
+  public getDateEnd(date: any, isPeriod: any): void{
+    this.dateToSend2 = date;
+    this.isPeriod = isPeriod;
   }
 
   public formatDate(date: string): any {
@@ -142,19 +166,82 @@ export default class ApontamentoRefeitorio extends Vue {
 
   @Watch('turnoGroup')
   public async onPropertyChangedTurnoGroup(value: any, oldValue: any): Promise <void>{
-    this.$emit('getShift', value);
     this.setDate(this.date);
     this.setDate2(this.date2);
   }
 
-  public InitialParameters(): void{
-    this.setDate(this.date);
-    this.setDate2(this.date2);
-    this.$emit('getShift', this.turnoGroup);
+  public closeModal(): void{
+    this.$emit('closeModal');
   }
 
-  async mounted(){
-    this.InitialParameters();
+  public async Print(): Promise < void > {
+    if(this.showReport === true){
+      await this.noShowReport({show: false});
+    }
+    await this.ApontamentoRefeitorio();
+    this.closeModal();
+  }
+
+  public async ApontamentoRefeitorio(): Promise<void>{
+    await this.getShiftHours();
+    let newShift;
+    if(this.turnoGroup === 4)
+      newShift = 'Todos';
+    else
+      newShift = this.turnoGroup;
+    
+    switch(this.isPeriod){
+    case false: 
+      await this.reportApontamentoRefeitorio({
+        InitialDate: this.dateToSend+' 00:00:00',
+        EndDate: this.dateToSend+' 23:59:59',
+        InitialHour: this.InitialHour,
+        EndHour:this.EndHour,
+        shift: newShift, 
+        idReport: 16, 
+        reportModule: 1 
+      });
+      break;
+    case true:
+      if(this.date < this.date2) {
+        await this.reportApontamentoRefeitorio({
+          InitialDate: this.dateToSend+' 00:00:00', 
+          EndDate: this.dateToSend2+' 23:59:59',
+          InitialHour: this.InitialHour,
+          EndHour:this.EndHour, 
+          shift: newShift, 
+          idReport: 16, 
+          reportModule: 1 });
+      } else {  
+        this.$swal('Ops!', 'A Data Inicial informada é maior que a Data Final, corrija-as e tente novamente', 'error');
+      }
+    }
+  }
+
+  public async getShiftHours(): Promise<any>{
+    switch(this.turnoGroup){
+    case 1: 
+      this.InitialHour = '06:00:00';
+      this.EndHour = '15:30:59';
+      break;
+    case 2: 
+      this.InitialHour = '15:31:00';
+      this.EndHour = '23:59:59';
+      break;
+    case 3:
+      this.InitialHour = '00:00:00';
+      this.EndHour = '05:59:59';
+      break;
+    case 4:
+      this.InitialHour = '00:00:00';
+      this.EndHour = '23:59:59';
+      break;
+    }
+  }
+
+  mounted() {
+    this.dateToSend = this.date;
+    this.dateToSend2 = this.date; 
   }
 }
 

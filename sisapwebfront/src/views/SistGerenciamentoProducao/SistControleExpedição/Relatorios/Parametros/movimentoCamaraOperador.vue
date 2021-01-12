@@ -91,7 +91,9 @@ import {
 export default class MovimentoCamaraOperador extends Vue {
   @Action getChambersByFilial
   @Action reportMovimentoCamaraOperador
+  @Action noShowReport
 
+  @Getter showReport
   @Getter filialName
   @Getter allChambers
  
@@ -174,6 +176,9 @@ export default class MovimentoCamaraOperador extends Vue {
   }
 
   public async Print(): Promise<void> {
+    if(this.showReport === true){
+      await this.noShowReport({show: false});
+    }
     switch(this.rgTypeMove){
     case '1':
       await this.ReportMovimentoCamaraOperador();

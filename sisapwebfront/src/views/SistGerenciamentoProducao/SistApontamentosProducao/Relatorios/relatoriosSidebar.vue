@@ -40,9 +40,11 @@ import InputModals from './inputModal.vue';
 })
 export default class ApontamentosRelatorios extends Vue {
   @Action setSelectedIdReport
-  
+  @Action reloadUser
+
   @Getter loginUser
   @Getter isSysAdmin
+
   /* eslint-disable indent */
   private modalReports: boolean = false;
   private nameBox: any = null;
@@ -63,6 +65,7 @@ export default class ApontamentosRelatorios extends Vue {
       }
     ]
   }, ]
+
   private itemsReportsByUser: Array<any> = [];
   
   public async selectReport(item: any): Promise<void> {
@@ -103,8 +106,17 @@ export default class ApontamentosRelatorios extends Vue {
       }
   }
 
-   async mounted(){
-    this.listReportsByUserPermission();
+  async mounted(){
+    if(this.loginUser === null || this.isSysAdmin === null){
+       await this.reloadUser({
+        token: window.localStorage.token
+      });
+      this.listReportsByUserPermission();
+    }
+    if(this.itemsReportsByUser.length === 0){
+      this.listReportsByUserPermission();
+    }
   }
+
 }
 </script>

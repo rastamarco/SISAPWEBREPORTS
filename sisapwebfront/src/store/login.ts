@@ -171,7 +171,6 @@ export const login = {
         nameUser: decodeToken.nameUser,
         idUser: decodeToken.idUser
       };
-      
       const UFeatures = new usersPermissionsViewModel();
       switch(authData.filialName){
       case 'UDM':
@@ -204,7 +203,6 @@ export const login = {
         } 
         break; 
       }     
-      
       await commit('setUserFeatures', UFeatures);
       await commit('setAuthData', authData);
       await commit('setIsAuthenticated', true);

@@ -41,7 +41,8 @@ import InputModals from './inputModalCtrlProducao.vue';
 })
 export default class CtrlProducaoRelatorios extends Vue {
   @Action setSelectedIdReport
-  
+  @Action reloadUser
+
   @Getter loginUser
   @Getter isSysAdmin
   /* eslint-disable indent */
@@ -113,8 +114,16 @@ export default class CtrlProducaoRelatorios extends Vue {
       }
   }
 
-   async mounted(){
-    this.listReportsByUserPermission();
+  async mounted(){
+    if(this.loginUser === null || this.isSysAdmin === null){
+       await this.reloadUser({
+        token: window.localStorage.token
+      });
+      this.listReportsByUserPermission();
+    }
+    if(this.itemsReportsByUser.length === 0){
+      this.listReportsByUserPermission();
+    }
   }
 }
 </script>

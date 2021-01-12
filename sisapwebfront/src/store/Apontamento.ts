@@ -66,7 +66,6 @@ export const Apontamento = {
       await commit('setIdReport', options.id);
     },
 
-
     async reportApontamentoRefeitorio({commit}, options){
       const parameter = new ParametersApontamento();
       parameter.InitialDate = options.InitialDate;
@@ -76,6 +75,7 @@ export const Apontamento = {
       parameter.InitialHour = options.InitialHour;
       parameter.EndHour = options.EndHour;
       parameter.shift = options.shift;
+      console.log(parameter);
       await commit('setIdReport', options.idReport);
       await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 
