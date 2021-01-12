@@ -21,6 +21,13 @@
               dense>
         </v-checkbox> -->
       </v-col>
+      <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
+        Cancelar
+      </v-btn>
+      <v-btn absolute rounded bottom right color="primary" @click="Print()" :disabled="!canPrint()" style="text-transform: none;">
+        <v-icon>mdi-printer</v-icon>
+        Imprimir
+      </v-btn> 
     </v-row>
 </template>
 <script lang="ts">
@@ -39,6 +46,7 @@ export default class LocalizacaoProduto extends Vue {
 
   @Action getProductName
   @Action getValidPallet
+  @Action ReportLocalizacaoProdutos
 
   @Getter productName
   @Getter validPallet
@@ -85,12 +93,27 @@ export default class LocalizacaoProduto extends Vue {
     if(value && value !== null && value !== ''){
       this.isGettingPallet = true;
     }
-    this.$emit('getNrPallet', value);
   }
 
-  @Watch('positions')
-  public async onPropertyChangedsPositions(value: any, oldValue: any): Promise < void > {
-    this.$emit('GetEmptyPositions', true);
+  public canPrint(): boolean {
+    if((this.nrPallet !== null && this.nrPallet !== '') || (this.product !== null && this.product !== '')){
+      return true;
+    } else { 
+      return false;
+    }
+  }
+
+  public async Print(): Promise < void > {
+    if (this.nrPallet === null){
+      await this.ReportLocalizacaoProdutos({codSicop: this.product, nrPallet: this.nrPallet, reportModule: 2, idReport: 42});
+    } else { 
+      await this.ReportLocalizacaoProdutos({codSicop: this.product, nrPallet: this.nrPallet, reportModule: 2, idReport: 43});
+    }
+    this.closeModal();
+  }
+
+  public async closeModal(): Promise<void> {
+    this.$emit('closeModal');
   }
 
   public async GetProductName(product: number): Promise<void>{
@@ -100,7 +123,6 @@ export default class LocalizacaoProduto extends Vue {
       if(this.productName === null || this.productName.cod === 0){
         this.productDescription = 'Produto Inválido, informe outro código';
       }else { 
-        this.$emit('getCodSicop', product);
         this.productDescription = this.productName.embalagem;
       }
     }else { 
@@ -115,7 +137,6 @@ export default class LocalizacaoProduto extends Vue {
       if (this.validPallet === null || this.validPallet.npallet === 0 || this.validPallet.iativo === 'N'){
         this.palletStatus = 'Pallet Inválido ou Não Existe!';
       }else { 
-        this.$emit('getNrPallet', pallet);
         this.palletStatus = 'Pallet Válido!';
       }
     }else { 

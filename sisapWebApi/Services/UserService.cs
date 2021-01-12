@@ -41,5 +41,20 @@ namespace sisapWebApi.Services
             else
                 return null;
         }
+
+        public async Task<Employe> getEmployeByRegister(int register, string filial)
+        {
+            DataContext dbconnection = new DataContext(filial);
+            UserRepository service = new UserRepository();
+            if (dbconnection.state)
+            {
+
+                var result = await service.getEmploye("SELECT * FROM TB_FUNCIONARIO WHERE COD_MATRICULA = '"+ register + "'",
+                                                dbconnection.connection).ConfigureAwait(true);
+                return result;
+            }
+            else
+                return null;
+        }
     }
 }

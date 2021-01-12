@@ -53,6 +53,13 @@
         </v-menu>
         </div>
       </v-col>
+      <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
+      Cancelar
+      </v-btn>
+      <v-btn absolute rounded bottom right color="primary" @click="Print()" :disabled="!canPrint()" style="text-transform: none;">
+      <v-icon>mdi-printer</v-icon>
+      Imprimir
+    </v-btn> 
   </v-row>
 </template>
 <script lang="ts">
@@ -71,6 +78,7 @@ export default class HistoricoCamaraPallet extends Vue {
 
   @Action getProductName
   @Action getChambersByFilial
+  @Action ReportHistoricoCamaraPallet
 
   @Getter filialName
   @Getter allChambers
@@ -106,17 +114,11 @@ export default class HistoricoCamaraPallet extends Vue {
     this.isGettingProduct = false;
   }
 
-  @Watch('idChambers')
-  public async onPropertyChangedsChambers(value: any, oldValue: any): Promise < void > {
-    this.$emit('getIdChambers', value);
-  }
-
   @Watch('codSicop')
   public async onPropertyChangedsSicop(value: any, oldValue: any): Promise < void > {
     if(value && value !== null){
       this.isGettingProduct = true;
     }
-    this.$emit('getCodSicop', value);
   }
 
   @Watch('clearFields')
@@ -128,18 +130,53 @@ export default class HistoricoCamaraPallet extends Vue {
    @Watch('date')
   public async onPropertyChangedsDate(value: any, oldValue: any): Promise < void > {
     this.dateFormatted = this.formatDate(value);
-    this.$emit('getInitialDate', value);
   }
 
   @Watch('date2')
    public async onPropertyChangedsDate2(value: any, oldValue: any): Promise < void > {
      this.dateFormatted2 = this.formatDate(value);
-     this.$emit('getEndDate', value);
    }
 
-  @Watch('status')
-  public async onPropertyChangedsStatus(value: any, oldValue: any): Promise < void > {
-    this.$emit('GetStatus', value);
+  public canPrint(): boolean{
+    if(this.status !==  null && this.idChambers !== null){
+      return true;
+    } else { 
+      return false;
+    }
+  }
+
+  public async Print(): Promise < void > {
+    if(this.codSicop === null){
+      switch(this.status){
+      case 'Armazenado(s)':
+        await this.ReportHistoricoCamaraPallet({idChamber: this.idChambers, initialDate: this.date, endDate: this.date2, filialName: this.filialName, reportModule: 2, idReport: 45});
+        break;
+      case 'Expedido(s)':
+        await this.ReportHistoricoCamaraPallet({idChamber: this.idChambers, initialDate: this.date, endDate: this.date2, filialName: this.filialName, reportModule: 2, idReport: 46});
+        break;
+      case 'Excluído(s)':
+        await this.ReportHistoricoCamaraPallet({idChamber: this.idChambers, initialDate: this.date, endDate: this.date2, filialName: this.filialName, reportModule: 2, idReport: 47});
+        break;
+      }
+    } else {
+      // o relatório com produto;
+      switch(this.status){
+      case 'Armazenado(s)':
+        await this.ReportHistoricoCamaraPallet({idChamber: this.idChambers, initialDate: this.date, endDate: this.date2, filialName: this.filialName, codSicop: this.codSicop, reportModule: 2, idReport: 48});
+        break;
+      case 'Expedido(s)':
+        await this.ReportHistoricoCamaraPallet({idChamber: this.idChambers, initialDate: this.date, endDate: this.date2, filialName: this.filialName, codSicop: this.codSicop, reportModule: 2, idReport: 49});
+        break;
+      case 'Excluído(s)':
+        await this.ReportHistoricoCamaraPallet({idChamber: this.idChambers, initialDate: this.date, endDate: this.date2, filialName: this.filialName, codSicop: this.codSicop, reportModule: 2, idReport: 50});
+        break;
+      }
+    }
+    this.closeModal();    
+  }
+
+  public closeModal(): void{
+    this.$emit('closeModal');
   }
 
   public setDate(): void {
@@ -167,17 +204,11 @@ export default class HistoricoCamaraPallet extends Vue {
       if(this.productName === null || this.productName.cod === 0){
         this.productDescription = 'Produto Inválido, informe outro código';
       }else { 
-        this.$emit('getCodSicop', product);
         this.productDescription = this.productName.embalagem;
       }
     }else { 
       this.productDescription = '';
     }
-  }
-
-  public InitialParameters(): void{
-    this.$emit('getInitialDate', this.date);
-    this.$emit('getEndDate', this.date);
   }
 
   async mounted() {
@@ -186,7 +217,6 @@ export default class HistoricoCamaraPallet extends Vue {
       await this.getChambersByFilial({filial: this.filialName });
       this.isLoadingChambers = false;
     }
-    this.InitialParameters();
   }
 } 
 </script>

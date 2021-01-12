@@ -97,8 +97,14 @@ export default class RelatorioSidebarExp extends Vue {
         title: 'Embarques por Período',
         show: ''
       },
+       {
+        id: 10,
+        title: 'Paradas, Embarques. e Desembarques',
+        show: ''
+      },
     ]
   }, ]
+  
   private itemsReportsByUser: Array<any> = [];
 
   public async selectReport(item: any): Promise<void> {
@@ -140,6 +146,10 @@ export default class RelatorioSidebarExp extends Vue {
       case 9:
         this.nameBox = 'Relatório de Embarques por Período';
         this.idBox = 9;
+      break;
+      case 10:
+        this.nameBox = 'Relatório de Paradas, Emb. e Desembarques';
+        this.idBox = 10;
       break;
       default:
         break;

@@ -68,6 +68,13 @@
           <v-date-picker v-model="date2" @input="setDate(date2)" locale="pt" min="1950-01-01" :max="dateMax" ></v-date-picker>
         </v-menu>
       </v-col>
+      <v-btn absolute rounded text bottom left color="primary" @click="CloseModal()" style="text-transform: none;">
+      Cancelar
+    </v-btn>
+    <v-btn absolute rounded bottom right color="primary" @click="Print()" :disabled="!canPrint()" style="text-transform: none;">
+      <v-icon>mdi-printer</v-icon>
+      Imprimir
+    </v-btn> 
     </v-row>
 </template>
 <script lang="ts">
@@ -83,6 +90,7 @@ import {
 @Component
 export default class MovimentoCamaraOperador extends Vue {
   @Action getChambersByFilial
+  @Action reportMovimentoCamaraOperador
 
   @Getter filialName
   @Getter allChambers
@@ -115,7 +123,6 @@ export default class MovimentoCamaraOperador extends Vue {
     this.codSicop = null;
     this.date = new Date().toISOString().substr(0, 10);
     this.date2 = new Date().toISOString().substr(0, 10);
-    await this.InitialParameters();
     this.$emit('resetClearFields');
   }
 
@@ -132,42 +139,11 @@ export default class MovimentoCamaraOperador extends Vue {
 
   @Watch('date')
   public async onPropertyChangedsDate(value: any, oldValue: any): Promise < void > {
-    this.dateFormatted = this.formatDate(value);
-    this.$emit('getInitialDate', value);
-  }
+    this.dateFormatted = this.formatDate(value);  }
 
   @Watch('date2')
   public async onPropertyChangedsDate2(value: any, oldValue: any): Promise < void > {
     this.dateFormatted2 = this.formatDate(value);
-    this.$emit('getEndDate', value);
-  }
-
-  @Watch('rgShift')
-  public async onPropertyChangedsShift(value: any, oldValue: any): Promise < void > {
-    this.$emit('getShift', value);
-  }
-
-  @Watch('rgTypeMove')
-  public async onPropertyChangedsMovement(value: any, oldValue: any): Promise < void > {
-    this.$emit('getMovement', value);
-  }
-
-  @Watch('rgTypeOperation')
-  public async onPropertyChangedsOperation(value: any, oldValue: any): Promise < void > {
-    this.$emit('getOperation', value);
-  }
-
-  @Watch('idChambers')
-  public async onPropertyChangedsChambers(value: any, oldValue: any): Promise < void > {
-    if(value.length !== 0) {
-      this.$emit('getIdChambers', value);
-    }else { 
-      this.$emit('getIdChambers', null);
-    }
-  }
-
-  public SendCodSicop(cod: any): void{
-    this.$emit('getCodSicop', cod);
   }
 
   public setDate(data: any): void {
@@ -189,22 +165,214 @@ export default class MovimentoCamaraOperador extends Vue {
     return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
   }
 
-  public InitialParameters(): void{
-    this.$emit('getCodSicop', null);
-    this.$emit('getOperation', '3');
-    this.$emit('getMovement', '1');
-    this.$emit('getShift', '4');
-    this.$emit('getInitialDate', this.date);
-    this.$emit('getEndDate', this.date2);
+  public canPrint(): boolean {
+    if(this.idChambers !== null){
+      return true;
+    } else { 
+      return false;
+    }
+  }
+
+  public async Print(): Promise<void> {
+    switch(this.rgTypeMove){
+    case '1':
+      await this.ReportMovimentoCamaraOperador();
+      break;
+    case '2':
+      await this.ReportMovimentoOperador();
+      break;
+    }
   }
   
+  public async ReportMovimentoCamaraOperador(): Promise<void> {
+    // Fazer as Validações aqui para cada item enviado 
+    let initDate = '';
+    let finalDate = '';
+    if(this.date === this.date2) {
+      initDate = this.date;
+      finalDate = this.date;
+    } else if(this.date > this.date2) {
+      this.$swal('Ops!', 'A data Final é menor que a data Inicial.','warning');
+      return;
+    } else if(this.date < this.date2) {
+      initDate = this.date;
+      finalDate = this.date2;
+    }
+    
+    // Movimentação por Câmaras
+    // Tipo de Operação
+    switch(this.rgTypeOperation){
+    case '1':
+      if(this.rgShift <= 3){
+        if (this.haveRegistration() === true){
+          await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.codSicop, idReport: 2, reportModule: 2 });
+        } else {
+          const shifts = this.getShiftToSend();
+          console.log(shifts);
+          const sendIdReport: any = null;
+          if (shifts === '1' || shifts === '2' || shifts === '0'){ 
+            await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: this.getIdReportChambersArmz(shifts), reportModule: 2 }); 
+          }
+        }
+      } else { 
+        await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 26, reportModule: 2 });
+      }
+      break;
+    case '2':
+      if(this.rgShift <= 3){
+        if (this.haveRegistration() === true){
+          await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.codSicop, idReport: 21, reportModule: 2 });
+        } else {
+          const shifts = this.getShiftToSend();
+          const sendIdReport: any = null;
+          if (shifts === '1' || shifts === '2' || shifts === '0'){  
+            await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: this.getIdReportChambersExp(shifts), reportModule: 2 });
+          }
+        }
+      } else { 
+        await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 27, reportModule: 2 });
+      }
+      break;
+    case '3':
+      if (this.haveRegistration() === true){
+        await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.codSicop, idReport: 23, reportModule: 2 });
+      } else {
+        const shifts = this.getShiftToSend();
+        const sendIdReport: any = null;
+        if (shifts === '1' || shifts === '2' || shifts === '0'){ 
+          await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: this.getIdReportChambers(shifts), reportModule: 2 });
+        } else {
+          await this.reportMovimentoCamaraOperador({ chambers: this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 22, reportModule: 2 });
+        }   
+      }
+      break;
+    }
+    this.closeModal();
+  }
+
+  public async ReportMovimentoOperador(): Promise<void> {
+    let initDate = '';
+    let finalDate = '';
+    if(this.date === this.date2) {
+      initDate = this.date;
+      finalDate = this.date;
+    } else if(this.date > this.date2) {
+      this.$swal('Ops!', 'A data Final é menor que a data Inicial.','warning');
+      return;
+    } else if(this.date < this.date2) {
+      initDate = this.date;
+      finalDate = this.date2;
+    }
+    switch(this.rgTypeOperation){
+    case '1':
+      if (this.haveRegistration() === true){
+        await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.codSicop, idReport: 2, reportModule: 2 });
+      } else {
+        await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 28, reportModule: 2 }); 
+      }
+      break;
+    case '2':
+      if (this.haveRegistration() === true){
+        await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.codSicop, idReport: 21, reportModule: 2 });
+        
+      } else {
+        await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 29, reportModule: 2 }); 
+      }
+      break;
+    case '3':
+      if (this.haveRegistration() === true){
+        await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, registration: this.codSicop, idReport: 23, reportModule: 2 });
+      } else {
+        const shifts = this.getShiftToSend();
+        const sendIdReport: any = null;
+        if (shifts === '1' || shifts === '2' || shifts === '0'){ 
+          // Mandar com turno
+          await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, shift: shifts, idReport: this.getIdReportOperador(shifts), reportModule: 2 }); 
+        } else { 
+          await this.reportMovimentoCamaraOperador({ chambers:this.idChambers, initialDate: initDate, endDate: finalDate, idReport: 3, reportModule: 2 }); 
+        }
+         
+      }
+      break;
+    }
+    this.closeModal();
+  }
+
+  public getShiftToSend(): any{
+    switch(this.rgShift){
+    case '1': 
+      return '1';
+    case '2': 
+      return '2';
+    case '3': 
+      return '0';
+    case '4': 
+      return '';
+    }
+  }
+
+  public haveRegistration(): boolean{
+    if (this.codSicop !== null){
+      return true;
+    } else { 
+      return false;
+    }
+  }
+
+  public getIdReportOperador(shifts): any{
+    switch(shifts){
+    case '1': 
+      return 31;
+    case '2':
+      return 32;
+    case '0': 
+      return 33;
+    }
+  }
+
+  public getIdReportChambers(shifts): any{
+    switch(shifts){
+    case '1': 
+      return 34;
+    case '2':
+      return 35;
+    case '0': 
+      return 36;
+    }
+  }
+
+  public getIdReportChambersArmz(shifts): any{
+    switch(shifts){
+    case '1': 
+      return 24;
+    case '2':
+      return 37;
+    case '0': 
+      return 38;
+    }
+  }
+
+  public getIdReportChambersExp(shifts): any{
+    switch(shifts){
+    case '1': 
+      return 25;
+    case '2':
+      return 39;
+    case '0': 
+      return 4;
+    }
+  }
+
+  public async closeModal(): Promise<void> {
+    this.$emit('closeModal');
+  }
+
   async mounted() {
     if (this.allChambers === null) {
       this.isLoadingChambers = true;
       await this.getChambersByFilial({filial: this.filialName });
       this.isLoadingChambers = false;
     }
-    this.InitialParameters();
   }
 }
 </script>

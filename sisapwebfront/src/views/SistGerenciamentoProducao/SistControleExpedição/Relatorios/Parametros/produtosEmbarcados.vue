@@ -22,6 +22,13 @@
         </v-menu>
         </div>
       </v-col>
+      <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
+      Cancelar
+    </v-btn>
+    <v-btn absolute rounded bottom right color="primary" @click="Print()" :disabled="!canPrint()" style="text-transform: none;">
+      <v-icon>mdi-printer</v-icon>
+      Imprimir
+    </v-btn> 
     </v-row>
 </template>
 <script lang="ts">
@@ -38,6 +45,8 @@ import {
 export default class ProdutosEmbarcados extends Vue {
   @Prop() clearFields!: any; 
   
+  @Action ReportProdutosEmbarcados
+
   private nrCarga: any = null;
   private nrConteiner: any = null;
   private menu: boolean = false;
@@ -56,24 +65,12 @@ export default class ProdutosEmbarcados extends Vue {
    @Watch('clearFields')
   public async onPropertyChangedsClearFields(value: any, oldValue: any): Promise < void > {
     this.Clear();
-    await this.InitialParameters();
     this.$emit('resetClearFields');
   }
 
    @Watch('date')
    public async onPropertyChangedsDate(value: any, oldValue: any): Promise < void > {
      this.dateFormatted = this.formatDate(value);
-     this.$emit('getInitialDate', value);
-   }
-
-   @Watch('nrCarga')
-   public async onPropertyChangedsCarga(value: any, oldValue: any): Promise < void > {
-     this.$emit('getNrCarga', value);
-   }
-
-   @Watch('nrConteiner')
-   public async onPropertyChangedsConteiner(value: any, oldValue: any): Promise < void > {
-     this.$emit('getNrConteiner', value);
    }
 
    public setDate(data: any): void {
@@ -94,12 +91,21 @@ export default class ProdutosEmbarcados extends Vue {
      return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
    }
 
-   public InitialParameters(): void{
-     this.$emit('getInitialDate', this.date);
+   public closeModal(): void{
+     this.$emit('closeModal');
    }
 
-   mounted(){
-     this.InitialParameters();
+   public canPrint(): boolean {
+     if(this.nrCarga !== null  && this.nrConteiner != null){
+       return true;
+     } else { 
+       return false;
+     }
+   }
+
+   public async Print(): Promise < void > {
+     await this.ReportProdutosEmbarcados({nrCarga: this.nrCarga, nrConteiner: this.nrConteiner, initialDate: this.date, idReport: 53, reportModule: 2});
+     this.closeModal();
    }
 
 } 

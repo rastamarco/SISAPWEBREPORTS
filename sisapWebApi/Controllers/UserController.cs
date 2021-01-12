@@ -21,5 +21,13 @@ namespace sisapWebApi.Controllers
             var listUsers = await usersService.getAllUsers(filial).ConfigureAwait(true);
             return listUsers;
         }
+
+        [HttpGet("employe/{register}/{filial}")]
+        public async Task<ActionResult<Employe>> GetEmployeRegister(int register, string filial)
+        {
+            var usersService = new UserService();
+            var employe = await usersService.getEmployeByRegister(register, filial).ConfigureAwait(true);
+            return employe;
+        }
     }
 }

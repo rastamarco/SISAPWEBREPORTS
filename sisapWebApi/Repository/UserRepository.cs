@@ -48,5 +48,26 @@ namespace sisapWebApi.Repository
             }
             return user;
         }
+
+        public async Task<Employe> getEmploye(string select, FbConnection connection)
+        {
+            Employe employe= new Employe();
+            FbDataReader reader = null;
+            FbCommand query = new FbCommand(select, connection);
+            reader = query.ExecuteReader();
+            while (reader.Read())
+            {
+                employe.COD_MATRICULA = (Int32)reader["COD_MATRICULA"];
+                employe.COD_FILIAL = reader.GetString(1);
+                employe.COD_TURNO = (Int32)reader["COD_TURNO"];
+                employe.NO_FUNCIONARIO = reader.GetString(3);
+                employe.DESC_FUNCAO = reader.GetString(4);
+                employe.NO_SENHA = reader.GetString(5);
+                employe.ATIVO = reader.GetString(6);
+                employe.COD_SETOR = (Int32)reader["COD_SETOR"];
+                employe.CARTAQ_SEGURANCA = reader.GetString(8);
+            }
+            return employe;
+        }
     }
 }

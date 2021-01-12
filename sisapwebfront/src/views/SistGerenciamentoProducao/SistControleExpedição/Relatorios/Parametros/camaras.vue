@@ -14,6 +14,13 @@
             ></v-progress-circular>
         </div>
       </v-col>
+      <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
+      Cancelar
+    </v-btn>
+    <v-btn absolute rounded bottom right color="primary" @click="Print()" :disabled="!canPrint()" style="text-transform: none;">
+      <v-icon>mdi-printer</v-icon>
+      Imprimir
+    </v-btn> 
     </v-row>
 </template>
 <script lang="ts">
@@ -29,11 +36,16 @@ import {
 @Component
 export default class Camaras extends Vue {
   @Action getChambersByFilial
-
+  @Action reportCamara
+  @Action ReportPesoProdutoCamara
+  @Action SetIdBox
+  
   @Getter filialName
   @Getter allChambers
- 
+  @Getter box
+
   @Prop() clearFields!: any; 
+  @Prop() idBox!: any
 
   private idChambers: Array<any> = [];
   private isLoadingChambers: boolean = false;
@@ -61,11 +73,6 @@ export default class Camaras extends Vue {
         this.selectChambers = false; 
       } 
     }
-    if(value.length !== 0) {
-      this.$emit('getIdChambers', value);
-    }else { 
-      this.$emit('getIdChambers', null);
-    }
   }
 
    @Watch('clearFields')
@@ -73,6 +80,27 @@ export default class Camaras extends Vue {
     this.idChambers.splice(0, this.idChambers.length);
     this.$emit('resetClearFields');
   }
+
+   public canPrint(): boolean {
+     if(this.idChambers.length > 0){
+       return true;
+     } else 
+       return false;
+   }
+
+   public async Print(): Promise<void> {
+     if(this.box === 3){
+       await this.reportCamara({chambers: this.idChambers, reportModule: 2, idReport: 41});
+     }else { 
+       await this.ReportPesoProdutoCamara({idChamber: this.idChambers, idReport: 52, reportModule: 2});
+     }
+     await this.SetIdBox({id: null});
+     this.closeModal();
+   }
+
+   public async closeModal(): Promise<void> {
+     this.$emit('closeModal');
+   }
 
    async mounted() {
      if (this.allChambers === null) {

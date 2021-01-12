@@ -7,7 +7,8 @@ export const Expedicao = {
     allChambers: null,
     productName: null,
     validPallet: null,
-    box: null
+    box: null,
+    validEmploye: null
   },
   getters:{
     allChambers(state){
@@ -21,6 +22,9 @@ export const Expedicao = {
     },
     box(state){
       return state.box;
+    },
+    validEmploye(state){
+      return state.validEmploye;
     }
   },
   mutations:{
@@ -35,6 +39,9 @@ export const Expedicao = {
     },
     setBox(state, value){
       state.box = value;
+    },
+    setValidEmploye(state, value){
+      state.validEmploye = value;
     },
   },
   actions:{
@@ -204,8 +211,37 @@ export const Expedicao = {
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
 
+    },
+
+    async GetEmployeRegister({ commit }, options){
+      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/users/employe/${options.codSicop}/${options.filialName}?`;
+      const response = await axios({
+        method: 'get',
+        url: routeAPILogin
+      });
+      if (response) {
+        if (response.status === 200) {
+          await commit('setValidEmploye', response.data);
+        } else {
+          await commit('setValidEmploye', null);
+        }
+      } 
+    },
+
+    async ReportEmbarquesDesembarque ({ commit }, options){
+      const parameter = new ParametersExpedicao();
+      parameter.InitialDate = options.initialDate;
+      parameter.EndDate = options.endDate;
+      if (options.nrConferente){
+        parameter.nrNote = options.nrConferente;
+      }
+      if(options.shift){
+        parameter.Shift = options.shift;
+      }
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
     }
-
-
   }
 };
