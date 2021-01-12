@@ -11,14 +11,14 @@
               item-value="cod_Municipio" 
               dense 
               label="Municípios " hide-details no-data-text="Município não Encontrado!" :disabled="all === true" ></v-autocomplete>
-              <span style="font-size: 10px; opacity: 0.7;" v-if="loadingCities === false">Não foi possível obter a lista de Municípios</span>
+              <span style="font-size: 10px; opacity: 0.7;color:red;" v-if="loadingCities === false">Não foi possível obter a lista de Municípios</span>
       </v-col> 
       <v-col cols="12" sm="6" md="5" style="padding-left: 10%;">
         <span class="text-title">Data Inicial </span>
         <v-menu v-model="menu" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
             <template v-slot:activator="{ on, attrs }">
               <v-text-field  v-model="dateFormatted" @blur="date = parseDate(dateFormatted)" prepend-icon="mdi-calendar" 
-              readonly outlined hide-details dense v-bind="attrs" v-on="on" style="padding-top: 8px;"></v-text-field>
+              readonly outlined hide-details dense v-bind="attrs" v-on="on" style="padding-top: 10px;"></v-text-field>
             </template>
             <v-date-picker v-model="date" locale="pt" min="1950-01-01" @input="SendDate(date)" :max="dateMax" ></v-date-picker>
         </v-menu>
@@ -28,11 +28,18 @@
         <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
             <template v-slot:activator="{ on, attrs }">
               <v-text-field  v-model="dateFormatted2" @blur="date2 = parseDate(dateFormatted2)" prepend-icon="mdi-calendar" 
-              readonly outlined hide-details dense v-bind="attrs" v-on="on" style="padding-top: 8px;"></v-text-field>
+              readonly outlined hide-details dense v-bind="attrs" v-on="on" style="padding-top: 10px;"></v-text-field>
             </template>
             <v-date-picker v-model="date2" locale="pt" min="1950-01-01" @input="SendDate2(date2)" :max="dateMax" ></v-date-picker>
         </v-menu>
       </v-col> 
+      <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
+      Cancelar
+    </v-btn>
+    <v-btn absolute rounded bottom right color="primary" @click="Print()" style="text-transform: none;">
+      <v-icon>mdi-printer</v-icon>
+      Imprimir
+    </v-btn> 
   </v-row>
 </template>
 
@@ -51,7 +58,10 @@ export default class CondenacoesPorMunicipio extends Vue {
   @Prop() clearFields!: any; 
 
   @Action getAllCities
+  @Action noShowReport
+  @Action reportCondenacoesMunicipio
 
+  @Getter showReport
   @Getter allCities
   @Getter loadingCities
   @Getter filialName
@@ -71,29 +81,19 @@ export default class CondenacoesPorMunicipio extends Vue {
   public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
     this.date = new Date().toISOString().substr(0, 10);
     this.date2 = new Date().toISOString().substr(0, 10);
-    await this.initialParameters();
     this.$emit('resetClearFields');
     
   }
 
- @Watch('all')
-  public async onPropertyChangedAll(value: any, oldValue: any): Promise < void > {
-    this.$emit('allSelected', value);
-  }
 
   @Watch('date')
- public async onPropertyChangedsDate(value: any, oldValue: any): Promise < void > {
-   this.dateFormatted = this.formatDate(value);
- }
+  public async onPropertyChangedsDate(value: any, oldValue: any): Promise < void > {
+    this.dateFormatted = this.formatDate(value);
+  }
 
   @Watch('date2')
   public async onPropertyChangedsDate2(value: any, oldValue: any): Promise < void > {
     this.dateFormatted2 = this.formatDate(value);
-  }
-
-  @Watch('city')
-  public async onPropertyChangedsCity(value: any, oldValue: any): Promise < void > {
-    this.$emit('getCity', value);
   }
 
   public formatDate(date: string): any {
@@ -110,21 +110,36 @@ export default class CondenacoesPorMunicipio extends Vue {
 
   public SendDate(date: any): void {
     this.menu = false;
-    this.$emit('getInitialDate', date);
   }
 
   public SendDate2(date: any): void {
     this.menu2 = false;
-    this.$emit('getEndDate', date);
   }
 
-  public initialParameters(): void{
-    this.SendDate(this.date);
-    this.SendDate2(this.date2);
+  public async Print(): Promise < void > {
+    if(this.showReport === true){
+      await this.noShowReport({show: false});
+    }
+    await this.AgendamentoDeParadas();
+    this.closeModal();
+  }
+
+  public closeModal(): void {
+    this.$emit('closeModal');
+  }
+
+  public async AgendamentoDeParadas(): Promise<void>{
+    switch(this.all){
+    case true: 
+      await this.reportCondenacoesMunicipio({initialDate: this.date, endDate: this.date2, idReport: 1, reportModule:7 });
+      break;
+    case false:
+      await this.reportCondenacoesMunicipio({idCity: this.city, initialDate: this.date, endDate: this.date2, idReport: 11, reportModule:7 });
+      break;
+    }
   }
 
   async mounted(){
-    await this.initialParameters();
     if (this.allCities === null){
       await this.getAllCities({filialName: this.filialName });
     }

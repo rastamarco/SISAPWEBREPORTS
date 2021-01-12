@@ -273,8 +273,12 @@ namespace sisapWebApi.Reports
         public void UDMEggs()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "Eggs/FichaOvos.frx"));
-            reportItems.Add(new ReportService(11, "Eggs/FichaOvos-TODOSDIA.frx"));
+            reportItems.Add(new ReportService(1, "Eggs/ApontamentoDeProducao.frx"));
+            reportItems.Add(new ReportService(11, "Eggs/ApontamentoDeProducaoTODOS.frx"));
+            reportItems.Add(new ReportService(12, "Eggs/ApontamentoDeProducaoTURNO-Periodo.frx"));
+            reportItems.Add(new ReportService(13, "Eggs/ApontamentoDeProducaoPERIODO-Turno.frx"));
+            reportItems.Add(new ReportService(14, "Eggs/FichaOvos.frx"));
+            reportItems.Add(new ReportService(15, "Eggs/FichaOvos-TODOSDIA.frx"));
         }
     }
 }

@@ -7,13 +7,20 @@
               <v-text-field  v-model="dateFormatted" @blur="date = parseDate(dateFormatted)" prepend-icon="mdi-calendar" 
               readonly outlined hide-details dense v-bind="attrs" v-on="on" style="padding-top: 10px;"></v-text-field>
             </template>
-            <v-date-picker v-model="date" locale="pt" min="1950-01-01" @input="SendDate(date)" :max="dateMax" ></v-date-picker>
+            <v-date-picker v-model="date" locale="pt" min="1950-01-01" @input="SendDate()" :max="dateMax" ></v-date-picker>
         </v-menu> 
       </v-col>
       <v-col cols="12" sm="5" md="6" style="padding-left: 10%;padding-top:10%;">
         <span class="text-title" >Número do Romaneio: <small>(Opcional)</small></span>
           <v-text-field  v-model="romaneio" outlined hide-details dense style="padding-top: 10px;"></v-text-field>
-      </v-col> 
+      </v-col>
+      <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
+      Cancelar
+    </v-btn>
+    <v-btn absolute rounded bottom right color="primary" @click="Print()" style="text-transform: none;">
+      <v-icon>mdi-printer</v-icon>
+      Imprimir
+    </v-btn>  
   </v-row>  
 </template>
 
@@ -30,6 +37,11 @@ import {
 @Component
 export default class RomaneioOvos extends Vue {
   @Prop() clearFields!: any; 
+  
+  @Action noShowReport
+  @Action reportFichaOvos
+  
+  @Getter showReport
 
   private date: any = new Date().toISOString().substr(0, 10) ;
   private menu: boolean = false;
@@ -42,17 +54,11 @@ export default class RomaneioOvos extends Vue {
     this.date = new Date().toISOString().substr(0, 10);
     this.romaneio = null;
     await this.$emit('resetClearFields');
-    await this.initialParameters();
   }
 
   @Watch('date')
   public async onPropertyChangedsDate(value: any, oldValue: any): Promise < void > {
     this.dateFormatted = this.formatDate(value);
-  }
-
-  @Watch('romaneio')
-  public async onPropertyChangedsRomaneio(value: any, oldValue: any): Promise < void > {
-    this.$emit('getRomaneioOvos', value);
   }
 
   public formatDate(date: string): any {
@@ -68,17 +74,30 @@ export default class RomaneioOvos extends Vue {
   }
 
 
-  public SendDate(date: any): void {
+  public SendDate(): void {
     this.menu = false;
-    this.$emit('getDate', date);
   }
 
-  public initialParameters(): void{
-    this.SendDate(this.date);
+  public closeModal(): void {
+    this.$emit('closeModal');
   }
 
-  mounted(){
-    this.initialParameters();
+  public async Print(): Promise < void > {
+    if(this.showReport === true){
+      await this.noShowReport({show: false});
+    }
+    await this.ControleFichaOvos();
+    this.closeModal();
   }
+
+
+  public async ControleFichaOvos(): Promise<void>{
+    if (this.romaneio !== null) {
+      await this.reportFichaOvos({romaneio: this.romaneio, initialDate: this.date, idReport: 14, reportModule: 8 });
+    } else { 
+      await this.reportFichaOvos({ initialDate: this.date, idReport: 15, reportModule: 8 });
+    }
+  }
+
 }
 </script>

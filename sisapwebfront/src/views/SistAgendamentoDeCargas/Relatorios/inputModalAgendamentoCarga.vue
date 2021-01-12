@@ -8,15 +8,8 @@
   </div>
   <v-card-actions>
       <!-- Todos os Parametros vão aqui --> 
-      <AgendamentoSemEmbarques v-on="{getInitialDate, getEndDate, resetClearFields}" v-bind="{clearFields}"  v-if="idBox === 1"/>
+      <AgendamentoSemEmbarques v-on="{closeModal, resetClearFields}" v-bind="{clearFields}"  v-if="idBox === 1"/>
 
-    <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
-      Cancelar
-    </v-btn>
-    <v-btn absolute rounded bottom right color="primary" @click="Print()" :disabled="!canPrint()" style="text-transform: none;">
-      <v-icon>mdi-printer</v-icon>
-      Imprimir
-    </v-btn> 
   </v-card-actions>
 </v-card>
 </template>
@@ -32,7 +25,6 @@ import {
 import {
   Action, Getter
 } from 'vuex-class';
-import _ from 'vuetify/es5/components/*';
 
 import AgendamentoSemEmbarques from '../Relatorios/Parametros/agendamentosSemEmbarqueCargas.vue';
 
@@ -64,40 +56,7 @@ export default class InputModalAgendamentoCarga extends Vue {
     this.clearFields = true;
     this.$emit('closeModal');
   }
-
-  public getInitialDate(date: any): void {
-    this.initialDate = date;
-  } 
-
-  public getEndDate(date: any): void {
-    this.endDate = date;
-  }
-
-  public canPrint(): boolean {
-    switch(this.idBox){
-    case 1:
-      return true;
-    default:
-      return false;   
-    }
-  }
-
-  public async Print(): Promise < void > {
-    if(this.showReport === true){
-      await this.noShowReport({show: false});
-    }
-    switch(this.idBox){
-    case 1:
-      await this.AgendamentoSemEmbarques();
-      break;
-    }
-    this.closeModal();
-  }
-
-  public async AgendamentoSemEmbarques(): Promise<void>{
-    await this.reportAgendamentoSemEmbarque({initialDate: this.initialDate, endDate: this.endDate, idReport: 1, reportModule:6 });
-  }
- 
+  
   public resetClearFields(): void{
     this.clearFields = false;
   }

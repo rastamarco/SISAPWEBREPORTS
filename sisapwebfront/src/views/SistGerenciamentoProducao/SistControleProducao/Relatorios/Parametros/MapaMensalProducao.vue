@@ -21,6 +21,13 @@
           <v-radio label="Linha 2" value="2" dense></v-radio>
         </v-radio-group>
       </v-col>
+       <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
+      Cancelar
+    </v-btn>
+    <v-btn absolute rounded bottom right color="primary" @click="Print()" style="text-transform: none;">
+      <v-icon>mdi-printer</v-icon>
+      Imprimir
+    </v-btn> 
   </v-row>
 </template>
 
@@ -37,29 +44,62 @@ import {
 @Component
 export default class MapaMensalProducao extends Vue {
   @Prop() clearFields!: any; 
+  
+  @Action reportMapaMensal
+  @Action noShowReport
+
+  @Getter filialName
+  @Getter showReport
 
   private date: any = new Date().toISOString().substr(0, 7) ;
   private menu: boolean = false;
   private dateMax = new Date().toISOString().substr(0, 7);
   private dateFormatted = this.formatDate(new Date().toISOString().substr(0, 7))
   private rgLineProd: any = 1;
-  
+  private line: any= null;
+  private year: any = null;
+  private month: any = null;
+
   @Watch('clearFields')
   public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
     this.date = new Date().toISOString().substr(0, 7);
     this.rgLineProd = 1;
-    this.initialParameters();
     this.$emit('resetClearFields');
   }
 
   @Watch('rgLineProd')
   public async onPropertyChangedsRgLineProd(value: any, oldValue: any): Promise < void > {
-    this.$emit('getLineProd', value);
+    this.getLineProd(value);
   }
 
   @Watch('date')
   public async onPropertyChangedsDate(value: any, oldValue: any): Promise < void > {
     this.dateFormatted = this.formatDate(value);
+  }
+
+  public getLineProd(line: any): void{
+    switch(this.filialName){
+    case 'UIC':
+      switch(line){
+      case 1:
+        this.line = 'Coz/Ass/Emp';
+        break;
+      case 2: 
+        this.line = 'L2UIC';
+        break;
+      }
+      break;
+    case 'UIA':
+      switch(line){
+      case 1:
+        this.line = 'Aves';
+        break;
+      case 2: 
+        this.line = 'L2';
+        break;
+      }
+      break;
+    }
   }
 
   public formatDate(date: string): any {
@@ -76,17 +116,32 @@ export default class MapaMensalProducao extends Vue {
 
   public SendDate(date: any): void {
     this.menu = false;
-    this.$emit('getMonthYear', date);
+    this.getMonthYear(date);
   }
 
-  public initialParameters(): void{
-    this.SendDate(this.date);
-    this.$emit('getLineProd', 1);
+  public getMonthYear(date: any): void{  
+    this.year = date.split('-')[0];
+    this.month = date.split('-')[1];
   }
 
-  mounted(){
-    this.initialParameters();
+  public closeModal(): void{
+    this.$emit('closeModal');
   }
+
+  public async Print(): Promise < void > {
+    if(this.showReport === true){
+      await this.noShowReport({show: false});
+    }
+    await this.MapaMensal();
+    this.closeModal();
+  }
+
+  public async MapaMensal(): Promise<void>{
+    const initialDate = this.year+'-'+this.month+'-01';
+    const endDate = this.year+'-'+this.month+'-30';
+    await this.reportMapaMensal({ initialDate: initialDate, endDate: endDate, localUser: this.filialName, line: this.line, reportModule: 4, idReport: 1 });
+  }
+
 }
 </script>
 <style scoped>

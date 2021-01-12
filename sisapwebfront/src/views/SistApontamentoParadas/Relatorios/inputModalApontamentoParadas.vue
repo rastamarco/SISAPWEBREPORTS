@@ -8,15 +8,8 @@
   </div>
   <v-card-actions>
       <!-- Todos os Parametros vão aqui --> 
-      <CondenacoesMunicipio v-on="{getInitialDate, getEndDate, resetClearFields, allSelected, getCity}" v-bind="{clearFields}"  v-if="idBox === 1"/>
+      <CondenacoesMunicipio v-on="{closeModal, resetClearFields, getCity}" v-bind="{clearFields}"  v-if="idBox === 1"/>
 
-    <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
-      Cancelar
-    </v-btn>
-    <v-btn absolute rounded bottom right color="primary" @click="Print()" :disabled="!canPrint()" style="text-transform: none;">
-      <v-icon>mdi-printer</v-icon>
-      Imprimir
-    </v-btn> 
   </v-card-actions>
 </v-card>
 </template>
@@ -68,53 +61,9 @@ export default class InputModalApontamentoParadas extends Vue {
     this.$emit('closeModal');
   }
 
-  public getInitialDate(date: any): void {
-    this.initialDate = date;
-  } 
-
-  public getEndDate(date: any): void {
-    this.endDate = date;
-  }
-
   public getCity(idCity: any, cityName: any): void{
     this.idCity = idCity;
     this.cityName = cityName;
-  }
-
-  public allSelected(all: any): void{
-    this.allSelecteds = all;
-  }
-
-  public canPrint(): boolean {
-    switch(this.idBox){
-    case 1:
-      return true;
-    default:
-      return false;   
-    }
-  }
-
-  public async Print(): Promise < void > {
-    if(this.showReport === true){
-      await this.noShowReport({show: false});
-    }
-    switch(this.idBox){
-    case 1:
-      await this.AgendamentoDeParadas();
-      break;
-    }
-    this.closeModal();
-  }
-
-  public async AgendamentoDeParadas(): Promise<void>{
-    switch(this.allSelecteds){
-    case true: 
-      await this.reportCondenacoesMunicipio({initialDate: this.initialDate, endDate: this.endDate, idReport: 1, reportModule:7 });
-      break;
-    case false:
-      await this.reportCondenacoesMunicipio({idCity: this.idCity, initialDate: this.initialDate, endDate: this.endDate, idReport: 11, reportModule:7 });
-      break;
-    }
   }
  
   public resetClearFields(): void{

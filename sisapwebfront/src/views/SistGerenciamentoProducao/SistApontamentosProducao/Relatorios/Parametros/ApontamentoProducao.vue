@@ -146,6 +146,12 @@ export default class ApontamentoProducao extends Vue {
   }
 
   public async ApontamentoProducao(): Promise<void>{
+    let filialModule;
+    if(this.filialName === 'UDM'){ 
+      filialModule = '8';
+    } else { 
+      filialModule = '1';
+    }
     switch(this.filialName){
     case 'UIC':
       if (this.turnoGroup === 4){
@@ -173,14 +179,14 @@ export default class ApontamentoProducao extends Vue {
           shift: this.turnoGroup,
           period: this.periodoGroup,
           idReport: 1,
-          reportModule: 1
+          reportModule: filialModule
         });
       }else if (this.turnoGroup === 4 && this.periodoGroup === 3){
         await this.reportApontamentoProducao({
           localUser: this.filialName, 
           date: this.date,
           idReport: 11,
-          reportModule: 1
+          reportModule: filialModule
         });
       }else if (this.turnoGroup === 4 && this.periodoGroup < 3){ 
         await this.reportApontamentoProducao({
@@ -188,7 +194,7 @@ export default class ApontamentoProducao extends Vue {
           date: this.date,
           period: this.periodoGroup,
           idReport: 12,
-          reportModule: 1
+          reportModule: filialModule
         });
       }else if (this.turnoGroup < 4 && this.periodoGroup === 3){ 
         await this.reportApontamentoProducao({
@@ -196,7 +202,7 @@ export default class ApontamentoProducao extends Vue {
           date: this.date,
           shift: this.turnoGroup,
           idReport: 13,
-          reportModule: 1
+          reportModule: filialModule
         });
       }
       break;

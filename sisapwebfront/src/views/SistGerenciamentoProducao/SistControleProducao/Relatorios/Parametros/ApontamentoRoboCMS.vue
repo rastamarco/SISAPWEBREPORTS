@@ -10,6 +10,13 @@
             <v-date-picker v-model="date" locale="pt" min="1950-01-01" @input="SendDate(date)" :max="dateMax" ></v-date-picker>
           </v-menu>
       </v-col>
+       <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
+      Cancelar
+    </v-btn>
+    <v-btn absolute rounded bottom right color="primary" @click="Print()" style="text-transform: none;">
+      <v-icon>mdi-printer</v-icon>
+      Imprimir
+    </v-btn> 
   </v-row>
 </template>
 
@@ -25,7 +32,12 @@ import {
 } from 'vuex-class';
 @Component
 export default class ApontamentoRoboCMS extends Vue {
-  @Prop() clearFields!: any; 
+  @Prop() clearFields!: any;
+  
+  @Action noShowReport
+  @Action reportApontamentoRoboCMS
+
+  @Getter showReport
 
   private date: any = new Date().toISOString().substr(0, 10) ;
   private menu: boolean = false;
@@ -35,7 +47,6 @@ export default class ApontamentoRoboCMS extends Vue {
   @Watch('clearFields')
   public async onPropertyChangeds(value: any, oldValue: any): Promise < void > {
     this.date = new Date().toISOString().substr(0, 10);
-    this.initialParameters();
     this.$emit('resetClearFields');
   }
 
@@ -57,18 +68,27 @@ export default class ApontamentoRoboCMS extends Vue {
     return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
   }
 
+   
+  public async Print(): Promise< void > {
+    if(this.showReport === true){
+      await this.noShowReport({show: false});
+    }
+    await this.ApontamentoRobo();
+    this.closeModal();
+  }
+  
+  public closeModal(): void {
+    this.$emit('closeModal');
+  }
+
+  public async ApontamentoRobo(): Promise<void>{
+    const initialDate = this.date+ ' 00:00:00';
+    const endDate = this.date+ ' 23:59:59';
+    await this.reportApontamentoRoboCMS({ initialDate: initialDate, endDate: endDate, idReport: 11, reportModule: 4 });
+  }
 
   public SendDate(date: any): void {
     this.menu = false;
-    this.$emit('getDate', date);
-  }
-
-  public initialParameters(): void{
-    this.SendDate(this.date);
-  }
-
-  mounted(){
-    this.initialParameters();
   }
 }
 </script>

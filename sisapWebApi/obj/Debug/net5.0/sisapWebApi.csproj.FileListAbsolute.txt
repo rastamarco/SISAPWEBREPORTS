@@ -141,6 +141,7 @@ C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\net5
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\net5.0\FastReport.Editor.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\net5.0\FastReport.Firebird.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\bin\Debug\net5.0\FastReport.Web.dll
+C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.csprojAssemblyReference.cache
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.AssemblyInfoInputs.cache
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.AssemblyInfo.cs
@@ -156,4 +157,3 @@ C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\ref\sisapWebApi.dll
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.pdb
 C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.genruntimeconfig.cache
-C:\Users\Lar\source\repos\sisapWebApi\SISAPWEBREPORTS\sisapWebApi\obj\Debug\net5.0\sisapWebApi.csprojAssemblyReference.cache

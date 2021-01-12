@@ -9,7 +9,7 @@
               item-value="cod_Fornecedor" 
               dense 
               label="Fornecedores " style="padding-top:5px;" hide-details no-data-text="Fornecedor não Encontrado!"></v-autocomplete>
-              <span style="font-size: 10px; opacity: 0.7;" v-if="loadingProviders === false">Não foi possível obter a lista de Fornecedores</span>
+              <span style="font-size: 10px; opacity: 0.7;color: red;" v-if="loadingProviders === false">Não foi possível obter a lista de Fornecedores</span>
           </div>
           <div class="texts">
           <span style="font-size: 14px; opacity: 0.7;padding-top:3px;">Nº da Placa</span>
@@ -20,6 +20,13 @@
             <v-text-field v-model="nrNote" filled rounded placeholder="############" hide-details></v-text-field>
           </div>
       </v-col>
+      <v-btn absolute rounded text bottom left color="primary" @click="closeModal()" style="text-transform: none;">
+      Cancelar
+    </v-btn>
+    <v-btn absolute rounded bottom right color="primary" @click="Print()" :disabled="!canPrint()" style="text-transform: none;">
+      <v-icon>mdi-printer</v-icon>
+      Imprimir
+    </v-btn> 
   </v-row>
 </template>
 
@@ -38,19 +45,22 @@ export default class EtiquetasPallets extends Vue {
   @Prop() clearFields!: any; 
 
   @Action getAllProviders
+  @Action noShowReport
+  @Action reportEtiquetaPallet
 
   @Getter allProviders
   @Getter loadingProviders
   @Getter filialName
+  @Getter showReport
 
-  private nrPlaca: any = null;
+  private nrPlaca: string = '';
   private provider: any = null;
   private nrNote: any = null;
   private providerName: any = null;
-  // private loadingProviders: any = null;
+  private idProvider: any = null;
 
   public Clear(): void{
-    this.nrPlaca = null;
+    this.nrPlaca = '';
     this.provider = null;
     this.nrNote = null;
   }
@@ -64,7 +74,6 @@ export default class EtiquetasPallets extends Vue {
   @Watch('nrPlaca')
   public async onPropertyChangedNrPlaca(value: any, oldValue: any): Promise < void > {
     this.nrPlaca = value.toUpperCase();
-    this.$emit('getNrPlaca', value);
   }
 
   @Watch('provider')
@@ -74,16 +83,42 @@ export default class EtiquetasPallets extends Vue {
         this.providerName = this.allProviders[i].desc_Fornecedor;
       }
     }
-    this.$emit('getProvider', value, this.providerName);
+    this.getProvider(value, this.providerName);
   }
 
-  @Watch('nrNote')
-  public async onPropertyChangedNrNote(value: any, oldValue: any): Promise < void > {
-    this.$emit('getNote', value);
+  public getProvider(idProvider: any, providerName: any): void{
+    this.idProvider = idProvider;
+    this.providerName = providerName;
   }
 
   public toUpper(placa: any): any {
     return placa.toUpperCase();
+  }
+
+  public closeModal(): void {
+    this.$emit('closeModal');
+  }
+
+  public canPrint(): boolean {
+    if (this.nrPlaca.length === 8 && this.idProvider !== null && this.nrNote !== null){
+      return true;
+    } else { 
+      return false;
+    }
+  }
+
+  public async Print(): Promise < void > {
+    if(this.showReport === true){
+      await this.noShowReport({show: false});
+    }
+    await this.EtiquetasPallets();
+    this.closeModal();
+  }
+
+  public async EtiquetasPallets(): Promise<void>{
+    await this.reportEtiquetaPallet({
+      idProvider: this.idProvider, providerName: this.providerName, 
+      nrPlaca: this.nrPlaca, nrNote: this.nrNote, idReport: 1, reportModule: 5 });
   }
 
   async mounted(){
