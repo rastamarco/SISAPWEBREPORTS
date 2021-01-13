@@ -80,7 +80,6 @@ export default class InputModalsExp extends Vue {
     case 6: 
       this.closeModal();
       await this.ReportPosicaoVazia();
-      await this.SetIdBox({id: null});
       break;
     } 
   }
@@ -97,6 +96,7 @@ export default class InputModalsExp extends Vue {
   public async ReportPosicaoVazia(): Promise<void> {
     this.closeModal();
     await this.ReportPosicaoCamaraVazia({filialName: this.filialName, idReport: 51, reportModule: 2 });
+    await this.SetIdBox({id: null});
   }
 
   async mounted(){

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="01/12/2021 10:40:43" ReportInfo.CreatorVersion="2020.4.9.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="01/13/2021 07:59:00" ReportInfo.CreatorVersion="2020.4.9.0">
   <Dictionary>
-    <FirebirdDataConnection Name="EmbPeriodo" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttVf0qTRRKReeOJazhBTszDg=">
+    <FirebirdDataConnection Name="EmbPeriodo" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttUyjSRDh4xT+qSZ2Cg+CmRM=">
       <TableDataSource Name="Table" Alias="EmPeriodos" DataType="System.Int32" Enabled="true" SelectCommand="select&#13;&#10;sum(tb_itenscarga.qt_caixas) as qt_embarcada, sum(tb_carregamento.qt_caixas) as qt_embarque, tb_carga.cod_carga, &#13;&#10;tb_carga.nr_placa, tb_carga.dt_emissao, tb_carga.dt_embarque, tb_carga.tot_volumes, tb_carregamento.ho_carregamento, tb_carga.nr_conteiner, tb_carregamento.ho_fimcarga, tb_carregamento.cod_conferente, tb_itenscarga.cod_produto &#13;&#10;from tb_carga, tb_itenscarga, tb_carregamento&#13;&#10; where&#13;&#10; (tb_carregamento.cod_conferente = @CONF) and&#13;&#10;(tb_carga.dt_embarque &gt;= @INI) and (tb_carga.dt_embarque &lt;= @FIM) and&#13;&#10;(tb_carga.cod_carga = tb_itenscarga.cod_carga) and (tb_carregamento.cod_itemcarga = tb_itenscarga.cod_itencarga) and &#13;&#10;(tb_carga.NR_CONTEINER = tb_itenscarga.nr_conteiner) and (tb_carga.nr_placa = tb_itenscarga.nr_placa) &#13;&#10;group by tb_carga.cod_carga, tb_carga.nr_placa, tb_carga.nr_conteiner, tb_carga.dt_emissao, tb_carga.dt_embarque, &#13;&#10;tb_carregamento.ho_carregamento, tb_carregamento.ho_fimcarga, tb_carregamento.cod_conferente, tb_carga.tot_volumes, tb_itenscarga.cod_produto">
         <Column Name="QT_EMBARCADA" DataType="System.Int64"/>
         <Column Name="QT_EMBARQUE" DataType="System.Int64"/>
@@ -32,8 +32,8 @@
       <TextObject Name="Text2" Left="660" Width="56.7" Height="18.9" Text="[Page#]" Font="Arial, 10pt"/>
       <TextObject Name="Text3" Left="601.9" Width="56.7" Height="18.9" Text="Página" Font="Arial, 10pt"/>
       <TextObject Name="Text10" Left="89.05" Top="1" Width="160.65" Height="15.12" Text="Cooperativa AgroIndustrial Lar" Font="Arial, 8pt"/>
-      <TextObject Name="Text11" Left="217.35" Top="66.15" Width="94.5" Height="18.9" Font="Arial, 10pt"/>
-      <TextObject Name="Text12" Left="368.55" Top="66.15" Width="94.5" Height="18.9" Font="Arial, 10pt"/>
+      <TextObject Name="Text11" Left="217.35" Top="66.15" Width="94.5" Height="15.12" Text="[ToDateTime([INICIAL])]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+      <TextObject Name="Text12" Left="368.55" Top="66.15" Width="94.5" Height="15.12" Text="[ToDateTime([FINAL])]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
       <TextObject Name="Text13" Left="9.45" Top="103.95" Width="56.7" Height="15.12" Text="Carga" Font="Arial, 8pt, style=Bold"/>
       <TextObject Name="Text14" Left="70.15" Top="103.95" Width="47.25" Height="15.12" Text="Placa" Font="Arial, 8pt, style=Bold"/>
       <TextObject Name="Text15" Left="131.65" Top="103.95" Width="85.05" Height="15.12" Text="Nr. Conteiner" Font="Arial, 8pt, style=Bold"/>

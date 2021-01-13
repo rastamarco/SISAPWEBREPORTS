@@ -15,7 +15,7 @@
         <span style="padding-top: 15px;">Data Final</span>
         <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
           <template v-slot:activator="{ on, attrs }">
-            <v-text-field  v-model="dateFormatted2" @blur="date2 = parseDate(dateFormatted)" prepend-icon="mdi-calendar" 
+            <v-text-field  v-model="dateFormatted2" @blur="date2 = parseDate(dateFormatted2)" prepend-icon="mdi-calendar" 
             readonly outlined hide-details dense v-bind="attrs" v-on="on" style="padding-top:5px;width: 230px;"></v-text-field>
           </template>
           <v-date-picker v-model="date2" locale="pt" @input="menu2 = false" min="1950-01-01" :max="dateMax" ></v-date-picker>
@@ -101,18 +101,15 @@ export default class RelatorioEmbarquesPeriodo extends Vue {
    @Watch('date')
    public async onPropertyChangedsDate(value: any, oldValue: any): Promise < void > {
      this.dateFormatted = this.formatDate(value);
-     this.$emit('getInitialDate', value);
    }
 
    @Watch('date2')
    public async onPropertyChangedsDateEnd(value: any, oldValue: any): Promise < void > {
      this.dateFormatted2 = this.formatDate(value);
-     this.$emit('getEndDate', value);
    }
 
    @Watch('codSicop')
    public async onPropertyChangedsConferente(value: any, oldValue: any): Promise < void > {
-     this.$emit('getCodSicop', value);
      if(value.length > 3){
        await this.GetEmployeRegister({filialName: this.filialName, codSicop: value});
        if(this.validEmploye.coD_MATRICULA === null || this.validEmploye.coD_MATRICULA === 0){
@@ -121,11 +118,6 @@ export default class RelatorioEmbarquesPeriodo extends Vue {
          this.employeValid = false;
        }
      }
-   }
-
-   @Watch('rgShift')
-   public async onPropertyChangedsRgShift(value: any, oldValue: any): Promise < void > {
-     this.$emit('getShift', value);
    }
 
    public setDate(): void {
@@ -156,7 +148,9 @@ export default class RelatorioEmbarquesPeriodo extends Vue {
        break;
      case 10: 
        await this.ReportEmbarquesDesembarques();
+       break;
      }
+     this.closeModal();
    }
 
    public async ReportEmbarquesPeriodos(): Promise<void> {
@@ -193,13 +187,13 @@ export default class RelatorioEmbarquesPeriodo extends Vue {
        initDate = this.date;
        finalDate = this.date2;
      }
-     if(this.codSicop === null && this.rgShift < 3){
+     if(this.codSicop === null && this.rgShift === '3'){
        await this.ReportEmbarquesDesembarque({initialDate: initDate, endDate: finalDate, idReport: 56, reportModule: 2 });
-     }else if(this.codSicop === null && this.rgShift === 3) { 
-       await this.ReportEmbarquesDesembarque({initialDate: initDate, endDate: finalDate, nrConferente: this.codSicop, idReport: 57, reportModule: 2 });
-     } else if (this.codSicop !== null && this.rgShift < 3){
-       await this.ReportEmbarquesDesembarque({initialDate: initDate, endDate: finalDate, nrConferente: this.codSicop, idReport: 58, reportModule: 2 });
-     } else if (this.codSicop !== null && this.rgShift === 3){
+     }else if(this.codSicop === null && this.rgShift < '3') { 
+       await this.ReportEmbarquesDesembarque({initialDate: initDate, endDate: finalDate, shift: this.rgShift, idReport: 57, reportModule: 2 });
+     } else if (this.codSicop !== null && this.rgShift < '3'){
+       await this.ReportEmbarquesDesembarque({initialDate: initDate, endDate: finalDate, nrConferente: this.codSicop, shift:this.rgShift, idReport: 58, reportModule: 2 });
+     } else if (this.codSicop !== null && this.rgShift === '3'){
        await this.ReportEmbarquesDesembarque({initialDate: initDate, endDate: finalDate, nrConferente: this.codSicop, idReport: 59, reportModule: 2 });
      }
    }
