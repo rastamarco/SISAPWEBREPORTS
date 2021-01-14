@@ -47,6 +47,7 @@ export default class DataInicialDataFinal extends Vue {
 
   @Action noShowReport
   @Action reportEntradaSaidaTunelCongelamentoExp
+  @Action reportCargasEmbarcadas
 
   @Getter showReport
   @Getter filialName
@@ -115,6 +116,9 @@ export default class DataInicialDataFinal extends Vue {
      case 11: 
        await this.ReportEntradaSaidaTunelExp();
        break;
+     case 12: 
+       await this.ReportCargasEmbarcadas();
+       break;
      }
      this.closeModal();
    }
@@ -135,7 +139,24 @@ export default class DataInicialDataFinal extends Vue {
      await this.reportEntradaSaidaTunelCongelamentoExp({ initialDate: initDate, endDate: finalDate, idReport: 60, reportModule: 2});
    }
 
+   public async ReportCargasEmbarcadas(): Promise<void> {
+     let initDate = '';
+     let finalDate = '';
+     if(this.date === this.date2) {
+       initDate = this.date;
+       finalDate = this.date;
+     } else if(this.date > this.date2) {
+       this.$swal('Ops!', 'A data Final é menor que a data Inicial.','warning');
+       return;
+     } else if(this.date < this.date2) {
+       initDate = this.date;
+       finalDate = this.date2;
+     }
+     await this.reportCargasEmbarcadas({ initialDate: initDate, endDate: finalDate, idReport: 61, reportModule: 2});
+   }
+
    public closeModal(): void {
+     this.Clear();
      this.$emit('closeModal');
    }
 } 

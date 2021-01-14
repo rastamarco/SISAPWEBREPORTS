@@ -24,7 +24,7 @@
       <!-- Embarques Períodos --> 
       <embarquesDesembarques v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 9 || idBox === 10"  />
       <!-- Entrada/Saida do Túnel de Congelamento --> 
-      <dataFinalDataInicial v-on="{closeModal, resetClearFields}" v-bind="{clearField}" v-if="idBox === 11" />
+      <dataFinalDataInicial v-on="{closeModal, resetClearFields}" v-bind="{clearField}" v-if="idBox === 11 || idBox === 12"/>
     </v-row>
   </v-card-actions>
 </v-card>
