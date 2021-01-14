@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="01/13/2021 17:10:26" ReportInfo.CreatorVersion="2020.4.9.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="01/14/2021 15:26:22" ReportInfo.CreatorVersion="2020.4.9.0">
   <Dictionary>
-    <FirebirdDataConnection Name="ParadasEmbDesem" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttW4ADLNMb45RtLkDHgjTNaE=">
+    <FirebirdDataConnection Name="ParadasEmbDesem" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttft1HYz/gl6jI5GBFenoE4o=">
       <TableDataSource Name="Table" Alias="ParadasEmbarquesDesembarques" DataType="System.Int32" Enabled="true" SelectCommand="select  * from TB_CABREGEMB, TB_DETREGEMB &#13;&#10;where TB_DETREGEMB.COD_CABREGEMB = TB_CABREGEMB.COD_CABREGEMB &#13;&#10;and (TB_CABREGEMB.DT_CABREGEMB &gt;= @INI and TB_CABREGEMB.DT_CABREGEMB  &lt;= @FIM)&#13;&#10;and TB_CABREGEMB.COD_TURNO = @TURN&#13;&#10;and TB_CABREGEMB.COD_MATCONFERENTE = @COD&#13;&#10;order by tb_cabregemb.dt_cabregemb, tb_cabregemb.cod_matconferente, tb_detregemb.cod_sequencia">
         <Column Name="COD_CABREGEMB" DataType="System.Int32"/>
         <Column Name="DT_CABREGEMB" DataType="System.DateTime"/>
@@ -29,7 +29,7 @@
         <CommandParameter Name="COD" DataType="10" Expression="[MAT]"/>
       </TableDataSource>
     </FirebirdDataConnection>
-    <FirebirdDataConnection Name="MatFunc" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttZxaQbtXyftPHg/uEwTh1Rg=">
+    <FirebirdDataConnection Name="MatFunc" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttcgrLv7KX1eyTEUu3Lv/AMc=">
       <TableDataSource Name="Table1" Alias="Funcionario" DataType="System.Int32" Enabled="true" SelectCommand="select * from tb_funcionario where cod_matricula = @CONFERENTE">
         <Column Name="COD_MATRICULA" DataType="System.Int32"/>
         <Column Name="COD_FILIAL" DataType="System.String"/>
@@ -43,7 +43,7 @@
         <CommandParameter Name="CONFERENTE" DataType="10" Expression="[ParadasEmbarquesDesembarques.COD_MATCONFERENTE]"/>
       </TableDataSource>
     </FirebirdDataConnection>
-    <FirebirdDataConnection Name="Formulario" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttdJbALVHMCcTNPklkHqlONU=">
+    <FirebirdDataConnection Name="Formulario" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttXd/5yY4jwexyvTJVJo4U/0=">
       <TableDataSource Name="Table3" Alias="Form" DataType="System.Int32" Enabled="true" SelectCommand="select * from TB_FORMULARIO&#13;&#10;where&#13;&#10;COD_FORMULARIO = 'FO 060 320 009'&#13;&#10;order by&#13;&#10;DT_REVISAO desc&#13;&#10;">
         <Column Name="COD_FORMULARIO" DataType="System.String"/>
         <Column Name="DT_EMISSAO" DataType="System.DateTime"/>
@@ -51,7 +51,7 @@
         <Column Name="NR_FORMULARIO" DataType="System.Int32"/>
       </TableDataSource>
     </FirebirdDataConnection>
-    <FirebirdDataConnection Name="ParadasDurante" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttXh+qaeo5O9m6jzdxTR0GM0=">
+    <FirebirdDataConnection Name="ParadasDurante" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttWtBO35ze/avxJSDNHfLtVw=">
       <TableDataSource Name="Table5" Alias="ParadasEmb" DataType="System.Int32" Enabled="true" SelectCommand="select * &#13;&#10;from TB_PARADASEMB, tb_motivoparada&#13;&#10;where&#13;&#10;tb_motivoparada.cod_motivoparada = TB_PARADASEMB.cod_motivo and  &#13;&#10;COD_CABREGEMB = @COD  and&#13;&#10;COD_SEQUENCIA = @SEQ">
         <Column Name="COD_CABREGEMB" DataType="System.Int32"/>
         <Column Name="COD_PARADASEMB" DataType="System.Int32"/>
@@ -65,7 +65,7 @@
         <CommandParameter Name="SEQ" DataType="10" Expression="[ParadasEmbarquesDesembarques.COD_SEQUENCIA]"/>
       </TableDataSource>
     </FirebirdDataConnection>
-    <FirebirdDataConnection Name="ParadasAntes" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttXpUgbXUrg1kO3cJthDsC18=">
+    <FirebirdDataConnection Name="ParadasAntes" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttep9FYSOKkWgpxtCgaqEhf0=">
       <TableDataSource Name="Table6" Alias="ParadaAntes" DataType="System.Int32" Enabled="true" SelectCommand="select sum(tb_maqocpa.ho_ocpa - cast('00:00:00' as time)) as TOT_SEG,&#13;&#10;tb_maquinas.desc_maquina, tb_setor.desc_setor,tb_maqocpa.cod_setor, tb_maqocpa.cod_turno, &#13;&#10;tb_maquinas.cod_linha, tb_maqocpa.desc_maqocpa, tb_maqocpa.dt_ocpa, tb_maqocpa.COD_MOTIVOPARADA,&#13;&#10;tb_maqocpa.cod_maquina,tb_maqocpa.HO_INIOCPA, tb_maqocpa.HO_FIMOCPA, tb_maqocpa.ID_PAROULINHA, tb_maqocpa.ID_CONSQPROCESSO, tb_maqocpa.NR_OS&#13;&#10;from tb_maqocpa, tb_maquinas, tb_setor &#13;&#10;where tb_maqocpa.cod_maquina = tb_maquinas.cod_maquina and &#13;&#10;tb_maquinas.cod_setor = tb_setor.cod_setor and tb_maquinas.cod_setor = tb_maqocpa.cod_setor &#13;&#10;and (tb_maqocpa.dt_ocpa &gt;= '2021-01-12' and tb_maqocpa.dt_ocpa &lt;= '2021-01-12')&#13;&#10;and tb_maqocpa.cod_setor = '322'&#13;&#10;and tb_maquinas.desc_maquina = @FUNC&#13;&#10;and cod_turno = '1'&#13;&#10;group by tb_maquinas.cod_linha, tb_maqocpa.cod_turno, tb_maqocpa.cod_setor, tb_maqocpa.dt_ocpa, &#13;&#10;tb_maquinas.desc_maquina, tb_setor.desc_setor, tb_maqocpa.desc_maqocpa, tb_maqocpa.cod_maquina, tb_maqocpa.COD_MOTIVOPARADA, tb_maqocpa.HO_INIOCPA, tb_maqocpa.HO_FIMOCPA, tb_maqocpa.ID_PAROULINHA,tb_maqocpa.ID_CONSQPROCESSO, tb_maqocpa.NR_OS">
         <Column Name="TOT_SEG" DataType="System.Decimal"/>
         <Column Name="DESC_MAQUINA" DataType="System.String"/>
@@ -85,12 +85,23 @@
         <CommandParameter Name="FUNC" DataType="16" Expression="[Funcionario.NO_FUNCIONARIO]"/>
       </TableDataSource>
     </FirebirdDataConnection>
-    <FirebirdDataConnection Name="MotivoParada" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttSBcK7Cp0pGlKfNrCbHALVo=">
+    <FirebirdDataConnection Name="MotivoParada" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttc0JQv9KeJf7iJsW9ODkwvw=">
       <TableDataSource Name="Table7" Alias="MotivoParada" DataType="System.Int32" Enabled="true" SelectCommand="select * from tb_motivoparada where cod_motivoparada = @COD">
         <Column Name="COD_MOTIVOPARADA" DataType="System.Int32"/>
         <Column Name="DESC_MOTIVOPARADA" DataType="System.String"/>
         <Column Name="ID_ATIVO" DataType="System.String"/>
         <CommandParameter Name="COD" DataType="10" Expression="[ParadaAntes.COD_MOTIVOPARADA]"/>
+      </TableDataSource>
+    </FirebirdDataConnection>
+    <FirebirdDataConnection Name="ConsFamilia" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttVl7/BzTd1l0vtjy4bmAv88=">
+      <TableDataSource Name="Table8" Alias="Familia" DataType="System.Int32" Enabled="true" SelectCommand="select &#13;&#10;COD_FAMILIAEMBARQUE, DESC_ME, DESC_MI, DESC_VEGETAL, NR_KGEMBFUN,&#13;&#10;KG_HORA,TEMPO_CARREGAMENTO &#13;&#10;from&#13;&#10;        tb_familiaembarque &#13;&#10; where &#13;&#10;        COD_FAMILIAEMBARQUE = 1&#13;&#10; order by &#13;&#10;        COD_FAMILIAEMBARQUE &#13;&#10;">
+        <Column Name="COD_FAMILIAEMBARQUE" DataType="System.Int32"/>
+        <Column Name="DESC_ME" DataType="System.String"/>
+        <Column Name="DESC_MI" DataType="System.String"/>
+        <Column Name="DESC_VEGETAL" DataType="System.String"/>
+        <Column Name="NR_KGEMBFUN" DataType="System.Single"/>
+        <Column Name="KG_HORA" DataType="System.Decimal"/>
+        <Column Name="TEMPO_CARREGAMENTO" DataType="System.TimeSpan"/>
       </TableDataSource>
     </FirebirdDataConnection>
     <Parameter Name="INICIAL" DataType="System.String" Expression="[DataInicial]"/>
@@ -164,16 +175,18 @@
       <TextObject Name="Text54" Left="549.65" Width="94.5" Height="15.12" Text="[ParadasEmbarquesDesembarques.COD_TURNO]" Font="Arial, 10pt"/>
       <DataBand Name="Data1" Top="151.64" Width="718.2" Height="16.12" Border.Lines="All" DataSource="Table">
         <TextObject Name="Text55" Left="9.45" Top="0.55" Width="85.05" Height="15.12" Text="[ParadasEmbarquesDesembarques.COD_SEQUENCIA]" HorzAlign="Center" Font="Arial, 10pt"/>
-        <TextObject Name="Text56" Left="99.5" Top="0.55" Width="47.25" Height="15.12" Text="[ParadasEmbarquesDesembarques.COD_FAMILIA]" HorzAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text56" Left="99.5" Top="0.55" Width="47.25" Height="15.12" Text="[ParadasEmbarquesDesembarques.COD_FAMILIA]" Font="Arial, 10pt"/>
         <TextObject Name="Text58" Left="362.65" Top="0.55" Width="75.6" Height="15.12" Text="[ParadasEmbarquesDesembarques.NR_PESSOAS]" HorzAlign="Center" Font="Arial, 10pt"/>
         <TextObject Name="Text59" Left="444.15" Top="0.55" Width="66.15" Height="15.12" Text="[ParadasEmbarquesDesembarques.HO_INI1]" Font="Arial, 10pt"/>
         <TextObject Name="Text60" Left="504.75" Top="0.55" Width="66.15" Height="15.12" Text="[ParadasEmbarquesDesembarques.HO_FIM1]" Font="Arial, 10pt"/>
         <TextObject Name="Text61" Left="567.55" Top="0.55" Width="151.2" Height="15.12" Text="[ParadasEmbarquesDesembarques.DESC_OBSERVACOES]" Font="Arial, 10pt"/>
         <TextObject Name="Text57" Left="266.7" Top="1" Width="85.05" Height="15.12" Text="[ParadasEmbarquesDesembarques.QT_KG]" RightToLeft="true" Font="Arial, 10pt"/>
+        <TextObject Name="Text70" Left="136.65" Top="2" Width="122.85" Height="11.34" Text="[Familia.DESC_ME]/[Familia.DESC_MI]/[Familia.DESC_VEGETAL]" Font="Arial, 7pt"/>
         <DataBand Name="Data2" Top="171.76" Width="718.2" DataSource="Table1"/>
+        <DataBand Name="Data3" Top="175.76" Width="718.2" DataSource="Table8"/>
       </DataBand>
-      <GroupFooterBand Name="GroupFooter1" Top="175.76" Width="718.2"/>
+      <GroupFooterBand Name="GroupFooter1" Top="179.76" Width="718.2"/>
     </GroupHeaderBand>
-    <PageFooterBand Name="PageFooter1" Top="179.76" Width="718.2" Height="18.9"/>
+    <PageFooterBand Name="PageFooter1" Top="183.76" Width="718.2" Height="18.9"/>
   </ReportPage>
 </Report>
