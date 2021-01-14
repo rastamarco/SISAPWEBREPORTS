@@ -23,6 +23,8 @@
       <produtosEmbarcados v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 8" />
       <!-- Embarques Períodos --> 
       <embarquesDesembarques v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 9 || idBox === 10"  />
+      <!-- Entrada/Saida do Túnel de Congelamento --> 
+      <dataFinalDataInicial v-on="{closeModal, resetClearFields}" v-bind="{clearField}" v-if="idBox === 11" />
     </v-row>
   </v-card-actions>
 </v-card>
@@ -46,6 +48,7 @@ import localizacaoProduto from '../Relatorios/Parametros/localizacaoProdutos.vue
 import historicoCamaraPallet from '../Relatorios/Parametros/historicoCamaraPallet.vue';
 import produtosEmbarcados from '../Relatorios/Parametros/produtosEmbarcados.vue';
 import embarquesDesembarques from '../Relatorios/Parametros/embarquesDesembarques.vue';
+import dataFinalDataInicial from '../Relatorios/Parametros/dataInicialFinal.vue';
 
 @Component ({
   components: {
@@ -56,6 +59,7 @@ import embarquesDesembarques from '../Relatorios/Parametros/embarquesDesembarque
     historicoCamaraPallet,
     produtosEmbarcados,
     embarquesDesembarques,
+    dataFinalDataInicial
   }
 })
 export default class InputModalsExp extends Vue {

@@ -98,9 +98,14 @@ export default class RelatorioSidebarExp extends Vue {
         title: 'Embarques por Período',
         show: ''
       },
-       {
+      {
         id: 10,
         title: 'Paradas, Embarques. e Desembarques',
+        show: ''
+      },
+      {
+        id: 11,
+        title: 'Ent/Saída Túnel de Congelamento',
         show: ''
       },
     ]
@@ -151,6 +156,10 @@ export default class RelatorioSidebarExp extends Vue {
       case 10:
         this.nameBox = 'Relatório de Paradas, Emb. e Desembarques';
         this.idBox = 10;
+      break;
+      case 11:
+        this.nameBox = 'Relatório Entrada/Saida de Túnel de Congelamento';
+        this.idBox = 11;
       break;
       default:
         break;

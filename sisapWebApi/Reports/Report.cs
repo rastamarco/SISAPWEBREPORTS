@@ -218,6 +218,7 @@ namespace sisapWebApi.Reports
             reportItems.Add(new ReportService(57, "Expedition/EmbarquesParadasDesembarquesTurno.frx"));
             reportItems.Add(new ReportService(58, "Expedition/EmbarquesParadasDesembarquesTurnoMatricula.frx"));
             reportItems.Add(new ReportService(59, "Expedition/EmbarquesParadasDesembarquesMatricula.frx"));
+            reportItems.Add(new ReportService(60, "Expedition/EntradaSaidaTunelCongelamento.frx"));
         }
 
         public void UIA2Expedition()
