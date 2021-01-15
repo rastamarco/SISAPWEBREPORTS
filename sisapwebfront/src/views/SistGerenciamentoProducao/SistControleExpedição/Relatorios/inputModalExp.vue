@@ -24,7 +24,9 @@
       <!-- Embarques Períodos --> 
       <embarquesDesembarques v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 9 || idBox === 10"  />
       <!-- Entrada/Saida do Túnel de Congelamento --> 
-      <dataFinalDataInicial v-on="{closeModal, resetClearFields}" v-bind="{clearField}" v-if="idBox === 11 || idBox === 12"/>
+      <dataFinalDataInicial v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 11 || idBox === 12"/>
+      <!-- Reagendamento de Cargas --> 
+      <reagendamentoCargas v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 13" />
     </v-row>
   </v-card-actions>
 </v-card>
@@ -49,6 +51,7 @@ import historicoCamaraPallet from '../Relatorios/Parametros/historicoCamaraPalle
 import produtosEmbarcados from '../Relatorios/Parametros/produtosEmbarcados.vue';
 import embarquesDesembarques from '../Relatorios/Parametros/embarquesDesembarques.vue';
 import dataFinalDataInicial from '../Relatorios/Parametros/dataInicialFinal.vue';
+import reagendamentoCargas from '../Relatorios/Parametros/reagendamentoCargas.vue';
 
 @Component ({
   components: {
@@ -59,7 +62,8 @@ import dataFinalDataInicial from '../Relatorios/Parametros/dataInicialFinal.vue'
     historicoCamaraPallet,
     produtosEmbarcados,
     embarquesDesembarques,
-    dataFinalDataInicial
+    dataFinalDataInicial,
+    reagendamentoCargas
   }
 })
 export default class InputModalsExp extends Vue {

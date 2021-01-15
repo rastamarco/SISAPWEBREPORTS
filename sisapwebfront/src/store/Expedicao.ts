@@ -45,6 +45,71 @@ export const Expedicao = {
     },
   },
   actions:{
+    /////////////////////  GET INFORMATIONS 
+    async getChambersByFilial({ commit }, options){
+      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/expedition/chambers/${options.filial}?`;
+      const response = await axios({
+        method: 'get',
+        url: routeAPILogin
+      });
+      if (response) {
+        if (response.status === 200) {
+          await commit('setAllChambers', response.data);
+        }
+      } 
+    },
+
+    async getProductName({ commit }, options){
+      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/informations/product/${options.productId}/${options.filialName}?`;
+      const response = await axios({
+        method: 'get',
+        url: routeAPILogin
+      });
+      if (response) {
+        if (response.status === 200) {
+          await commit('setProductName', response.data);
+        } else {
+          await commit('setProductName', null);
+        }
+      } 
+    },
+
+    async getValidPallet({ commit }, options){
+      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/expedition/pallet/${options.filialName}/${options.nrPallet}?`;
+      const response = await axios({
+        method: 'get',
+        url: routeAPILogin
+      });
+      if (response) {
+        if (response.status === 200) {
+          await commit('setValidPallet', response.data);
+        } else {
+          await commit('setValidPallet', null);
+        }
+      } 
+    },
+
+    async SetIdBox({commit}, options){
+      commit('setBox', options.id);
+    },
+
+    async GetEmployeRegister({ commit }, options){
+      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/users/employe/${options.codSicop}/${options.filialName}?`;
+      const response = await axios({
+        method: 'get',
+        url: routeAPILogin
+      });
+      if (response) {
+        if (response.status === 200) {
+          await commit('setValidEmploye', response.data);
+        } else {
+          await commit('setValidEmploye', null);
+        }
+      } 
+    },
+    /////////////////////  END INFORMATIONS
+    
+    //////////////////// REPORT FUNCTIONS
     async reportFormacaoPallets({ commit }, options){
       const parameter = new ParametersExpedicao();
       parameter.nrPallet = options.nrPallet;
@@ -82,19 +147,6 @@ export const Expedicao = {
       await commit('setShowReport', true);
     },
 
-    async getChambersByFilial({ commit }, options){
-      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/expedition/chambers/${options.filial}?`;
-      const response = await axios({
-        method: 'get',
-        url: routeAPILogin
-      });
-      if (response) {
-        if (response.status === 200) {
-          await commit('setAllChambers', response.data);
-        }
-      } 
-    },
-
     async reportCamara({commit }, options){
       const parameter = new ParametersExpedicao();
       await commit('setIdReport', options.idReport);
@@ -121,36 +173,6 @@ export const Expedicao = {
 
     },
 
-    async getProductName({ commit }, options){
-      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/informations/product/${options.productId}/${options.filialName}?`;
-      const response = await axios({
-        method: 'get',
-        url: routeAPILogin
-      });
-      if (response) {
-        if (response.status === 200) {
-          await commit('setProductName', response.data);
-        } else {
-          await commit('setProductName', null);
-        }
-      } 
-    },
-
-    async getValidPallet({ commit }, options){
-      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/expedition/pallet/${options.filialName}/${options.nrPallet}?`;
-      const response = await axios({
-        method: 'get',
-        url: routeAPILogin
-      });
-      if (response) {
-        if (response.status === 200) {
-          await commit('setValidPallet', response.data);
-        } else {
-          await commit('setValidPallet', null);
-        }
-      } 
-    },
-
     async ReportLocalizacaoProdutos({commit}, options){
       const parameter = new ParametersExpedicao();
       parameter.CodSicop = options.codSicop;
@@ -168,10 +190,6 @@ export const Expedicao = {
       await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
-    },
-
-    async SetIdBox({commit}, options){
-      commit('setBox', options.id);
     },
 
     async ReportPesoProdutoCamara({commit}, options){
@@ -213,21 +231,6 @@ export const Expedicao = {
 
     },
 
-    async GetEmployeRegister({ commit }, options){
-      const routeAPILogin = `${process.env.VUE_APP_API_URL}/api/users/employe/${options.codSicop}/${options.filialName}?`;
-      const response = await axios({
-        method: 'get',
-        url: routeAPILogin
-      });
-      if (response) {
-        if (response.status === 200) {
-          await commit('setValidEmploye', response.data);
-        } else {
-          await commit('setValidEmploye', null);
-        }
-      } 
-    },
-
     async ReportEmbarquesDesembarque ({ commit }, options){
       const parameter = new ParametersExpedicao();
       parameter.InitialDate = options.initialDate;
@@ -263,5 +266,18 @@ export const Expedicao = {
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
     },
+
+    async reportReagendamentoCargas ({ commit }, options){
+      const parameter = new ParametersExpedicao();
+      parameter.InitialDate = options.initialDate;
+      parameter.EndDate = options.endDate;
+      parameter.nrNote = options.operation;
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
+    },
+
+    //////////////////// END REPORT FUNCTIONS
   }
 };

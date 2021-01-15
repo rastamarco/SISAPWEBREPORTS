@@ -109,9 +109,7 @@ export default class HistoricoCamaraPallet extends Vue {
     this.status = null;
     this.ignore = false;
     this.date = new Date().toISOString().substr(0, 10);
-    this.dateFormatted = this.formatDate(new Date().toISOString().substr(0, 10));
     this.date2 = new Date().toISOString().substr(0, 10);
-    this.dateFormatted2 = this.formatDate(new Date().toISOString().substr(0, 10));
     this.productDescription = null;
     this.isGettingProduct = false;
   }

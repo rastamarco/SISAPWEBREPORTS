@@ -11,7 +11,7 @@
           <v-date-picker v-model="date" locale="pt" @input="menu = false" min="1950-01-01" :max="dateMax" ></v-date-picker>
         </v-menu>
         </div>
-        <div class="input">
+        <div class="input" v-if="box !== 11">
         <span style="padding-top: 15px;">Data Final</span>
         <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
           <template v-slot:activator="{ on, attrs }">
@@ -126,16 +126,8 @@ export default class DataInicialDataFinal extends Vue {
    public async ReportEntradaSaidaTunelExp(): Promise < void > {
      let initDate = '';
      let finalDate = '';
-     if(this.date === this.date2) {
-       initDate = this.date;
-       finalDate = this.addDay(this.date);
-     } else if(this.date > this.date2) {
-       this.$swal('Ops!', 'A data Final é menor que a data Inicial.','warning');
-       return;
-     } else if(this.date < this.date2) {
-       initDate = this.date;
-       finalDate = this.addDay(this.date2);
-     }
+     initDate = this.date;
+     finalDate = this.addDay(this.date);
      await this.reportEntradaSaidaTunelCongelamentoExp({ initialDate: initDate, endDate: finalDate, idReport: 60, reportModule: 2});
    }
 

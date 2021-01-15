@@ -59,7 +59,6 @@ export default class ProdutosEmbarcados extends Vue {
   private dateToSend: any = null;
 
   public Clear(): void{
-    this.dateFormatted = new Date().toISOString().substr(0, 10);
     this.date = new Date().toISOString().substr(0, 10);
     this.nrCarga = null;
     this.nrConteiner = null;

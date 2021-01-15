@@ -113,6 +113,11 @@ export default class RelatorioSidebarExp extends Vue {
         title: 'Cargas Embarcadas',
         show: ''
       },
+      {
+        id: 13,
+        title: 'Reagendamento de Cargas',
+        show: ''
+      },
     ]
   }, ]
   
@@ -169,6 +174,10 @@ export default class RelatorioSidebarExp extends Vue {
       case 12:
         this.nameBox = 'Relatório de Cargas Embarcadas';
         this.idBox = 12;
+      break;
+      case 13:
+        this.nameBox = 'Reagendamento de Cargas';
+        this.idBox = 13;
       break;
       default:
         break;

@@ -83,9 +83,7 @@ export default class RelatorioEmbarquesPeriodo extends Vue {
   private employeValid: boolean = false;
 
   public Clear(): void{
-    this.dateFormatted = new Date().toISOString().substr(0, 10);
     this.date = new Date().toISOString().substr(0, 10);
-    this.dateFormatted2 = new Date().toISOString().substr(0, 10);
     this.date2 = new Date().toISOString().substr(0, 10);
     this.codSicop = null;
     this.rgShift = '3';
