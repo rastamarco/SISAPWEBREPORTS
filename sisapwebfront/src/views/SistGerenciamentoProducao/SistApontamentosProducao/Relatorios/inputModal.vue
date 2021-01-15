@@ -1,5 +1,5 @@
 <template>
-<v-card width="100%" height="335">
+<v-card width="100%" height="335" style="overflow:hidden;">
   <div class="title">
     <span class="title-box">{{ nameBox }} </span>
     <div class="close-box">

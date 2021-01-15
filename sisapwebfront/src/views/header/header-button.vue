@@ -9,7 +9,7 @@
     <v-list>
       <v-list-item>
         <v-list-item-avatar>
-          <img src="https://www.lar.ind.br/logo_lar.png" alt="John">
+          <v-img :src="require('./../../assets/logo-lar.png')"  contain/>
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title><b>{{filialName}} - {{userType}}</b> </v-list-item-title>

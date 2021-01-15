@@ -48,7 +48,8 @@ export default class DataInicialDataFinal extends Vue {
   @Action noShowReport
   @Action reportEntradaSaidaTunelCongelamentoExp
   @Action reportCargasEmbarcadas
-
+  @Action ReportPalletsEmCamaraC
+  
   @Getter showReport
   @Getter filialName
   @Getter box
@@ -62,9 +63,7 @@ export default class DataInicialDataFinal extends Vue {
   private dateMax = new Date().toISOString().substr(0, 10);
 
   public Clear(): void{
-    this.dateFormatted = new Date().toISOString().substr(0, 10);
     this.date = new Date().toISOString().substr(0, 10);
-    this.dateFormatted2 = new Date().toISOString().substr(0, 10);
     this.date2 = new Date().toISOString().substr(0, 10);
   }
 
@@ -119,6 +118,9 @@ export default class DataInicialDataFinal extends Vue {
      case 12: 
        await this.ReportCargasEmbarcadas();
        break;
+     case 14: 
+       await this.ReportPalletsCamaraC();
+       break;
      }
      this.closeModal();
    }
@@ -145,6 +147,10 @@ export default class DataInicialDataFinal extends Vue {
        finalDate = this.date2;
      }
      await this.reportCargasEmbarcadas({ initialDate: initDate, endDate: finalDate, idReport: 61, reportModule: 2});
+   }
+
+   public async ReportPalletsCamaraC(): Promise < void > {
+     await this.ReportPalletsEmCamaraC({ initialDate: this.date, endDate: this.date2, idReport: 64, reportModule: 2 });
    }
 
    public closeModal(): void {

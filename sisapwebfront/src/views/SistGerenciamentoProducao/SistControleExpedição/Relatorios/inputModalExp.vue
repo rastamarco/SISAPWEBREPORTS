@@ -1,5 +1,5 @@
 <template>
-<v-card width="100%" height="435">
+<v-card width="100%" height="435" style="overflow:hidden;">
   <div class="title">
     <span class="title-box">{{ nameBox }} </span>
     <div class="close-box">
@@ -24,7 +24,7 @@
       <!-- Embarques Períodos --> 
       <embarquesDesembarques v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 9 || idBox === 10"  />
       <!-- Entrada/Saida do Túnel de Congelamento --> 
-      <dataFinalDataInicial v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 11 || idBox === 12"/>
+      <dataFinalDataInicial v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 11 || idBox === 12 || idBox === 14"/>
       <!-- Reagendamento de Cargas --> 
       <reagendamentoCargas v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 13" />
     </v-row>
@@ -104,17 +104,17 @@ export default class InputModalsExp extends Vue {
   public async ReportPosicaoVazia(): Promise<void> {
     this.closeModal();
     await this.ReportPosicaoCamaraVazia({filialName: this.filialName, idReport: 51, reportModule: 2 });
-    await this.SetIdBox({id: null});
   }
 
   async mounted(){
     // Forçando aparecer a leitura do idBox no inicio para  abrir o relatório direto caso for o id 6 que não precisa de parametros
     switch(this.box){
     case 6: 
-      this.closeModal();
       await this.ReportPosicaoVazia();
+      this.closeModal();
       break;
-    } 
+    }
+    await this.SetIdBox({id: null}); 
   }
 }
 </script>

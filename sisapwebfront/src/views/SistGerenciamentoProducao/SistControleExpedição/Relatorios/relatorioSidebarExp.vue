@@ -1,13 +1,13 @@
 <template>
-<div>
+<div class="reports">
   <v-list dense>
-    <v-list-group v-for="item in itemsReportsByUser" :key="item.title" v-model="item.active" :prepend-icon="item.icon" no-action>
+    <v-list-group v-for="item in itemsReportsByUser" :key="item.title" v-model="item.active" :prepend-icon="item.icon" >
       <template v-slot:activator>
-        <v-list-item-content>
+        <v-list-item-content >
           <v-list-item-title v-text="item.title"></v-list-item-title>
         </v-list-item-content>
       </template>
-      <v-dialog v-model="modalReports" persistent width="40%">
+      <v-dialog v-model="modalReports" persistent width="40%" >
         <template v-slot:activator="{ on, attrs }">
           <v-list-item v-for="child in item.items" :key="child.title" @click="selectReport(child)" v-on="on" v-bind="attrs">
             <v-list-item-content>
@@ -16,7 +16,7 @@
           </v-list-item>
         </template>
         <!-- Aqui vai todos os templates de input de parametros para relatórios --> 
-        <InputModals v-bind="{ nameBox, idBox }" v-on="{ closeModal }" />
+        <InputModals v-bind="{ nameBox, idBox }" v-on="{ closeModal }"/>
       </v-dialog>
     </v-list-group>
   </v-list>
@@ -118,6 +118,16 @@ export default class RelatorioSidebarExp extends Vue {
         title: 'Reagendamento de Cargas',
         show: ''
       },
+      {
+        id: 14,
+        title: 'Pallets na Câmara C',
+        show: ''
+      },
+      {
+        id: 15,
+        title: 'Países Destino',
+        show: ''
+      },
     ]
   }, ]
   
@@ -178,6 +188,16 @@ export default class RelatorioSidebarExp extends Vue {
       case 13:
         this.nameBox = 'Reagendamento de Cargas';
         this.idBox = 13;
+      break;
+      case 14:
+        // Não Possui tela de Parametros no Delphi mais coloquie pra rodar melhor filtrando pela DATA
+        this.nameBox = 'Relação de Pallets Estocados na Câmara C';
+        this.idBox = 14;
+        break;
+      case 15:
+        // Não Possui tela de Parametros no Delphi mais coloquie pra rodar melhor filtrando pela DATA
+        this.nameBox = 'Relação de Habilitações';
+        this.idBox = 15;
       break;
       default:
         break;

@@ -1,5 +1,5 @@
 <template>
-<div class="grey lighten-3">
+<div class="grey lighten-3" >
   <v-app-bar app color="primary">
     <headerButtonAdmin v-if="isSysAdmin || userType === 'Consultoria'" v-on="{getSystem}"/>
     <h2 class="title-header-admin" v-if="isSysAdmin || userType === 'Consultoria'"> {{systemName}} </h2>
@@ -7,7 +7,7 @@
     <headerBtn />
     <v-spacer></v-spacer>
   </v-app-bar>
-  <v-container  style="margin-top: 65px;">
+  <v-container style="margin-top: 65px;">
     <adminHome v-if="(isSysAdmin === true || userType === 'Consultoria') && this.system === 0"  />
     <apontamentos v-if="userFeatures.isApontamento || this.system === 1" /> 
     <expedicao v-if="userFeatures.isExpedicao || this.system === 2" />

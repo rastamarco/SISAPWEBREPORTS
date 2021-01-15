@@ -1,9 +1,9 @@
 <template>
 <v-row>
-  <v-col cols="12" sm="3">
-    <v-sheet rounded="lg" min-height="100%">
+  <v-col cols="12" sm="3" class="sideReport">
+    <v-sheet rounded="lg" class="items">
       <!-- <Cadastros /> -->
-      <Relatorios />
+      <Relatorios class="reports"/>
       <!-- <Etiquetas /> -->
     </v-sheet>
   </v-col>
@@ -85,5 +85,30 @@ export default class ApontamentoParadas extends Vue {
   height: 80%;
   padding-left: 50px;
   padding-top: 50px;
+}
+
+.sideReport{
+  height: 87vh;
+}
+
+.sideReport .items {
+  height:100%;
+  overflow-y: auto; 
+}
+
+.sideReport .items .reports{
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.sideReport .items::-webkit-scrollbar-track {
+   background-color: #F4F4F4;
+}
+.sideReport .items::-webkit-scrollbar {
+   width: 5px;
+    background: #F4F4F4;
+}
+.sideReport .items::-webkit-scrollbar-thumb {
+   background: silver;
 }
 </style>
