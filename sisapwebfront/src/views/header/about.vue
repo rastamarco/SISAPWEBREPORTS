@@ -8,11 +8,11 @@
       <v-list-item-title>Sobre</v-list-item-title>
     </v-list-item>
     </template>
-    <v-card class="about-system">
+    <v-card class="about-system" style="overflow:hidden;">
         <div class="content">
           <v-row>
-            <v-col cols="3" sm="3" md="3" class="img">
-                  <v-img src="https://www.lar.ind.br/logo_lar.png" contain alt="John"/>
+            <v-col cols="23" sm="3" md="3" class="img">
+                  <v-img :src="require('./../../assets/logo-lar.png')" contain/>
             </v-col>
             <v-col cols="4" sm="3" md="9" class="title-initial">
                   <span style="font-size: 16px;font-weight: bold;text-align:center;">SISAP Web <small>Versão 2.0.0</small></span><br>
@@ -66,6 +66,7 @@ export default class About extends Vue{
   justify-content:center;
   height:30%;
   margin-top:35px;
+  padding-left:35px;
 }
 
 .about-system .content .title-initial{

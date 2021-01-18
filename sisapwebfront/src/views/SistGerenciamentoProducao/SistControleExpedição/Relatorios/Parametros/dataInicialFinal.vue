@@ -11,7 +11,7 @@
           <v-date-picker v-model="date" locale="pt" @input="menu = false" min="1950-01-01" :max="dateMax" ></v-date-picker>
         </v-menu>
         </div>
-        <div class="input" v-if="box !== 11">
+        <div class="input">
         <span style="padding-top: 15px;">Data Final</span>
         <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="290px">
           <template v-slot:activator="{ on, attrs }">
@@ -46,7 +46,6 @@ export default class DataInicialDataFinal extends Vue {
   @Prop() clearFields!: any; 
 
   @Action noShowReport
-  @Action reportEntradaSaidaTunelCongelamentoExp
   @Action reportCargasEmbarcadas
   @Action ReportPalletsEmCamaraC
   
@@ -112,9 +111,6 @@ export default class DataInicialDataFinal extends Vue {
        await this.noShowReport({show: false});
      }
      switch (this.box){
-     case 11: 
-       await this.ReportEntradaSaidaTunelExp();
-       break;
      case 12: 
        await this.ReportCargasEmbarcadas();
        break;
@@ -123,14 +119,6 @@ export default class DataInicialDataFinal extends Vue {
        break;
      }
      this.closeModal();
-   }
-
-   public async ReportEntradaSaidaTunelExp(): Promise < void > {
-     let initDate = '';
-     let finalDate = '';
-     initDate = this.date;
-     finalDate = this.addDay(this.date);
-     await this.reportEntradaSaidaTunelCongelamentoExp({ initialDate: initDate, endDate: finalDate, idReport: 60, reportModule: 2});
    }
 
    public async ReportCargasEmbarcadas(): Promise<void> {
@@ -157,6 +145,7 @@ export default class DataInicialDataFinal extends Vue {
      this.Clear();
      this.$emit('closeModal');
    }
+
 } 
 </script>
 <style scoped>

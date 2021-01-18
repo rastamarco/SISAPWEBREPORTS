@@ -12,4 +12,5 @@ export default class ParametersExpedicao {
   nrConteiner !: string | any
   nrConfereNte !: number | any
   nrNote !: number | any
+  Period !: number | any
 }

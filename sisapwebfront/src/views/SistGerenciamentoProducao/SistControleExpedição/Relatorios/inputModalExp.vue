@@ -23,8 +23,10 @@
       <produtosEmbarcados v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 8" />
       <!-- Embarques Períodos --> 
       <embarquesDesembarques v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 9 || idBox === 10"  />
-      <!-- Entrada/Saida do Túnel de Congelamento --> 
-      <dataFinalDataInicial v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 11 || idBox === 12 || idBox === 14"/>
+      <!-- Entrada Saída do Túnel de Congelamento --> 
+      <entradaSaidaTunelCongelamento v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 11" />
+      <!-- Cargas embarcadas e Países Destinos --> 
+      <dataFinalDataInicial v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 12 || idBox === 14"/>
       <!-- Reagendamento de Cargas --> 
       <reagendamentoCargas v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 13" />
       <!-- Produtos por SIF --> 
@@ -55,6 +57,7 @@ import embarquesDesembarques from '../Relatorios/Parametros/embarquesDesembarque
 import dataFinalDataInicial from '../Relatorios/Parametros/dataInicialFinal.vue';
 import reagendamentoCargas from '../Relatorios/Parametros/reagendamentoCargas.vue';
 import produtosPorSif from '../Relatorios/Parametros/produtosPorSIF.vue';
+import entradaSaidaTunelCongelamento from '../Relatorios/Parametros/entradaSaidaTunelCongelamento.vue';
 
 @Component ({
   components: {
@@ -67,7 +70,8 @@ import produtosPorSif from '../Relatorios/Parametros/produtosPorSIF.vue';
     embarquesDesembarques,
     dataFinalDataInicial,
     reagendamentoCargas,
-    produtosPorSif
+    produtosPorSif,
+    entradaSaidaTunelCongelamento
   }
 })
 export default class InputModalsExp extends Vue {

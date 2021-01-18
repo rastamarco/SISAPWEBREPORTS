@@ -251,6 +251,12 @@ export const Expedicao = {
       const parameter = new ParametersExpedicao();
       parameter.InitialDate = options.initialDate;
       parameter.EndDate = options.endDate;
+      if(options.shift){
+        parameter.Shift = options.shift;
+      }
+      if(options.period){
+        parameter.Period = options.period;
+      }
       await commit('setIdReport', options.idReport);
       await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 

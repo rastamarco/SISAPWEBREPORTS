@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="01/14/2021 15:13:42" ReportInfo.CreatorVersion="2020.4.9.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/13/2020 15:25:41" ReportInfo.Modified="01/18/2021 15:12:38" ReportInfo.CreatorVersion="2020.4.9.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,24 +23,30 @@ namespace FastReport
 }
 </ScriptText>
   <Dictionary>
-    <FirebirdDataConnection Name="Congelamento" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttdmvjgpEBi/O98jM1BzucPw=">
-      <TableDataSource Name="Table" Alias="TunelCongelamento" DataType="System.Int32" Enabled="true" SelectCommand="select cast(COD_PRODUTO as integer) as COD_PRODUTO, COUNT(CX_APTO) as QT_APTO, COUNT(CX_PALETIZADAS) AS QT_SAIUTUNEL,&#13;&#10;COUNT(CX_APTO) - COUNT(CX_PALETIZADAS) AS DIFERENCA&#13;&#10;FROM&#13;&#10;(select&#13;&#10;substring(tb_aptoauto.cod_barras from 1 for position(';' in tb_aptoauto.cod_barras)-1) AS COD_PRODUTO,&#13;&#10;substring(tb_aptoauto.cod_barras from position(';', tb_aptoauto.cod_barras,9) for CHAR_LENGTH(tb_aptoauto.cod_barras)) AS CX_APTO,&#13;&#10;(select distinct (';'||SUBSTRING(CAST(tb_cxpallet.dt_producao AS VARCHAR(24)) FROM 1 FOR 4) || SUBSTRING(CAST(tb_cxpallet.dt_producao AS VARCHAR(24)) FROM 6 FOR 2) ||&#13;&#10;SUBSTRING(CAST(tb_cxpallet.dt_producao AS VARCHAR(24)) FROM 9 FOR 2)||tb_cxpallet.id_etiqueta)||';'&#13;&#10;from tb_cxpallet&#13;&#10;where&#13;&#10;tb_cxpallet.tp_etiqueta IN ('CONNECT','%MATRI%','MTECH','EAN%', 'AGROSYS') and&#13;&#10;tb_cxpallet.id_etiqueta = substring(substring(tb_aptoauto.cod_barras from position(';', tb_aptoauto.cod_barras,9) for CHAR_LENGTH(tb_aptoauto.cod_barras))&#13;&#10;from 10 for&#13;&#10;char_length(substring(tb_aptoauto.cod_barras from position(';', tb_aptoauto.cod_barras,9) for CHAR_LENGTH(tb_aptoauto.cod_barras)))-10 ) and&#13;&#10;tb_cxpallet.dt_producao = @INI) as CX_PALETIZADAS&#13;&#10;from tb_aptoauto&#13;&#10;where&#13;&#10;tb_aptoauto.dt_producao &gt;= @INI and tb_aptoauto.dt_producao &lt; @FIM ) AS APTO&#13;&#10;-- somar mais um&#13;&#10;GROUP BY COD_PRODUTO">
+    <FirebirdDataConnection Name="Congelamento" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttZEQEc/eTxk14H5c5Ducb9Y=">
+      <TableDataSource Name="Table" Alias="TunelCongelamento" DataType="System.Int32" Enabled="true" SelectCommand="select cast(COD_PRODUTO as integer) as COD_PRODUTO, COUNT(CX_APTO) as QT_APTO, COUNT(CX_PALETIZADAS) AS QT_SAIUTUNEL,&#13;&#10;COUNT(CX_APTO) - COUNT(CX_PALETIZADAS) AS DIFERENCA, TURNO, PERIODO&#13;&#10;FROM&#13;&#10;(select&#13;&#10;substring(tb_aptoauto.cod_barras from 1 for position(';' in tb_aptoauto.cod_barras)-1) AS COD_PRODUTO,&#13;&#10;substring(tb_aptoauto.cod_barras from position(';', tb_aptoauto.cod_barras,9) for CHAR_LENGTH(tb_aptoauto.cod_barras)) AS CX_APTO,&#13;&#10;(select distinct (';'||SUBSTRING(CAST(tb_cxpallet.dt_producao AS VARCHAR(24)) FROM 1 FOR 4) || SUBSTRING(CAST(tb_cxpallet.dt_producao AS VARCHAR(24)) FROM 6 FOR 2) ||&#13;&#10;SUBSTRING(CAST(tb_cxpallet.dt_producao AS VARCHAR(24)) FROM 9 FOR 2)||tb_cxpallet.id_etiqueta)||';'&#13;&#10;from tb_cxpallet&#13;&#10;where&#13;&#10;tb_cxpallet.tp_etiqueta IN ('CONNECT','%MATRI%','MTECH','EAN%', 'AGROSYS') and&#13;&#10;tb_cxpallet.id_etiqueta = substring(substring(tb_aptoauto.cod_barras from position(';', tb_aptoauto.cod_barras,9) for CHAR_LENGTH(tb_aptoauto.cod_barras))&#13;&#10;from 10 for&#13;&#10;char_length(substring(tb_aptoauto.cod_barras from position(';', tb_aptoauto.cod_barras,9) for CHAR_LENGTH(tb_aptoauto.cod_barras)))-10 ) and&#13;&#10;tb_cxpallet.dt_producao = @INI) as CX_PALETIZADAS,&#13;&#10;tb_aptoauto.cod_turno as TURNO,&#13;&#10;tb_aptoauto.cod_periodo AS PERIODO&#13;&#10;from tb_aptoauto&#13;&#10;where&#13;&#10;tb_aptoauto.dt_producao &gt;= @INI and tb_aptoauto.dt_producao &lt; @FIM and&#13;&#10;tb_aptoauto.cod_turno = @TURNO and&#13;&#10;tb_aptoauto.cod_periodo = @PER ) as APTO&#13;&#10;GROUP BY COD_PRODUTO, TURNO,  PERIODO">
         <Column Name="COD_PRODUTO" DataType="System.Int32"/>
         <Column Name="QT_APTO" DataType="System.Int32"/>
         <Column Name="QT_SAIUTUNEL" DataType="System.Int32"/>
         <Column Name="DIFERENCA" DataType="System.Int64"/>
-        <CommandParameter Name="INI" DataType="5" Expression="[INICIAL]"/>
-        <CommandParameter Name="FIM" DataType="5" Expression="[FINAL]"/>
+        <Column Name="TURNO" DataType="System.Int32"/>
+        <Column Name="PERIODO" DataType="System.Int32"/>
+        <CommandParameter Name="INI" DataType="5" Expression="[INITIAL]"/>
+        <CommandParameter Name="FIM" DataType="5" Expression="[ENDDATE]"/>
+        <CommandParameter Name="TURNO" DataType="10" Expression="[SHIFT]"/>
+        <CommandParameter Name="PER" DataType="10" Expression="[PERIOD]"/>
       </TableDataSource>
     </FirebirdDataConnection>
-    <FirebirdDataConnection Name="ConsProduto" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttTOOB2wrrPBSqGcHx+eyWCA=">
+    <FirebirdDataConnection Name="ConsProduto" ConnectionString="rijcmlqDEsChHWgW5OFiwSyA3zls5pWmyjaUszJ9r0v/ZPqeFrMNDrt/pseWBWAzI+WYd9jvlqCOwxJ2m4eO2RaxcNCPZDAmJIZ9jVy+8QMlpXne7DnOJDKzLidpFXmDFL3zlgDftv4r/LOnGMa7Bpv+SU6CsLEbxBzHX7bb0Gv8w2bxRTZ1g76RwX8sNXYeM/TTaU7RaQHn/YVExsagsk5bBsat9ojhxLzU1JT8dsasi4xnWZnfhk4ijhnuB1DDRc7iFB02C3Z52OlPSqZ5fP+SwUttYBzeCehVHDrZIj1T1vbkv4=">
       <TableDataSource Name="Table1" Alias="DescProduto" DataType="System.Int32" Enabled="true" SelectCommand="select DESC_EMBALAGEM&#13;&#10;from TB_CADASTRO&#13;&#10;where COD_SICOP = @COD">
         <Column Name="DESC_EMBALAGEM" DataType="System.String"/>
         <CommandParameter Name="COD" DataType="10" Expression="[TunelCongelamento.COD_PRODUTO]"/>
       </TableDataSource>
     </FirebirdDataConnection>
-    <Parameter Name="INICIAL" DataType="System.String" Expression="[DataInicial]"/>
-    <Parameter Name="FINAL" DataType="System.String" Expression="[DataFinal]"/>
+    <Parameter Name="INITIAL" DataType="System.String" Expression="[DataInicial]"/>
+    <Parameter Name="ENDDATE" DataType="System.String" Expression="[DataFinal]"/>
+    <Parameter Name="SHIFT" DataType="System.String" Expression="[Turno]"/>
+    <Parameter Name="PERIOD" DataType="System.String" Expression="[Periodo]"/>
   </Dictionary>
   <ReportPage Name="Page1" RawPaperSize="9" Watermark.Font="Arial, 60pt" ExtraDesignWidth="true">
     <PageHeaderBand Name="PageHeader1" Width="718.2" Height="119.07" Border.Lines="All">
@@ -50,23 +56,27 @@ namespace FastReport
       <TextObject Name="Text3" Left="601.9" Width="56.7" Height="18.9" Text="Página" Font="Arial, 10pt"/>
       <TextObject Name="Text10" Left="89.05" Top="1" Width="160.65" Height="15.12" Text="Cooperativa AgroIndustrial Lar" Font="Arial, 8pt"/>
       <TextObject Name="Text11" Left="238.35" Top="66.15" Width="66.15" Height="15.12" Text="De" Font="Arial, 10pt, style=Bold"/>
-      <TextObject Name="Text12" Left="407.55" Top="66.15" Width="113.4" Height="15.12" Text="[ToDateTime([FINAL])]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
-      <TextObject Name="Text37" Left="276.9" Top="66.15" Width="94.5" Height="15.12" Text="[ToDateTime([INICIAL])]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+      <TextObject Name="Text12" Left="407.55" Top="66.15" Width="113.4" Height="15.12" Text="[ToDateTime([ENDDATE])]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+      <TextObject Name="Text37" Left="276.9" Top="66.15" Width="94.5" Height="15.12" Text="[ToDateTime([INITIAL])]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
       <TextObject Name="Text38" Left="379.5" Top="66.15" Width="18.9" Height="15.12" Text="à" Font="Arial, 10pt, style=Bold"/>
       <TextObject Name="Text71" Left="437.85" Width="160.65" Height="18.9" Text="[Date]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
       <TextObject Name="Text72" Left="397.75" Width="122.85" Height="18.9" Text="Data" Font="Arial, 10pt"/>
-      <TextObject Name="Text73" Left="9.45" Top="103.95" Width="75.6" Height="15.12" Text="Código" Format="Date" Format.Format="d" Font="Arial, 10pt, style=Bold"/>
-      <TextObject Name="Text74" Left="85.05" Top="103.95" Width="264.6" Height="15.12" Text="Desc Produto" Format="Date" Format.Format="d" Font="Arial, 10pt, style=Bold"/>
-      <TextObject Name="Text75" Left="390" Top="103.95" Width="103.95" Height="15.12" Text="Qt. Apontado" Format="Date" Format.Format="d" Font="Arial, 10pt, style=Bold"/>
-      <TextObject Name="Text76" Left="514.95" Top="103.95" Width="75.6" Height="15.12" Text="Qt. Saída" Format="Date" Format.Format="d" Font="Arial, 10pt, style=Bold"/>
-      <TextObject Name="Text77" Left="625.9" Top="103.95" Width="75.6" Height="15.12" Text="Diferença" Format="Date" Format.Format="d" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text73" Left="9.45" Top="103.95" Width="66.15" Height="15.12" Text="Código" Format="Date" Format.Format="d" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text74" Left="75.05" Top="103.95" Width="264.6" Height="15.12" Text="Desc Produto" Format="Date" Format.Format="d" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text75" Left="367" Top="103.95" Width="103.95" Height="15.12" Text="Qt. Apontado" Format="Date" Format.Format="d" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text76" Left="483.95" Top="103.95" Width="75.6" Height="15.12" Text="Qt. Saída" Format="Date" Format.Format="d" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text77" Left="579.9" Top="103.95" Width="75.6" Height="15.12" Text="Diferença" Format="Date" Format.Format="d" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text83" Left="665.95" Top="103.95" Width="18.9" Height="15.12" Text="T." Format="Date" Format.Format="d" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text84" Left="689.85" Top="103.95" Width="18.9" Height="15.12" Text="P." Format="Date" Format.Format="d" Font="Arial, 10pt, style=Bold"/>
     </PageHeaderBand>
     <DataBand Name="Data1" Top="123.07" Width="718.2" Height="15.12" Border.Lines="All" Fill.Color="White" AfterDataEvent="Data1_AfterData" FirstRowStartsNewPage="true" DataSource="Table">
-      <TextObject Name="Text78" Left="9.45" Width="75.6" Height="15.12" Text="[TunelCongelamento.COD_PRODUTO]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
-      <TextObject Name="Text79" Left="378" Width="103.95" Height="15.12" Text="[TunelCongelamento.QT_APTO]" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
-      <TextObject Name="Text80" Left="495.4" Width="103.95" Height="15.12" Text="[TunelCongelamento.QT_SAIUTUNEL]" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
-      <TextObject Name="Text81" Left="607.8" Width="103.95" Height="15.12" Text="[TunelCongelamento.DIFERENCA]" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
-      <TextObject Name="Text82" Left="85.05" Width="292.95" Height="15.12" Text="[DescProduto.DESC_EMBALAGEM]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+      <TextObject Name="Text78" Left="9.45" Width="66.15" Height="15.12" Text="[TunelCongelamento.COD_PRODUTO]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+      <TextObject Name="Text79" Left="366" Width="103.95" Height="15.12" Text="[TunelCongelamento.QT_APTO]" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text80" Left="464.4" Width="103.95" Height="15.12" Text="[TunelCongelamento.QT_SAIUTUNEL]" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text81" Left="571.25" Width="85.05" Height="15.12" Text="[TunelCongelamento.DIFERENCA]" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text82" Left="75.05" Width="292.95" Height="15.12" Text="[DescProduto.DESC_EMBALAGEM]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+      <TextObject Name="Text85" Left="665.95" Width="18.9" Height="15.12" Text="[TunelCongelamento.TURNO]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+      <TextObject Name="Text86" Left="689.85" Width="18.9" Height="15.12" Text="[TunelCongelamento.PERIODO]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
       <DataBand Name="Data2" Top="142.19" Width="718.2" DataSource="Table1"/>
     </DataBand>
     <PageFooterBand Name="PageFooter1" Top="146.19" Width="718.2" Height="18.9"/>

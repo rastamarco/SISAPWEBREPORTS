@@ -213,7 +213,7 @@ export default class RelatorioSidebarExp extends Vue {
         break;
       
     }
-    this.SetIdBox({id : this.idBox});
+    await this.SetIdBox({id : this.idBox});
   }
 
    public async  listReportsByUserPermission(): Promise<void> {
