@@ -282,11 +282,30 @@ export const Expedicao = {
       const parameter = new ParametersExpedicao();
       parameter.InitialDate = options.initialDate;
       parameter.EndDate = options.endDate;
-      
       await commit('setIdReport', options.idReport);
       await commit('setReportModule', options.reportModule);
       await commit('setParams', JSON.stringify(parameter)); 
       await commit('setShowReport', true);
+    },
+
+    async ReportPaisesDestinoHabilitacao({commit}, options){
+      const parameter = new ParametersExpedicao();
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
+    },
+
+    async reportProdutoSif({ commit }, options){
+      const parameter = new ParametersExpedicao();
+      if(options.codSicop){
+        parameter.CodSicop = options.codSicop;
+      }
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
+
     }
 
     //////////////////// END REPORT FUNCTIONS

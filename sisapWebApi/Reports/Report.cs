@@ -223,6 +223,9 @@ namespace sisapWebApi.Reports
             reportItems.Add(new ReportService(62, "Expedition/ReagendamentoDeCargas.frx"));
             reportItems.Add(new ReportService(63, "Expedition/ReagendamentoDeCargasEspecificos.frx"));
             reportItems.Add(new ReportService(64, "Expedition/PalletsNaCamaraC.frx"));
+            reportItems.Add(new ReportService(65, "Expedition/PaisesDestinos.frx"));
+            reportItems.Add(new ReportService(66, "Expedition/ProdutosPorSif.frx"));
+            reportItems.Add(new ReportService(67, "Expedition/ProdutosPorSifNr.frx"));
         }
 
         public void UIA2Expedition()

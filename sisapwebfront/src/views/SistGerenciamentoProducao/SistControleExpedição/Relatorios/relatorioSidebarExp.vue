@@ -128,6 +128,11 @@ export default class RelatorioSidebarExp extends Vue {
         title: 'Países Destino',
         show: ''
       },
+      {
+        id: 16,
+        title: 'Produtos por SIF',
+        show: ''
+      },
     ]
   }, ]
   
@@ -139,66 +144,71 @@ export default class RelatorioSidebarExp extends Vue {
         // UIA 
         this.nameBox = 'Relatório de Formação de Pallet';
         this.idBox = 1;
-      break;
+        break;
       case 2:
         this.nameBox = 'Relatório de Movimentação Operador/Câmara';
         this.idBox = 2;
-      break;
+        break;
       case 3:
         this.nameBox = 'Relatório de Mapa de Câmaras';
         this.idBox = 3;
-      break;
+        break;
       case 4:
         this.nameBox = 'Relatório de Extrato de Localização de Produtos';
         this.idBox = 4;
-      break;
+        break;
       case 5:
         this.nameBox = 'Relatório de Histórico de Câmara/Pallets';
         this.idBox = 5;
-      break;
+        break;
       case 6:
         // Não possui Tela de Parametros
         this.nameBox = 'Relatório de Posições Vazias nas Câmaras';
         this.idBox = 6;
-      break;
+        break;
       case 7:
         this.nameBox = 'Relatório de Pesos por Produtos nas Câmaras';
         this.idBox = 7;
-      break;
+        break;
       case 8:
         this.nameBox = 'Relatório de Produtos Embarcados';
         this.idBox = 8;
-      break;
+        break;
       case 9:
         this.nameBox = 'Relatório de Embarques por Período';
         this.idBox = 9;
-      break;
+        break;
       case 10:
         this.nameBox = 'Relatório de Paradas, Emb. e Desembarques';
         this.idBox = 10;
-      break;
+        break;
       case 11:
         this.nameBox = 'Relatório Entrada/Saida de Túnel de Congelamento';
         this.idBox = 11;
-      break;
+        break;
       case 12:
         this.nameBox = 'Relatório de Cargas Embarcadas';
         this.idBox = 12;
-      break;
+        break;
       case 13:
         this.nameBox = 'Reagendamento de Cargas';
         this.idBox = 13;
-      break;
+        break;
       case 14:
         // Não Possui tela de Parametros no Delphi mais coloquie pra rodar melhor filtrando pela DATA
         this.nameBox = 'Relação de Pallets Estocados na Câmara C';
         this.idBox = 14;
         break;
       case 15:
-        // Não Possui tela de Parametros no Delphi mais coloquie pra rodar melhor filtrando pela DATA
-        this.nameBox = 'Relação de Habilitações';
+        // Não Possui tela de Parametros
+        this.nameBox = 'Relatório de Países Destinos (Relação de Habilitações)';
         this.idBox = 15;
-      break;
+        break;
+      case 16:
+        // Não Possui tela de Parametros
+        this.nameBox = 'Relação de Produtos por Nº de SIF';
+        this.idBox = 16;
+        break;
       default:
         break;
       

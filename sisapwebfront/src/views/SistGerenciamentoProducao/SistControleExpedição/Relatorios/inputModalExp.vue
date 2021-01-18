@@ -27,6 +27,8 @@
       <dataFinalDataInicial v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 11 || idBox === 12 || idBox === 14"/>
       <!-- Reagendamento de Cargas --> 
       <reagendamentoCargas v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 13" />
+      <!-- Produtos por SIF --> 
+      <produtosPorSif v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 16" />
     </v-row>
   </v-card-actions>
 </v-card>
@@ -52,6 +54,7 @@ import produtosEmbarcados from '../Relatorios/Parametros/produtosEmbarcados.vue'
 import embarquesDesembarques from '../Relatorios/Parametros/embarquesDesembarques.vue';
 import dataFinalDataInicial from '../Relatorios/Parametros/dataInicialFinal.vue';
 import reagendamentoCargas from '../Relatorios/Parametros/reagendamentoCargas.vue';
+import produtosPorSif from '../Relatorios/Parametros/produtosPorSIF.vue';
 
 @Component ({
   components: {
@@ -63,7 +66,8 @@ import reagendamentoCargas from '../Relatorios/Parametros/reagendamentoCargas.vu
     produtosEmbarcados,
     embarquesDesembarques,
     dataFinalDataInicial,
-    reagendamentoCargas
+    reagendamentoCargas,
+    produtosPorSif
   }
 })
 export default class InputModalsExp extends Vue {
@@ -73,6 +77,7 @@ export default class InputModalsExp extends Vue {
   @Action setSelectedIdReport
   @Action noShowReport
   @Action ReportPosicaoCamaraVazia
+  @Action ReportPaisesDestinoHabilitacao
   @Action SetIdBox
 
   @Getter filialName
@@ -89,6 +94,10 @@ export default class InputModalsExp extends Vue {
       this.closeModal();
       await this.ReportPosicaoVazia();
       break;
+    case 15: 
+      this.closeModal();
+      await this.ReportPaisesDestino();
+      break;
     } 
   }
 
@@ -104,6 +113,11 @@ export default class InputModalsExp extends Vue {
   public async ReportPosicaoVazia(): Promise<void> {
     this.closeModal();
     await this.ReportPosicaoCamaraVazia({filialName: this.filialName, idReport: 51, reportModule: 2 });
+  }
+
+  public async ReportPaisesDestino(): Promise<void> {
+    this.closeModal();
+    await this.ReportPaisesDestinoHabilitacao({filialName: this.filialName, idReport: 65, reportModule: 2 });
   }
 
   async mounted(){
