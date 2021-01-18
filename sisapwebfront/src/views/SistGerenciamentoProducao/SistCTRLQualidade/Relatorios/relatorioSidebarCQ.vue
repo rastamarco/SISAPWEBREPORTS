@@ -45,6 +45,7 @@ export default class QualidadeRelatorios extends Vue {
   
   @Getter loginUser
   @Getter isSysAdmin
+  @Getter filialName
   /* eslint-disable indent */
   private modalReports: boolean = false;
   private nameBox: any = null;
@@ -61,7 +62,7 @@ export default class QualidadeRelatorios extends Vue {
       {
         id: 2,
         title: 'Qualidade Fomento Mensal',
-        show: ''
+        show: 'UIAIII'
       }
     ]
   }, ]
@@ -97,7 +98,7 @@ export default class QualidadeRelatorios extends Vue {
         case false: 
           this.itemsReportsByUser.push({ icon: 'mdi-file-chart', title: 'Relatórios', items: null});
           this.itemsReports[0].items.forEach(reportItems => {
-            if(reportItems.show ===  this.loginUser || reportItems.show === ''){ 
+            if(reportItems.show ===  this.loginUser || reportItems.show === '' || this.filialName !== 'UIAIII'){ 
               listReports.push(reportItems);
             }
           });

@@ -48,6 +48,9 @@ namespace sisapWebApi.Reports
                 case "UIAII":
                     UIA2Pointing();
                     break;
+                case "UIAIII":
+                    UIA3Pointing();
+                    break;
                 default:
                     UIAPointing();
                     break;
@@ -153,25 +156,31 @@ namespace sisapWebApi.Reports
         public void UIAPointing()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "Pointing/ApontamentoDeProducao.frx"));
-            reportItems.Add(new ReportService(11, "Pointing/ApontamentoDeProducaoTODOS.frx"));
-            reportItems.Add(new ReportService(12, "Pointing/ApontamentoDeProducaoTURNO-Periodo.frx"));
-            reportItems.Add(new ReportService(13, "Pointing/ApontamentoDeProducaoPERIODO-Turno.frx"));
-            reportItems.Add(new ReportService(14, "Pointing/ApontamentoDeProducaoUIC-Turno.frx"));
-            reportItems.Add(new ReportService(15, "Pointing/ApontamentoDeProducaoUIC.frx"));
-            reportItems.Add(new ReportService(16, "Pointing/ApontamentoDeRefeitorio.frx"));
+            reportItems.Add(new ReportService(1, "Pointing/UIA/ApontamentoDeProducao.frx"));
+            reportItems.Add(new ReportService(11, "Pointing/UIA/ApontamentoDeProducaoTODOS.frx"));
+            reportItems.Add(new ReportService(12, "Pointing/UIA/ApontamentoDeProducaoTURNO-Periodo.frx"));
+            reportItems.Add(new ReportService(13, "Pointing/UIA/ApontamentoDeProducaoPERIODO-Turno.frx"));
+            reportItems.Add(new ReportService(14, "Pointing/UIA/ApontamentoDeProducaoUIC-Turno.frx"));
+            reportItems.Add(new ReportService(15, "Pointing/UIA/ApontamentoDeProducaoUIC.frx"));
+            reportItems.Add(new ReportService(16, "Pointing/UIA/ApontamentoDeRefeitorio.frx"));
         }
 
         public void UIA2Pointing()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "Pointing/ApontamentoDeProducao.frx"));
-            reportItems.Add(new ReportService(11, "Pointing/ApontamentoDeProducaoTODOS.frx"));
-            reportItems.Add(new ReportService(12, "Pointing/ApontamentoDeProducaoTURNO-Periodo.frx"));
-            reportItems.Add(new ReportService(13, "Pointing/ApontamentoDeProducaoPERIODO-Turno.frx"));
-            reportItems.Add(new ReportService(14, "Pointing/ApontamentoDeProducaoUIC-Turno.frx"));
-            reportItems.Add(new ReportService(15, "Pointing/ApontamentoDeProducaoUIC.frx"));
-            reportItems.Add(new ReportService(16, "Pointing/ApontamentoDeRefeitorio.frx"));
+            reportItems.Add(new ReportService(1, "Pointing/UIA2/ApontamentoDeProducao.frx"));
+            reportItems.Add(new ReportService(11, "Pointing/UIA2/ApontamentoDeProducaoTODOS.frx"));
+            reportItems.Add(new ReportService(12, "Pointing/UIA2/ApontamentoDeProducaoTURNO-Periodo.frx"));
+            reportItems.Add(new ReportService(13, "Pointing/UIA2/ApontamentoDeProducaoPERIODO-Turno.frx"));
+        }
+
+        public void UIA3Pointing()
+        {
+            reportItems = new List<ReportService>();
+            reportItems.Add(new ReportService(1, "Pointing/UIA3/ApontamentoDeProducao.frx"));
+            reportItems.Add(new ReportService(11, "Pointing/UIA3/ApontamentoDeProducaoTODOS.frx"));
+            reportItems.Add(new ReportService(12, "Pointing/UIA3/ApontamentoDeProducaoTURNO-Periodo.frx"));
+            reportItems.Add(new ReportService(13, "Pointing/UIA3/ApontamentoDeProducaoPERIODO-Turno.frx"));
         }
 
         public void UIAExpedition()
@@ -242,13 +251,13 @@ namespace sisapWebApi.Reports
         public void UIAQuality()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "Quality/QualidadeFomentoMensal.frx"));
+            reportItems.Add(new ReportService(1, "Quality/UIA/QualidadeFomentoMensal.frx"));
         }
 
         public void UIA2Quality()
         {
             reportItems = new List<ReportService>();
-            reportItems.Add(new ReportService(1, "Quality/QualidadeFomentoMensal.frx"));
+            reportItems.Add(new ReportService(1, "Quality/UIA2/QualidadeFomentoMensal.frx"));
         }
 
         public void UIAProduction()

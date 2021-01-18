@@ -90,7 +90,7 @@ export default class Home extends Vue {
         this.systemName = 'Sistema de Apontamento de Produção';
         break;
       case 2:
-        this.systemName = 'Sistema de Controle da Expedição';
+        this.systemName = 'Sistema de Controle da Expedição da Produção';
         break;
       case 3:
         this.systemName = 'Sistema de Controle da Produção';

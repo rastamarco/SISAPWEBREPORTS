@@ -9,7 +9,7 @@
     <v-list dense>
       <v-list-item dense>
         <v-list-item-avatar>
-          <img src="https://www.lar.ind.br/logo_lar.png" dense>
+          <v-img :src="require('./../../assets/logo-lar.png')" contain />
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title v-if="isSysAdmin"><b>Menu do Administrador</b> </v-list-item-title>

@@ -10,7 +10,6 @@
       <!-- Todos os Parametros vão aqui --> 
       <ApontamentoProducao v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 1" />
       <QualidadeFomento v-on="{closeModal, resetClearFields}" v-bind="{clearFields}" v-if="idBox === 2" />  
-
   </v-card-actions>
 </v-card>
 </template>
@@ -42,6 +41,7 @@ export default class InputModalCQ extends Vue {
   @Action noShowReport
 
   @Getter showReport
+  @Getter filialName
 
   private clearFields: boolean = false;
   
@@ -53,7 +53,6 @@ export default class InputModalCQ extends Vue {
   public resetClearFields(): void{
     this.clearFields = false;
   }
-
 }
 </script>
 
