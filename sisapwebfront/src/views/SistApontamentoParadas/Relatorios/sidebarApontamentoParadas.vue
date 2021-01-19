@@ -1,7 +1,7 @@
 <template>
 <div>
   <v-list dense>
-    <v-list-group v-for="item in itemsReportsByUser" :key="item.title" v-model="item.active" :prepend-icon="item.icon" no-action>
+    <v-list-group v-for="item in itemsReportsByUser" :key="item.title" v-model="item.active" :prepend-icon="item.icon">
       <template v-slot:activator>
         <v-list-item-content>
           <v-list-item-title v-text="item.title" ></v-list-item-title>
