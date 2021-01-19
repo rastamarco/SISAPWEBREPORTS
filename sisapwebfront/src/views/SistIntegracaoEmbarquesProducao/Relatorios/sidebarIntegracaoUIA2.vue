@@ -1,7 +1,7 @@
 <template>
 <div>
   <v-list dense>
-    <v-list-group v-for="item in itemsReportsByUser" :key="item.title" v-model="item.active" :prepend-icon="item.icon" no-action>
+    <v-list-group v-for="item in itemsReportsByUser" :key="item.title" v-model="item.active" :prepend-icon="item.icon">
       <template v-slot:activator>
         <v-list-item-content>
           <v-list-item-title v-text="item.title" ></v-list-item-title>
@@ -58,6 +58,11 @@ export default class SidebarIntegracaoUIA2 extends Vue {
         id: 1,
         title: 'Produções Sem Integração',
         show: ''
+      },
+      {
+        id: 2,
+        title: 'Reagendamento de Cargas',
+        show: ''
       }
     ]
   }]
@@ -69,6 +74,10 @@ export default class SidebarIntegracaoUIA2 extends Vue {
       case 1:
         this.nameBox = 'Produções Sem Integração';
         this.idBox = 1;
+      break;
+      case 2:
+        this.nameBox = 'Reagendamento de Cargas';
+        this.idBox = 2;
       break;
       default:
         break;

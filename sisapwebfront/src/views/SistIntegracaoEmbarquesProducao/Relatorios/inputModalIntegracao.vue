@@ -1,5 +1,5 @@
 <template>
-<v-card width="100%" height="355" style="overflow:hidden;">
+<v-card width="100%" height="400" style="overflow:hidden;">
   <div class="title">
     <span class="title-box">{{ nameBox }} </span>
     <div class="close-box">
@@ -10,6 +10,7 @@
       <!-- Todos os Parametros vão aqui --> 
       <!-- Produções sem Integração -->
       <producoesSemIntegracao v-on="{closeModal, ResetClearFields}" v-bind="{clearFields}" v-if="idBox === 1" />
+      <reagendamentoCargas v-on="{closeModal, ResetClearFields}" v-bind="{clearFields}" v-if="idBox === 2" />
 
   </v-card-actions>
 </v-card>
@@ -28,9 +29,12 @@ import {
 } from 'vuex-class';
 
 import producoesSemIntegracao from '../Relatorios/Parametros/producoesSemIntegracao.vue';
+import reagendamentoCargas from '../../SistGerenciamentoProducao/SistControleExpedição/Relatorios/Parametros/reagendamentoCargas.vue';
+
 @Component({
   components: {
-    producoesSemIntegracao
+    producoesSemIntegracao,
+    reagendamentoCargas
   }
 })
 export default class InputModalOvos extends Vue {

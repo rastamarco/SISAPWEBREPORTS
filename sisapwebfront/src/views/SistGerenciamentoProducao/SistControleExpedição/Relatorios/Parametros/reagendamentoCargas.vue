@@ -122,17 +122,34 @@ export default class ReagendamentoCargas extends Vue {
      if(this.showReport === true){
        await this.noShowReport({show: false});
      }
-     switch(this.rgReagendamento){
-     case '1':
-       await this.reportReagendamentoCargas({ initialDate: this.date, endDate: this.date2, operation: 'INCLUSÃO',  idReport: 62, reportModule: 2});
+     switch(this.filialName){
+     case 'UIAII':
+       switch(this.rgReagendamento){
+       case '1':
+         await this.reportReagendamentoCargas({ initialDate: this.date, endDate: this.date2, operation: 'INCLUSÃO',  idReport: 3, reportModule: 2});
+         break;
+       case '2':
+         await this.reportReagendamentoCargas({ initialDate: this.date, endDate: this.date2, operation: 'REAGENDAMENTO', idReport: 4, reportModule: 2});
+         break;
+       case '3':
+         await this.reportReagendamentoCargas({ initialDate: this.date, endDate: this.date2, operation: 'EXCLUÍDO', idReport: 4, reportModule: 2});
+         break;
+       }
        break;
-     case '2':
-       await this.reportReagendamentoCargas({ initialDate: this.date, endDate: this.date2, operation: 'REAGENDAMENTO', idReport: 63, reportModule: 2});
+     default:
+       switch(this.rgReagendamento){
+       case '1':
+         await this.reportReagendamentoCargas({ initialDate: this.date, endDate: this.date2, operation: 'INCLUSÃO',  idReport: 62, reportModule: 2});
+         break;
+       case '2':
+         await this.reportReagendamentoCargas({ initialDate: this.date, endDate: this.date2, operation: 'REAGENDAMENTO', idReport: 63, reportModule: 2});
+         break;
+       case '3':
+         await this.reportReagendamentoCargas({ initialDate: this.date, endDate: this.date2, operation: 'EXCLUÍDO', idReport: 63, reportModule: 2});
+         break;
+       } 
        break;
-     case '3':
-       await this.reportReagendamentoCargas({ initialDate: this.date, endDate: this.date2, operation: 'EXCLUÍDO', idReport: 63, reportModule: 2});
-       break;
-     }
+     } 
      this.closeModal();
    }
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import ParametersControleOvos from '../models/parametersControleOvos.model';
+import ParametersIntegracaoUIA2 from '../models/parametersIntegracaoUIA2.model';
 
 export const IntegracaoUIA2 = {
   state:{
@@ -9,17 +9,18 @@ export const IntegracaoUIA2 = {
   mutations:{
   },
   actions:{
-    // async reportFichaOvos({ commit }, options){
-    //   const parameter = new ParametersControleOvos();
-    //   parameter.InitialDate = options.initialDate;
-    //   if (options.romaneio !== null || options.romaneio !== undefined){
-    //     parameter.Romaneio = options.romaneio;
-    //   }
-    //   await commit('setIdReport', options.idReport);
-    //   await commit('setReportModule', options.reportModule);
-    //   await commit('setParams', JSON.stringify(parameter)); 
-    //   await commit('setShowReport', true);
-    // }
+    async reportProdSemIntegracao({commit}, options){
+      const parameter = new ParametersIntegracaoUIA2();
+      parameter.InitialDate = options.initialDate;
+      parameter.localUser = options.filialname;
+      if(options.shift){
+        parameter.Shift = options.shift;
+      }
+      await commit('setIdReport', options.idReport);
+      await commit('setReportModule', options.reportModule);
+      await commit('setParams', JSON.stringify(parameter)); 
+      await commit('setShowReport', true);
+    }
   
   }
 };
