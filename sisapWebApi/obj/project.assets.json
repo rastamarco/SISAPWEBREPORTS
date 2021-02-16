@@ -9613,11 +9613,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lar\\source\\repos\\sisapWebApi\\SISAPWEBREPORTS\\sisapWebApi\\sisapWebApi.csproj",
+      "projectUniqueName": "C:\\Users\\Lar\\Documents\\SISAPWebReports\\SISAPWEBREPORTS\\sisapWebApi\\sisapWebApi.csproj",
       "projectName": "sisapWebApi",
-      "projectPath": "C:\\Users\\Lar\\source\\repos\\sisapWebApi\\SISAPWEBREPORTS\\sisapWebApi\\sisapWebApi.csproj",
+      "projectPath": "C:\\Users\\Lar\\Documents\\SISAPWebReports\\SISAPWEBREPORTS\\sisapWebApi\\sisapWebApi.csproj",
       "packagesPath": "C:\\Users\\Lar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lar\\source\\repos\\sisapWebApi\\SISAPWEBREPORTS\\sisapWebApi\\obj\\",
+      "outputPath": "C:\\Users\\Lar\\Documents\\SISAPWebReports\\SISAPWEBREPORTS\\sisapWebApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
