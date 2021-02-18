@@ -1,12 +1,8 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "NJzTAzmcmKcwh54LuwKvDPKr9b865HZ/WiAukqaM7u8AD0U+JCldGY0zqsaUYOORDXu6nABAKlDlKX8FXMghjQ==",
-=======
-  "dgSpecHash": "A7870p3iL3UYMmt5g1boGJ60pn1g+ZOTFybCT6TLn0Lsa/ts2mLYN2BjJiQwjw0vekJ2o2d+Po3gK4CVeueaHg==",
->>>>>>> 2c993725dcc162b6c3a2943a36b4bf8da1b03e1f
+  "dgSpecHash": "hkfRnAfQm1Ktll77lHW7+krdQ+nVi6Vh+aN2YLU8X/d00v+KTYME56872SR6TZ31AFuoP0f0t+29xvf7/xMS5A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Lar\\Documents\\SISAPWebReports\\SISAPWEBREPORTS\\sisapWebApi\\sisapWebApi.csproj",
+  "projectFilePath": "C:\\Users\\Lar\\Desktop\\Nova pasta\\SISAPWEBREPORTS\\sisapWebApi\\sisapWebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lar\\.nuget\\packages\\automapper\\10.1.0\\automapper.10.1.0.nupkg.sha512",
     "C:\\Users\\Lar\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.0\\automapper.extensions.microsoft.dependencyinjection.8.1.0.nupkg.sha512",
@@ -193,5 +189,12 @@
     "C:\\Users\\Lar\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Lar\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problema ao ler o arquivo de cache C:\\Users\\Lar\\Desktop\\Nova pasta\\SISAPWEBREPORTS\\sisapWebApi\\obj\\project.nuget.cache: Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
