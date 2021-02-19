@@ -51,7 +51,7 @@ export default class Login extends Vue {
 
   @Getter isAuthenticated
   
-  private items: any = null;
+  private items: any = ['UIA', 'UIC', 'GBA', 'UPP', 'SIF', 'UIAII', 'UIAIII', 'UDM'];
   private local: any = null;
   private user = null;
   private password = null;
@@ -84,35 +84,36 @@ export default class Login extends Vue {
     this.local = this.items[0];
   }
 
-  public GetItemsByFilial(url: any): void{
-    const filial = url.split('//');
-    switch (filial[1]){
-    case '10.10.11.32/':
-      this.items = ['UIA', 'UIC', 'GBA', 'UPP', 'SIF'];
-      this.local = this.items[0];
-      break;
-    case '10.10.128.100/':
-      this.items = ['UIAII'];
-      this.local = this.items[0];
-      break;
-    case '192.168.1.246/':
-      this.items = ['UIAIII'];
-      this.local = this.items[0];
-      break;
-    case '172.16.5.66/':
-      this.items = ['UDM'];
-      this.local = this.items[0];
-      break;
-    case 'localhost:8080/':
-      this.items = ['UIA', 'UIC', 'GBA', 'UPP', 'SIF', 'UIAII', 'UIAIII', 'UDM'];
-      this.local = this.items[0];
-      break;
-    }
-  }
+  // public GetItemsByFilial(url: any): void{
+  //   const filial = url.split('//');
+  //   switch (filial[1]){
+  //   case '10.10.11.32/':
+  //     this.items = ['UIA', 'UIC', 'GBA', 'UPP', 'SIF'];
+  //     this.local = this.items[0];
+  //     break;
+  //   case '10.10.128.100/':
+  //     this.items = ['UIAII'];
+  //     this.local = this.items[0];
+  //     break;
+  //   case '192.168.1.246/':
+  //     this.items = ['UIAIII'];
+  //     this.local = this.items[0];
+  //     break;
+  //   case '172.16.5.66/':
+  //     this.items = ['UDM'];
+  //     this.local = this.items[0];
+  //     break;
+  //   case 'localhost:8080/':
+  //     this.items = ['UIA', 'UIC', 'GBA', 'UPP', 'SIF', 'UIAII', 'UIAIII', 'UDM'];
+  //     this.local = this.items[0];
+  //     break;
+  //   }
+  // }
 
-  mounted() {
-    this.GetItemsByFilial(window.location.href);
-  }
+  // mounted() {
+  //   this.GetItemsByFilial(window.location.href);
+  // }
+
 }
 </script>
 
